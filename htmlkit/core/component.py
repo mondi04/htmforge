@@ -7,11 +7,13 @@ die Props-Validierung und HTML-Rendering kombiniert.
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+import json
 from typing import Any, ClassVar, Unpack
 
 from pydantic import BaseModel, ConfigDict
 
 from htmlkit.core.element import Element
+from htmlkit.htmx import HxPushUrl, HxSwap, HxTarget, HxTrigger
 
 
 class Component(BaseModel, ABC):
@@ -47,6 +49,27 @@ class Component(BaseModel, ABC):
         arbitrary_types_allowed=True,
     )
     __htmlkit_missing_render__: ClassVar[bool] = False
+
+    # Typisierte HTMX-Props, die komponentenweit wiederverwendbar sind.
+    hx_get: str | None = None
+    hx_post: str | None = None
+    hx_put: str | None = None
+    hx_patch: str | None = None
+    hx_delete: str | None = None
+    hx_trigger: HxTrigger | str | None = None
+    hx_target: HxTarget | str | None = None
+    hx_swap: HxSwap | None = None
+    hx_push_url: HxPushUrl | str | None = None
+    hx_confirm: str | None = None
+    hx_indicator: str | None = None
+    hx_include: str | None = None
+    hx_vals: str | dict[str, Any] | None = None
+    hx_headers: str | dict[str, Any] | None = None
+    hx_request: str | dict[str, Any] | None = None
+    hx_select: str | None = None
+    hx_select_oob: str | None = None
+    hx_params: str | None = None
+    hx_encoding: str | None = None
 
     def __init_subclass__(cls, **kwargs: Unpack[ConfigDict]) -> None:
         """Validiert, dass Unterklassen eine konkrete ``render``-Methode haben."""
@@ -86,6 +109,60 @@ class Component(BaseModel, ABC):
             Den vollständigen HTML-String der Komponente.
         """
         return self.render().to_html()
+
+    def htmx_attrs(self) -> dict[str, object]:
+        """Gibt alle gesetzten HTMX-Props als Attribut-Dict zurueck.
+
+        Returns:
+            Ein Dict mit nur den HTMX-Attributen, die nicht ``None`` sind.
+
+        Example:
+            ``button("Save", **self.htmx_attrs())``
+        """
+        attrs: dict[str, object] = {}
+        for key in (
+            "hx_get",
+            "hx_post",
+            "hx_put",
+            "hx_patch",
+            "hx_delete",
+            "hx_trigger",
+            "hx_target",
+            "hx_swap",
+            "hx_push_url",
+            "hx_confirm",
+            "hx_indicator",
+            "hx_include",
+            "hx_vals",
+            "hx_headers",
+            "hx_request",
+            "hx_select",
+            "hx_select_oob",
+            "hx_params",
+            "hx_encoding",
+        ):
+            value = getattr(self, key)
+            if value is not None:
+                attrs[key] = _normalize_htmx_value(value)
+        return attrs
+
+
+def _normalize_htmx_value(value: object) -> object:
+    """Normalisiert HTMX-Prop-Werte in HTML-kompatible Attributwerte.
+
+    Dict-Werte werden als kompakter JSON-String serialisiert, damit
+    HTMX-Attribute wie ``hx-headers``, ``hx-request`` und ``hx-vals``
+    korrekt gerendert werden.
+
+    Args:
+        value: Der rohe Prop-Wert.
+
+    Returns:
+        Ein HTML-Attribut-kompatibler Wert.
+    """
+    if isinstance(value, dict):
+        return json.dumps(value, separators=(",", ":"), sort_keys=True)
+    return value
 
     # ------------------------------------------------------------------
     # Framework-Adapter (Stubs — werden in Phase 1 ausgebaut)

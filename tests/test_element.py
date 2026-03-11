@@ -6,6 +6,7 @@ import pytest
 
 from htmlkit.core.element import Element, _normalize_attr_name
 from htmlkit.elements import br, button, div, form, input, span, table, td, tr
+from htmlkit.htmx import HxSwap, HxTarget, HxTrigger
 
 
 class TestElementRendering:
@@ -126,6 +127,16 @@ class TestAttributeRendering:
         """``cls`` als Liste wird als leerzeichen-separierte Klassenkette gerendert."""
         el = div("text", cls=["btn", "btn-primary"])
         assert el.to_html() == '<div class="btn btn-primary">text</div>'
+
+    def test_enum_attribute_renders_enum_value(self) -> None:
+        """Enum-Attribute werden als Enum-Value statt Enum-Name gerendert."""
+        el = button("Load", hx_swap=HxSwap.OUTER_HTML)
+        assert 'hx-swap="outerHTML"' in el.to_html()
+
+    def test_enum_values_inside_list_attributes_render_values(self) -> None:
+        """Enum-Werte in Listenattributen werden korrekt als Values gerendert."""
+        el = div("x", data_tokens=[HxTrigger.CLICK, HxTarget.THIS])
+        assert 'data-tokens="click this"' in el.to_html()
 
 
 class TestXSSProtection:

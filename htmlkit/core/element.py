@@ -7,9 +7,10 @@ HTML-String gerendert werden kann.
 
 from __future__ import annotations
 
+from enum import Enum
 from typing import Union
 
-from markupsafe import Markup, escape
+from markupsafe import escape
 
 # Ein Kind-Element ist entweder ein weiteres Element, ein Rohstring oder None.
 Child = Union["Element", str, None]
@@ -117,7 +118,12 @@ class Element:
                 parts.append(html_key)
             else:
                 if isinstance(value, (list, tuple)):
-                    value = " ".join(str(item) for item in value)
+                    value = " ".join(
+                        str(item.value) if isinstance(item, Enum) else str(item)
+                        for item in value
+                    )
+                elif isinstance(value, Enum):
+                    value = value.value
                 safe_value = escape(str(value))
                 parts.append(f'{html_key}="{safe_value}"')
 

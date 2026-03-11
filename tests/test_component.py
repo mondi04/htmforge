@@ -10,6 +10,7 @@ from htmlkit import Element as PublicElement
 from htmlkit.core.component import Component
 from htmlkit.core.element import Element
 from htmlkit.elements import button, div, p, span, table, td, tr
+from htmlkit.htmx import HxPushUrl, HxSwap, HxTarget, HxTrigger
 
 
 # ---------------------------------------------------------------------------
@@ -63,6 +64,16 @@ class Counter(Component):
         )
 
 
+class HtmxDeleteButton(Component):
+    """Komponente, die HTMX-Props aus dem Basismodell nutzt."""
+
+    label: str = "Delete"
+
+    def render(self) -> Element:
+        """Rendert einen Button mit allen gesetzten HTMX-Attributen."""
+        return button(self.label, **self.htmx_attrs())
+
+
 # ---------------------------------------------------------------------------
 # Tests: Rendering
 # ---------------------------------------------------------------------------
@@ -107,6 +118,56 @@ class TestComponentRendering:
         assert 'hx-target="#counter-value"' in html
         assert 'hx-swap="innerHTML"' in html
 
+    def test_typed_htmx_props_render_via_helper(self) -> None:
+        """Typisierte HTMX-Props werden ueber ``htmx_attrs`` korrekt gerendert."""
+        component = HtmxDeleteButton(
+            hx_delete="/users/1",
+            hx_swap=HxSwap.OUTER_HTML,
+            hx_target=HxTarget.THIS,
+            hx_trigger=HxTrigger.CLICK,
+            hx_push_url=HxPushUrl.FALSE,
+        )
+        html = component.to_html()
+        assert 'hx-delete="/users/1"' in html
+        assert 'hx-swap="outerHTML"' in html
+        assert 'hx-target="this"' in html
+        assert 'hx-trigger="click"' in html
+        assert 'hx-push-url="false"' in html
+
+    def test_htmx_attrs_omits_none_values(self) -> None:
+        """``htmx_attrs`` gibt nur gesetzte Werte zurueck."""
+        component = HtmxDeleteButton(hx_post="/submit")
+        attrs = component.htmx_attrs()
+        assert attrs == {"hx_post": "/submit"}
+
+    def test_htmx_attrs_serializes_mapping_values(self) -> None:
+        """Mapping-Werte werden in `htmx_attrs` als JSON serialisiert."""
+        component = HtmxDeleteButton(
+            hx_headers={"X-CSRF": "token"},
+            hx_request={"timeout": 1000},
+            hx_vals={"id": 42},
+        )
+        attrs = component.htmx_attrs()
+        assert attrs["hx_headers"] == '{"X-CSRF":"token"}'
+        assert attrs["hx_request"] == '{"timeout":1000}'
+        assert attrs["hx_vals"] == '{"id":42}'
+
+    def test_extended_htmx_props_render_via_helper(self) -> None:
+        """Erweiterte HTMX-Props erscheinen korrekt im gerenderten HTML."""
+        component = HtmxDeleteButton(
+            hx_select="#row",
+            hx_select_oob="#flash",
+            hx_params="*",
+            hx_encoding="multipart/form-data",
+            hx_headers={"X-CSRF": "token"},
+        )
+        html = component.to_html()
+        assert 'hx-select="#row"' in html
+        assert 'hx-select-oob="#flash"' in html
+        assert 'hx-params="*"' in html
+        assert 'hx-encoding="multipart/form-data"' in html
+        assert "hx-headers=" in html
+
 
 # ---------------------------------------------------------------------------
 # Tests: Props-Validierung (Pydantic V2)
@@ -141,6 +202,11 @@ class TestComponentPropsValidation:
         """Pydantic koerziert kompatible Typen (str → int)."""
         counter = Counter(count="7")  # type: ignore[arg-type]
         assert counter.count == 7
+
+    def test_invalid_typed_htmx_prop_raises_validation_error(self) -> None:
+        """Falsche Typen fuer typisierte HTMX-Props werden abgelehnt."""
+        with pytest.raises(ValidationError):
+            HtmxDeleteButton(hx_swap=123)  # type: ignore[arg-type]
 
 
 # ---------------------------------------------------------------------------

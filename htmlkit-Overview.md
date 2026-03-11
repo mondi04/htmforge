@@ -148,9 +148,108 @@ Monorepo auf GitHub, Contributions willkommen.
 
 ## Roadmap
 
-| Phase | Inhalt                              | Ziel         |
-|-------|-------------------------------------|--------------|
-| v0.1  | HTML-Primitives, Component-Klasse   | Woche 4      |
-| v0.2  | HTMX-Integration, Framework-Adapter | Woche 8      |
-| v0.3  | Fertige Komponenten-Library         | Woche 12     |
-| v1.0  | Stabile API, vollständige Docs      | Monat 4      |
+| Phase | Inhalt                              | Ziel         | Status |
+|-------|-------------------------------------|--------------|--------|
+| v0.1  | HTML-Primitives, Component-Klasse   | Woche 4      | Aktiv |
+| v0.2  | HTMX-Integration, Framework-Adapter | Woche 8      | Geplant |
+| v0.3  | Fertige Komponenten-Library         | Woche 12     | Geplant |
+| v1.0  | Stabile API, vollständige Docs      | Monat 4      | Geplant |
+
+---
+
+## Entwicklungsmodus (Overview-Driven)
+
+Diese Datei ist die **verbindliche Arbeitsgrundlage**.
+
+Regel:
+- Erst diese Overview aktualisieren (Ziel, Scope, Akzeptanzkriterien)
+- Danach exakt nach dem neuen Abschnitt implementieren
+- Nach Abschluss den Status hier aktualisieren
+
+Damit ist immer klar:
+- Was als Nächstes gebaut wird
+- Wann ein Schritt als "fertig" gilt
+- Welche Tests den Abschluss belegen
+
+---
+
+## Aktueller Stand (Live)
+
+### Bereits umgesetzt
+
+- Core-Bausteine für `Element` und `Component`
+- HTML-Rendering mit Escaping via `markupsafe`
+- Attribut-Mapping für `cls`, `for_`, `hx_*`
+- Public Exports im Package-Root
+- Erste Element-Factories und Testbasis
+
+### Qualitäts-Gates
+
+- `pytest` muss grün sein
+- `mypy --strict` muss ohne Fehler laufen
+- Keine neuen Core-Dependencies außer `pydantic` und `markupsafe`
+
+---
+
+## Nächste Implementierungsblöcke (in Reihenfolge)
+
+### Block A — HTMX-Typisierung vervollständigen (Abgeschlossen)
+
+Scope:
+- `HxSwap`, `HxTrigger` konsolidieren/ergänzen
+- klare Nutzbarkeit in Component-Props
+
+Fortschritt (2026-03-11):
+- Enum-Rendering in HTML stabilisiert (`Enum` -> `.value`)
+- Typisierte HTMX-Basisprops in `Component` ergänzt
+- `htmx_attrs()` Helper für direkte Nutzung in `render()` ergänzt
+- Erweiterte HTMX-Props (`hx_headers`, `hx_request`, `hx_select`, `hx_select_oob`, `hx_params`, `hx_encoding`) ergänzt
+- Strukturierte HTMX-Werte (Dict) werden in `htmx_attrs()` als JSON normalisiert
+
+Akzeptanzkriterien:
+- Typed Props mit HTMX-Enums laufen in Beispielen ohne Workarounds
+- Tests für typische HTMX-Attribute vorhanden
+
+### Block B — Framework-Adapter stabilisieren
+
+Status:
+- Nächster aktiver Block
+
+Scope:
+- FastAPI/Flask/Django Adapter robust dokumentieren
+- klare Fehlermeldungen bei fehlenden optionalen Dependencies
+
+Akzeptanzkriterien:
+- Adapter-Rückgabetypen und Verhalten testbar
+- Keine Änderung am Core-Dependency-Footprint
+
+### Block C — Erste produktive Komponenten
+
+Scope:
+- `DataTable`, `SearchInput`, `Pagination` als Startset
+- SSR + HTMX-first Verhalten
+
+Akzeptanzkriterien:
+- Jede Komponente mit Unit-Tests
+- Beispiele in Doku lauffähig
+
+---
+
+## Definition of Done pro Block
+
+Ein Block ist nur fertig, wenn:
+- Funktionaler Scope umgesetzt ist
+- Tests ergänzt wurden
+- `pytest` grün ist
+- `mypy --strict` grün ist
+- Diese Overview mit finalem Status aktualisiert wurde
+
+---
+
+## Change-Log (kurz)
+
+- 2026-03-11: Overview als lebendes Steuerdokument eingeführt
+- 2026-03-11: Reihenfolge A/B/C und DoD verbindlich ergänzt
+- 2026-03-11: Block A gestartet, HTMX-Enum-Rendering als Kernverhalten festgelegt
+- 2026-03-11: Block A erweitert um typisierte HTMX-Component-Props und `htmx_attrs()`
+- 2026-03-11: Block A abgeschlossen, inklusive erweiterter HTMX-Props und JSON-Normalisierung
