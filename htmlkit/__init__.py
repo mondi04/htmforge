@@ -17,8 +17,8 @@ Quickstart::
     print(Card(title="Hello", body="World").to_html())
 """
 
-from htmlkit.core.component import Component
-from htmlkit.core.element import Element
+from .core.component import Component
+from .core.element import Element
 
 __all__ = ["Component", "Element"]
 __version__ = "0.1.0"

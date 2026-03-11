@@ -6,15 +6,15 @@ die Props-Validierung und HTML-Rendering kombiniert.
 
 from __future__ import annotations
 
-from abc import abstractmethod
-from typing import Any
+from abc import ABC, abstractmethod
+from typing import Any, ClassVar, Unpack
 
 from pydantic import BaseModel, ConfigDict
 
 from htmlkit.core.element import Element
 
 
-class Component(BaseModel):
+class Component(BaseModel, ABC):
     """Abstrakte Basisklasse für wiederverwendbare UI-Komponenten.
 
     Subklassen deklarieren typisierte Props als Pydantic-Felder und
@@ -46,6 +46,26 @@ class Component(BaseModel):
         validate_assignment=True,
         arbitrary_types_allowed=True,
     )
+    __htmlkit_missing_render__: ClassVar[bool] = False
+
+    def __init_subclass__(cls, **kwargs: Unpack[ConfigDict]) -> None:
+        """Validiert, dass Unterklassen eine konkrete ``render``-Methode haben."""
+        super().__init_subclass__(**kwargs)
+        if cls is Component:
+            return
+        if cls.render is Component.render:
+            cls.__htmlkit_missing_render__ = True
+        else:
+            cls.__htmlkit_missing_render__ = False
+
+    def __init__(self, **data: Any) -> None:
+        """Initialisiert die Komponente und blockiert Klassen ohne ``render``."""
+        if getattr(type(self), "__htmlkit_missing_render__", False):
+            raise TypeError(
+                f"Can't instantiate abstract class {type(self).__name__} "
+                "without a concrete render() implementation"
+            )
+        super().__init__(**data)
 
     @abstractmethod
     def render(self) -> Element:

@@ -5,6 +5,7 @@ from __future__ import annotations
 import pytest
 
 from htmlkit.core.element import Element, _normalize_attr_name
+from htmlkit.elements import br, button, div, form, input, span, table, td, tr
 
 
 class TestElementRendering:
@@ -121,6 +122,11 @@ class TestAttributeRendering:
         assert 'href="/home"' in html
         assert 'class="nav-link"' in html
 
+    def test_cls_list_renders_as_space_separated_class_names(self) -> None:
+        """``cls`` als Liste wird als leerzeichen-separierte Klassenkette gerendert."""
+        el = div("text", cls=["btn", "btn-primary"])
+        assert el.to_html() == '<div class="btn btn-primary">text</div>'
+
 
 class TestXSSProtection:
     """Tests für die XSS-Sanitisierung durch markupsafe."""
@@ -170,3 +176,23 @@ class TestNormalizeAttrName:
     def test_plain_name_unchanged(self) -> None:
         """Ein Name ohne Unterstriche bleibt unverändert."""
         assert _normalize_attr_name("href") == "href"
+
+
+class TestElementFactories:
+    """Tests fuer die Public-Factories in ``htmlkit.elements``."""
+
+    def test_basic_factories_render_expected_html(self) -> None:
+        """Element-Factories liefern erwartete HTML-Ausgaben."""
+        assert div("hi").to_html() == "<div>hi</div>"
+        assert span("x", cls="badge").to_html() == '<span class="badge">x</span>'
+        assert input(type="text", name="email").to_html() == (
+            '<input type="text" name="email">'
+        )
+        assert br().to_html() == "<br>"
+
+    def test_selected_requested_imports_are_usable(self) -> None:
+        """Die geforderten Factory-Exporte sind direkt importierbar und nutzbar."""
+        html = table(tr(td("a"))).to_html()
+        assert html == "<table><tr><td>a</td></tr></table>"
+        form_html = form(input(type="email"), button("Save")).to_html()
+        assert "<form>" in form_html

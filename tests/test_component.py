@@ -5,6 +5,8 @@ from __future__ import annotations
 import pytest
 from pydantic import ValidationError
 
+from htmlkit import Component as PublicComponent
+from htmlkit import Element as PublicElement
 from htmlkit.core.component import Component
 from htmlkit.core.element import Element
 from htmlkit.elements import button, div, p, span, table, td, tr
@@ -149,6 +151,15 @@ class TestComponentPropsValidation:
 class TestComponentInheritance:
     """Tests für die Klassen-Hierarchie und abstrakte Interface-Anforderungen."""
 
+    def test_no_render_component_raises_type_error(self) -> None:
+        """Eine Klasse ohne ``render()`` wirft beim Instanziieren einen TypeError."""
+
+        class NoRender(Component):
+            pass
+
+        with pytest.raises(TypeError):
+            NoRender()  # type: ignore[abstract]
+
     def test_component_without_render_cannot_be_instantiated(self) -> None:
         """Eine Subklasse ohne ``render()`` kann nicht instanziiert werden."""
 
@@ -163,3 +174,12 @@ class TestComponentInheritance:
         card = GreetingCard(title="Test")
         result = card.render()
         assert isinstance(result, Element)
+
+
+class TestPublicExports:
+    """Tests fuer Public-Exports im Package-Root."""
+
+    def test_root_exports_component_and_element(self) -> None:
+        """Das Root-Package exportiert ``Component`` und ``Element``."""
+        assert PublicComponent is Component
+        assert PublicElement is Element

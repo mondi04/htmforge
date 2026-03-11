@@ -116,6 +116,8 @@ class Element:
                 # Boolesches Attribut: nur Flag, kein Wert
                 parts.append(html_key)
             else:
+                if isinstance(value, (list, tuple)):
+                    value = " ".join(str(item) for item in value)
                 safe_value = escape(str(value))
                 parts.append(f'{html_key}="{safe_value}"')
 
