@@ -84,7 +84,7 @@ class Component(BaseModel):
             ImportError: Wenn ``fastapi`` nicht installiert ist.
         """
         try:
-            from fastapi.responses import HTMLResponse  # type: ignore[import]
+            from fastapi.responses import HTMLResponse
         except ImportError as exc:
             raise ImportError(
                 "fastapi ist nicht installiert. "
@@ -105,7 +105,7 @@ class Component(BaseModel):
             ImportError: Wenn ``flask`` nicht installiert ist.
         """
         try:
-            from flask import Response  # type: ignore[import]
+            from flask import Response
         except ImportError as exc:
             raise ImportError(
                 "flask ist nicht installiert. "
@@ -126,7 +126,7 @@ class Component(BaseModel):
             ImportError: Wenn ``django`` nicht installiert ist.
         """
         try:
-            from django.http import HttpResponse  # type: ignore[import]
+            from django.http import HttpResponse
         except ImportError as exc:
             raise ImportError(
                 "django ist nicht installiert. "

@@ -89,6 +89,18 @@ show_error_codes = true
 module = "markupsafe"
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = "fastapi.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "flask"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "django.*"
+ignore_missing_imports = true
+
 # ---------------------------------------------------------------------------
 # pytest
 # ---------------------------------------------------------------------------
