@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [
-    { name = "Your Name", email = "you@example.com" },
+    { name = "mondi04", email = "206898989+mondi04@users.noreply.github.com" },
 ]
 keywords = ["html", "components", "htmx", "server-side-rendering", "pydantic"]
 classifiers = [
@@ -36,9 +36,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/DEIN-USERNAME/htmforge"
-Repository = "https://github.com/DEIN-USERNAME/htmforge"
-"Bug Tracker" = "https://github.com/DEIN-USERNAME/htmforge/issues"
+Homepage = "https://github.com/mondi04/htmforge"
+Repository = "https://github.com/mondi04/htmforge"
+"Bug Tracker" = "https://github.com/mondi04/htmforge/issues"
 
 # ---------------------------------------------------------------------------
 # Ruff — Linting & Formatting

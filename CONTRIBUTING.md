@@ -5,7 +5,7 @@ Thank you for your interest in contributing!
 ## Setup
 
 ```bash
-git clone https://github.com/DEIN-USERNAME/htmforge.git
+git clone https://github.com/mondi04/htmforge.git
 cd htmforge
 pip install -e ".[dev]"
 ```
