@@ -10,7 +10,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Union
 
-from markupsafe import escape
+from markupsafe import Markup, escape
 
 # Ein Kind-Element ist entweder ein weiteres Element, ein Rohstring oder None.
 Child = Union["Element", str, None]
@@ -90,6 +90,10 @@ class Element:
         inner = self._render_children()
         return f"<{tag}{attrs_str}>{inner}</{tag}>"
 
+    def __str__(self) -> str:
+        """Delegiert zu :meth:`to_html`."""
+        return self.to_html()
+
     def __repr__(self) -> str:
         """Gibt eine kurze Debug-Darstellung zurück."""
         return f"Element(tag={self._tag!r}, attrs={self._attrs!r})"
@@ -147,6 +151,28 @@ class Element:
                 # Roher String → escapen, damit kein XSS möglich ist
                 chunks.append(str(escape(child)))
         return "".join(chunks)
+
+
+def safe_html(text: str) -> Markup:
+    """Markiert einen String als sicheres HTML — verhindert doppeltes Escaping.
+
+    Nützlich wenn der Text bereits valides HTML enthält (z.B. aus einer
+    Datenbank) und nicht erneut escaped werden soll.
+
+    Args:
+        text: Ein String der bereits HTML enthält.
+
+    Returns:
+        Ein :class:`markupsafe.Markup`-Objekt, das beim Rendern
+        nicht nochmals escaped wird.
+
+    Example:
+        >>> from htmlkit.elements import div
+        >>> from htmlkit.core.element import safe_html
+        >>> div(safe_html("<strong>fett</strong>")).to_html()
+        '<div><strong>fett</strong></div>'
+    """
+    return Markup(text)
 
 
 def _normalize_attr_name(name: str) -> str:

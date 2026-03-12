@@ -2,7 +2,29 @@
 
 from __future__ import annotations
 
+from markupsafe import Markup
+
 from htmlkit.core.element import Child, Element
+
+
+def raw(text: str) -> Markup:
+    """Gibt einen String als rohes, nicht-escaptes HTML-Markup zurück.
+
+    Verwende diese Funktion, um Inhalte von ``<script>`` oder ``<style>``-
+    Tags einzubetten, die von markupsafe nicht erneut escaped werden sollen.
+
+    Args:
+        text: Der rohe Textinhalt (CSS, JavaScript …).
+
+    Returns:
+        Ein :class:`markupsafe.Markup`-Objekt.
+
+    Example:
+        >>> from htmlkit.elements import script, raw
+        >>> script(raw("console.log(1)")).to_html()
+        '<script>console.log(1)</script>'
+    """
+    return Markup(text)
 
 def div(*children: Child, **attrs: object) -> Element:
     """Block-Container."""
@@ -180,11 +202,68 @@ def blockquote(*children: Child, **attrs: object) -> Element:
     """Blockzitat."""
     return Element("blockquote", *children, **attrs)
 
+
+# ---------------------------------------------------------------------------
+# Document structure
+# ---------------------------------------------------------------------------
+
+def html(*children: Child, **attrs: object) -> Element:
+    """Wurzelelement des HTML-Dokuments."""
+    return Element("html", *children, **attrs)
+
+
+def head(*children: Child, **attrs: object) -> Element:
+    """Dokumentkopf mit Metadaten."""
+    return Element("head", *children, **attrs)
+
+
+def body(*children: Child, **attrs: object) -> Element:
+    """Sichtbarer Dokumentinhalt."""
+    return Element("body", *children, **attrs)
+
+
+def title(*children: Child, **attrs: object) -> Element:
+    """Dokumenttitel (im Browser-Tab)."""
+    return Element("title", *children, **attrs)
+
+
+def meta(**attrs: object) -> Element:
+    """Metadaten-Void-Element."""
+    return Element("meta", **attrs)
+
+
+def link(**attrs: object) -> Element:
+    """Externe Ressource als Void-Element (z.B. Stylesheet)."""
+    return Element("link", **attrs)
+
+
+def script(*children: Child, **attrs: object) -> Element:
+    """Skript-Block oder externes Skript.
+
+    Verwende :func:`raw` für Inline-JavaScript, damit der Inhalt
+    nicht escaped wird.
+    """
+    return Element("script", *children, **attrs)
+
+
+def style(*children: Child, **attrs: object) -> Element:
+    """Inline-CSS-Block.
+
+    Verwende :func:`raw` für CSS-Inhalt, damit er nicht escaped wird.
+    """
+    return Element("style", *children, **attrs)
+
+
+def noscript(*children: Child, **attrs: object) -> Element:
+    """Fallback-Inhalt wenn JavaScript deaktiviert ist."""
+    return Element("noscript", *children, **attrs)
+
 __all__ = [
     "a",
     "article",
     "aside",
     "blockquote",
+    "body",
     "br",
     "button",
     "code",
@@ -200,22 +279,30 @@ __all__ = [
     "h4",
     "h5",
     "h6",
+    "head",
     "header",
     "hr",
+    "html",
     "img",
     "input",
     "label",
     "li",
+    "link",
     "main",
+    "meta",
     "nav",
+    "noscript",
     "ol",
     "option",
     "p",
     "pre",
+    "raw",
+    "script",
     "section",
     "select",
     "span",
     "strong",
+    "style",
     "table",
     "tbody",
     "td",
@@ -223,6 +310,7 @@ __all__ = [
     "tfoot",
     "th",
     "thead",
+    "title",
     "tr",
     "ul",
 ]

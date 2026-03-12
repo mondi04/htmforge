@@ -146,24 +146,6 @@ class Component(BaseModel, ABC):
                 attrs[key] = _normalize_htmx_value(value)
         return attrs
 
-
-def _normalize_htmx_value(value: object) -> object:
-    """Normalisiert HTMX-Prop-Werte in HTML-kompatible Attributwerte.
-
-    Dict-Werte werden als kompakter JSON-String serialisiert, damit
-    HTMX-Attribute wie ``hx-headers``, ``hx-request`` und ``hx-vals``
-    korrekt gerendert werden.
-
-    Args:
-        value: Der rohe Prop-Wert.
-
-    Returns:
-        Ein HTML-Attribut-kompatibler Wert.
-    """
-    if isinstance(value, dict):
-        return json.dumps(value, separators=(",", ":"), sort_keys=True)
-    return value
-
     # ------------------------------------------------------------------
     # Framework-Adapter (Stubs — werden in Phase 1 ausgebaut)
     # ------------------------------------------------------------------
@@ -230,3 +212,21 @@ def _normalize_htmx_value(value: object) -> object:
                 "Installiere es mit: pip install django"
             ) from exc
         return HttpResponse(content=self.to_html())
+
+
+def _normalize_htmx_value(value: object) -> object:
+    """Normalisiert HTMX-Prop-Werte in HTML-kompatible Attributwerte.
+
+    Dict-Werte werden als kompakter JSON-String serialisiert, damit
+    HTMX-Attribute wie ``hx-headers``, ``hx-request`` und ``hx-vals``
+    korrekt gerendert werden.
+
+    Args:
+        value: Der rohe Prop-Wert.
+
+    Returns:
+        Ein HTML-Attribut-kompatibler Wert.
+    """
+    if isinstance(value, dict):
+        return json.dumps(value, separators=(",", ":"), sort_keys=True)
+    return value
