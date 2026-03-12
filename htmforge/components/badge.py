@@ -24,7 +24,10 @@ class Badge(Component):
 
     text: str
     variant: BadgeVariant = BadgeVariant.DEFAULT
+    extra_class: str = ""
 
     def render(self) -> Element:
         """Erstellt ein ``<span>`` mit Badge-CSS-Klassen."""
-        return span(self.text, cls=f"badge badge--{self.variant.value}")
+        base_class = f"badge badge--{self.variant.value}"
+        final_class = f"{base_class} {self.extra_class}".strip()
+        return span(self.text, cls=final_class)

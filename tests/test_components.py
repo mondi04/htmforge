@@ -21,7 +21,7 @@ class TestDataTable:
 
         html = table_component.to_html()
 
-        assert html.startswith("<table")
+        assert html.startswith('<div class="table-wrapper"><table class="table"')
         assert "<thead><tr><th>Name</th><th>Rolle</th></tr></thead>" in html
         assert "<tbody>" in html
         assert "<tr><td>Ada</td><td>Admin</td></tr>" in html
@@ -33,7 +33,15 @@ class TestDataTable:
 
         html = table_component.to_html()
 
-        assert '<td colspan="2">Keine Einträge</td>' in html
+        assert '<td colspan="2" class="table__empty">Keine Einträge</td>' in html
+
+    def test_datatable_empty_rows(self) -> None:
+        """Leere Tabellen zeigen den Empty-State mit ``table__empty``."""
+        table_component = DataTable(headers=["Name"], rows=[])
+        html = table_component.to_html()
+        assert 'class="table-wrapper"' in html
+        assert 'class="table"' in html
+        assert '<td colspan="1" class="table__empty">Keine Einträge</td>' in html
 
     def test_render_sets_htmx_attributes_when_hx_url_is_configured(self) -> None:
         """Optionales Reloading per HTMX wird auf ``table`` gesetzt."""
@@ -60,17 +68,16 @@ class TestAlert:
 
         assert html == '<div class="alert alert-success">Gespeichert</div>'
 
-    def test_render_dismissible_alert_adds_htmx_close_button(self) -> None:
-        """Dismissible Alerts enthalten einen Schliessen-Button mit HTMX-Attrs."""
+    def test_alert_dismissible(self) -> None:
+        """Dismissible Alerts enthalten einen Close-Button mit ``onclick``."""
         alert = Alert(message="Hinweis", dismissible=True)
 
         html = alert.to_html()
 
         assert "<button" in html
         assert "×" in html
-        assert 'hx-get=""' in html
-        assert 'hx-target="closest div"' in html
-        assert 'hx-swap="delete"' in html
+        assert "onclick=\"this.closest(&#39;.alert&#39;).remove()\"" in html
+        assert "hx-get" not in html
 
     def test_render_non_dismissible_has_no_close_button(self) -> None:
         """Ohne ``dismissible`` wird kein Button gerendert."""
@@ -141,6 +148,14 @@ class TestPagination:
 
         assert 'hx-get="/users?page=1"' in html
         assert 'hx-get="/users?page=3"' in html
+        assert "hx-target=" not in html
+
+    def test_pagination_no_hx_target(self) -> None:
+        """Ohne ``hx_target`` wird kein ``hx-target`` Attribut gerendert."""
+        pager = Pagination(current_page=2, total_pages=4, hx_url="/x?page={page}")
+        html = pager.to_html()
+        assert 'hx-get="/x?page=1"' in html
+        assert 'hx-get="/x?page=3"' in html
         assert "hx-target=" not in html
 
 
@@ -241,12 +256,30 @@ class TestFormField:
     def test_required_attribute_set_when_true(self) -> None:
         """``required=True`` setzt das ``required``-Flag auf dem Input."""
         field = FormField(name="pwd", label_text="Passwort", required=True)
-        assert "required" in field.to_html()
+        html_out = field.to_html()
+        assert "required" in html_out
+        assert 'aria-required="true"' in html_out
 
     def test_required_attribute_absent_when_false(self) -> None:
         """Ohne ``required=True`` erscheint kein required-Attribut."""
         field = FormField(name="note", label_text="Notiz")
-        assert "required" not in field.to_html()
+        html_out = field.to_html()
+        assert "required" not in html_out
+        assert "aria-required" not in html_out
+
+    def test_form_field_required(self) -> None:
+        """``required=True`` setzt required und aria-required auf Label und Input."""
+        field = FormField(name="mail", label_text="Mail", required=True)
+        html_out = field.to_html()
+        assert "required" in html_out
+        assert html_out.count('aria-required="true"') == 2
+
+    def test_form_field_not_required(self) -> None:
+        """Default ohne required rendert keine Required-Attribute."""
+        field = FormField(name="mail", label_text="Mail")
+        html_out = field.to_html()
+        assert "required" not in html_out
+        assert "aria-required" not in html_out
 
     def test_error_renders_error_div(self) -> None:
         """``error`` erzeugt ein ``<div class=\"field-error\">``."""

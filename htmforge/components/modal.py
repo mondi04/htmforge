@@ -48,7 +48,15 @@ class Modal(Component):
             div(
                 div(
                     h2(self.title, id=title_id, cls="modal__title"),
-                    button("×", cls="modal__close", aria_label=self.close_label),
+                    button(
+                        "×",
+                        type="button",
+                        class_="modal__close",
+                        aria_label=self.close_label,
+                        onclick=(
+                            f"document.getElementById('{self.modal_id}').style.display='none'"
+                        ),
+                    ),
                     cls="modal__header",
                 ),
                 div(self.body, cls="modal__body"),

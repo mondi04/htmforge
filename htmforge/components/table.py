@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from htmforge import Component
 from htmforge.core.element import Element
-from htmforge.elements import table, tbody, td, th, thead, tr
+from htmforge.elements import div, table, tbody, td, th, thead, tr
 from htmforge.htmx import HxTrigger
 
 
@@ -24,7 +24,7 @@ class DataTable(Component):
     empty_message: str = "Keine Einträge"
 
     def render(self) -> Element:
-        """Erstellt ``<table>`` mit ``<thead>`` und ``<tbody>``."""
+        """Erstellt ``div.table-wrapper > table.table`` mit ``thead``/``tbody``."""
         header_row = tr(*(th(header) for header in self.headers))
 
         body_rows: list[Element]
@@ -32,15 +32,21 @@ class DataTable(Component):
             body_rows = [tr(*(td(cell) for cell in row)) for row in self.rows]
         else:
             colspan = max(len(self.headers), 1)
-            body_rows = [tr(td(self.empty_message, colspan=colspan))]
+            body_rows = [
+                tr(td(self.empty_message, colspan=colspan, cls="table__empty"))
+            ]
 
         attrs: dict[str, object] = {}
         if self.hx_url is not None:
             attrs["hx_get"] = self.hx_url
             attrs["hx_trigger"] = HxTrigger.LOAD
 
-        return table(
-            thead(header_row),
-            tbody(*body_rows),
-            **attrs,
+        return div(
+            table(
+                thead(header_row),
+                tbody(*body_rows),
+                cls="table",
+                **attrs,
+            ),
+            cls="table-wrapper",
         )

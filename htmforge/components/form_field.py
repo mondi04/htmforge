@@ -57,7 +57,11 @@ class FormField(Component):
         fid = self.field_id or self.name.replace(" ", "-")
 
         children: list[Element] = [
-            label(self.label_text, for_=fid),
+            label(
+                self.label_text,
+                for_=fid,
+                aria_required="true" if self.required else None,
+            ),
             input(
                 type=self.input_type.value,
                 name=self.name,
@@ -65,6 +69,7 @@ class FormField(Component):
                 value=self.value or None,
                 placeholder=self.placeholder or None,
                 required=True if self.required else None,
+                aria_required="true" if self.required else None,
             ),
         ]
 

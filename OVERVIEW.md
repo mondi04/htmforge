@@ -157,6 +157,7 @@ A block is only complete when:
 
 | Date       | Change                                                                  |
 |------------|-------------------------------------------------------------------------|
+| 2026-03-12 | v0.2.0 polish: Alert/Modal dismiss fix, Pagination optional hx_target, FormField required, DataTable empty state, Breadcrumb single item, Badge extra_class |
 | 2026-03-12 | v0.2.0: Badge, Breadcrumb, Spinner, Modal — 4 neue Komponenten          |
 | 2026-03-12 | Renamed htmlkit → htmforge across entire codebase                       |
 | 2026-03-12 | v0.2.0: Page, FormField, `safe_html`, `raw()`, DOCTYPE, head elements   |

@@ -27,7 +27,6 @@ class Pagination(Component):
 
     def render(self) -> Element:
         """Erstellt eine ``<ul>`` mit Seitenlinks inklusive Previous/Next."""
-        target_attr = self.hx_target or None
         items: list[Element] = [self._previous_link()]
 
         for page in range(1, self.total_pages + 1):
@@ -39,8 +38,7 @@ class Pagination(Component):
                         a(
                             str(page),
                             href="#",
-                            hx_get=self.hx_url.format(page=page),
-                            hx_target=target_attr,
+                            **self._link_attrs(self.hx_url.format(page=page)),
                         )
                     )
                 )
@@ -57,8 +55,7 @@ class Pagination(Component):
             a(
                 "Previous",
                 href="#",
-                hx_get=self.hx_url.format(page=prev_page),
-                hx_target=self.hx_target or None,
+                **self._link_attrs(self.hx_url.format(page=prev_page)),
             )
         )
 
@@ -71,7 +68,13 @@ class Pagination(Component):
             a(
                 "Next",
                 href="#",
-                hx_get=self.hx_url.format(page=next_page),
-                hx_target=self.hx_target or None,
+                **self._link_attrs(self.hx_url.format(page=next_page)),
             )
         )
+
+    def _link_attrs(self, url: str) -> dict[str, str]:
+        """Erstellt HTMX-Linkattribute und fuegt optional ``hx-target`` hinzu."""
+        attrs: dict[str, str] = {"hx_get": url}
+        if self.hx_target:
+            attrs["hx_target"] = self.hx_target
+        return attrs
