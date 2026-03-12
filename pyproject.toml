@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "htmforge"
-version = "0.1.0"
+version = "0.2.0"
 description = "Type-safe, composable UI components for Python — server-side rendered, HTMX-first."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = { file = "LICENSE" }
 authors = [
     { name = "mondi04", email = "206898989+mondi04@users.noreply.github.com" },
 ]

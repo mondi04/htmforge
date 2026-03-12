@@ -157,6 +157,7 @@ A block is only complete when:
 
 | Date       | Change                                                                  |
 |------------|-------------------------------------------------------------------------|
+| 2026-03-12 | v0.2.0: Badge, Breadcrumb, Spinner, Modal — 4 neue Komponenten          |
 | 2026-03-12 | Renamed htmlkit → htmforge across entire codebase                       |
 | 2026-03-12 | v0.2.0: Page, FormField, `safe_html`, `raw()`, DOCTYPE, head elements   |
 | 2026-03-12 | v0.2.0: Framework adapters `to_fastapi`/`to_flask`/`to_django` stable  |
