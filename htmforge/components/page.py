@@ -77,9 +77,7 @@ class Page(Component):
         head_children: list[Any] = [meta(charset=self.charset)]
 
         if self.description:
-            head_children.append(
-                meta(name="description", content=self.description)
-            )
+            head_children.append(meta(name="description", content=self.description))
 
         head_children.append(title(self.title))
 

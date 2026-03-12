@@ -166,8 +166,7 @@ class Component(BaseModel, ABC):
             from fastapi.responses import HTMLResponse
         except ImportError as exc:
             raise ImportError(
-                "fastapi ist nicht installiert. "
-                "Installiere es mit: pip install fastapi"
+                "fastapi ist nicht installiert. Installiere es mit: pip install fastapi"
             ) from exc
         return HTMLResponse(content=self.to_html())
 
@@ -187,8 +186,7 @@ class Component(BaseModel, ABC):
             from flask import Response
         except ImportError as exc:
             raise ImportError(
-                "flask ist nicht installiert. "
-                "Installiere es mit: pip install flask"
+                "flask ist nicht installiert. Installiere es mit: pip install flask"
             ) from exc
         return Response(response=self.to_html(), mimetype="text/html")
 
@@ -208,8 +206,7 @@ class Component(BaseModel, ABC):
             from django.http import HttpResponse
         except ImportError as exc:
             raise ImportError(
-                "django ist nicht installiert. "
-                "Installiere es mit: pip install django"
+                "django ist nicht installiert. Installiere es mit: pip install django"
             ) from exc
         return HttpResponse(content=self.to_html())
 
