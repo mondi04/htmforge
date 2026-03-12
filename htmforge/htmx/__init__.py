@@ -1,4 +1,4 @@
-"""HTMX-Typen und Enums für htmlkit.
+"""HTMX-Typen und Enums für htmforge.
 
 Stellt typisierte Enumerationen für HTMX-Attribute bereit, damit
 HTMX-Konfigurationen in Komponenten-Props genutzt werden können —
@@ -9,8 +9,8 @@ bzw. Kleinbuchstaben) wie in der HTMX-Dokumentation definiert.
 
 Example::
 
-    from htmlkit.elements import button
-    from htmlkit.htmx import HxSwap
+    from htmforge.elements import button
+    from htmforge.htmx import HxSwap
 
     btn = button(
         "Löschen",
@@ -22,10 +22,10 @@ Example::
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
 
-class HxSwap(str, Enum):
+class HxSwap(StrEnum):
     """Typisierter Enum für das ``hx-swap``-Attribut.
 
     Bestimmt, wie HTMX den zurückgegebenen HTML-Inhalt in den DOM einfügt.
@@ -58,7 +58,7 @@ class HxSwap(str, Enum):
     """Führt keinen DOM-Swap durch (z.B. nur Out-of-Band-Swaps)."""
 
 
-class HxTrigger(str, Enum):
+class HxTrigger(StrEnum):
     """Typisierter Enum für häufige ``hx-trigger``-Werte.
 
     Legt fest, welches Ereignis einen HTMX-Request auslöst.
@@ -98,7 +98,7 @@ class HxTrigger(str, Enum):
     """Löst periodisch alle 2 Sekunden aus."""
 
 
-class HxTarget(str, Enum):
+class HxTarget(StrEnum):
     """Typisierter Enum für häufige ``hx-target``-Werte.
 
     Bestimmt, welches Element als Ziel für einen HTMX-Swap verwendet wird.
@@ -126,7 +126,7 @@ class HxTarget(str, Enum):
     """Das unmittelbar vorherige Geschwister-Element."""
 
 
-class HxPushUrl(str, Enum):
+class HxPushUrl(StrEnum):
     """Typisierter Enum für das ``hx-push-url``-Attribut.
 
     Steuert, ob die URL in der Browser-History aktualisiert wird.

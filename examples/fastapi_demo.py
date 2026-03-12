@@ -1,7 +1,7 @@
-"""FastAPI demo — htmlkit in action.
+"""FastAPI demo — htmforge in action.
 
 Run with:
-    pip install fastapi uvicorn htmlkit
+    pip install fastapi uvicorn htmforge
     uvicorn examples.fastapi_demo:app --reload
 
 Then open http://localhost:8000/users
@@ -12,12 +12,12 @@ from __future__ import annotations
 from fastapi import FastAPI, Form
 from fastapi.responses import HTMLResponse
 
-from htmlkit.components import Alert, AlertVariant, DataTable, FormField, InputType, Pagination
-from htmlkit.components.page import Page
-from htmlkit.core.element import Element
-from htmlkit.elements import div, h1, h2
+from htmforge.components import Alert, AlertVariant, DataTable, FormField, InputType, Pagination
+from htmforge.components.page import Page
+from htmforge.core.element import Element
+from htmforge.elements import div, h1, h2
 
-app = FastAPI(title="htmlkit demo")
+app = FastAPI(title="htmforge demo")
 
 # ---------------------------------------------------------------------------
 # In-memory data store
@@ -110,7 +110,7 @@ def list_users(page: int = 1) -> str:
     """Render the full users page."""
     rows, total = _paginate(page)
     return UsersPage(
-        title="Users — htmlkit demo",
+        title="Users — htmforge demo",
         css_urls=["https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"],
         js_urls=["https://unpkg.com/htmx.org@1.9.12"],
         users=rows,
@@ -139,7 +139,7 @@ def add_user(name: str = Form(...), email: str = Form(...)) -> str:
     _USERS.append([name, email])
     rows, total = _paginate(1)
     return UsersPage(
-        title="Users — htmlkit demo",
+        title="Users — htmforge demo",
         css_urls=["https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"],
         js_urls=["https://unpkg.com/htmx.org@1.9.12"],
         users=rows,

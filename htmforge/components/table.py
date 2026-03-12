@@ -1,7 +1,7 @@
 """Tabellen-Komponente fuer strukturierte Daten.
 
 Example:
-    >>> from htmlkit.components import DataTable
+    >>> from htmforge.components import DataTable
     >>> table = DataTable(headers=["Name"], rows=[["Ada"]])
     >>> table.to_html()
     '<table><thead><tr><th>Name</th></tr></thead><tbody><tr><td>Ada</td></tr></tbody></table>'
@@ -9,10 +9,10 @@ Example:
 
 from __future__ import annotations
 
-from htmlkit import Component
-from htmlkit.core.element import Element
-from htmlkit.elements import table, tbody, td, th, thead, tr
-from htmlkit.htmx import HxTrigger
+from htmforge import Component
+from htmforge.core.element import Element
+from htmforge.elements import table, tbody, td, th, thead, tr
+from htmforge.htmx import HxTrigger
 
 
 class DataTable(Component):

@@ -1,8 +1,8 @@
-"""Vollstaendige HTML-Seiten-Komponente fuer htmlkit.
+"""Vollstaendige HTML-Seiten-Komponente fuer htmforge.
 
 Example:
-    >>> from htmlkit.components.page import Page
-    >>> from htmlkit.core.element import Element
+    >>> from htmforge.components.page import Page
+    >>> from htmforge.core.element import Element
     >>>
     >>> class IndexPage(Page):
     ...     def _body_content(self) -> list[Element | str | None]:
@@ -18,15 +18,14 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any
 
-from htmlkit import Component
-from htmlkit.core.element import Element
-from htmlkit.elements import (
+from htmforge import Component
+from htmforge.core.element import Element
+from htmforge.elements import (
     body,
     head,
     html,
     link,
     meta,
-    noscript,
     raw,
     script,
     style,
@@ -42,14 +41,14 @@ class Page(Component):
     voran.
 
     Example:
-        >>> from htmlkit.components.page import Page
-        >>> from htmlkit.core.element import Element
+        >>> from htmforge.components.page import Page
+        >>> from htmforge.core.element import Element
         >>>
         >>> class MyPage(Page):
         ...     users: list[str] = []
         ...
         ...     def _body_content(self) -> list[Element | str | None]:
-        ...         from htmlkit.elements import li, ul
+        ...         from htmforge.elements import li, ul
         ...         return [ul(*[li(u) for u in self.users])]
         ...
         >>> page = MyPage(title="Users", users=["Ada", "Grace"])

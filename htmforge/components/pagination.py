@@ -1,17 +1,20 @@
-"""Pagination-Komponente fuer seitenweises Laden mit HTMX.
+r"""Pagination-Komponente fuer seitenweises Laden mit HTMX.
 
 Example:
-    >>> from htmlkit.components import Pagination
-    >>> pager = Pagination(current_page=2, total_pages=3, hx_url="/users?page={page}", hx_target="#users")
+    >>> from htmforge.components import Pagination
+    >>> pager = Pagination(
+    ...     current_page=2, total_pages=3,
+    ...     hx_url="/users?page={page}", hx_target="#users",
+    ... )
     >>> "hx-get=\"/users?page=1\"" in pager.to_html()
     True
 """
 
 from __future__ import annotations
 
-from htmlkit import Component
-from htmlkit.core.element import Element
-from htmlkit.elements import a, li, ul
+from htmforge import Component
+from htmforge.core.element import Element
+from htmforge.elements import a, li, ul
 
 
 class Pagination(Component):

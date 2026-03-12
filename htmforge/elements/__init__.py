@@ -1,10 +1,10 @@
-﻿"""HTML5 factory functions for htmlkit elements."""
+"""HTML5 factory functions for htmforge elements."""
 
 from __future__ import annotations
 
 from markupsafe import Markup
 
-from htmlkit.core.element import Child, Element
+from htmforge.core.element import Child, Element
 
 
 def raw(text: str) -> Markup:
@@ -20,11 +20,11 @@ def raw(text: str) -> Markup:
         Ein :class:`markupsafe.Markup`-Objekt.
 
     Example:
-        >>> from htmlkit.elements import script, raw
+        >>> from htmforge.elements import script, raw
         >>> script(raw("console.log(1)")).to_html()
         '<script>console.log(1)</script>'
     """
-    return Markup(text)
+    return Markup(text)  # noqa: S704
 
 def div(*children: Child, **attrs: object) -> Element:
     """Block-Container."""

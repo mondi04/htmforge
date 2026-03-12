@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from markupsafe import Markup
 
-from htmlkit.core.element import Element, safe_html
-from htmlkit.elements import (
+from htmforge.core.element import Element, safe_html
+from htmforge.elements import (
     body,
     div,
     head,
@@ -64,7 +64,7 @@ class TestElementDunderStr:
 
 
 class TestRawHelper:
-    """Tests fuer die ``raw``-Hilfsfunktion in ``htmlkit.elements``."""
+    """Tests fuer die ``raw``-Hilfsfunktion in ``htmforge.elements``."""
 
     def test_raw_returns_markup(self) -> None:
         """``raw()`` gibt ein ``Markup``-Objekt zurueck."""

@@ -1,16 +1,16 @@
-"""Unit-Tests für htmlkit.core.component.Component."""
+"""Unit-Tests für htmforge.core.component.Component."""
 
 from __future__ import annotations
 
 import pytest
 from pydantic import ValidationError
 
-from htmlkit import Component as PublicComponent
-from htmlkit import Element as PublicElement
-from htmlkit.core.component import Component
-from htmlkit.core.element import Element
-from htmlkit.elements import button, div, p, span, table, td, tr
-from htmlkit.htmx import HxPushUrl, HxSwap, HxTarget, HxTrigger
+from htmforge import Component as PublicComponent
+from htmforge import Element as PublicElement
+from htmforge.core.component import Component
+from htmforge.core.element import Element
+from htmforge.elements import button, div, p, span, table, td, tr
+from htmforge.htmx import HxPushUrl, HxSwap, HxTarget, HxTrigger
 
 
 # ---------------------------------------------------------------------------
@@ -236,7 +236,7 @@ class TestComponentInheritance:
             IncompleteComponent(value="test")  # type: ignore[abstract]
 
     def test_render_must_return_element(self) -> None:
-        """``render()`` gibt ein :class:`~htmlkit.core.element.Element` zurück."""
+        """``render()`` gibt ein :class:`~htmforge.core.element.Element` zurück."""
         card = GreetingCard(title="Test")
         result = card.render()
         assert isinstance(result, Element)

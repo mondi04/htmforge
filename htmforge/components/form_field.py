@@ -1,7 +1,7 @@
-"""Formularelement-Komponente fuer htmlkit.
+"""Formularelement-Komponente fuer htmforge.
 
 Example:
-    >>> from htmlkit.components.form_field import FormField, InputType
+    >>> from htmforge.components.form_field import FormField, InputType
     >>> field = FormField(name="email", label_text="E-Mail", input_type=InputType.EMAIL)
     >>> 'type="email"' in field.to_html()
     True
@@ -9,19 +9,19 @@ Example:
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
-from htmlkit import Component
-from htmlkit.core.element import Element
-from htmlkit.elements import div, input, label
+from htmforge import Component
+from htmforge.core.element import Element
+from htmforge.elements import div, input, label
 
 
-class InputType(str, Enum):
+class InputType(StrEnum):
     """Unterstuetzte ``<input>``-Typen."""
 
     TEXT = "text"
     EMAIL = "email"
-    PASSWORD = "password"
+    PASSWORD = "password"  # noqa: S105
     NUMBER = "number"
     TEL = "tel"
     URL = "url"
@@ -33,7 +33,7 @@ class FormField(Component):
     """Rendert ein beschriftetes Eingabefeld mit optionaler Fehleranzeige.
 
     Example:
-        >>> from htmlkit.components.form_field import FormField, InputType
+        >>> from htmforge.components.form_field import FormField, InputType
         >>> field = FormField(
         ...     name="username",
         ...     label_text="Benutzername",

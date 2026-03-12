@@ -1,12 +1,12 @@
-"""Unit-Tests fuer vorgefertigte Komponenten in ``htmlkit.components``."""
+"""Unit-Tests fuer vorgefertigte Komponenten in ``htmforge.components``."""
 
 from __future__ import annotations
 
-from htmlkit.components import Alert, AlertVariant, DataTable, Pagination
-from htmlkit.components.form_field import FormField, InputType
-from htmlkit.components.page import Page
-from htmlkit.core.element import Element
-from htmlkit.elements import li, ul
+from htmforge.components import Alert, AlertVariant, DataTable, Pagination
+from htmforge.components.form_field import FormField, InputType
+from htmforge.components.page import Page
+from htmforge.core.element import Element
+from htmforge.elements import li, ul
 
 
 class TestDataTable:

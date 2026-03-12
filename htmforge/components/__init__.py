@@ -1,8 +1,7 @@
-"""Vorgefertigte, wiederverwendbare Komponenten fuer htmlkit."""
+"""Vorgefertigte, wiederverwendbare Komponenten fuer htmforge."""
 
 from .alert import Alert, AlertVariant
 from .form_field import FormField, InputType
-from .page import Page
 from .pagination import Pagination
 from .table import DataTable
 
@@ -12,6 +11,5 @@ __all__ = [
     "DataTable",
     "FormField",
     "InputType",
-    "Page",
     "Pagination",
 ]

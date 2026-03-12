@@ -1,4 +1,4 @@
-"""Component-Basisklasse für htmlkit.
+"""Component-Basisklasse für htmforge.
 
 Stellt :class:`Component` bereit — eine abstrakte Pydantic-BaseModel-Klasse,
 die Props-Validierung und HTML-Rendering kombiniert.
@@ -6,22 +6,22 @@ die Props-Validierung und HTML-Rendering kombiniert.
 
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
 import json
-from typing import Any, ClassVar, Unpack
+from abc import ABC, abstractmethod
+from typing import Any, ClassVar
 
 from pydantic import BaseModel, ConfigDict
 
-from htmlkit.core.element import Element
-from htmlkit.htmx import HxPushUrl, HxSwap, HxTarget, HxTrigger
+from htmforge.core.element import Element
+from htmforge.htmx import HxPushUrl, HxSwap, HxTarget, HxTrigger
 
 
 class Component(BaseModel, ABC):
     """Abstrakte Basisklasse für wiederverwendbare UI-Komponenten.
 
     Subklassen deklarieren typisierte Props als Pydantic-Felder und
-    implementieren die :meth:`render`-Methode, die ein :class:`~htmlkit.core.element.Element`
-    zurückgibt.
+    implementieren die :meth:`render`-Methode, die ein
+    :class:`~htmforge.core.element.Element` zurückgibt.
 
     Die Klasse aktiviert Pydantic-Features:
         - ``validate_assignment = True``: Props werden auch nach der
@@ -31,7 +31,7 @@ class Component(BaseModel, ABC):
         - ``frozen = False``: Komponenten sind per Default mutable.
 
     Example:
-        >>> from htmlkit.elements import div, p
+        >>> from htmforge.elements import div, p
         >>>
         >>> class Card(Component):
         ...     title: str
@@ -48,7 +48,7 @@ class Component(BaseModel, ABC):
         validate_assignment=True,
         arbitrary_types_allowed=True,
     )
-    __htmlkit_missing_render__: ClassVar[bool] = False
+    __htmforge_missing_render__: ClassVar[bool] = False
 
     # Typisierte HTMX-Props, die komponentenweit wiederverwendbar sind.
     hx_get: str | None = None
@@ -71,19 +71,19 @@ class Component(BaseModel, ABC):
     hx_params: str | None = None
     hx_encoding: str | None = None
 
-    def __init_subclass__(cls, **kwargs: Unpack[ConfigDict]) -> None:
+    def __init_subclass__(cls, **kwargs: Any) -> None:  # noqa: ANN401
         """Validiert, dass Unterklassen eine konkrete ``render``-Methode haben."""
         super().__init_subclass__(**kwargs)
         if cls is Component:
             return
         if cls.render is Component.render:
-            cls.__htmlkit_missing_render__ = True
+            cls.__htmforge_missing_render__ = True
         else:
-            cls.__htmlkit_missing_render__ = False
+            cls.__htmforge_missing_render__ = False
 
-    def __init__(self, **data: Any) -> None:
+    def __init__(self, **data: Any) -> None:  # noqa: ANN401
         """Initialisiert die Komponente und blockiert Klassen ohne ``render``."""
-        if getattr(type(self), "__htmlkit_missing_render__", False):
+        if getattr(type(self), "__htmforge_missing_render__", False):
             raise TypeError(
                 f"Can't instantiate abstract class {type(self).__name__} "
                 "without a concrete render() implementation"
@@ -92,13 +92,13 @@ class Component(BaseModel, ABC):
 
     @abstractmethod
     def render(self) -> Element:
-        """Rendert die Komponente zu einem :class:`~htmlkit.core.element.Element`.
+        """Rendert die Komponente zu einem :class:`~htmforge.core.element.Element`.
 
         Subklassen müssen diese Methode implementieren und das Root-Element
         der Komponente zurückgeben.
 
         Returns:
-            Das Root-:class:`~htmlkit.core.element.Element` der Komponente.
+            Das Root-:class:`~htmforge.core.element.Element` der Komponente.
         """
         ...
 
@@ -150,7 +150,7 @@ class Component(BaseModel, ABC):
     # Framework-Adapter (Stubs — werden in Phase 1 ausgebaut)
     # ------------------------------------------------------------------
 
-    def to_fastapi(self) -> Any:
+    def to_fastapi(self) -> Any:  # noqa: ANN401
         """Gibt eine FastAPI-kompatible ``HTMLResponse`` zurück.
 
         Note:
@@ -171,7 +171,7 @@ class Component(BaseModel, ABC):
             ) from exc
         return HTMLResponse(content=self.to_html())
 
-    def to_flask(self) -> Any:
+    def to_flask(self) -> Any:  # noqa: ANN401
         """Gibt eine Flask-kompatible Response zurück.
 
         Note:
@@ -192,7 +192,7 @@ class Component(BaseModel, ABC):
             ) from exc
         return Response(response=self.to_html(), mimetype="text/html")
 
-    def to_django(self) -> Any:
+    def to_django(self) -> Any:  # noqa: ANN401
         """Gibt eine Django-kompatible ``HttpResponse`` zurück.
 
         Note:

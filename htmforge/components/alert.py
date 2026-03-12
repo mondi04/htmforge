@@ -1,22 +1,22 @@
 """Alert-Komponente fuer Statusmeldungen.
 
 Example:
-    >>> from htmlkit.components import Alert, AlertVariant
+    >>> from htmforge.components import Alert, AlertVariant
     >>> Alert(message="Gespeichert", variant=AlertVariant.SUCCESS).to_html()
     '<div class="alert alert-success">Gespeichert</div>'
 """
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
-from htmlkit import Component
-from htmlkit.core.element import Element
-from htmlkit.elements import button, div
-from htmlkit.htmx import HxSwap, HxTarget
+from htmforge import Component
+from htmforge.core.element import Element
+from htmforge.elements import button, div
+from htmforge.htmx import HxSwap, HxTarget
 
 
-class AlertVariant(str, Enum):
+class AlertVariant(StrEnum):
     """Unterstuetzte Alert-Varianten."""
 
     INFO = "info"

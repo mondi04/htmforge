@@ -1,4 +1,4 @@
-"""HTML-Primitive Basisklasse für htmlkit.
+"""HTML-Primitive Basisklasse für htmforge.
 
 Stellt die ``Element``-Klasse bereit, die einen einzelnen HTML-Tag
 repräsentiert und via :meth:`Element.to_html` in einen sicheren
@@ -167,12 +167,12 @@ def safe_html(text: str) -> Markup:
         nicht nochmals escaped wird.
 
     Example:
-        >>> from htmlkit.elements import div
-        >>> from htmlkit.core.element import safe_html
+        >>> from htmforge.elements import div
+        >>> from htmforge.core.element import safe_html
         >>> div(safe_html("<strong>fett</strong>")).to_html()
         '<div><strong>fett</strong></div>'
     """
-    return Markup(text)
+    return Markup(text)  # noqa: S704
 
 
 def _normalize_attr_name(name: str) -> str:

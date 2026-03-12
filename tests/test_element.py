@@ -1,12 +1,12 @@
-"""Unit-Tests für htmlkit.core.element.Element."""
+"""Unit-Tests für htmforge.core.element.Element."""
 
 from __future__ import annotations
 
 import pytest
 
-from htmlkit.core.element import Element, _normalize_attr_name
-from htmlkit.elements import br, button, div, form, input, span, table, td, tr
-from htmlkit.htmx import HxSwap, HxTarget, HxTrigger
+from htmforge.core.element import Element, _normalize_attr_name
+from htmforge.elements import br, button, div, form, input, span, table, td, tr
+from htmforge.htmx import HxSwap, HxTarget, HxTrigger
 
 
 class TestElementRendering:
@@ -190,7 +190,7 @@ class TestNormalizeAttrName:
 
 
 class TestElementFactories:
-    """Tests fuer die Public-Factories in ``htmlkit.elements``."""
+    """Tests fuer die Public-Factories in ``htmforge.elements``."""
 
     def test_basic_factories_render_expected_html(self) -> None:
         """Element-Factories liefern erwartete HTML-Ausgaben."""

@@ -1,11 +1,11 @@
-"""htmlkit — Typsichere, composable UI-Komponenten für Python.
+"""htmforge — Typsichere, composable UI-Komponenten für Python.
 
 Server-side rendered, framework-agnostisch, HTMX-first.
 
 Quickstart::
 
-    from htmlkit import Component
-    from htmlkit.elements import div, p
+    from htmforge import Component
+    from htmforge.elements import div, p
 
     class Card(Component):
         title: str

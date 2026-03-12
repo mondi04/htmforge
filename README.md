@@ -1,14 +1,14 @@
 <!-- badges -->
-[![PyPI version](https://img.shields.io/pypi/v/htmlkit.svg)](https://pypi.org/project/htmlkit/)
+[![PyPI version](https://img.shields.io/pypi/v/htmforge.svg)](https://pypi.org/project/htmforge/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![mypy strict](https://img.shields.io/badge/mypy-strict-brightgreen.svg)](https://mypy.readthedocs.io/)
 
-# htmlkit
+# htmforge
 
 Type-safe, composable UI components for Python — server-side rendered, HTMX-first, framework-agnostic.
 
-## Why htmlkit?
+## Why htmforge?
 
 - **No templates** — build HTML with plain Python classes and type-checked props
 - **HTMX-native** — typed enums for every `hx-*` attribute, zero string guessing
@@ -18,7 +18,7 @@ Type-safe, composable UI components for Python — server-side rendered, HTMX-fi
 ## Installation
 
 ```bash
-pip install htmlkit
+pip install htmforge
 ```
 
 ## Quickstart
@@ -29,10 +29,10 @@ A FastAPI route that renders a full page with a user table and an add-user form:
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
-from htmlkit.components.page import Page
-from htmlkit.components import DataTable, FormField, InputType
-from htmlkit.core.element import Element
-from htmlkit.elements import div, h1
+from htmforge.components.page import Page
+from htmforge.components import DataTable, FormField, InputType
+from htmforge.core.element import Element
+from htmforge.elements import div, h1
 
 app = FastAPI()
 
@@ -44,21 +44,16 @@ class UsersPage(Page):
     added: bool = False
 
     def _body_content(self) -> list[Element | str | None]:
-        table = DataTable(
-            headers=["Name", "Email"],
-            rows=self.users,
-        )
-        form = FormField(
-            name="name",
-            label_text="Full Name",
-            input_type=InputType.TEXT,
-            required=True,
-        )
         return [
             div(
                 h1("Users"),
-                table.render(),
-                form.render(),
+                DataTable(headers=["Name", "Email"], rows=self.users).render(),
+                FormField(
+                    name="name",
+                    label_text="Full Name",
+                    input_type=InputType.TEXT,
+                    required=True,
+                ).render(),
             )
         ]
 
@@ -76,19 +71,19 @@ def list_users() -> str:
 
 | Component   | Description                                    | Import                                  |
 |-------------|------------------------------------------------|-----------------------------------------|
-| `DataTable` | Table with optional HTMX reload                | `from htmlkit.components import DataTable` |
-| `Alert`     | Info/success/warning/error box, dismissible    | `from htmlkit.components import Alert`  |
-| `Pagination`| Previous/Next + page links with HTMX targeting | `from htmlkit.components import Pagination` |
-| `Page`      | Full HTML document with DOCTYPE, abstract base | `from htmlkit.components.page import Page` |
-| `FormField` | Label + input + error div, 8 input types       | `from htmlkit.components import FormField` |
+| `DataTable` | Table with optional HTMX reload                | `from htmforge.components import DataTable` |
+| `Alert`     | Info/success/warning/error box, dismissible    | `from htmforge.components import Alert`  |
+| `Pagination`| Previous/Next + page links with HTMX targeting | `from htmforge.components import Pagination` |
+| `Page`      | Full HTML document with DOCTYPE, abstract base | `from htmforge.components.page import Page` |
+| `FormField` | Label + input + error div, 8 input types       | `from htmforge.components import FormField` |
 
 ## HTMX Integration
 
 All HTMX attributes are available as typed enums — no string typos:
 
 ```python
-from htmlkit.elements import button
-from htmlkit.htmx import HxSwap, HxTarget, HxTrigger
+from htmforge.elements import button
+from htmforge.htmx import HxSwap, HxTarget, HxTrigger
 
 btn = button(
     "Delete",

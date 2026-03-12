@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "htmlkit"
+name = "htmforge"
 version = "0.1.0"
 description = "Type-safe, composable UI components for Python — server-side rendered, HTMX-first."
 readme = "README.md"
@@ -36,9 +36,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/DEIN-USERNAME/htmlkit"
-Repository = "https://github.com/DEIN-USERNAME/htmlkit"
-"Bug Tracker" = "https://github.com/DEIN-USERNAME/htmlkit/issues"
+Homepage = "https://github.com/DEIN-USERNAME/htmforge"
+Repository = "https://github.com/DEIN-USERNAME/htmforge"
+"Bug Tracker" = "https://github.com/DEIN-USERNAME/htmforge/issues"
 
 # ---------------------------------------------------------------------------
 # Ruff — Linting & Formatting
@@ -120,4 +120,4 @@ addopts = "-v --tb=short"
 # hatch — build
 # ---------------------------------------------------------------------------
 [tool.hatch.build.targets.wheel]
-packages = ["htmlkit"]
+packages = ["htmforge"]

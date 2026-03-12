@@ -1,12 +1,12 @@
-# Contributing to htmlkit
+# Contributing to htmforge
 
 Thank you for your interest in contributing!
 
 ## Setup
 
 ```bash
-git clone https://github.com/DEIN-USERNAME/htmlkit.git
-cd htmlkit
+git clone https://github.com/DEIN-USERNAME/htmforge.git
+cd htmforge
 pip install -e ".[dev]"
 ```
 
@@ -14,16 +14,16 @@ Run tests and type checks:
 
 ```bash
 pytest               # run all tests
-mypy htmlkit/        # strict type check
-ruff check htmlkit/  # lint
-ruff format htmlkit/ # format
+mypy htmforge/        # strict type check
+ruff check htmforge/  # lint
+ruff format htmforge/ # format
 ```
 
 ## Workflow
 
 1. Fork the repository and create a branch: `git checkout -b feat/my-feature`
 2. Write your code and add tests — all new public functions need a docstring
-3. Make sure `pytest`, `mypy htmlkit/`, and `ruff check htmlkit/` all pass
+3. Make sure `pytest`, `mypy htmforge/`, and `ruff check htmforge/` all pass
 4. Open a pull request against `main` with a clear description
 
 ## Coding Standards
@@ -60,14 +60,14 @@ If you're new to the project, these are great places to start:
 
 ### 1. New HTML elements (`details`, `summary`, `dialog`)
 
-Add factory functions to `htmlkit/elements/__init__.py` following the existing
+Add factory functions to `htmforge/elements/__init__.py` following the existing
 pattern. Each function needs a one-line docstring and an entry in `__all__`.
 An HTML5 reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element
 
 ### 2. New ready-made component (Breadcrumb, Badge, or Spinner)
 
-Create `htmlkit/components/breadcrumb.py` (or badge/spinner) as a subclass of
-`Component`, export it from `htmlkit/components/__init__.py`, and add tests in
+Create `htmforge/components/breadcrumb.py` (or badge/spinner) as a subclass of
+`Component`, export it from `htmforge/components/__init__.py`, and add tests in
 `tests/test_components.py`. Follow the structure of the existing `Alert`
 component.
 
