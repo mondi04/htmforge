@@ -53,20 +53,20 @@ class UsersPage(Page):
                 message=self.success_message,
                 variant=AlertVariant.SUCCESS,
                 dismissible=True,
-            ).render()
+            )
 
         table = DataTable(
             headers=["Name", "Email"],
             rows=self.users,
             hx_url=f"/users/table?page={{page}}",
-        ).render()
+        )
 
         pager = Pagination(
             current_page=self.current_page,
             total_pages=self.total_pages,
             hx_url="/users/table?page={page}",
             hx_target="#users-table",
-        ).render()
+        )
 
         # Add-user form
         name_field = FormField(
@@ -74,13 +74,13 @@ class UsersPage(Page):
             label_text="Full Name",
             input_type=InputType.TEXT,
             required=True,
-        ).render()
+        )
         email_field = FormField(
             name="email",
             label_text="Email",
             input_type=InputType.EMAIL,
             required=True,
-        ).render()
+        )
 
         return [
             div(

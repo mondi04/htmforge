@@ -129,6 +129,20 @@ class TestPagination:
         assert '<li class="disabled"><a href="#">Next</a></li>' in html
         assert 'hx-get="/users?page=2"' in html
 
+    def test_render_with_default_hx_target_omits_hx_target_attribute(self) -> None:
+        """Wenn ``hx_target`` leer ist, wird kein ``hx-target`` gerendert."""
+        pager = Pagination(
+            current_page=2,
+            total_pages=3,
+            hx_url="/users?page={page}",
+        )
+
+        html = pager.to_html()
+
+        assert 'hx-get="/users?page=1"' in html
+        assert 'hx-get="/users?page=3"' in html
+        assert "hx-target=" not in html
+
 
 # ---------------------------------------------------------------------------
 # Fixture-Subklassen für Page

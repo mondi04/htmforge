@@ -23,10 +23,11 @@ class Pagination(Component):
     current_page: int
     total_pages: int
     hx_url: str
-    hx_target: str
+    hx_target: str = ""
 
     def render(self) -> Element:
         """Erstellt eine ``<ul>`` mit Seitenlinks inklusive Previous/Next."""
+        target_attr = self.hx_target or None
         items: list[Element] = [self._previous_link()]
 
         for page in range(1, self.total_pages + 1):
@@ -39,7 +40,7 @@ class Pagination(Component):
                             str(page),
                             href="#",
                             hx_get=self.hx_url.format(page=page),
-                            hx_target=self.hx_target,
+                            hx_target=target_attr,
                         )
                     )
                 )
@@ -57,7 +58,7 @@ class Pagination(Component):
                 "Previous",
                 href="#",
                 hx_get=self.hx_url.format(page=prev_page),
-                hx_target=self.hx_target,
+                hx_target=self.hx_target or None,
             )
         )
 
@@ -71,6 +72,6 @@ class Pagination(Component):
                 "Next",
                 href="#",
                 hx_get=self.hx_url.format(page=next_page),
-                hx_target=self.hx_target,
+                hx_target=self.hx_target or None,
             )
         )

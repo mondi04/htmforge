@@ -103,7 +103,7 @@ Core install: **2 dependencies.**
 | `FormField` | `htmforge.components`               | Label + input + error div, 8 input types     |
 
 ### ✅ Quality
-- **96 tests**, all green
+- **97 tests**, all green
 - **mypy --strict** clean (17 source files)
 - **CI** via GitHub Actions: matrix Python 3.11/3.12, pytest + mypy + ruff
 - `pip install -e .` works cleanly with hatchling
@@ -165,5 +165,6 @@ A block is only complete when:
 | 2026-03-12 | Removed `.render()` from public API examples; Component usable as Element child |
 | 2026-03-12 | Removed deprecated ANN101/ANN102 ruff ignores from pyproject.toml              |
 | 2026-03-12 | v0.1.0: LICENSE, py.typed (PEP 561), author metadata, build + smoke test verified |
+| 2026-03-12 | v0.1.0 final: importlib.metadata version, Pagination.hx_target optional, example fixes |
 | 2026-03-11 | Block A–C completed: HTMX enums, framework adapters, component library  |
 | 2026-03-11 | OVERVIEW introduced as living steering document                         |

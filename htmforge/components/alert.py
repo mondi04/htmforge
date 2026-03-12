@@ -37,6 +37,8 @@ class Alert(Component):
         children: list[Element | str] = [self.message]
         if self.dismissible:
             children.append(
+                # TODO: replace with JS-based dismiss
+                # (hx_get="" triggers GET on current URL)
                 button(
                     "×",
                     type="button",
