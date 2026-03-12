@@ -168,6 +168,14 @@ class TestComponentRendering:
         assert 'hx-encoding="multipart/form-data"' in html
         assert "hx-headers=" in html
 
+    def test_component_usable_as_child_of_element(self) -> None:
+        """Eine Komponente kann direkt als Kind eines Elements verwendet werden."""
+        card = GreetingCard(title="Nested", body="Test")
+        wrapper = div(card)
+        html = wrapper.to_html()
+        assert '<div class="card">' in html
+        assert "Nested" in html
+
 
 # ---------------------------------------------------------------------------
 # Tests: Props-Validierung (Pydantic V2)

@@ -47,13 +47,16 @@ class UsersPage(Page):
         return [
             div(
                 h1("Users"),
-                DataTable(headers=["Name", "Email"], rows=self.users).render(),
+                DataTable(
+                    headers=["Name", "Email"],
+                    rows=self.users,
+                ),
                 FormField(
                     name="name",
                     label_text="Full Name",
                     input_type=InputType.TEXT,
                     required=True,
-                ).render(),
+                ),
             )
         ]
 

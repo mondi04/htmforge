@@ -64,8 +64,6 @@ select = [
 ignore = [
     "D203",   # one-blank-line-before-class (conflicts with D211)
     "D213",   # multi-line-summary-second-line (conflicts with D212)
-    "ANN101", # missing-type-self (deprecated)
-    "ANN102", # missing-type-cls (deprecated)
 ]
 
 [tool.ruff.lint.pydocstyle]

@@ -8,12 +8,15 @@ HTML-String gerendert werden kann.
 from __future__ import annotations
 
 from enum import Enum
-from typing import Union
+from typing import TYPE_CHECKING, Union
 
 from markupsafe import Markup, escape
 
+if TYPE_CHECKING:
+    from htmforge.core.component import Component
+
 # Ein Kind-Element ist entweder ein weiteres Element, ein Rohstring oder None.
-Child = Union["Element", str, None]
+Child = Union["Element", "Component", str, None]
 
 # Void-Elemente dürfen keine schließenden Tags haben (HTML5-Spec).
 _VOID_ELEMENTS: frozenset[str] = frozenset(
@@ -145,7 +148,9 @@ class Element:
         for child in self._children:
             if child is None:
                 continue
-            if isinstance(child, Element):
+            from htmforge.core.component import Component
+
+            if isinstance(child, (Element, Component)):
                 chunks.append(child.to_html())
             else:
                 # Roher String → escapen, damit kein XSS möglich ist
