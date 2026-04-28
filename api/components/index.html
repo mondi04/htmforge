@@ -1,0 +1,3758 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Type-safe, composable UI components for Python — server-side rendered, HTMX-first, framework-agnostic.">
+      
+      
+      
+        <link rel="canonical" href="https://mondi04.github.io/htmforge/api/components/">
+      
+      
+        <link rel="prev" href="../htmx/">
+      
+      
+        <link rel="next" href="../../examples/fastapi/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>htmforge.components - htmforge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#htmforgecomponents" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="htmforge" class="md-header__button md-logo" aria-label="htmforge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            htmforge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              htmforge.components
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mondi04/htmforge" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mondi04/htmforge
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guide/elements/" class="md-tabs__link">
+          
+  
+  
+  Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../components/alert/" class="md-tabs__link">
+          
+  
+  
+  Components Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../htmforge/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../examples/fastapi/" class="md-tabs__link">
+          
+  
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../contributing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="htmforge" class="md-nav__button md-logo" aria-label="htmforge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    htmforge
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mondi04/htmforge" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mondi04/htmforge
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/htmx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTMX Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/frameworks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework Adapters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XSS & Safety
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Components Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Components Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/alert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alert
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/badge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Badge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/breadcrumb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Breadcrumb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/datatable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataTable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/formfield/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FormField
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/modal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/pagination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagination
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/searchinput/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SearchInput
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../htmforge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    htmforge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../element/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    htmforge.core.element
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    htmforge.core.component
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    htmforge.elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../htmx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    htmforge.htmx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    htmforge.components
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    htmforge.components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.alert.Alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alert
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alert">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.alert.Alert.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.alert.AlertVariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AlertVariant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.badge.Badge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Badge
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Badge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.badge.Badge.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.badge.BadgeVariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BadgeVariant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.breadcrumb.Breadcrumb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breadcrumb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Breadcrumb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.breadcrumb.Breadcrumb--contains-home-and-aktuell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        contains htmforge.components.alert.Alert(**data) Bases: Component Rendert eine Alert-Box mit optionalem Dismiss-Button. Source code in htmforge/core/component.py 84 85 86 87 88 89 90 91def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Erstellt ein &lt;div&gt; mit Variantenklasse und optionalem Schliessen. Source code in htmforge/components/alert.py 35 36 37 38 39 40 41 42 43 44 45 46 47 48def render(self) -&gt; Element: &quot;&quot;&quot;Erstellt ein ``&lt;div&gt;`` mit Variantenklasse und optionalem Schliessen.&quot;&quot;&quot; children: list[Element | str] = [self.message] if self.dismissible: children.append( button( &quot;×&quot;, type=&quot;button&quot;, cls=&quot;alert-close&quot;, aria_label=self.close_label, onclick=&quot;this.closest(&#39;.alert&#39;).remove()&quot;, ) ) return div(*children, cls=f&quot;alert alert-{self.variant.value}&quot;) Home htmforge.components.alert.AlertVariant Bases: StrEnum Unterstuetzte Alert-Varianten. and htmforge.components.badge.Badge(**data) Bases: Component Rendert ein kleines Inline-Label mit Variantenklasse. Example Badge(text="3", variant=BadgeVariant.DANGER).to_html() '3' Source code in htmforge/core/component.py 84 85 86 87 88 89 90 91def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Erstellt ein &lt;span&gt; mit Variantenklasse. Source code in htmforge/components/badge.py 39 40 41def render(self) -&gt; Element: &quot;&quot;&quot;Erstellt ein ``&lt;span&gt;`` mit Variantenklasse.&quot;&quot;&quot; return span(self.text, cls=f&quot;badge badge-{self.variant.value}&quot;) Aktuell htmforge.components.badge.BadgeVariant Bases: StrEnum Unterstuetzte Badge-Varianten.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.breadcrumb.Breadcrumb.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.table.DataTable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DataTable
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DataTable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.table.DataTable.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.form_field.FormField" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FormField
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FormField">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.form_field.FormField.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.form_field.InputType" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InputType
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.modal.Modal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.modal.Modal.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.pagination.Pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pagination
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pagination">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.pagination.Pagination.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.search_input.SearchInput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SearchInput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SearchInput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.search_input.SearchInput.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.page.Page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Page
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.page.Page.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.page.Page.to_html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        to_html
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/fastapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/flask/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flask
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/django/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Django
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.alert.Alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alert
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alert">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.alert.Alert.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.alert.AlertVariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AlertVariant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.badge.Badge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Badge
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Badge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.badge.Badge.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.badge.BadgeVariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BadgeVariant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.breadcrumb.Breadcrumb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breadcrumb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Breadcrumb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.breadcrumb.Breadcrumb--contains-home-and-aktuell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        contains htmforge.components.alert.Alert(**data) Bases: Component Rendert eine Alert-Box mit optionalem Dismiss-Button. Source code in htmforge/core/component.py 84 85 86 87 88 89 90 91def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Erstellt ein &lt;div&gt; mit Variantenklasse und optionalem Schliessen. Source code in htmforge/components/alert.py 35 36 37 38 39 40 41 42 43 44 45 46 47 48def render(self) -&gt; Element: &quot;&quot;&quot;Erstellt ein ``&lt;div&gt;`` mit Variantenklasse und optionalem Schliessen.&quot;&quot;&quot; children: list[Element | str] = [self.message] if self.dismissible: children.append( button( &quot;×&quot;, type=&quot;button&quot;, cls=&quot;alert-close&quot;, aria_label=self.close_label, onclick=&quot;this.closest(&#39;.alert&#39;).remove()&quot;, ) ) return div(*children, cls=f&quot;alert alert-{self.variant.value}&quot;) Home htmforge.components.alert.AlertVariant Bases: StrEnum Unterstuetzte Alert-Varianten. and htmforge.components.badge.Badge(**data) Bases: Component Rendert ein kleines Inline-Label mit Variantenklasse. Example Badge(text="3", variant=BadgeVariant.DANGER).to_html() '3' Source code in htmforge/core/component.py 84 85 86 87 88 89 90 91def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Erstellt ein &lt;span&gt; mit Variantenklasse. Source code in htmforge/components/badge.py 39 40 41def render(self) -&gt; Element: &quot;&quot;&quot;Erstellt ein ``&lt;span&gt;`` mit Variantenklasse.&quot;&quot;&quot; return span(self.text, cls=f&quot;badge badge-{self.variant.value}&quot;) Aktuell htmforge.components.badge.BadgeVariant Bases: StrEnum Unterstuetzte Badge-Varianten.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.breadcrumb.Breadcrumb.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.table.DataTable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DataTable
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DataTable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.table.DataTable.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.form_field.FormField" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FormField
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FormField">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.form_field.FormField.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.form_field.InputType" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InputType
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.modal.Modal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.modal.Modal.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.pagination.Pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pagination
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pagination">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.pagination.Pagination.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.search_input.SearchInput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SearchInput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SearchInput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.search_input.SearchInput.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmforge.components.page.Page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Page
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.page.Page.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#htmforge.components.page.Page.to_html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        to_html
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="htmforgecomponents">htmforge.components</h1>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.alert.Alert" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">htmforge</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">alert</span><span class="o">.</span><span class="n">Alert</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Component(**data) (htmforge.Component)" href="../htmforge/#htmforge.Component">Component</a></code></p>
+
+
+
+        <p>Rendert eine Alert-Box mit optionalem Dismiss-Button.</p>
+
+
+
+
+
+
+
+
+                  <details class="mkdocstrings-source">
+                    <summary>Source code in <code>htmforge/core/component.py</code></summary>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+                  </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="htmforge.components.alert.Alert.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Erstellt ein <code>&lt;div&gt;</code> mit Variantenklasse und optionalem Schliessen.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>htmforge/components/alert.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Erstellt ein ``&lt;div&gt;`` mit Variantenklasse und optionalem Schliessen.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="n">children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span> <span class="o">|</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">]</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dismissible</span><span class="p">:</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>        <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>            <span class="n">button</span><span class="p">(</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>                <span class="s2">&quot;×&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a>                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>                <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;alert-close&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a>                <span class="n">aria_label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">close_label</span><span class="p">,</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a>                <span class="n">onclick</span><span class="o">=</span><span class="s2">&quot;this.closest(&#39;.alert&#39;).remove()&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>            <span class="p">)</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>        <span class="p">)</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;alert alert-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.alert.AlertVariant" class="doc doc-heading">
+            <code>htmforge.components.alert.AlertVariant</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="enum.StrEnum">StrEnum</span></code></p>
+
+
+
+        <p>Unterstuetzte Alert-Varianten.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.badge.Badge" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">htmforge</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">badge</span><span class="o">.</span><span class="n">Badge</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Component(**data) (htmforge.Component)" href="../htmforge/#htmforge.Component">Component</a></code></p>
+
+
+
+        <p>Rendert ein kleines Inline-Label mit Variantenklasse.</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>Badge(text="3", variant=BadgeVariant.DANGER).to_html()
+'<span class="badge badge-danger">3</span>'</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+
+
+
+
+
+
+                  <details class="mkdocstrings-source">
+                    <summary>Source code in <code>htmforge/core/component.py</code></summary>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+                  </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="htmforge.components.badge.Badge.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Erstellt ein <code>&lt;span&gt;</code> mit Variantenklasse.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>htmforge/components/badge.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Erstellt ein ``&lt;span&gt;`` mit Variantenklasse.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="k">return</span> <span class="n">span</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;badge badge-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.badge.BadgeVariant" class="doc doc-heading">
+            <code>htmforge.components.badge.BadgeVariant</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="enum.StrEnum">StrEnum</span></code></p>
+
+
+
+        <p>Unterstuetzte Badge-Varianten.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.breadcrumb.Breadcrumb" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">htmforge</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">breadcrumb</span><span class="o">.</span><span class="n">Breadcrumb</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Component(**data) (htmforge.Component)" href="../htmforge/#htmforge.Component">Component</a></code></p>
+
+
+
+        <p>Rendert eine Breadcrumb-Navigation als <code>&lt;nav&gt;</code> mit geordneter Liste.</p>
+<p>Items sind <code>(label, url)</code>-Tupel.
+<code>url=None</code> markiert die aktuelle Seite und wird als <code>&lt;span&gt;</code> gerendert.</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>Breadcrumb(items=[("Home", "/"), ("Aktuell", None)]).to_html()</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="htmforge.components.breadcrumb.Breadcrumb--contains-home-and-aktuell">contains <a href="/">Home</a> and <span ...>Aktuell</span></h3>
+</details>
+
+
+
+
+
+
+
+                  <details class="mkdocstrings-source">
+                    <summary>Source code in <code>htmforge/core/component.py</code></summary>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+                  </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="htmforge.components.breadcrumb.Breadcrumb.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Erstellt <code>&lt;nav&gt;</code> mit <code>&lt;ol&gt;</code> und <code>&lt;li&gt;</code>-Eintraegen.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>htmforge/components/breadcrumb.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Erstellt ``&lt;nav&gt;`` mit ``&lt;ol&gt;`` und ``&lt;li&gt;``-Eintraegen.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a>    <span class="n">list_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="n">last_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">href</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>        <span class="n">is_current</span> <span class="o">=</span> <span class="n">href</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">index</span> <span class="o">==</span> <span class="n">last_index</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>        <span class="k">if</span> <span class="n">is_current</span><span class="p">:</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>            <span class="n">list_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>                <span class="n">li</span><span class="p">(</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a>                    <span class="n">span</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">aria_current</span><span class="o">=</span><span class="s2">&quot;page&quot;</span><span class="p">),</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>                    <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;breadcrumb-item active&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a>                <span class="p">)</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a>            <span class="p">)</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>            <span class="n">list_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a>                <span class="n">li</span><span class="p">(</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a>                    <span class="n">a</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="n">href</span><span class="p">),</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>                    <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;breadcrumb-item&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a>                <span class="p">)</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>            <span class="p">)</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="k">return</span> <span class="n">nav</span><span class="p">(</span><span class="n">ol</span><span class="p">(</span><span class="o">*</span><span class="n">list_items</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;breadcrumb&quot;</span><span class="p">),</span> <span class="n">aria_label</span><span class="o">=</span><span class="s2">&quot;breadcrumb&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.table.DataTable" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">htmforge</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">DataTable</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Component(**data) (htmforge.Component)" href="../htmforge/#htmforge.Component">Component</a></code></p>
+
+
+
+        <p>Rendert eine einfache Datentabelle mit optionalem HTMX-Reload.</p>
+
+
+
+
+
+
+
+
+                  <details class="mkdocstrings-source">
+                    <summary>Source code in <code>htmforge/core/component.py</code></summary>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+                  </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="htmforge.components.table.DataTable.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Erstellt <code>div.table-wrapper &gt; table.table</code> mit <code>thead</code>/<code>tbody</code>.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>htmforge/components/table.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Erstellt ``div.table-wrapper &gt; table.table`` mit ``thead``/``tbody``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a>    <span class="n">header_row</span> <span class="o">=</span> <span class="n">tr</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">th</span><span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="k">for</span> <span class="n">header</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">))</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="n">body_rows</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span><span class="p">]</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">:</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a>        <span class="n">body_rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">tr</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">td</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">]</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a>        <span class="n">colspan</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a>        <span class="n">body_rows</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>            <span class="n">tr</span><span class="p">(</span><span class="n">td</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">empty_message</span><span class="p">,</span> <span class="n">colspan</span><span class="o">=</span><span class="n">colspan</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;table__empty&quot;</span><span class="p">))</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>        <span class="p">]</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>    <span class="n">attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>        <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;hx_get&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_url</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a>        <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;hx_trigger&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">HxTrigger</span><span class="o">.</span><span class="n">LOAD</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a>        <span class="n">table</span><span class="p">(</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>            <span class="n">thead</span><span class="p">(</span><span class="n">header_row</span><span class="p">),</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>            <span class="n">tbody</span><span class="p">(</span><span class="o">*</span><span class="n">body_rows</span><span class="p">),</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a>            <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;table&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a>            <span class="o">**</span><span class="n">attrs</span><span class="p">,</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>        <span class="p">),</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a>        <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;table-wrapper&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.form_field.FormField" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">htmforge</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">form_field</span><span class="o">.</span><span class="n">FormField</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Component(**data) (htmforge.Component)" href="../htmforge/#htmforge.Component">Component</a></code></p>
+
+
+
+        <p>Rendert ein beschriftetes Eingabefeld mit optionaler Fehleranzeige.</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>from htmforge.components.form_field import FormField, InputType
+field = FormField(
+...     name="username",
+...     label_text="Benutzername",
+...     required=True,
+... )
+"required" in field.to_html()
+True</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+
+
+
+
+
+
+                  <details class="mkdocstrings-source">
+                    <summary>Source code in <code>htmforge/core/component.py</code></summary>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+                  </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="htmforge.components.form_field.FormField.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Erstellt <code>div &gt; label + input [+ div.field-error]</code>.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>htmforge/components/form_field.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span>
+<span class="normal"><a href="#__codelineno-0-63">63</a></span>
+<span class="normal"><a href="#__codelineno-0-64">64</a></span>
+<span class="normal"><a href="#__codelineno-0-65">65</a></span>
+<span class="normal"><a href="#__codelineno-0-66">66</a></span>
+<span class="normal"><a href="#__codelineno-0-67">67</a></span>
+<span class="normal"><a href="#__codelineno-0-68">68</a></span>
+<span class="normal"><a href="#__codelineno-0-69">69</a></span>
+<span class="normal"><a href="#__codelineno-0-70">70</a></span>
+<span class="normal"><a href="#__codelineno-0-71">71</a></span>
+<span class="normal"><a href="#__codelineno-0-72">72</a></span>
+<span class="normal"><a href="#__codelineno-0-73">73</a></span>
+<span class="normal"><a href="#__codelineno-0-74">74</a></span>
+<span class="normal"><a href="#__codelineno-0-75">75</a></span>
+<span class="normal"><a href="#__codelineno-0-76">76</a></span>
+<span class="normal"><a href="#__codelineno-0-77">77</a></span>
+<span class="normal"><a href="#__codelineno-0-78">78</a></span>
+<span class="normal"><a href="#__codelineno-0-79">79</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Erstellt ``div &gt; label + input [+ div.field-error]``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_id</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="n">children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>        <span class="n">label</span><span class="p">(</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">label_text</span><span class="p">,</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>            <span class="n">for_</span><span class="o">=</span><span class="n">fid</span><span class="p">,</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a>            <span class="n">aria_required</span><span class="o">=</span><span class="s2">&quot;true&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">required</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>        <span class="p">),</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65"></a>        <span class="nb">input</span><span class="p">(</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66"></a>            <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">input_type</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>            <span class="nb">id</span><span class="o">=</span><span class="n">fid</span><span class="p">,</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a>            <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>            <span class="n">placeholder</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">placeholder</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71"></a>            <span class="n">required</span><span class="o">=</span><span class="kc">True</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">required</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72"></a>            <span class="n">aria_required</span><span class="o">=</span><span class="s2">&quot;true&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">required</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73"></a>        <span class="p">),</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74"></a>    <span class="p">]</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75"></a>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a>        <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;field-error&quot;</span><span class="p">))</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78"></a>
+<a id="__codelineno-0-79" name="__codelineno-0-79"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.form_field.InputType" class="doc doc-heading">
+            <code>htmforge.components.form_field.InputType</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="enum.StrEnum">StrEnum</span></code></p>
+
+
+
+        <p>Unterstuetzte <code>&lt;input&gt;</code>-Typen.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.modal.Modal" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">htmforge</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">modal</span><span class="o">.</span><span class="n">Modal</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Component(**data) (htmforge.Component)" href="../htmforge/#htmforge.Component">Component</a></code></p>
+
+
+
+        <p>Trigger-Button + leeres Dialog-Overlay, Inhalt wird per HTMX geladen.</p>
+
+
+<details class="renders" open>
+  <summary>Renders</summary>
+  <div class="modal-wrapper">
+  <button hx-get=hx_url hx-target="#modal_id-body" hx-swap="innerHTML"
+          onclick="document.getElementById('modal_id').showModal()">
+    trigger_label
+  </button>
+  <dialog id=modal_id class="modal">
+    <div id="modal_id-body" class="modal-body"></div>
+    <form method="dialog">
+      <button class="modal-close">Schließen</button>
+    </form>
+  </dialog>
+</div>
+</details>
+
+<details class="fields" open>
+  <summary>Fields</summary>
+  <p>modal_id: str — unique HTML id for the <dialog>
+trigger_label: str — label on the trigger button
+hx_url: str — URL to load modal content from
+hx_target: str = "" — overrides default target if set
+close_label: str = "Schließen"</p>
+</details>
+
+
+
+
+
+
+
+                  <details class="mkdocstrings-source">
+                    <summary>Source code in <code>htmforge/core/component.py</code></summary>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+                  </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="htmforge.components.modal.Modal.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Erstellt den Trigger-Button und das <code>&lt;dialog&gt;</code>-Overlay.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>htmforge/components/modal.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span>
+<span class="normal"><a href="#__codelineno-0-63">63</a></span>
+<span class="normal"><a href="#__codelineno-0-64">64</a></span>
+<span class="normal"><a href="#__codelineno-0-65">65</a></span>
+<span class="normal"><a href="#__codelineno-0-66">66</a></span>
+<span class="normal"><a href="#__codelineno-0-67">67</a></span>
+<span class="normal"><a href="#__codelineno-0-68">68</a></span>
+<span class="normal"><a href="#__codelineno-0-69">69</a></span>
+<span class="normal"><a href="#__codelineno-0-70">70</a></span>
+<span class="normal"><a href="#__codelineno-0-71">71</a></span>
+<span class="normal"><a href="#__codelineno-0-72">72</a></span>
+<span class="normal"><a href="#__codelineno-0-73">73</a></span>
+<span class="normal"><a href="#__codelineno-0-74">74</a></span>
+<span class="normal"><a href="#__codelineno-0-75">75</a></span>
+<span class="normal"><a href="#__codelineno-0-76">76</a></span>
+<span class="normal"><a href="#__codelineno-0-77">77</a></span>
+<span class="normal"><a href="#__codelineno-0-78">78</a></span>
+<span class="normal"><a href="#__codelineno-0-79">79</a></span>
+<span class="normal"><a href="#__codelineno-0-80">80</a></span>
+<span class="normal"><a href="#__codelineno-0-81">81</a></span>
+<span class="normal"><a href="#__codelineno-0-82">82</a></span>
+<span class="normal"><a href="#__codelineno-0-83">83</a></span>
+<span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-54" name="__codelineno-0-54"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Erstellt den Trigger-Button und das ``&lt;dialog&gt;``-Overlay.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>    <span class="n">body_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">modal_id</span><span class="si">}</span><span class="s2">-body&quot;</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_target</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="n">body_id</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>        <span class="n">button</span><span class="p">(</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">trigger_label</span><span class="p">,</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>            <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a>            <span class="n">data_modal_target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">modal_id</span><span class="p">,</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>            <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;modal-trigger&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65"></a>            <span class="n">hx_get</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hx_url</span><span class="p">,</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66"></a>            <span class="n">hx_target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>            <span class="n">hx_swap</span><span class="o">=</span><span class="n">HxSwap</span><span class="o">.</span><span class="n">INNER_HTML</span><span class="p">,</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>        <span class="p">),</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a>        <span class="n">dialog</span><span class="p">(</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>            <span class="n">div</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">body_id</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;modal-body&quot;</span><span class="p">),</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71"></a>            <span class="n">form</span><span class="p">(</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72"></a>                <span class="n">button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">close_label</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;modal-close&quot;</span><span class="p">),</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73"></a>                <span class="n">method</span><span class="o">=</span><span class="s2">&quot;dialog&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74"></a>            <span class="p">),</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75"></a>            <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">modal_id</span><span class="p">,</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a>            <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;modal&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a>        <span class="p">),</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78"></a>        <span class="n">raw</span><span class="p">(</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79"></a>            <span class="s2">&quot;&lt;script&gt;&quot;</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80"></a>            <span class="s2">&quot;document.querySelectorAll(&#39;[data-modal-target]&#39;).forEach(function(btn){&quot;</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81"></a>            <span class="s2">&quot;btn.addEventListener(&#39;click&#39;,function(){&quot;</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82"></a>            <span class="s2">&quot;var id=btn.getAttribute(&#39;data-modal-target&#39;);&quot;</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83"></a>            <span class="s2">&quot;var dlg=document.getElementById(id);&quot;</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84"></a>            <span class="s2">&quot;if(dlg)dlg.showModal();&quot;</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a>            <span class="s2">&quot;});&quot;</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>            <span class="s2">&quot;});&quot;</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>            <span class="s2">&quot;&lt;/script&gt;&quot;</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>        <span class="p">),</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>        <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;modal-wrapper&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.pagination.Pagination" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">htmforge</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">pagination</span><span class="o">.</span><span class="n">Pagination</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Component(**data) (htmforge.Component)" href="../htmforge/#htmforge.Component">Component</a></code></p>
+
+
+
+        <p>Rendert Previous/Next und Seitenlinks fuer HTMX-Navigation.</p>
+
+
+
+
+
+
+
+
+                  <details class="mkdocstrings-source">
+                    <summary>Source code in <code>htmforge/core/component.py</code></summary>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+                  </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="htmforge.components.pagination.Pagination.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Erstellt eine <code>&lt;ul&gt;</code> mit Seitenlinks inklusive Previous/Next.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>htmforge/components/pagination.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Erstellt eine ``&lt;ul&gt;`` mit Seitenlinks inklusive Previous/Next.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_previous_link</span><span class="p">()]</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a>    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_pages</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>        <span class="k">if</span> <span class="n">page</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span><span class="p">:</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a>            <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">li</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">),</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">),</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;active&quot;</span><span class="p">))</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>            <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>                <span class="n">li</span><span class="p">(</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>                    <span class="n">a</span><span class="p">(</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>                        <span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">),</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>                        <span class="n">href</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>                        <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_link_attrs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hx_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">)),</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a>                    <span class="p">)</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>                <span class="p">)</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a>            <span class="p">)</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>    <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_next_link</span><span class="p">())</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="k">return</span> <span class="n">ul</span><span class="p">(</span><span class="o">*</span><span class="n">items</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;pagination&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.search_input.SearchInput" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">htmforge</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">search_input</span><span class="o">.</span><span class="n">SearchInput</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Component(**data) (htmforge.Component)" href="../htmforge/#htmforge.Component">Component</a></code></p>
+
+
+
+        <p>Text-Input mit automatischem hx-trigger keyup-Debounce.</p>
+
+
+<details class="renders" open>
+  <summary><div class="search-input-wrapper"></summary>
+  <p><input type="search" name=name placeholder=placeholder
+       hx-get=search_url hx-trigger="keyup delay:{debounce_ms}ms"
+       hx-target=search_target [hx-indicator=indicator]></p>
+</details>        <div class="highlight"><pre><span></span><code>     &lt;/div&gt;
+</code></pre></div>
+
+
+<details class="fields" open>
+  <summary>Fields</summary>
+  <p>name: str — input name attribute
+search_url: str — URL for hx-get (custom field, not Component.hx_get)
+search_target: str — CSS selector for swap target
+    (custom field, not Component.hx_target)
+placeholder: str = "Suchen…"
+debounce_ms: int = 300
+indicator: str = "" — optional hx-indicator selector</p>
+</details>
+
+
+
+
+
+
+
+                  <details class="mkdocstrings-source">
+                    <summary>Source code in <code>htmforge/core/component.py</code></summary>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+                  </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="htmforge.components.search_input.SearchInput.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Erstellt den Such-Input mit Debounce und optionalem Indicator.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>htmforge/components/search_input.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Erstellt den Such-Input mit Debounce und optionalem Indicator.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>        <span class="nb">input</span><span class="p">(</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a>            <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;search&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a>            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>            <span class="n">placeholder</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">placeholder</span><span class="p">,</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a>            <span class="n">hx_get</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search_url</span><span class="p">,</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>            <span class="n">hx_trigger</span><span class="o">=</span><span class="n">hx_keyup_delay</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">debounce_ms</span><span class="p">),</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a>            <span class="n">hx_target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search_target</span><span class="p">,</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>            <span class="n">hx_indicator</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">indicator</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="p">),</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>        <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;search-input-wrapper&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmforge.components.page.Page" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">htmforge</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">page</span><span class="o">.</span><span class="n">Page</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="Component(**data) (htmforge.Component)" href="../htmforge/#htmforge.Component">Component</a></code></p>
+
+
+
+        <p>Abstrakte Basisklasse fuer vollstaendige HTML-Dokumente mit DOCTYPE.</p>
+<p>Subklassen implementieren :meth:<code>_body_content</code> um den Seiteninhalt
+bereitzustellen. :meth:<code>to_html</code> haengt automatisch <code>&lt;!DOCTYPE html&gt;</code>
+voran.</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>from htmforge.components.page import Page
+from htmforge.core.element import Element</p>
+<p>class MyPage(Page):
+...     users: list[str] = []
+...
+...     def _body_content(self) -&gt; list[Element | str | None]:
+...         from htmforge.elements import li, ul
+...         return [ul(*[li(u) for u in self.users])]
+...
+page = MyPage(title="Users", users=["Ada", "Grace"])
+page.to_html().startswith("&lt;!DOCTYPE html&gt;")
+True</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+
+
+
+
+
+
+                  <details class="mkdocstrings-source">
+                    <summary>Source code in <code>htmforge/core/component.py</code></summary>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+                  </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="htmforge.components.page.Page.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Rendert das vollstaendige <code>&lt;html&gt;</code>-Dokument ohne DOCTYPE.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>htmforge/components/page.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-75">75</a></span>
+<span class="normal"><a href="#__codelineno-0-76">76</a></span>
+<span class="normal"><a href="#__codelineno-0-77">77</a></span>
+<span class="normal"><a href="#__codelineno-0-78">78</a></span>
+<span class="normal"><a href="#__codelineno-0-79">79</a></span>
+<span class="normal"><a href="#__codelineno-0-80">80</a></span>
+<span class="normal"><a href="#__codelineno-0-81">81</a></span>
+<span class="normal"><a href="#__codelineno-0-82">82</a></span>
+<span class="normal"><a href="#__codelineno-0-83">83</a></span>
+<span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span>
+<span class="normal"><a href="#__codelineno-0-97">97</a></span>
+<span class="normal"><a href="#__codelineno-0-98">98</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Rendert das vollstaendige ``&lt;html&gt;``-Dokument ohne DOCTYPE.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a>    <span class="n">head_children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">meta</span><span class="p">(</span><span class="n">charset</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">charset</span><span class="p">)]</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78"></a>
+<a id="__codelineno-0-79" name="__codelineno-0-79"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80"></a>        <span class="n">head_children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">meta</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81"></a>
+<a id="__codelineno-0-82" name="__codelineno-0-82"></a>    <span class="n">head_children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">))</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83"></a>
+<a id="__codelineno-0-84" name="__codelineno-0-84"></a>    <span class="k">for</span> <span class="n">css_url</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">css_urls</span><span class="p">:</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a>        <span class="n">head_children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">link</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="s2">&quot;stylesheet&quot;</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="n">css_url</span><span class="p">))</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inline_css</span><span class="p">:</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>        <span class="n">head_children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">style</span><span class="p">(</span><span class="n">raw</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inline_css</span><span class="p">)))</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>    <span class="n">body_children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_body_content</span><span class="p">()</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>    <span class="k">for</span> <span class="n">js_url</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">js_urls</span><span class="p">:</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>        <span class="n">body_children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">script</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">js_url</span><span class="p">))</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>    <span class="k">return</span> <span class="n">html</span><span class="p">(</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>        <span class="n">head</span><span class="p">(</span><span class="o">*</span><span class="n">head_children</span><span class="p">),</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97"></a>        <span class="n">body</span><span class="p">(</span><span class="o">*</span><span class="n">body_children</span><span class="p">),</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98"></a>    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="htmforge.components.page.Page.to_html" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">to_html</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Rendert das vollstaendige Dokument inklusive <code>&lt;!DOCTYPE html&gt;</code>.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>htmforge/components/page.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-100">100</a></span>
+<span class="normal"><a href="#__codelineno-0-101">101</a></span>
+<span class="normal"><a href="#__codelineno-0-102">102</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-100" name="__codelineno-0-100"></a><span class="k">def</span><span class="w"> </span><span class="nf">to_html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-0-101" name="__codelineno-0-101"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Rendert das vollstaendige Dokument inklusive ``&lt;!DOCTYPE html&gt;``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-102" name="__codelineno-0-102"></a>    <span class="k">return</span> <span class="s2">&quot;&lt;!DOCTYPE html&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">()</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
