@@ -97,7 +97,7 @@ class Component(BaseModel, ABC):
             >>> Card(title="Hi", body="World")
             Card(title='Hi', body='World')
         """
-        fields = type(self).model_fields  # type: ignore[attr-defined]  # Klasse statt Instanz
+        fields = type(self).model_fields
         props = ", ".join(
             f"{k}={getattr(self, k)!r}"
             for k in fields
