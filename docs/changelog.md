@@ -4,6 +4,12 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.2.1] - 2026-04-29
+
+### Fixed
+- Correct LICENSE badge link to absolute GitHub URL
+- Correct Docs badge link to GitHub repository
+
 ## [0.2.0] - 2026-04-28
 
 ### Added
