@@ -28,4 +28,4 @@ __all__ = ["Component", "Element"]
 try:
     __version__ = _version("htmforge")
 except PackageNotFoundError:
-    __version__ = "0.0.0.dev"
+    __version__ = "0.0.0"

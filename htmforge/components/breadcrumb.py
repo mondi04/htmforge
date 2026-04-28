@@ -1,59 +1,54 @@
-"""Breadcrumb-Komponente fuer hierarchische Navigation."""
+"""Breadcrumb-Navigation.
+
+Example:
+    >>> from htmforge.components import Breadcrumb
+    >>> bc = Breadcrumb(
+    ...     items=[("Home", "/"), ("Produkte", "/produkte"), ("Detail", None)]
+    ... )
+    >>> bc.to_html()
+    '<nav ...>...<span ...>Detail</span>...</nav>'
+"""
 
 from __future__ import annotations
-
-from pydantic import BaseModel
 
 from htmforge import Component
 from htmforge.core.element import Element
 from htmforge.elements import a, li, nav, ol, span
 
 
-class BreadcrumbItem(BaseModel):
-    """Ein einzelnes Breadcrumb-Element."""
-
-    label: str
-    href: str | None = None
-
-
 class Breadcrumb(Component):
-    """Rendert eine Breadcrumb-Navigation mit optionalen Links."""
+    """Rendert eine Breadcrumb-Navigation als ``<nav>`` mit geordneter Liste.
 
-    items: list[BreadcrumbItem]
-    separator: str = "/"
+    Items sind ``(label, url)``-Tupel.
+    ``url=None`` markiert die aktuelle Seite und wird als ``<span>`` gerendert.
+
+    Example:
+        >>> Breadcrumb(items=[("Home", "/"), ("Aktuell", None)]).to_html()
+        # contains <a href="/">Home</a> and <span ...>Aktuell</span>
+    """
+
+    items: list[tuple[str, str | None]]
 
     def render(self) -> Element:
-        """Erstellt ``<nav>`` und optional eine ``<ol>`` mit Trennzeichen."""
-        if not self.items:
-            return nav(cls="breadcrumb", aria_label="breadcrumb")
-
-        list_children: list[Element] = []
+        """Erstellt ``<nav>`` mit ``<ol>`` und ``<li>``-Eintraegen."""
+        list_items: list[Element] = []
         last_index = len(self.items) - 1
 
-        for index, item in enumerate(self.items):
-            is_active = index == last_index or item.href is None
-
-            if is_active:
-                list_children.append(
+        for index, (label, href) in enumerate(self.items):
+            is_current = href is None or index == last_index
+            if is_current:
+                list_items.append(
                     li(
-                        item.label,
-                        cls="breadcrumb__item breadcrumb__item--active",
-                        aria_current="page",
+                        span(label, aria_current="page"),
+                        cls="breadcrumb-item active",
                     )
                 )
             else:
-                list_children.append(
+                list_items.append(
                     li(
-                        a(item.label, href=item.href, cls="breadcrumb__link"),
-                        cls="breadcrumb__item",
+                        a(label, href=href),
+                        cls="breadcrumb-item",
                     )
                 )
 
-            if index < last_index:
-                list_children.append(span(self.separator, cls="breadcrumb__separator"))
-
-        return nav(
-            ol(*list_children, cls="breadcrumb__list"),
-            cls="breadcrumb",
-            aria_label="breadcrumb",
-        )
+        return nav(ol(*list_items, cls="breadcrumb"), aria_label="breadcrumb")

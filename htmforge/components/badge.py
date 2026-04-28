@@ -1,4 +1,10 @@
-"""Badge-Komponente fuer kurze Statuskennzeichnungen."""
+"""Badge-Komponente fuer kleine Inline-Labels.
+
+Example:
+    >>> from htmforge.components import Badge, BadgeVariant
+    >>> Badge(text="Neu", variant=BadgeVariant.SUCCESS).to_html()
+    '<span class="badge badge-success">Neu</span>'
+"""
 
 from __future__ import annotations
 
@@ -13,21 +19,23 @@ class BadgeVariant(StrEnum):
     """Unterstuetzte Badge-Varianten."""
 
     DEFAULT = "default"
+    PRIMARY = "primary"
     SUCCESS = "success"
     WARNING = "warning"
     DANGER = "danger"
-    INFO = "info"
 
 
 class Badge(Component):
-    """Rendert ein statisches Badge mit Variantenklasse."""
+    """Rendert ein kleines Inline-Label mit Variantenklasse.
+
+    Example:
+        >>> Badge(text="3", variant=BadgeVariant.DANGER).to_html()
+        '<span class="badge badge-danger">3</span>'
+    """
 
     text: str
     variant: BadgeVariant = BadgeVariant.DEFAULT
-    extra_class: str = ""
 
     def render(self) -> Element:
-        """Erstellt ein ``<span>`` mit Badge-CSS-Klassen."""
-        base_class = f"badge badge--{self.variant.value}"
-        final_class = f"{base_class} {self.extra_class}".strip()
-        return span(self.text, cls=final_class)
+        """Erstellt ein ``<span>`` mit Variantenklasse."""
+        return span(self.text, cls=f"badge badge-{self.variant.value}")

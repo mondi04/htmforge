@@ -12,15 +12,25 @@ license = { file = "LICENSE" }
 authors = [
     { name = "mondi04", email = "206898989+mondi04@users.noreply.github.com" },
 ]
-keywords = ["html", "components", "htmx", "server-side-rendering", "pydantic"]
+keywords = [
+    "html", "components", "htmx", "pydantic",
+    "server-side-rendering", "type-safe",
+    "jinja2-alternative", "web", "fastapi", "flask", "django"
+]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
+    "License :: Other/Proprietary License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Typing :: Typed",
+    "Framework :: FastAPI",
+    "Framework :: Django",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Markup :: HTML",
 ]
 dependencies = [
     "pydantic>=2.0",
@@ -35,10 +45,19 @@ dev = [
     "pytest-cov>=5.0",
 ]
 
+docs = [
+    "mkdocs-material>=9.5",
+    "mkdocstrings[python]>=0.25",
+    "mkdocs-autorefs>=1.0",
+    "mkdocs-git-revision-date-localized-plugin>=1.2",
+]
+
 [project.urls]
 Homepage = "https://github.com/mondi04/htmforge"
 Repository = "https://github.com/mondi04/htmforge"
 "Bug Tracker" = "https://github.com/mondi04/htmforge/issues"
+Documentation = "https://mondi04.github.io/htmforge/"
+Changelog = "https://github.com/mondi04/htmforge/blob/main/docs/changelog.md"
 
 # ---------------------------------------------------------------------------
 # Ruff — Linting & Formatting

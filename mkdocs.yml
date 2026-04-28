@@ -1,0 +1,97 @@
+site_name: htmforge
+site_description: >-
+  Type-safe, composable UI components for Python —
+  server-side rendered, HTMX-first, framework-agnostic.
+site_url: https://mondi04.github.io/htmforge/
+repo_url: https://github.com/mondi04/htmforge
+repo_name: mondi04/htmforge
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            show_submodules: false
+            merge_init_into_class: true
+  # git-revision-date-localized removed for local build stability
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - tables
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quickstart: getting-started/quickstart.md
+    - Core Concepts: getting-started/concepts.md
+  - Guide:
+    - Elements: guide/elements.md
+    - Components: guide/components.md
+    - HTMX Integration: guide/htmx.md
+    - Framework Adapters: guide/frameworks.md
+    - XSS & Safety: guide/safety.md
+  - Components Reference:
+    - Alert: components/alert.md
+    - Badge: components/badge.md
+    - Breadcrumb: components/breadcrumb.md
+    - DataTable: components/datatable.md
+    - FormField: components/formfield.md
+    - Modal: components/modal.md
+    - Page: components/page.md
+    - Pagination: components/pagination.md
+    - SearchInput: components/searchinput.md
+  - API Reference:
+    - htmforge: api/htmforge.md
+    - htmforge.core.element: api/element.md
+    - htmforge.core.component: api/component.md
+    - htmforge.elements: api/elements.md
+    - htmforge.htmx: api/htmx.md
+    - htmforge.components: api/components.md
+  - Examples:
+    - FastAPI: examples/fastapi.md
+    - Flask: examples/flask.md
+    - Django: examples/django.md
+  - Changelog: changelog.md
+  - Contributing: contributing.md

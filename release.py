@@ -1,172 +1,129 @@
+"""Release validation and build script for htmforge.
+
+Usage:
+    python release.py
 """
-htmforge — Release Script
-Usage: python release.py
-Merged develop → main, released auf PyPI, synct develop zurück.
-"""
+
+from __future__ import annotations
+
 import re
-import shutil
 import subprocess
 import sys
-import tempfile
+import tomllib
 from pathlib import Path
 
-PYTHON = sys.executable
 
-def ok(msg):   print(f"[OK]   {msg}")
-def info(msg): print(f"[...] {msg}")
-def fail(msg):
-    print(f"[ERR] {msg}")
-    sys.exit(1)
+def fail(message: str) -> None:
+    """Print an error and exit with code 1."""
+    print(f"ERROR: {message}")
+    raise SystemExit(1)
 
-def confirm(prompt):
-    answer = input(f"\n{prompt} [y/N] ").strip().lower()
-    if answer != "y":
-        print("Aborted.")
-        sys.exit(0)
 
-def run(cmd, check=True):
-    print(f"\n> {cmd}")
-    result = subprocess.run(cmd, shell=True)
-    if check and result.returncode != 0:
-        fail(f"Fehlgeschlagen: {cmd}")
-    return result
+def read_version() -> str:
+    """Read current project version from pyproject.toml."""
+    pyproject_path = Path("pyproject.toml")
+    if not pyproject_path.exists():
+        fail("pyproject.toml not found")
 
-def get(cmd):
-    return subprocess.check_output(cmd, shell=True).decode().strip()
+    data = tomllib.loads(pyproject_path.read_text(encoding="utf-8"))
+    try:
+        version = data["project"]["version"]
+    except KeyError as exc:
+        fail(f"Missing [project].version in pyproject.toml: {exc}")
 
-print()
-print("=" * 42)
-print("  htmforge Release Script")
-print("=" * 42)
+    if not isinstance(version, str) or not version:
+        fail("Invalid [project].version in pyproject.toml")
+    return version
 
-# ── Version erfragen ──────────────────────────────────────────────────────────
-pyproject_path = Path("pyproject.toml")
-pyproject = pyproject_path.read_text(encoding="utf-8")
-match = re.search(r'^version = "([^"]+)"', pyproject, re.MULTILINE)
-if not match:
-    fail("Version nicht in pyproject.toml gefunden")
-last_version = match.group(1)
 
-print(f"\n  Aktuelle Version: {last_version}")
-new_version = input("  Neue Version eingeben (z.B. 0.2.0): ").strip().lstrip("v")
-if not re.match(r"^\d+\.\d+\.\d+$", new_version):
-    fail(f"Ungültiges Format: '{new_version}' — bitte X.Y.Z verwenden")
+def ensure_docs_changelog_entry(path: Path, version: str) -> None:
+    """Ensure docs changelog file contains an entry for the version."""
+    if not path.exists():
+        fail(f"Missing file: {path}")
 
-print(f"\n  {last_version}  →  {new_version}")
-confirm(f"Release v{new_version} starten?")
+    text = path.read_text(encoding="utf-8")
+    pattern = re.compile(rf"\b(?:v)?{re.escape(version)}\b")
+    if not pattern.search(text):
+        fail(f"No entry for version {version} found in {path}")
 
-# ── Sicherstellen auf develop ─────────────────────────────────────────────────
-branch = get("git rev-parse --abbrev-ref HEAD")
-if branch != "develop":
-    info(f"Wechsle von '{branch}' zu develop...")
-    run("git checkout develop")
 
-# ── Uncommitted changes committen ─────────────────────────────────────────────
-status = subprocess.run("git diff --quiet && git diff --cached --quiet", shell=True)
-if status.returncode != 0:
-    info("Uncommitted changes — werden automatisch committet...")
-    run("git add -A")
-    run(f'git commit -m "chore: pre-release cleanup for v{new_version}"')
+def ensure_overview_changelog_entry(path: Path, version: str) -> None:
+    """Ensure OVERVIEW.md Change-Log section contains an entry for version."""
+    if not path.exists():
+        fail(f"Missing file: {path}")
 
-# ── Tests ─────────────────────────────────────────────────────────────────────
-print("\n--- Tests ---")
-run(f"{PYTHON} -m pytest --tb=short -q")
-ok("Alle Tests bestanden")
+    text = path.read_text(encoding="utf-8")
+    section_match = re.search(
+        r"^##\s+Change-Log\s*$([\s\S]*?)(?=^##\s+|\Z)",
+        text,
+        re.MULTILINE,
+    )
+    if not section_match:
+        fail("OVERVIEW.md does not contain a Change-Log section")
 
-# ── Lint & Format ─────────────────────────────────────────────────────────────
-print("\n--- Lint ---")
-run(f"{PYTHON} -m ruff format htmforge/")
-run(f"{PYTHON} -m ruff check htmforge/ --fix")
-run(f"{PYTHON} -m ruff check htmforge/")
-ok("ruff sauber")
-run(f"{PYTHON} -m mypy htmforge/")
-ok("mypy sauber")
+    section = section_match.group(1)
+    pattern = re.compile(rf"\b(?:v)?{re.escape(version)}\b")
+    if not pattern.search(section):
+        fail(f"No entry for version {version} found in OVERVIEW.md Change-Log")
 
-# ── Version bumpen auf develop ────────────────────────────────────────────────
-print("\n--- Version bumpen ---")
-new_pyproject = re.sub(r'^version = ".*"', f'version = "{new_version}"', pyproject, flags=re.MULTILINE)
-pyproject_path.write_text(new_pyproject, encoding="utf-8")
-ok(f"pyproject.toml → {new_version}")
 
-init = Path("htmforge/__init__.py")
-if init.exists():
-    content = init.read_text(encoding="utf-8")
-    if '__version__ = "' in content:
-        new_content = re.sub(r'__version__ = ".*"', f'__version__ = "{new_version}"', content)
-        init.write_text(new_content, encoding="utf-8")
-        ok(f"__init__.py → {new_version}")
-    else:
-        info("__init__.py nutzt importlib.metadata — kein Bump nötig")
+def run_step(step_name: str, command: list[str]) -> None:
+    """Run a command and fail with step context on error."""
+    print(f"\n[{step_name}] {' '.join(command)}")
+    try:
+        subprocess.run(command, check=True)
+    except subprocess.CalledProcessError:
+        fail(f"Step failed: {step_name}")
 
-# ── Build ─────────────────────────────────────────────────────────────────────
-print("\n--- Build ---")
-if Path("dist").exists():
-    shutil.rmtree("dist")
-run(f"{PYTHON} -m build")
-run(f"{PYTHON} -m twine check dist/*")
-ok("Build erfolgreich")
 
-# ── Smoke test ────────────────────────────────────────────────────────────────
-print("\n--- Smoke test ---")
-wheels = list(Path("dist").glob("*.whl"))
-if not wheels:
-    fail("Kein wheel in dist/ gefunden")
+def find_artifacts(version: str) -> tuple[Path, Path]:
+    """Locate expected wheel and source tarball for version."""
+    dist = Path("dist")
+    wheel = dist / f"htmforge-{version}-py3-none-any.whl"
+    tarball = dist / f"htmforge-{version}.tar.gz"
 
-venv_dir = Path(tempfile.mkdtemp())
-run(f"{PYTHON} -m venv {venv_dir}")
-venv_python = venv_dir / "Scripts" / "python.exe"
-run(f'"{venv_python}" -m pip install "{wheels[0]}" -q')
-run(f'"{venv_python}" -c "import htmforge; assert htmforge.__version__ == \'{new_version}\', f\'Version falsch: {{htmforge.__version__}}\'; print(\'OK:\', htmforge.__version__)"')
-shutil.rmtree(venv_dir)
-ok("Smoke test bestanden")
+    if not wheel.exists() or not tarball.exists():
+        fail(
+            "Missing build artifacts for current version. "
+            f"Expected {wheel} and {tarball}"
+        )
+    return wheel, tarball
 
-# ── develop committen & pushen ────────────────────────────────────────────────
-print("\n--- develop → push ---")
-run("git add -A")
-run(f'git commit -m "chore: release v{new_version}"')
-run("git push origin develop")
-ok("develop gepusht")
 
-# ── main: merge develop ───────────────────────────────────────────────────────
-print("\n--- merge develop → main ---")
-run("git checkout main")
-run("git pull origin main")
-run("git merge develop --no-ff -m \"chore: merge develop for release v" + new_version + "\"", check=False)
+def main() -> None:
+    """Run release checks and build artifacts without uploading."""
+    version = read_version()
 
-# Konflikt in pyproject.toml automatisch lösen (unsere Version aus develop)
-conflict = subprocess.run("git diff --name-only --diff-filter=U", shell=True, capture_output=True, text=True)
-if "pyproject.toml" in conflict.stdout:
-    info("Konflikt in pyproject.toml — löse automatisch...")
-    run("git checkout --theirs pyproject.toml")
-    run("git add pyproject.toml")
-    run(f'git commit -m "chore: resolve pyproject.toml conflict for v{new_version}"')
+    # 2. Verify OVERVIEW changelog entry
+    ensure_overview_changelog_entry(Path("OVERVIEW.md"), version)
 
-ok("develop → main gemerged")
+    # 3. Verify docs changelog entry
+    ensure_docs_changelog_entry(Path("docs/changelog.md"), version)
 
-# ── Tag & push main ───────────────────────────────────────────────────────────
-print("\n--- Tag & push main ---")
-run(f"git tag v{new_version}")
-run("git push origin main")
-run(f"git push origin v{new_version}")
-ok(f"main gepusht — Tag v{new_version}")
+    # 4. Validation suite
+    run_step("pytest", [sys.executable, "-m", "pytest"])
+    run_step("mypy", [sys.executable, "-m", "mypy", "htmforge/"])
+    run_step("ruff check", [sys.executable, "-m", "ruff", "check", "htmforge/"])
+    run_step(
+        "ruff format --check",
+        [sys.executable, "-m", "ruff", "format", "--check", "htmforge/"],
+    )
+    run_step(
+        "mkdocs build --strict",
+        [sys.executable, "-m", "mkdocs", "build", "--strict"],
+    )
 
-# ── PyPI upload ───────────────────────────────────────────────────────────────
-print()
-confirm(f"v{new_version} jetzt auf PyPI hochladen?")
-run(f"{PYTHON} -m twine upload dist/*")
-ok(f"Live → https://pypi.org/project/htmforge/{new_version}/")
+    # 5. Build distribution and verify artifacts
+    run_step("python -m build", [sys.executable, "-m", "build"])
+    wheel, tarball = find_artifacts(version)
 
-# ── develop synct zurück ──────────────────────────────────────────────────────
-print("\n--- sync main → develop ---")
-run("git checkout develop")
-run("git merge main --no-ff -m \"chore: sync develop after release v" + new_version + "\"")
-run("git push origin develop")
-ok("develop synchronisiert")
+    # 6. Summary
+    print("\nRelease summary")
+    print(f"Version:   {version}")
+    print(f"Wheel:     {wheel.as_posix()}")
+    print(f"Tarball:   {tarball.as_posix()}")
+    print("Status:    READY FOR UPLOAD — run push.py to publish")
 
-# ── Fertig ────────────────────────────────────────────────────────────────────
-print()
-print("=" * 42)
-print(f"  htmforge v{new_version} ist live!")
-print(f"  PyPI:   https://pypi.org/project/htmforge/{new_version}/")
-print(f"  GitHub: https://github.com/mondi04/htmforge/releases/new?tag=v{new_version}")
-print("=" * 42)
+
+if __name__ == "__main__":
+    main()

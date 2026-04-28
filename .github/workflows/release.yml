@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependencies
+        run: pip install build
+
+      - name: Build distribution
+        run: python -m build
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Extract changelog section
+        id: changelog
+        run: |
+          python - <<'EOF'
+          import re, pathlib, os
+          version = os.environ["VERSION"]
+          text = pathlib.Path("docs/changelog.md").read_text()
+          pattern = rf"## \[{re.escape(version)}\].*?\n(.*?)(?=\n## \[|\Z)"
+          match = re.search(pattern, text, re.DOTALL)
+          body = match.group(1).strip() if match else "See CHANGELOG for details."
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"BODY<<EOF\n{body}\nEOF\n")
+          EOF
+        env:
+          VERSION: ${{ steps.version.outputs.VERSION }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: htmforge ${{ steps.version.outputs.VERSION }}
+          body: ${{ steps.changelog.outputs.BODY }}
+          prerelease: ${{ contains(steps.version.outputs.VERSION, 'a') || contains(steps.version.outputs.VERSION, 'b') || contains(steps.version.outputs.VERSION, 'rc') }}
+          files: |
+            dist/*.whl
+            dist/*.tar.gz

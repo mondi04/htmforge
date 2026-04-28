@@ -88,6 +88,13 @@ class TestComponentRendering:
         expected = '<div class="card"><p>Hallo</p><p>Welt</p></div>'
         assert card.to_html() == expected
 
+    def test_repr_shows_class_name_and_non_default_props(self) -> None:
+        card = GreetingCard(title="Hi")
+        r = repr(card)
+        assert r.startswith("GreetingCard(")
+        assert "title='Hi'" in r
+        assert "body=" not in r  # default value omitted
+
     def test_default_prop_is_used(self) -> None:
         """Default-Werte von Props werden korrekt gerendert."""
         card = GreetingCard(title="Nur Titel")

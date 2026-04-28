@@ -2,7 +2,19 @@
 
 from __future__ import annotations
 
-from htmforge.components import Alert, AlertVariant, DataTable, Pagination
+import importlib
+
+from htmforge.components import (
+    Alert,
+    AlertVariant,
+    Badge,
+    BadgeVariant,
+    Breadcrumb,
+    DataTable,
+    Modal,
+    Pagination,
+    SearchInput,
+)
 from htmforge.components.form_field import FormField, InputType
 from htmforge.components.page import Page
 from htmforge.core.element import Element
@@ -68,8 +80,8 @@ class TestAlert:
 
         assert html == '<div class="alert alert-success">Gespeichert</div>'
 
-    def test_alert_dismissible(self) -> None:
-        """Dismissible Alerts enthalten einen Close-Button mit ``onclick``."""
+    def test_render_dismissible_alert_adds_js_close_button(self) -> None:
+        """Dismissible Alerts enthalten einen JS-Close-Button."""
         alert = Alert(message="Hinweis", dismissible=True)
 
         html = alert.to_html()
@@ -157,6 +169,187 @@ class TestPagination:
         assert 'hx-get="/x?page=1"' in html
         assert 'hx-get="/x?page=3"' in html
         assert "hx-target=" not in html
+
+
+class TestBadge:
+    """Tests fuer die ``Badge``-Komponente."""
+
+    def test_render_default_variant(self) -> None:
+        """Ohne Variante wird die Default-Klasse gerendert."""
+        html = Badge(text="Neu").to_html()
+        assert html == '<span class="badge badge-default">Neu</span>'
+
+    def test_render_danger_variant(self) -> None:
+        """Die Danger-Variante wird korrekt als CSS-Klasse gerendert."""
+        html = Badge(text="3", variant=BadgeVariant.DANGER).to_html()
+        assert html == '<span class="badge badge-danger">3</span>'
+
+    def test_text_content_is_escaped(self) -> None:
+        """Badge-Text wird sicher escaped."""
+        html = Badge(text="<b>").to_html()
+        assert "&lt;b&gt;" in html
+
+
+class TestBreadcrumb:
+    """Tests fuer die ``Breadcrumb``-Komponente."""
+
+    def test_render_links_for_non_current_items(self) -> None:
+        """Nicht-aktuelle Items werden als Links gerendert."""
+        html = Breadcrumb(items=[("Home", "/"), ("Produkte", "/produkte"), ("Detail", None)]).to_html()
+        assert '<a href="/">Home</a>' in html
+        assert '<a href="/produkte">Produkte</a>' in html
+
+    def test_render_span_for_current_item(self) -> None:
+        """Das aktuelle Item wird als Span mit aria-current gerendert."""
+        html = Breadcrumb(items=[("Home", "/"), ("Aktuell", None)]).to_html()
+        assert '<span aria-current="page">Aktuell</span>' in html
+
+    def test_single_item_renders_as_current(self) -> None:
+        """Ein einzelnes Item wird als aktuelles Element gerendert."""
+        html = Breadcrumb(items=[("Aktuell", None)]).to_html()
+        assert 'class="breadcrumb-item active"' in html
+
+    def test_aria_label_present(self) -> None:
+        """Die Navigation hat ein aria-label."""
+        html = Breadcrumb(items=[("Home", "/")]).to_html()
+        assert 'aria-label="breadcrumb"' in html
+
+
+class TestSearchInput:
+    """Tests fuer die ``SearchInput``-Komponente."""
+
+    def test_render_debounce_trigger(self) -> None:
+        """Standardmaessig wird ein 300ms Debounce gerendert."""
+        html = SearchInput(
+            name="q",
+            search_url="/search",
+            search_target="#results",
+        ).to_html()
+        assert 'hx-trigger="keyup delay:300ms"' in html
+
+    def test_custom_debounce_ms(self) -> None:
+        """Ein benutzerdefinierter Debounce wird im Trigger sichtbar."""
+        html = SearchInput(
+            name="q",
+            search_url="/search",
+            search_target="#results",
+            debounce_ms=500,
+        ).to_html()
+        assert "500ms" in html
+
+    def test_hx_get_and_target_present(self) -> None:
+        """hx-get und hx-target werden im Input gerendert."""
+        html = SearchInput(
+            name="q",
+            search_url="/search",
+            search_target="#results",
+        ).to_html()
+        assert 'hx-get="/search"' in html
+        assert 'hx-target="#results"' in html
+
+    def test_indicator_attribute_when_set(self) -> None:
+        """Ein Indicator wird als hx-indicator gerendert."""
+        html = SearchInput(
+            name="q",
+            search_url="/search",
+            search_target="#results",
+            indicator="#spinner",
+        ).to_html()
+        assert 'hx-indicator="#spinner"' in html
+
+    def test_indicator_absent_when_empty(self) -> None:
+        """Ohne Indicator wird kein hx-indicator gerendert."""
+        html = SearchInput(
+            name="q",
+            search_url="/search",
+            search_target="#results",
+        ).to_html()
+        assert "hx-indicator=" not in html
+
+
+class TestModal:
+    """Tests fuer die ``Modal``-Komponente."""
+
+    def test_trigger_button_has_hx_get(self) -> None:
+        """Der Trigger-Button laedt den Inhalt per HTMX."""
+        html = Modal(
+            modal_id="confirm",
+            trigger_label="Öffnen",
+            hx_url="/modal/content",
+        ).to_html()
+        assert 'hx-get="/modal/content"' in html
+
+    def test_trigger_uses_data_modal_target(self) -> None:
+        """Der Trigger nutzt ein data-Attribut statt onclick-JavaScript."""
+        html = Modal(
+            modal_id="confirm",
+            trigger_label="Öffnen",
+            hx_url="/modal/content",
+        ).to_html()
+        assert 'data-modal-target="confirm"' in html
+
+    def test_inline_script_present(self) -> None:
+        """Das Inline-Script zum Oeffnen des Dialogs ist vorhanden."""
+        html = Modal(
+            modal_id="confirm",
+            trigger_label="Öffnen",
+            hx_url="/modal/content",
+        ).to_html()
+        assert "<script>" in html
+        assert "showModal" in html
+
+    def test_dialog_id_matches_modal_id(self) -> None:
+        """Das dialog-Element verwendet modal_id als id."""
+        html = Modal(
+            modal_id="confirm",
+            trigger_label="Öffnen",
+            hx_url="/modal/content",
+        ).to_html()
+        assert '<dialog id="confirm" class="modal">' in html
+
+    def test_body_div_id_is_derived_from_modal_id(self) -> None:
+        """Die Body-Div-ID wird aus modal_id abgeleitet."""
+        html = Modal(
+            modal_id="confirm",
+            trigger_label="Öffnen",
+            hx_url="/modal/content",
+        ).to_html()
+        assert '<div id="confirm-body" class="modal-body"></div>' in html
+
+    def test_close_button_in_form_with_method_dialog(self) -> None:
+        """Der Close-Button sitzt in einem form method=dialog."""
+        html = Modal(
+            modal_id="confirm",
+            trigger_label="Öffnen",
+            hx_url="/modal/content",
+        ).to_html()
+        assert 'method="dialog"' in html
+        assert '<button class="modal-close">Schließen</button>' in html
+
+    def test_custom_close_label(self) -> None:
+        """Der Close-Button nutzt ein benutzerdefiniertes Label."""
+        html = Modal(
+            modal_id="confirm",
+            trigger_label="Öffnen",
+            hx_url="/modal/content",
+            close_label="Cerrar",
+        ).to_html()
+        assert '<button class="modal-close">Cerrar</button>' in html
+
+
+class TestPublicExports:
+    """Tests fuer Public-Exports im Package-Root."""
+
+    def test_components_exports_block_d_symbols(self) -> None:
+        """Die Block-D-Symbole sind aus ``htmforge.components`` importierbar."""
+        module = importlib.import_module("htmforge.components")
+        for symbol in ("Badge", "BadgeVariant", "Breadcrumb", "Modal", "SearchInput"):
+            assert hasattr(module, symbol)
+
+    def test_page_not_exported_from_components(self) -> None:
+        """Page bleibt bewusst nicht aus ``htmforge.components`` exportiert."""
+        module = importlib.import_module("htmforge.components")
+        assert not hasattr(module, "Page")
 
 
 # ---------------------------------------------------------------------------

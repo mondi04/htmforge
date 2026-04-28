@@ -44,3 +44,6 @@ uv.lock
 Thumbs.db
 
 push.py
+
+site/
+dist/

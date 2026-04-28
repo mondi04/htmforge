@@ -55,12 +55,12 @@ Core install: **2 dependencies.**
 
 ## Roadmap
 
-| Phase  | Contents                                                                 | Status        |
-|--------|--------------------------------------------------------------------------|---------------|
-| v0.1.0 | Core engine, all HTML5 elements, HTMX enums, framework adapters          | ✅ Released   |
-| v0.2.0 | DataTable, Alert, Pagination, Page, FormField, `safe_html`, `raw()`      | ✅ Released   |
-| v0.3.0 | New components: Breadcrumb, Badge, Modal, SearchInput                    | 🔜 Planned    |
-| v1.0.0 | Stable API, mkdocs documentation, PyPI launch                            | 🔜 Planned    |
+| Phase  | Contents | Status |
+|--------|----------|--------|
+| v0.1.0 | Core engine, all HTML5 elements (60+), HTMX enums, framework adapters (FastAPI/Flask/Django), py.typed | ✅ Released (PyPI: 2026-03-12) |
+| v0.1.2 | Bug fixes — __init_subclass__ kwargs, Page abstract guard, ruff config cleanup, importlib.metadata version | ✅ Released (PyPI: 2026-03-12) |
+| v0.2.0 | DataTable, Alert, Pagination, Page, FormField, safe_html, raw(), 25 new element factories (dialog, details, audio, video, picture, canvas, iframe, meter, progress, kbd, abbr, time, address, mark, small, sub, sup, caption, colgroup, col, source, track, map_, area), Badge, Breadcrumb, Modal, SearchInput, hx_keyup_delay(), Component.__repr__, Alert JS-dismiss fix, Modal data-attribute fix, SearchInput API rename (search_url/search_target), mkdocs-material documentation site, GitHub Actions (CI Python 3.13, docs deploy, release workflow), MIT + Commons Clause license | ✅ Released (PyPI: 2026-04-28) |
+| v1.0.0 | Stable API guarantee, full mkdocs API reference, Django example, performance benchmarks, 100% docstring coverage | 🔜 Planned |
 
 ---
 
@@ -85,10 +85,17 @@ Core install: **2 dependencies.**
 - Full set of extended props: `hx_include`, `hx_vals`, `hx_headers`,
   `hx_request`, `hx_select`, `hx_select_oob`, `hx_params`, `hx_encoding`
 
-### ✅ HTML5 element factories (60+)
+### ✅ HTML5 element factories (80+)
 - All semantic elements: `div`, `span`, `p`, `h1`–`h6`, `section`, `article`, …
 - Form elements: `form`, `input`, `label`, `button`, `select`, `textarea`, …
 - Table elements: `table`, `thead`, `tbody`, `tr`, `th`, `td`, …
+- Disclosure: `details`, `summary`
+- Form grouping: `fieldset`, `legend`
+- Media: `audio`, `video`, `picture`, `source`, `track`
+- Interactive: `dialog`, `canvas`, `iframe`
+- Semantic: `mark`, `small`, `sub`, `sup`, `kbd`, `abbr`, `time`, `address`
+- Table extras: `caption`, `colgroup`, `col`
+- Map: `map_`, `area`
 - Document structure: `html`, `head`, `body`, `title`, `meta`, `link`,
   `script`, `style`, `noscript`
 - Media: `img`, `figure`, `figcaption`, `a`, `hr`, `br`, …
@@ -101,11 +108,16 @@ Core install: **2 dependencies.**
 | `Pagination`| `htmforge.components`               | Previous/Next + numbered pages, HTMX target  |
 | `Page`      | `htmforge.components.page`          | Full HTML document (abstract), adds DOCTYPE  |
 | `FormField` | `htmforge.components`               | Label + input + error div, 8 input types     |
+| `Badge`     | `htmforge.components`               | Small inline label with variant colors       |
+| `Breadcrumb`| `htmforge.components`               | Ordered nav links, aria-current support      |
+| `SearchInput`| `htmforge.components`              | Text input with hx-trigger keyup debounce    |
+| `Modal`     | `htmforge.components`               | Trigger button + dialog with HTMX content load |
+| `Spinner`   | `htmforge.components`               | Accessible loading indicator with size variants |
 
 ### ✅ Quality
-- **97 tests**, all green
+- **134 tests**, all green
 - **mypy --strict** clean (17 source files)
-- **CI** via GitHub Actions: matrix Python 3.11/3.12, pytest + mypy + ruff
+- **CI** via GitHub Actions: matrix Python 3.11/3.12/3.13, pytest + mypy + ruff
 - `pip install -e .` works cleanly with hatchling
 
 ---
@@ -155,18 +167,9 @@ A block is only complete when:
 
 ## Change-Log
 
-| Date       | Change                                                                  |
-|------------|-------------------------------------------------------------------------|
-| 2026-03-12 | v0.2.0 polish: Alert/Modal dismiss fix, Pagination optional hx_target, FormField required, DataTable empty state, Breadcrumb single item, Badge extra_class |
-| 2026-03-12 | v0.2.0: Badge, Breadcrumb, Spinner, Modal — 4 neue Komponenten          |
-| 2026-03-12 | Renamed htmlkit → htmforge across entire codebase                       |
-| 2026-03-12 | v0.2.0: Page, FormField, `safe_html`, `raw()`, DOCTYPE, head elements   |
-| 2026-03-12 | v0.2.0: Framework adapters `to_fastapi`/`to_flask`/`to_django` stable  |
-| 2026-03-12 | Bug fix: `__init_subclass__` signature corrected to `**kwargs: Any`     |
-| 2026-03-12 | Bug fix: `Page` removed from `components/__init__.py` (abstract class)  |
-| 2026-03-12 | Removed `.render()` from public API examples; Component usable as Element child |
-| 2026-03-12 | Removed deprecated ANN101/ANN102 ruff ignores from pyproject.toml              |
-| 2026-03-12 | v0.1.0: LICENSE, py.typed (PEP 561), author metadata, build + smoke test verified |
-| 2026-03-12 | v0.1.0 final: importlib.metadata version, Pagination.hx_target optional, example fixes |
-| 2026-03-11 | Block A–C completed: HTMX enums, framework adapters, component library  |
-| 2026-03-11 | OVERVIEW introduced as living steering document                         |
+| Date       | Change |
+|------------|--------|
+| 2026-04-28 | v0.2.0: 25 new element factories, Badge, Breadcrumb, Modal, SearchInput, hx_keyup_delay(), Component.__repr__, Alert JS-dismiss fix, Modal data-attribute/script fix, SearchInput renamed fields (search_url/search_target), mkdocs-material docs site, GitHub Pages deploy workflow, GitHub Release workflow, MIT + Commons Clause license, Python 3.13 added to CI matrix |
+| 2026-03-12 | v0.1.2: DataTable, Alert, Pagination, Page, FormField, safe_html(), raw(), framework adapters stable, importlib.metadata version, Pagination.hx_target optional |
+| 2026-03-12 | v0.1.0: Core engine, Element, Component, 60+ HTML5 factories, HxSwap/HxTrigger/HxTarget/HxPushUrl enums, py.typed, FastAPI/Flask/Django adapters, LICENSE, CI |
+| 2026-03-11 | OVERVIEW introduced as living steering document |

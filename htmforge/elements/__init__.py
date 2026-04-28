@@ -157,6 +157,141 @@ def td(*children: Child, **attrs: object) -> Element:
     return Element("td", *children, **attrs)
 
 
+def dialog(*children: Child, **attrs: object) -> Element:
+    """Modaler oder nicht-modaler Dialog-Container."""
+    return Element("dialog", *children, **attrs)
+
+
+def details(*children: Child, **attrs: object) -> Element:
+    """Aufklappbares Disclosure-Element."""
+    return Element("details", *children, **attrs)
+
+
+def summary(*children: Child, **attrs: object) -> Element:
+    """Sichtbare Zusammenfassung fuer ein details-Element."""
+    return Element("summary", *children, **attrs)
+
+
+def fieldset(*children: Child, **attrs: object) -> Element:
+    """Gruppierung verwandter Formularfelder."""
+    return Element("fieldset", *children, **attrs)
+
+
+def legend(*children: Child, **attrs: object) -> Element:
+    """Beschriftung fuer ein fieldset-Element."""
+    return Element("legend", *children, **attrs)
+
+
+def progress(*children: Child, **attrs: object) -> Element:
+    """Fortschrittsbalken."""
+    return Element("progress", *children, **attrs)
+
+
+def meter(*children: Child, **attrs: object) -> Element:
+    """Skalarer Messwert innerhalb eines bekannten Bereichs."""
+    return Element("meter", *children, **attrs)
+
+
+def kbd(*children: Child, **attrs: object) -> Element:
+    """Tastatureingabe-Formatierung."""
+    return Element("kbd", *children, **attrs)
+
+
+def abbr(*children: Child, **attrs: object) -> Element:
+    """Abkuerzung mit optionalem Langtext via title-Attribut."""
+    return Element("abbr", *children, **attrs)
+
+
+def time(*children: Child, **attrs: object) -> Element:
+    """Maschinenlesbarer Zeit-/Datumsinhalt."""
+    return Element("time", *children, **attrs)
+
+
+def address(*children: Child, **attrs: object) -> Element:
+    """Kontaktinformations-Block."""
+    return Element("address", *children, **attrs)
+
+
+def mark(*children: Child, **attrs: object) -> Element:
+    """Hervorgehobener (markierter) Text."""
+    return Element("mark", *children, **attrs)
+
+
+def small(*children: Child, **attrs: object) -> Element:
+    """Nebenbemerkung oder Kleingedrucktes."""
+    return Element("small", *children, **attrs)
+
+
+def sub(*children: Child, **attrs: object) -> Element:
+    """Tiefgestellter Text."""
+    return Element("sub", *children, **attrs)
+
+
+def sup(*children: Child, **attrs: object) -> Element:
+    """Hochgestellter Text."""
+    return Element("sup", *children, **attrs)
+
+
+def colgroup(*children: Child, **attrs: object) -> Element:
+    """Gruppe von Tabellenspalten."""
+    return Element("colgroup", *children, **attrs)
+
+
+def caption(*children: Child, **attrs: object) -> Element:
+    """Tabellenbeschriftung."""
+    return Element("caption", *children, **attrs)
+
+
+def col(**attrs: object) -> Element:
+    """Einzelne Tabellenspalte als Void-Element."""
+    return Element("col", **attrs)
+
+
+def source(**attrs: object) -> Element:
+    """Mediaquelle als Void-Element fuer audio/video/picture."""
+    return Element("source", **attrs)
+
+
+def track(**attrs: object) -> Element:
+    """Textspur fuer audio/video als Void-Element."""
+    return Element("track", **attrs)
+
+
+def audio(*children: Child, **attrs: object) -> Element:
+    """Audio-Mediaplayer."""
+    return Element("audio", *children, **attrs)
+
+
+def video(*children: Child, **attrs: object) -> Element:
+    """Video-Mediaplayer."""
+    return Element("video", *children, **attrs)
+
+
+def picture(*children: Child, **attrs: object) -> Element:
+    """Responsives Bild-Container-Element."""
+    return Element("picture", *children, **attrs)
+
+
+def iframe(*children: Child, **attrs: object) -> Element:
+    """Eingebetteter Browser-Frame."""
+    return Element("iframe", *children, **attrs)
+
+
+def canvas(*children: Child, **attrs: object) -> Element:
+    """Zeichenflaeche fuer JavaScript-Grafiken."""
+    return Element("canvas", *children, **attrs)
+
+
+def map_(*children: Child, **attrs: object) -> Element:
+    """Bild-Map-Container (map_ wegen Python-Namenskonflikt)."""
+    return Element("map", *children, **attrs)
+
+
+def area(**attrs: object) -> Element:
+    """Klickbarer Bereich in einer Bild-Map als Void-Element."""
+    return Element("area", **attrs)
+
+
 def form(*children: Child, **attrs: object) -> Element:
     """Formular-Container."""
     return Element("form", *children, **attrs)
@@ -306,15 +441,26 @@ def noscript(*children: Child, **attrs: object) -> Element:
 
 __all__ = [
     "a",
+    "abbr",
+    "address",
+    "area",
     "article",
     "aside",
+    "audio",
     "blockquote",
     "body",
     "br",
     "button",
+    "canvas",
+    "caption",
+    "col",
+    "colgroup",
     "code",
+    "details",
+    "dialog",
     "div",
     "em",
+    "fieldset",
     "figcaption",
     "figure",
     "footer",
@@ -329,26 +475,39 @@ __all__ = [
     "header",
     "hr",
     "html",
+    "iframe",
     "img",
     "input",
+    "kbd",
     "label",
+    "legend",
     "li",
     "link",
     "main",
+    "mark",
+    "map_",
     "meta",
+    "meter",
     "nav",
     "noscript",
     "ol",
     "option",
     "p",
+    "picture",
     "pre",
+    "progress",
     "raw",
     "script",
     "section",
     "select",
+    "small",
+    "source",
     "span",
     "strong",
     "style",
+    "sub",
+    "sup",
+    "summary",
     "table",
     "tbody",
     "td",
@@ -356,7 +515,10 @@ __all__ = [
     "tfoot",
     "th",
     "thead",
+    "time",
     "title",
+    "track",
     "tr",
     "ul",
+    "video",
 ]

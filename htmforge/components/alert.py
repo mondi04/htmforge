@@ -40,7 +40,7 @@ class Alert(Component):
                 button(
                     "×",
                     type="button",
-                    class_="alert__close",
+                    cls="alert-close",
                     aria_label=self.close_label,
                     onclick="this.closest('.alert').remove()",
                 )
