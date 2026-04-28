@@ -1,7 +1,7 @@
 <!-- badges -->
 [![PyPI version](https://img.shields.io/pypi/v/htmforge.svg)](https://pypi.org/project/htmforge/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT + Commons Clause](https://img.shields.io/badge/License-MIT%20%2B%20Commons%20Clause-blue.svg)](LICENSE)
+[![License: MIT + Commons Clause](https://img.shields.io/badge/License-MIT%20%2B%20Commons%20Clause-blue.svg)](https://github.com/mondi04/htmforge/blob/main/LICENSE)
 [![mypy strict](https://img.shields.io/badge/mypy-strict-brightgreen.svg)](https://mypy.readthedocs.io/)
 [![CI](https://github.com/mondi04/htmforge/actions/workflows/ci.yml/badge.svg)](https://github.com/mondi04/htmforge/actions/workflows/ci.yml)
 [![Docs](https://img.shields.io/badge/docs-mondi04.github.io%2Fhtmforge-orange.svg)](https://mondi04.github.io/htmforge/)
