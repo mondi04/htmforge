@@ -42,3 +42,8 @@ uv.lock
 # OS
 .DS_Store
 Thumbs.db
+
+push.py
+
+site/
+dist/

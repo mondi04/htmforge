@@ -90,6 +90,21 @@ class Component(BaseModel, ABC):
             )
         super().__init__(**data)
 
+    def __repr__(self) -> str:
+        """Gibt eine lesbare Debug-Darstellung der Komponente zurueck.
+
+        Example:
+            >>> Card(title="Hi", body="World")
+            Card(title='Hi', body='World')
+        """
+        fields = type(self).model_fields  # type: ignore[attr-defined]  # Klasse statt Instanz
+        props = ", ".join(
+            f"{k}={getattr(self, k)!r}"
+            for k in fields
+            if getattr(self, k) != fields[k].default
+        )
+        return f"{type(self).__name__}({props})"
+
     @abstractmethod
     def render(self) -> Element:
         """Rendert die Komponente zu einem :class:`~htmforge.core.element.Element`.

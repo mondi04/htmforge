@@ -87,7 +87,7 @@ class Page(Component):
         if self.inline_css:
             head_children.append(style(raw(self.inline_css)))
 
-        body_children: list[Any] = list(self._body_content())
+        body_children: list[Any] = [c for c in self._body_content() if c is not None]
 
         for js_url in self.js_urls:
             body_children.append(script(src=js_url))

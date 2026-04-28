@@ -207,3 +207,60 @@ class TestElementFactories:
         assert html == "<table><tr><td>a</td></tr></table>"
         form_html = form(input(type="email"), button("Save")).to_html()
         assert "<form>" in form_html
+
+
+class TestNewElementFactories:
+    """Tests fuer die neuen Element-Factories aus Block D / v0.2.0."""
+
+    def test_dialog_factory(self) -> None:
+        from htmforge.elements import dialog
+
+        assert dialog("Inhalt").to_html() == "<dialog>Inhalt</dialog>"
+
+    def test_details_summary_factory(self) -> None:
+        from htmforge.elements import details, summary
+
+        html = details(summary("Titel"), "Text").to_html()
+        assert html == "<details><summary>Titel</summary>Text</details>"
+
+    def test_fieldset_legend_factory(self) -> None:
+        from htmforge.elements import fieldset, legend
+
+        html = fieldset(legend("Gruppe")).to_html()
+        assert "<fieldset>" in html
+        assert "<legend>Gruppe</legend>" in html
+
+    def test_progress_is_not_void(self) -> None:
+        from htmforge.elements import progress
+
+        html = progress(value="50", max="100").to_html()
+        assert html == '<progress value="50" max="100"></progress>'
+
+    def test_col_is_void(self) -> None:
+        from htmforge.elements import col
+
+        html = col(span="2").to_html()
+        assert html == '<col span="2">'
+        assert "</col>" not in html
+
+    def test_audio_video_factories(self) -> None:
+        from htmforge.elements import audio, source, video
+
+        html = video(source(src="/v.mp4", type="video/mp4"), controls=True).to_html()
+        assert "controls" in html
+        assert '<source src="/v.mp4"' in html
+
+    def test_map_factory_renders_map_tag(self) -> None:
+        from htmforge.elements import map_
+
+        html = map_(name="nav").to_html()
+        assert html == '<map name="nav"></map>'
+
+    def test_mark_kbd_abbr_time_small(self) -> None:
+        from htmforge.elements import abbr, kbd, mark, small, time
+
+        assert mark("wichtig").to_html() == "<mark>wichtig</mark>"
+        assert kbd("Ctrl+C").to_html() == "<kbd>Ctrl+C</kbd>"
+        assert abbr("HTML", title="HyperText").to_html() == '<abbr title="HyperText">HTML</abbr>'
+        assert time("2026", datetime="2026-01-01").to_html() == '<time datetime="2026-01-01">2026</time>'
+        assert small("Hinweis").to_html() == "<small>Hinweis</small>"

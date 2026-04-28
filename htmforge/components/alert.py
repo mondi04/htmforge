@@ -13,7 +13,6 @@ from enum import StrEnum
 from htmforge import Component
 from htmforge.core.element import Element
 from htmforge.elements import button, div
-from htmforge.htmx import HxSwap, HxTarget
 
 
 class AlertVariant(StrEnum):
@@ -31,21 +30,19 @@ class Alert(Component):
     message: str
     variant: AlertVariant = AlertVariant.INFO
     dismissible: bool = False
+    close_label: str = "Schließen"
 
     def render(self) -> Element:
         """Erstellt ein ``<div>`` mit Variantenklasse und optionalem Schliessen."""
         children: list[Element | str] = [self.message]
         if self.dismissible:
             children.append(
-                # TODO: replace with JS-based dismiss
-                # (hx_get="" triggers GET on current URL)
                 button(
                     "×",
                     type="button",
-                    hx_get="",
-                    hx_target=HxTarget.CLOSEST_DIV,
-                    hx_swap=HxSwap.DELETE,
                     cls="alert-close",
+                    aria_label=self.close_label,
+                    onclick="this.closest('.alert').remove()",
                 )
             )
         return div(*children, cls=f"alert alert-{self.variant.value}")

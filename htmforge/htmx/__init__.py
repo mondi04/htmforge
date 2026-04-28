@@ -147,3 +147,24 @@ __all__ = [
     "HxTarget",
     "HxTrigger",
 ]
+
+
+def hx_keyup_delay(ms: int = 300) -> str:
+    """Erzeugt einen HTMX keyup-Trigger-String mit Debounce-Delay.
+
+    Args:
+        ms: Wartezeit in Millisekunden nach dem letzten Tastendruck.
+
+    Returns:
+        Einen HTMX-kompatiblen Trigger-String, z.B. "keyup delay:300ms".
+
+    Example:
+        >>> from htmforge.htmx import hx_keyup_delay
+        >>> hx_keyup_delay(500)
+        'keyup delay:500ms'
+    """
+    return f"keyup delay:{ms}ms"
+
+
+# Export helper in the public API
+__all__.append("hx_keyup_delay")
