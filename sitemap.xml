@@ -41,6 +41,10 @@
          <lastmod>2026-05-06</lastmod>
     </url>
     <url>
+         <loc>https://mondi04.github.io/htmforge/components/accordion/</loc>
+         <lastmod>2026-05-06</lastmod>
+    </url>
+    <url>
          <loc>https://mondi04.github.io/htmforge/components/alert/</loc>
          <lastmod>2026-05-06</lastmod>
     </url>
@@ -53,11 +57,27 @@
          <lastmod>2026-05-06</lastmod>
     </url>
     <url>
+         <loc>https://mondi04.github.io/htmforge/components/checkboxfield/</loc>
+         <lastmod>2026-05-06</lastmod>
+    </url>
+    <url>
          <loc>https://mondi04.github.io/htmforge/components/datatable/</loc>
          <lastmod>2026-05-06</lastmod>
     </url>
     <url>
+         <loc>https://mondi04.github.io/htmforge/components/dropdown/</loc>
+         <lastmod>2026-05-06</lastmod>
+    </url>
+    <url>
+         <loc>https://mondi04.github.io/htmforge/components/form/</loc>
+         <lastmod>2026-05-06</lastmod>
+    </url>
+    <url>
          <loc>https://mondi04.github.io/htmforge/components/formfield/</loc>
+         <lastmod>2026-05-06</lastmod>
+    </url>
+    <url>
+         <loc>https://mondi04.github.io/htmforge/components/formgroup/</loc>
          <lastmod>2026-05-06</lastmod>
     </url>
     <url>
@@ -73,7 +93,27 @@
          <lastmod>2026-05-06</lastmod>
     </url>
     <url>
+         <loc>https://mondi04.github.io/htmforge/components/radiogroup/</loc>
+         <lastmod>2026-05-06</lastmod>
+    </url>
+    <url>
          <loc>https://mondi04.github.io/htmforge/components/searchinput/</loc>
+         <lastmod>2026-05-06</lastmod>
+    </url>
+    <url>
+         <loc>https://mondi04.github.io/htmforge/components/selectfield/</loc>
+         <lastmod>2026-05-06</lastmod>
+    </url>
+    <url>
+         <loc>https://mondi04.github.io/htmforge/components/spinner/</loc>
+         <lastmod>2026-05-06</lastmod>
+    </url>
+    <url>
+         <loc>https://mondi04.github.io/htmforge/components/tabs/</loc>
+         <lastmod>2026-05-06</lastmod>
+    </url>
+    <url>
+         <loc>https://mondi04.github.io/htmforge/components/toast/</loc>
          <lastmod>2026-05-06</lastmod>
     </url>
     <url>

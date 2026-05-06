@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://mondi04.github.io/htmforge/components/pagination/">
+        <link rel="canonical" href="https://mondi04.github.io/htmforge/components/accordion/">
       
       
-        <link rel="prev" href="../page/">
+        <link rel="prev" href="../toast/">
       
       
-        <link rel="next" href="../searchinput/">
+        <link rel="next" href="../dropdown/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Pagination - htmforge</title>
+        <title>Accordion - htmforge</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pagination" class="md-skip">
+        <a href="#accordion" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pagination
+              Accordion
             
           </span>
         </div>
@@ -1101,37 +1101,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pagination
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../pagination/" class="md-nav__link">
         
   
   
@@ -1147,48 +1120,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#props" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Props
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rendered-html" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rendered HTML
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1310,10 +1241,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../accordion/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accordion
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1329,6 +1287,48 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#props" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Props
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendered-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendered HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2005,11 +2005,14 @@
   
 
 
-<h1 id="pagination">Pagination</h1>
-<p>Pagination shows previous/next and page numbers. Supports HTMX via <code>hx_url</code> and <code>hx_target</code> props.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pagination</span>
+<h1 id="accordion">Accordion</h1>
+<p>Multiple expandable sections using native HTML <code>details</code> and <code>summary</code> elements for semantic markup.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Accordion</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Pagination</span><span class="p">(</span><span class="n">current_page</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">total_pages</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hx_url</span><span class="o">=</span><span class="s2">&quot;/p/</span><span class="si">{page}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">hx_target</span><span class="o">=</span><span class="s2">&quot;#list&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Accordion</span><span class="p">(</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">items</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;FAQ&quot;</span><span class="p">,</span> <span class="s2">&quot;Answer text&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Info&quot;</span><span class="p">,</span> <span class="s2">&quot;More details&quot;</span><span class="p">)],</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">open_index</span><span class="o">=</span><span class="mi">0</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="props">Props</h2>
 <table>
@@ -2023,34 +2026,29 @@
 </thead>
 <tbody>
 <tr>
-<td><code>current_page</code></td>
-<td><code>int</code></td>
+<td><code>items</code></td>
+<td><code>list[tuple[str, str]]</code></td>
 <td>required</td>
-<td>current page number</td>
+<td>List of (title, content) tuples</td>
 </tr>
 <tr>
-<td><code>total_pages</code></td>
-<td><code>int</code></td>
-<td>required</td>
-<td>total number of pages</td>
+<td><code>open_index</code></td>
+<td><code>int \| None</code></td>
+<td><code>None</code></td>
+<td>Index of initially open item; <code>None</code> = all closed</td>
 </tr>
 <tr>
-<td><code>hx_url</code></td>
-<td><code>str</code></td>
-<td>required</td>
-<td>URL template with <code>{page}</code> placeholder</td>
-</tr>
-<tr>
-<td><code>hx_target</code></td>
+<td><code>item_cls</code></td>
 <td><code>str</code></td>
 <td><code>""</code></td>
-<td>optional HTMX target selector</td>
+<td>Extra CSS class on each details element</td>
 </tr>
 </tbody>
 </table>
 <h2 id="rendered-html">Rendered HTML</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pagination&quot;</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/1&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>Previous<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/1&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/3&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/3&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>Next<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;accordion&quot;</span><span class="p">&gt;&lt;</span><span class="nt">details</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;accordion-item&quot;</span> <span class="na">open</span><span class="p">&gt;&lt;</span><span class="nt">summary</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;accordion-title&quot;</span><span class="p">&gt;</span>FAQ<span class="p">&lt;/</span><span class="nt">summary</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;accordion-content&quot;</span><span class="p">&gt;</span>Answer text<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">details</span><span class="p">&gt;&lt;</span><span class="nt">details</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;accordion-item&quot;</span><span class="p">&gt;&lt;</span><span class="nt">summary</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;accordion-title&quot;</span><span class="p">&gt;</span>Info<span class="p">&lt;/</span><span class="nt">summary</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;accordion-content&quot;</span><span class="p">&gt;</span>More details<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">details</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
+<p><strong>Note:</strong> Uses semantic HTML <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> elements. The <code>open</code> attribute controls initial state. Only one section opens at a time via browser default behavior.</p>
 
 
 

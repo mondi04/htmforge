@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://mondi04.github.io/htmforge/components/pagination/">
+        <link rel="canonical" href="https://mondi04.github.io/htmforge/components/toast/">
       
       
-        <link rel="prev" href="../page/">
+        <link rel="prev" href="../tabs/">
       
       
-        <link rel="next" href="../searchinput/">
+        <link rel="next" href="../accordion/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Pagination - htmforge</title>
+        <title>Toast - htmforge</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pagination" class="md-skip">
+        <a href="#toast" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pagination
+              Toast
             
           </span>
         </div>
@@ -1101,37 +1101,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pagination
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../pagination/" class="md-nav__link">
         
   
   
@@ -1147,48 +1120,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#props" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Props
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rendered-html" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rendered HTML
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1282,10 +1213,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../toast/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Toast
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1301,6 +1259,48 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#props" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Props
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendered-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendered HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2005,11 +2005,15 @@
   
 
 
-<h1 id="pagination">Pagination</h1>
-<p>Pagination shows previous/next and page numbers. Supports HTMX via <code>hx_url</code> and <code>hx_target</code> props.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pagination</span>
+<h1 id="toast">Toast</h1>
+<p>Timed notification box with HTMX out-of-band swap support for injecting notifications into existing pages.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Toast</span><span class="p">,</span> <span class="n">ToastVariant</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Pagination</span><span class="p">(</span><span class="n">current_page</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">total_pages</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hx_url</span><span class="o">=</span><span class="s2">&quot;/p/</span><span class="si">{page}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">hx_target</span><span class="o">=</span><span class="s2">&quot;#list&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Toast</span><span class="p">(</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Successfully saved!&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">variant</span><span class="o">=</span><span class="n">ToastVariant</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">duration_ms</span><span class="o">=</span><span class="mi">3000</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="props">Props</h2>
 <table>
@@ -2023,34 +2027,35 @@
 </thead>
 <tbody>
 <tr>
-<td><code>current_page</code></td>
-<td><code>int</code></td>
-<td>required</td>
-<td>current page number</td>
-</tr>
-<tr>
-<td><code>total_pages</code></td>
-<td><code>int</code></td>
-<td>required</td>
-<td>total number of pages</td>
-</tr>
-<tr>
-<td><code>hx_url</code></td>
+<td><code>message</code></td>
 <td><code>str</code></td>
 <td>required</td>
-<td>URL template with <code>{page}</code> placeholder</td>
+<td>Notification text content</td>
 </tr>
 <tr>
-<td><code>hx_target</code></td>
+<td><code>variant</code></td>
+<td><code>ToastVariant</code></td>
+<td><code>ToastVariant.INFO</code></td>
+<td>Style: INFO, SUCCESS, WARNING, or ERROR</td>
+</tr>
+<tr>
+<td><code>toast_id</code></td>
 <td><code>str</code></td>
-<td><code>""</code></td>
-<td>optional HTMX target selector</td>
+<td><code>"toast"</code></td>
+<td>HTML id attribute; use OOB to inject into page</td>
+</tr>
+<tr>
+<td><code>duration_ms</code></td>
+<td><code>int</code></td>
+<td><code>3000</code></td>
+<td>Auto-dismiss delay in milliseconds (0 = no auto-dismiss)</td>
 </tr>
 </tbody>
 </table>
 <h2 id="rendered-html">Rendered HTML</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pagination&quot;</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/1&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>Previous<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/1&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/3&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/3&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>Next<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;toast&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;toast toast-success&quot;</span> <span class="na">hx-swap-oob</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="na">data-duration</span><span class="o">=</span><span class="s">&quot;3000&quot;</span><span class="p">&gt;</span>Successfully saved!<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
+<p><strong>Note:</strong> Set <code>hx-swap-oob="true"</code> in HTMX responses to inject the toast out-of-band and replace an existing toast element. Variants: <code>toast-info</code>, <code>toast-success</code>, <code>toast-warning</code>, <code>toast-error</code>.</p>
 
 
 

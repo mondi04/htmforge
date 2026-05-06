@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://mondi04.github.io/htmforge/components/pagination/">
+        <link rel="canonical" href="https://mondi04.github.io/htmforge/components/spinner/">
       
       
-        <link rel="prev" href="../page/">
+        <link rel="prev" href="../searchinput/">
       
       
-        <link rel="next" href="../searchinput/">
+        <link rel="next" href="../tabs/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Pagination - htmforge</title>
+        <title>Spinner - htmforge</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pagination" class="md-skip">
+        <a href="#spinner" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pagination
+              Spinner
             
           </span>
         </div>
@@ -1101,6 +1101,62 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../pagination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagination
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../searchinput/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SearchInput
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1120,7 +1176,7 @@
   <span class="md-ellipsis">
     
   
-    Pagination
+    Spinner
   
 
     
@@ -1138,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Pagination
+    Spinner
   
 
     
@@ -1189,62 +1245,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../searchinput/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SearchInput
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../spinner/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Spinner
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -2005,11 +2005,11 @@
   
 
 
-<h1 id="pagination">Pagination</h1>
-<p>Pagination shows previous/next and page numbers. Supports HTMX via <code>hx_url</code> and <code>hx_target</code> props.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pagination</span>
+<h1 id="spinner">Spinner</h1>
+<p>Accessible loading indicator with configurable size and label for ARIA compatibility.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Spinner</span><span class="p">,</span> <span class="n">SpinnerSize</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Pagination</span><span class="p">(</span><span class="n">current_page</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">total_pages</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hx_url</span><span class="o">=</span><span class="s2">&quot;/p/</span><span class="si">{page}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">hx_target</span><span class="o">=</span><span class="s2">&quot;#list&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Spinner</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">SpinnerSize</span><span class="o">.</span><span class="n">LG</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Loading data...&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="props">Props</h2>
 <table>
@@ -2023,34 +2023,23 @@
 </thead>
 <tbody>
 <tr>
-<td><code>current_page</code></td>
-<td><code>int</code></td>
-<td>required</td>
-<td>current page number</td>
+<td><code>size</code></td>
+<td><code>SpinnerSize</code></td>
+<td><code>SpinnerSize.MD</code></td>
+<td>Size variant: SM, MD, or LG</td>
 </tr>
 <tr>
-<td><code>total_pages</code></td>
-<td><code>int</code></td>
-<td>required</td>
-<td>total number of pages</td>
-</tr>
-<tr>
-<td><code>hx_url</code></td>
+<td><code>label</code></td>
 <td><code>str</code></td>
-<td>required</td>
-<td>URL template with <code>{page}</code> placeholder</td>
-</tr>
-<tr>
-<td><code>hx_target</code></td>
-<td><code>str</code></td>
-<td><code>""</code></td>
-<td>optional HTMX target selector</td>
+<td><code>"Loading"</code></td>
+<td>ARIA label for accessibility</td>
 </tr>
 </tbody>
 </table>
 <h2 id="rendered-html">Rendered HTML</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pagination&quot;</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/1&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>Previous<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/1&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/3&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/3&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>Next<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;spinner spinner-lg&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;status&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Loading data...&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
+<p>SpinnerSize options: <code>SM</code> (small), <code>MD</code> (medium), <code>LG</code> (large).</p>
 
 
 
