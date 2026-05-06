@@ -1,6 +1,6 @@
 ﻿site_name: htmforge
 site_description: >-
-  Type-safe, composable UI components for Python â€”
+  Type-safe, composable UI components for Python -
   server-side rendered, HTMX-first, framework-agnostic.
 site_url: https://mondi04.github.io/htmforge/
 repo_url: https://github.com/mondi04/htmforge
@@ -83,6 +83,16 @@ nav:
     - Page: components/page.md
     - Pagination: components/pagination.md
     - SearchInput: components/searchinput.md
+    - Spinner: components/spinner.md
+    - Tabs: components/tabs.md
+    - Toast: components/toast.md
+    - Accordion: components/accordion.md
+    - Dropdown: components/dropdown.md
+    - SelectField: components/selectfield.md
+    - CheckboxField: components/checkboxfield.md
+    - RadioGroup: components/radiogroup.md
+    - FormGroup: components/formgroup.md
+    - Form: components/form.md
   - API Reference:
     - htmforge: api/htmforge.md
     - htmforge.core.element: api/element.md

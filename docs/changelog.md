@@ -4,6 +4,23 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.3.1] - 2026-05-06
+
+### Documentation
+- Completed all missing component reference pages:
+  Spinner, Tabs, Toast, Accordion, Dropdown, SelectField,
+  CheckboxField, RadioGroup, FormGroup, Form
+- Fixed MkDocs navigation to include full component list
+- Corrected broken relative links in release notes
+- Fixed Quickstart code blocks (proper fenced syntax)
+- Expanded homepage feature list with full capabilities overview
+
+### Changed
+- README.md fully revised for improved clarity, structure, and onboarding experience
+
+### Quality
+- mkdocs build passes with --strict (0 warnings, 0 errors)
+
 ## [0.3.0] - 2026-05-06
 
 ### Block F — DataTable Enhancements

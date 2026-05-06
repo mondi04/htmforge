@@ -1,19 +1,19 @@
 # htmforge
 
-Type-safe, composable UI components for Python — server-side rendered, HTMX-first.
+Type-safe, composable UI components for Python - server-side rendered, HTMX-first.
 
 ## Why htmforge?
 
-- **Type-safe props**: Pydantic v2 validation on construction and assignment
-- **Safe rendering**: Automatic XSS protection via markupsafe
-- **HTMX-first**: Typed enums and helpers for `hx-*` attributes
-- **Framework-agnostic**: Adapters for FastAPI, Flask, Django
-- **20+ pre-built components**: Alerts, DataTables, Forms, Modals, Tabs, Spinners, Toasts, and more
-- **Auto-error injection**: Forms automatically bind validation errors to fields
-- **Snapshot testing**: Built-in regression detection via auto-created HTML snapshots
-- **Performance optimized**: 1000 renders in <1 second, benchmarks included
-- **Backward compatible**: Extend without breaking existing code
-- **Composable**: Mix and match components with custom Elements
+- **Type-safe props**: Pydantic v2 validation on construction and assignment.
+- **Safe rendering**: Automatic XSS protection via `markupsafe`.
+- **HTMX-first**: Typed enums and helpers for `hx-*` attributes.
+- **Framework-agnostic**: Adapters for FastAPI, Flask, Django.
+- **20+ pre-built components**: Alert, Badge, Breadcrumb, DataTable, Page, Pagination, SearchInput, Spinner, Tabs, Toast, Accordion, Dropdown, SelectField, CheckboxField, RadioGroup, FormGroup, and Form.
+- **Auto-error injection**: Forms automatically bind validation errors to fields.
+- **Snapshot testing**: Built-in regression detection via auto-created HTML snapshots.
+- **Performance optimized**: 1000 renders in under 1 second for core element paths.
+- **Backward compatible**: Extend without breaking existing code.
+- **Composable**: Mix and match components with custom Elements.
 
 ## Quick install
 
@@ -32,19 +32,19 @@ print(htmforge.__version__)
 
 ```python
 from htmforge import Component
-from htmforge.elements import div, p, button
+from htmforge.elements import button, div, p
 from htmforge.htmx import HxSwap
 
 class Card(Component):
     title: str
     content: str
-    
+
     def render(self):
         return div(
             p(self.title, cls="title"),
             p(self.content),
             button("Delete", hx_delete="/card/1", hx_swap=HxSwap.OUTER_HTML),
-            cls="card"
+            cls="card",
         )
 
 print(Card(title="Hello", content="World").to_html())
@@ -63,7 +63,7 @@ app = Flask(__name__)
 
 class UsersPage(Page):
     users: list[list[str]]
-    
+
     def _body_content(self) -> list[Element | str | None]:
         return [
             div(
@@ -85,22 +85,23 @@ if __name__ == "__main__":
 
 ### Components (20+)
 
-**Data Display**: Alert, Badge, Breadcrumb, DataTable (with sortable headers), Modal, Pagination, SearchInput, Toast
+**Layout & Structure**: Page
 
-**Navigation & Interaction**: Accordion, Dropdown, Spinner (SM/MD/LG), Tabs
+**Data Display**: Alert, Badge, Breadcrumb, DataTable, Pagination, Toast
 
-**Forms**: SelectField, CheckboxField, RadioGroup, FormGroup, Form (with auto-error injection)
+**Navigation & Interaction**: Accordion, Dropdown, Modal, SearchInput, Spinner, Tabs
 
-**Layout**: Page (full HTML document)
+**Forms**: FormField, SelectField, CheckboxField, RadioGroup, FormGroup, Form
 
 ### Platform
 
-- **HTML5 Element Factories**: 80+ element functions with type-safe attributes
-- **HTMX Integration**: Typed enums (HxSwap, HxTrigger, HxTarget) and helpers (hx_keyup_delay)
-- **Framework Adapters**: `to_fastapi()`, `to_flask()`, `to_django()`
-- **API Extensions**: Element.__eq__, Component.clone(), render(), when() helper
-- **Comprehensive Testing**: 238+ unit tests, 21 snapshot tests, 5 performance benchmarks
+- **80+ HTML5 element factories** with automatic attribute mapping and XSS protection
+- **20+ pre-built components**: Alerts, DataTables, Forms, Modals, Spinners, Tabs, Toasts, and more
+- **Typed HTMX attributes** via enums — `HxSwap`, `HxTarget`, `HxTrigger`, `HxPushUrl`
+- **Framework adapters** for FastAPI, Flask, and Django
+- **Auto-error injection** in Form — validation errors routed to fields automatically
+- **py.typed** — full mypy strict and pyright support
 
 ## Continue
 
-Start with [Concepts](getting-started/concepts.md) → [Installation](getting-started/installation.md) → [Quickstart](getting-started/quickstart.md)
+Start with [Concepts](getting-started/concepts.md) -> [Installation](getting-started/installation.md) -> [Quickstart](getting-started/quickstart.md)

@@ -53,17 +53,13 @@ Complete component reference for htmforge v0.3.0+.
 ::: htmforge.components.badge.BadgeVariant
 ::: htmforge.components.breadcrumb.Breadcrumb
 ::: htmforge.components.pagination.Pagination
-::: htmforge.components.toast.Toast
-::: htmforge.components.toast.ToastVariant
 
 ### Navigation & Interaction
 
 ::: htmforge.components.modal.Modal
 ::: htmforge.components.search_input.SearchInput
 
-## Legacy Reference
-
-### FormField (v0.2.x)
+### Legacy FormField
 
 ::: htmforge.components.form_field.FormField
 ::: htmforge.components.form_field.InputType

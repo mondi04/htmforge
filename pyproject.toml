@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "htmforge"
-version = "0.3.0"
+version = "0.3.1"
 description = "Type-safe, composable UI components for Python — server-side rendered, HTMX-first, 20+ pre-built components."
 readme = "README.md"
 requires-python = ">=3.11"
