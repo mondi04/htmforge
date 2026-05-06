@@ -380,10 +380,10 @@ print(htmforge.__version__)  # 0.3.0
 
 ## Documentation
 
-- **API Reference**: [htmforge.components](../api/components.md)
-- **Component Guide**: [Components](../guide/components.md)
-- **Getting Started**: [Quickstart](../getting-started/quickstart.md)
-- **Examples**: [FastAPI](../examples/fastapi.md), [Flask](../examples/flask.md), [Django](../examples/django.md)
+- **API Reference**: [htmforge.components](/api/components.md)
+- **Component Guide**: [Components](/guide/components.md)
+- **Getting Started**: [Quickstart](/getting-started/quickstart.md)
+- **Examples**: [FastAPI](/examples/fastapi.md), [Flask](/examples/flask.md), [Django](/examples/django.md)
 
 ---
 
