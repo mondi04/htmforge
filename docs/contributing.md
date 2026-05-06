@@ -1,8 +1,6 @@
 # Contributing
 
-Thanks for considering contributions to htmforge.
-
-See `CONTRIBUTING.md` in the repository for contribution guidelines.
+--8<-- "CONTRIBUTING.md"
 
 ## Running the docs locally
 

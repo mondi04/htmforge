@@ -58,22 +58,22 @@ docs: add FormField usage example to README
 
 If you're new to the project, these are great places to start:
 
-### 1. New HTML elements (`details`, `summary`, `dialog`)
+### 1. Framework integration tests
 
-Add factory functions to `htmforge/elements/__init__.py` following the existing
-pattern. Each function needs a one-line docstring and an entry in `__all__`.
-An HTML5 reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+Create `tests/test_framework_adapters.py` and add tests that check
+`to_flask()` and `to_django()` return the correct response types. Use
+`pytest.importorskip` so the tests skip when Flask or Django are not
+installed.
 
-### 2. New ready-made component (Breadcrumb, Badge, or Spinner)
+### 2. DataTable typed rows
 
-Create `htmforge/components/breadcrumb.py` (or badge/spinner) as a subclass of
-`Component`, export it from `htmforge/components/__init__.py`, and add tests in
-`tests/test_components.py`. Follow the structure of the existing `Alert`
-component.
+Add an optional `dict_rows: list[dict[str, str]]` field to
+`htmforge/components/table.py`. When it is provided, render rows in header
+order using the header keys.
 
-### 3. Framework integration tests (Flask, Django)
+### 3. Spinner component
 
-Add an optional test file `tests/test_framework_adapters.py` that checks
-`component.to_flask()` and `component.to_django()` return the correct response
-types. The tests should be skipped automatically when flask/django are not
-installed (use `pytest.importorskip`).
+Create `htmforge/components/spinner.py` as a loading indicator component with
+size variants (`sm`/`md`/`lg`) rendered as a `div` with CSS class
+`spinner spinner-{size}`. Export it from `components/__init__.py` and add
+tests in `tests/test_components.py`.

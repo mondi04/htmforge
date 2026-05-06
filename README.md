@@ -159,5 +159,5 @@ separate commercial license from the author.
 ## Contributing
 
 See `CONTRIBUTING.md` and the docs site at
-https://mondi04.github.io/htmforge/ for contribution guidelines.
+https://mondi04.github.io/htmforge/contributing/ for contribution guidelines.
 

@@ -2,12 +2,23 @@
 
 DataTable renders a table with optional HTMX hooks for reloading rows.
 
-Usage example is shown in `examples/fastapi_demo.py`.
+```python
+from htmforge.components import DataTable
 
-Props (derived from source):
-- `headers` | list[str] | required
-- `rows` | list[list[str]] | required
-- `empty_message` | str | default shown when no rows
-- `hx_url` | str | optional — if provided, enables HTMX reloads
+DataTable(headers=["Name"], rows=[["Ada"]]).to_html()
+```
 
-Edge cases: empty rows render a message row with colspan of the header count.
+## Props
+
+| Name | Type | Default | Notes |
+|------|------|---------|-------|
+| `headers` | `list[str]` | required | table header labels |
+| `rows` | `list[list[str]]` | required | table body rows |
+| `hx_url` | `str | None` | `None` | enables HTMX reload when set |
+| `empty_message` | `str` | `Keine Einträge` | shown when `rows` is empty |
+
+## Rendered HTML
+
+```html
+<div class="table-wrapper"><table class="table"><thead><tr><th>Name</th></tr></thead><tbody><tr><td>Ada</td></tr></tbody></table></div>
+```

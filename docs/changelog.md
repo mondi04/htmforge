@@ -4,11 +4,38 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.2.2] - 2026-04-29
+
+### Added
+- Component reference pages now include full props tables with
+	types, defaults, and descriptions for all fields
+- Rendered HTML output blocks on all component pages (Alert,
+	Badge, Breadcrumb, DataTable, FormField, Modal, Page,
+	Pagination, SearchInput)
+- Quickstart guide rewritten with complete runnable Flask example
+	including rendered output
+- Core Concepts page: attribute mapping table and expanded
+	Mermaid architecture diagram
+- Framework Adapters guide: full embedded FastAPI, Flask, and
+	Django code examples
+- Contributing guide: full CONTRIBUTING.md content embedded
+	in docs site
+
+### Fixed
+- OVERVIEW.md merge conflict in Roadmap table resolved
+- Spinner row removed from Ready-made components table
+	(not yet implemented)
+- Next Implementation Blocks section updated to Blocks F–J
+- CONTRIBUTING.md Good First Issues updated to reflect
+	actual open tasks
+
 ## [0.2.1] - 2026-04-29
 
 ### Fixed
-- Correct LICENSE badge link to absolute GitHub URL
-- Correct Docs badge link to GitHub repository
+- README LICENSE badge now links to absolute GitHub URL
+	(https://github.com/mondi04/htmforge/blob/main/LICENSE)
+- README Docs badge corrected to point to GitHub Pages
+	(https://mondi04.github.io/htmforge/)
 
 ## [0.2.0] - 2026-04-28
 

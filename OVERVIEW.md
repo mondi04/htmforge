@@ -57,10 +57,12 @@ Core install: **2 dependencies.**
 
 | Phase  | Contents | Status |
 |--------|----------|--------|
-| v0.1.0 | Core engine, all HTML5 elements (60+), HTMX enums, framework adapters (FastAPI/Flask/Django), py.typed | ✅ Released (PyPI: 2026-03-12) |
+| v0.1.0 | Core engine, 60+ HTML5 element factories, HTMX enums, framework adapters (FastAPI/Flask/Django), py.typed | ✅ Released (PyPI: 2026-03-12) |
 | v0.1.2 | Bug fixes — __init_subclass__ kwargs, Page abstract guard, ruff config cleanup, importlib.metadata version | ✅ Released (PyPI: 2026-03-12) |
-| v0.2.0 | DataTable, Alert, Pagination, Page, FormField, safe_html, raw(), 25 new element factories (dialog, details, audio, video, picture, canvas, iframe, meter, progress, kbd, abbr, time, address, mark, small, sub, sup, caption, colgroup, col, source, track, map_, area), Badge, Breadcrumb, Modal, SearchInput, hx_keyup_delay(), Component.__repr__, Alert JS-dismiss fix, Modal data-attribute fix, SearchInput API rename (search_url/search_target), mkdocs-material documentation site, GitHub Actions (CI Python 3.13, docs deploy, release workflow), MIT + Commons Clause license | ✅ Released (PyPI: 2026-04-28) |
-| v0.2.1 | Fix README badge links (LICENSE, Docs) | ✅ Released (PyPI: 2026-04-29) |
+| v0.2.0 | DataTable, Alert, Pagination, Page, FormField, safe_html, raw(), 25 new element factories, Badge, Breadcrumb, Modal, SearchInput, hx_keyup_delay(), Component.__repr__, Alert JS-dismiss fix, Modal data-attribute fix, SearchInput API rename, mkdocs-material docs site, GitHub Actions, MIT + Commons Clause license | ✅ Released (PyPI: 2026-04-28) |
+| v0.2.1 | Fix README badge links (LICENSE → absolute GitHub URL, Docs badge corrected) | ✅ Released (PyPI: 2026-04-29) |
+| v0.2.2 | Documentation rewrite — component pages with props tables and rendered HTML, quickstart with full runnable examples, concepts attribute mapping table, framework guide with embedded code, contributing guide embedded, OVERVIEW + CONTRIBUTING cleaned up | ✅ Released (PyPI: 2026-04-29) |
+| v0.3.0 | Spinner, Tabs, Toast, Accordion, Dropdown components; DataTable dict_rows + ColumnDef + sorting; Forms system (Form, SelectField, CheckboxField, RadioGroup, FormGroup, validation); API extensions (Element.__eq__, Component.clone(), Component.to_fragment(), render(), when()); framework adapter tests; snapshot tests | 🔜 Planned |
 | v1.0.0 | Stable API guarantee, full mkdocs API reference, Django example, performance benchmarks, 100% docstring coverage | 🔜 Planned |
 
 ---
@@ -113,7 +115,6 @@ Core install: **2 dependencies.**
 | `Breadcrumb`| `htmforge.components`               | Ordered nav links, aria-current support      |
 | `SearchInput`| `htmforge.components`              | Text input with hx-trigger keyup debounce    |
 | `Modal`     | `htmforge.components`               | Trigger button + dialog with HTMX content load |
-| `Spinner`   | `htmforge.components`               | Accessible loading indicator with size variants |
 
 ### ✅ Quality
 - **134 tests**, all green
@@ -137,32 +138,73 @@ A block is only complete when:
 
 ## Next Implementation Blocks
 
-### Block D — New components (v0.3.0)
+### Block F — DataTable erweitern
 
 **Scope:**
-- `Breadcrumb` — ordered nav links, HTMX-aware current-page indicator
-- `Badge` — small inline label with variant colors
-- `Modal` — trigger button + dialog overlay with HTMX content loading
-- `SearchInput` — text input with `hx_trigger="keyup delay:300ms"` debounce
+- `dict_rows: list[dict[str, str]] | None = None` field
+- `columns: list[ColumnDef] | None = None` for label/key/sortable/width
+- Sortable headers with `hx-get` + `?sort=col&dir=asc`
+- Fallback to existing `rows` when `dict_rows` is None
 
 **Acceptance criteria:**
-- Each component: unit tests (basic render + edge case + HTMX attrs)
+- Tests: dict rows, missing key → empty string, sortable header renders hx-get
+- mypy strict clean, ruff clean, pytest green
+
+### Block G — Neue Komponenten
+
+**Scope:**
+- `Spinner` — `<div class="spinner spinner-{size}" role="status" aria-label="Loading">`, SpinnerSize enum (SM/MD/LG)
+- `Tabs` — tab bar + panels, active tab via CSS class, HTMX lazy-load per tab
+- `Toast` — timed notification, HTMX OOB-swap compatible, ToastVariant enum
+- `Accordion` — `details`/`summary` based, multiple items, optional HTMX content load
+- `Dropdown` — trigger button + hidden menu, HTMX toggleable
+
+**Acceptance criteria:**
+- Each component: positive test + edge case + HTMX attrs test
 - Exported from `htmforge/components/__init__.py`
+- Google-style docstring with usage example on every class
 - mypy strict clean, ruff clean
-- Docstring with usage example on every class
 
-### Block E — Documentation (v1.0.0)
+### Block H — Forms-System
 
 **Scope:**
-- mkdocs-material site with API reference generated from docstrings
-- Getting-Started guide (5 minutes to first page)
-- 3 complete example apps: FastAPI, Flask, Django
-- All existing `examples/` moved into mkdocs
+- `Form` — wrapper with action, method, HTMX submit support
+- `SelectField` — `<select>` with typed options list
+- `CheckboxField` — single checkbox + label
+- `RadioGroup` — multiple radio inputs from options list
+- `FormGroup` — layout container for multiple fields
+- Validation integration — accept `errors: dict[str, str]` and pass to fields
 
 **Acceptance criteria:**
-- `mkdocs build` exits 0 with no warnings
-- API reference covers all public symbols in `htmforge/`
-- Each example app is runnable with `uvicorn` / `flask run` / `python manage.py runserver`
+- Full test coverage per component
+- Validation dict wires errors to correct fields
+- mypy strict clean, ruff clean
+
+### Block I — API-Erweiterungen
+
+**Scope:**
+- `Element.__eq__` — compare two elements by their rendered HTML
+- `Component.clone(**overrides)` — return new instance with changed props
+- `Component.to_fragment()` — explicit HTMX fragment method (same as to_html() but documents intent)
+- `htmforge.render(component)` — top-level convenience function
+- `when(condition, element)` — returns element or None for conditional rendering
+
+**Acceptance criteria:**
+- Tests for each helper
+- `when()` exported from `htmforge` root
+- mypy strict clean
+
+### Block J — Testing-Infrastruktur
+
+**Scope:**
+- `tests/test_framework_adapters.py` — to_flask(), to_django() return types, auto-skip via pytest.importorskip
+- Snapshot tests — rendered HTML against stored snapshots (pytest-snapshot)
+- Performance benchmark — render time baseline for 1000 elements
+
+**Acceptance criteria:**
+- Framework tests skip gracefully without flask/django installed
+- Snapshots stored in tests/snapshots/
+- Benchmark runs with pytest --benchmark
 
 ---
 
@@ -170,7 +212,8 @@ A block is only complete when:
 
 | Date       | Change |
 |------------|--------|
-| 2026-04-29 | v0.2.1: Fix README badge links — LICENSE zeigt auf GitHub, Docs-Badge korrigiert |
+| 2026-04-29 | v0.2.2: Documentation rewrite — component pages with props tables and rendered HTML, quickstart with runnable examples, concepts attribute mapping table, framework guide with embedded code, contributing guide embedded, OVERVIEW cleaned up, Roadmap extended to v0.3.0 |
+| 2026-04-29 | v0.2.1: Fix README badge links (LICENSE → absolute GitHub URL, Docs badge corrected) |
 | 2026-04-28 | v0.2.0: 25 new element factories, Badge, Breadcrumb, Modal, SearchInput, hx_keyup_delay(), Component.__repr__, Alert JS-dismiss fix, Modal data-attribute/script fix, SearchInput renamed fields (search_url/search_target), mkdocs-material docs site, GitHub Pages deploy workflow, GitHub Release workflow, MIT + Commons Clause license, Python 3.13 added to CI matrix |
 | 2026-03-12 | v0.1.2: DataTable, Alert, Pagination, Page, FormField, safe_html(), raw(), framework adapters stable, importlib.metadata version, Pagination.hx_target optional |
 | 2026-03-12 | v0.1.0: Core engine, Element, Component, 60+ HTML5 factories, HxSwap/HxTrigger/HxTarget/HxPushUrl enums, py.typed, FastAPI/Flask/Django adapters, LICENSE, CI |

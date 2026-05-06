@@ -1,32 +1,24 @@
 # Alert
 
-Renders an alert box with optional dismiss button.
+Renders an alert box with an optional dismiss button.
 
 ```python
 from htmforge.components import Alert, AlertVariant
 
-Alert(message="Saved", variant=AlertVariant.SUCCESS).to_html()
+Alert(message="Saved", variant=AlertVariant.SUCCESS, dismissible=True, close_label="Close").to_html()
 ```
 
-Props
+## Props
 
-- `message` | `str` | required — the alert text
-- `variant` | `AlertVariant` | default `AlertVariant.INFO`
-- `dismissible` | `bool` | default `False`
-- `close_label` | `str` | default `Schließen`
+| Name | Type | Default | Notes |
+|------|------|---------|-------|
+| `message` | `str` | required | the alert text |
+| `variant` | `AlertVariant` | `AlertVariant.INFO` | CSS variant |
+| `dismissible` | `bool` | `False` | adds the close button |
+| `close_label` | `str` | `Schließen` | `aria-label` for the close button |
 
-Usage
-
-```python
-Alert(message="Saved", variant=AlertVariant.SUCCESS, dismissible=True).to_html()
-```
-
-Rendered HTML (example):
+## Rendered HTML
 
 ```html
-<div class="alert alert-success">Saved<button type="button" class="alert-close" aria-label="Schließen">×</button></div>
+<div class="alert alert-success">Saved<button type="button" class="alert-close" aria-label="Close" onclick="this.closest(&#39;.alert&#39;).remove()">×</button></div>
 ```
-
-HTMX: none specific.
-
-Edge cases: when `dismissible=False` no close button is rendered.
