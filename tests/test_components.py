@@ -5,17 +5,31 @@ from __future__ import annotations
 import importlib
 
 from htmforge.components import (
+    Accordion,
     Alert,
     AlertVariant,
     Badge,
     BadgeVariant,
     Breadcrumb,
+    CheckboxField,
+    ColumnDef,
     DataTable,
+    Dropdown,
+    Form,
+    FormField,
+    FormGroup,
     Modal,
     Pagination,
+    RadioGroup,
     SearchInput,
+    SelectField,
+    Spinner,
+    SpinnerSize,
+    Tabs,
+    Toast,
+    ToastVariant,
 )
-from htmforge.components.form_field import FormField, InputType
+from htmforge.components.form_field import InputType
 from htmforge.components.page import Page
 from htmforge.core.element import Element
 from htmforge.elements import li, ul
@@ -67,6 +81,72 @@ class TestDataTable:
 
         assert 'hx-get="/api/users/table"' in html
         assert 'hx-trigger="load"' in html
+
+    def test_dict_rows_renders_by_header_key(self) -> None:
+        """dict_rows wird mit header-Keys gerendert."""
+        table = DataTable(
+            headers=["name", "email"],
+            dict_rows=[{"name": "Ada", "email": "ada@example.com"}],
+        )
+        html = table.to_html()
+        assert "Ada" in html
+        assert "ada@example.com" in html
+
+    def test_dict_rows_missing_key_renders_empty_string(self) -> None:
+        """Fehlende Keys in dict_rows werden als leere Strings gerendert."""
+        table = DataTable(
+            headers=["name", "role"],
+            dict_rows=[{"name": "Ada"}],
+        )
+        html = table.to_html()
+        assert "<td></td>" in html
+
+    def test_column_def_label_used_as_header(self) -> None:
+        """ColumnDef label wird als Header-Text gerendert."""
+        table = DataTable(
+            headers=[],
+            columns=[ColumnDef(key="name", label="Full Name")],
+            dict_rows=[{"name": "Ada"}],
+        )
+        assert "Full Name" in table.to_html()
+
+    def test_column_def_sortable_renders_hx_get(self) -> None:
+        """Sortierbare ColumnDef rendert hx-get mit sort-URL."""
+        table = DataTable(
+            headers=[],
+            columns=[ColumnDef(key="name", label="Name", sortable=True)],
+            dict_rows=[],
+            sort_url="/users/table",
+        )
+        assert 'hx-get="/users/table?sort=name&amp;dir=asc"' in table.to_html()
+
+    def test_sort_dir_flips_when_current_sort_matches(self) -> None:
+        """Sort-Direction flipped wenn current_sort die Spalte trifft."""
+        table = DataTable(
+            headers=[],
+            columns=[ColumnDef(key="name", sortable=True)],
+            dict_rows=[],
+            sort_url="/users/table",
+            current_sort="name",
+            sort_dir="asc",
+        )
+        assert "dir=desc" in table.to_html()
+
+    def test_existing_rows_still_work(self) -> None:
+        """Bestehende list[list[str]] rows funktionieren noch."""
+        table = DataTable(
+            headers=["Name"],
+            rows=[["Ada"]],
+        )
+        assert "<td>Ada</td>" in table.to_html()
+
+    def test_empty_dict_rows_shows_empty_message(self) -> None:
+        """Leere dict_rows zeigen die empty_message."""
+        table = DataTable(
+            headers=["name"],
+            dict_rows=[],
+        )
+        assert "Keine Einträge" in table.to_html()
 
 
 class TestAlert:
@@ -508,3 +588,370 @@ class TestFormField:
             input_type=InputType.EMAIL,
         )
         assert 'type="email"' in field.to_html()
+
+
+# ---------------------------------------------------------------------------
+# Tests: Spinner
+# ---------------------------------------------------------------------------
+
+
+class TestSpinner:
+    """Tests fuer die ``Spinner``-Komponente."""
+
+    def test_default_size_is_md(self) -> None:
+        """Standard-Groesse ist MD."""
+        assert 'class="spinner spinner-md"' in Spinner().to_html()
+
+    def test_large_size(self) -> None:
+        """Große Spinner werden mit LG-Klasse gerendert."""
+        assert 'class="spinner spinner-lg"' in Spinner(size=SpinnerSize.LG).to_html()
+
+    def test_role_and_aria_label_present(self) -> None:
+        """Role und Aria-Label sind fuer Barrierefreiheit vorhanden."""
+        html = Spinner().to_html()
+        assert 'role="status"' in html
+        assert 'aria-label="Loading"' in html
+
+    def test_custom_label(self) -> None:
+        """Benutzerdefinierte Aria-Label werden gerendert."""
+        assert 'aria-label="Bitte warten"' in Spinner(label="Bitte warten").to_html()
+
+
+# ---------------------------------------------------------------------------
+# Tests: Tabs
+# ---------------------------------------------------------------------------
+
+
+class TestTabs:
+    """Tests fuer die ``Tabs``-Komponente."""
+
+    def test_active_tab_has_active_class(self) -> None:
+        """Der aktive Tab hat die active-Klasse."""
+        tabs = Tabs(tabs=[("A", "/a"), ("B", "/b")], active=0, target="#p")
+        assert "tab-active" in tabs.to_html()
+
+    def test_inactive_tab_has_hx_get(self) -> None:
+        """Inaktive Tabs haben hx-get-Attribute."""
+        assert 'hx-get="/b"' in Tabs(tabs=[("A", "/a"), ("B", "/b")], active=0, target="#p").to_html()
+
+    def test_active_tab_has_no_hx_get(self) -> None:
+        """Der aktive Tab hat keine hx-get-Attribute."""
+        html = Tabs(tabs=[("A", "/a")], active=0, target="#p").to_html()
+        assert "hx-get" not in html
+
+    def test_target_on_inactive_tabs(self) -> None:
+        """Inaktive Tabs haben das richtige hx-target."""
+        html = Tabs(tabs=[("A", "/a"), ("B", "/b")], active=0, target="#panel").to_html()
+        assert 'hx-target="#panel"' in html
+
+
+# ---------------------------------------------------------------------------
+# Tests: Toast
+# ---------------------------------------------------------------------------
+
+
+class TestToast:
+    """Tests fuer die ``Toast``-Komponente."""
+
+    def test_default_variant_class(self) -> None:
+        """Die Standard-Variante ist INFO."""
+        assert 'class="toast toast-info"' in Toast(message="Hi").to_html()
+
+    def test_success_variant(self) -> None:
+        """Success-Variante wird mit der korrekten Klasse gerendert."""
+        assert "toast-success" in Toast(message="OK", variant=ToastVariant.SUCCESS).to_html()
+
+    def test_toast_id_default(self) -> None:
+        """Standard Toast-ID ist 'toast'."""
+        assert 'id="toast"' in Toast(message="Hi").to_html()
+
+    def test_custom_toast_id(self) -> None:
+        """Benutzerdefinierte Toast-ID wird gerendert."""
+        assert 'id="msg"' in Toast(message="Hi", toast_id="msg").to_html()
+
+    def test_duration_ms_as_data_attribute(self) -> None:
+        """Duration wird als data-attribute gerendert."""
+        assert 'data-duration="3000"' in Toast(message="Hi").to_html()
+
+    def test_zero_duration_omits_data_attribute(self) -> None:
+        """Duration=0 wird nicht gerendert."""
+        assert "data-duration" not in Toast(message="Hi", duration_ms=0).to_html()
+
+    def test_hx_swap_oob_present(self) -> None:
+        """OOB-Swap wird immer gerendert."""
+        assert 'hx-swap-oob="true"' in Toast(message="Hi").to_html()
+
+
+# ---------------------------------------------------------------------------
+# Tests: Accordion
+# ---------------------------------------------------------------------------
+
+
+class TestAccordion:
+    """Tests fuer die ``Accordion``-Komponente."""
+
+    def test_renders_details_and_summary(self) -> None:
+        """Details- und Summary-Elemente werden gerendert."""
+        html = Accordion(items=[("Q", "A")]).to_html()
+        assert "<details" in html
+        assert "<summary" in html
+
+    def test_title_and_content_present(self) -> None:
+        """Titel und Inhalt sind vorhanden."""
+        html = Accordion(items=[("Title", "Body")]).to_html()
+        assert "Title" in html
+        assert "Body" in html
+
+    def test_open_index_sets_open_attribute(self) -> None:
+        """Das offene Item hat das open-Attribut."""
+        html = Accordion(items=[("A", "x"), ("B", "y")], open_index=1).to_html()
+        assert html.count("open") == 1
+
+    def test_no_open_index_all_closed(self) -> None:
+        """Ohne open_index ist nichts offen."""
+        html = Accordion(items=[("A", "x"), ("B", "y")]).to_html()
+        assert "open" not in html
+
+    def test_multiple_items_render(self) -> None:
+        """Mehrere Items werden alle gerendert."""
+        html = Accordion(items=[("A", "x"), ("B", "y"), ("C", "z")]).to_html()
+        assert html.count("<details") == 3
+
+
+# ---------------------------------------------------------------------------
+# Tests: Dropdown
+# ---------------------------------------------------------------------------
+
+
+class TestDropdown:
+    """Tests fuer die ``Dropdown``-Komponente."""
+
+    def test_trigger_button_label(self) -> None:
+        """Der Trigger-Button hat das richtige Label."""
+        assert "Actions" in Dropdown(label="Actions", items=[]).to_html()
+
+    def test_menu_items_rendered(self) -> None:
+        """Menü-Items werden als Links gerendert."""
+        html = Dropdown(label="X", items=[("Edit", "/e"), ("Del", "/d")]).to_html()
+        assert "Edit" in html
+        assert 'href="/e"' in html
+
+    def test_menu_id_derived_from_dropdown_id(self) -> None:
+        """Menü-ID wird aus dropdown_id abgeleitet."""
+        html = Dropdown(label="X", items=[], dropdown_id="nav").to_html()
+        assert 'id="nav-menu"' in html
+
+    def test_toggle_url_sets_hx_get(self) -> None:
+        """Toggle-URL wird als hx-get gerendert."""
+        html = Dropdown(label="X", items=[], toggle_url="/menu").to_html()
+        assert 'hx-get="/menu"' in html
+
+    def test_no_toggle_url_omits_hx_get(self) -> None:
+        """Ohne Toggle-URL wird hx-get nicht gerendert."""
+        html = Dropdown(label="X", items=[]).to_html()
+        assert "hx-get" not in html
+
+
+# ---------------------------------------------------------------------------
+# Tests: SelectField
+# ---------------------------------------------------------------------------
+
+
+class TestSelectField:
+    """Tests fuer die ``SelectField``-Komponente."""
+
+    def test_renders_select_with_options(self) -> None:
+        """Select mit Optionen wird gerendert."""
+        html = SelectField(
+            name="role",
+            options=[("Admin", "admin"), ("User", "user")],
+        ).to_html()
+        assert "<select" in html
+        assert 'value="admin"' in html
+
+    def test_selected_option_has_selected_attr(self) -> None:
+        """Ausgewählte Option hat selected-Attribut."""
+        html = SelectField(
+            name="role",
+            options=[("Admin", "admin"), ("User", "user")],
+            selected="user",
+        ).to_html()
+        assert "selected" in html
+
+    def test_label_rendered_when_set(self) -> None:
+        """Label wird gerendert wenn gesetzt."""
+        html = SelectField(
+            name="role",
+            label_text="Rolle",
+            options=[],
+        ).to_html()
+        assert "Rolle" in html
+
+    def test_error_renders_field_error_div(self) -> None:
+        """Fehler werden in div.field-error gerendert."""
+        html = SelectField(
+            name="role",
+            options=[],
+            error="Pflichtfeld",
+        ).to_html()
+        assert "field-error" in html
+        assert "Pflichtfeld" in html
+
+    def test_no_error_omits_error_div(self) -> None:
+        """Ohne Fehler wird kein Error-Div gerendert."""
+        html = SelectField(name="role", options=[]).to_html()
+        assert "field-error" not in html
+
+
+# ---------------------------------------------------------------------------
+# Tests: CheckboxField
+# ---------------------------------------------------------------------------
+
+
+class TestCheckboxField:
+    """Tests fuer die ``CheckboxField``-Komponente."""
+
+    def test_renders_checkbox_input(self) -> None:
+        """Checkbox-Input wird gerendert."""
+        html = CheckboxField(name="agree", label_text="Ich stimme zu").to_html()
+        assert 'type="checkbox"' in html
+        assert "Ich stimme zu" in html
+
+    def test_checked_attribute_when_true(self) -> None:
+        """Checked-Attribut wenn checked=True."""
+        html = CheckboxField(
+            name="agree", label_text="OK", checked=True
+        ).to_html()
+        assert "checked" in html
+
+    def test_not_checked_by_default(self) -> None:
+        """Nicht per Default gecheckt."""
+        html = CheckboxField(name="agree", label_text="OK").to_html()
+        assert "checked" not in html
+
+    def test_error_renders_field_error(self) -> None:
+        """Fehler werden gerendert."""
+        html = CheckboxField(
+            name="agree", label_text="OK", error="Erforderlich"
+        ).to_html()
+        assert "field-error" in html
+
+
+# ---------------------------------------------------------------------------
+# Tests: RadioGroup
+# ---------------------------------------------------------------------------
+
+
+class TestRadioGroup:
+    """Tests fuer die ``RadioGroup``-Komponente."""
+
+    def test_renders_radio_inputs(self) -> None:
+        """Radio-Inputs werden gerendert."""
+        html = RadioGroup(
+            name="size",
+            options=[("Small", "sm"), ("Large", "lg")],
+        ).to_html()
+        assert html.count('type="radio"') == 2
+
+    def test_selected_radio_has_checked(self) -> None:
+        """Ausgewähltes Radio hat checked-Attribut."""
+        html = RadioGroup(
+            name="size",
+            options=[("Small", "sm"), ("Large", "lg")],
+            selected="lg",
+        ).to_html()
+        assert "checked" in html
+
+    def test_legend_text_rendered(self) -> None:
+        """Legend-Text wird gerendert."""
+        html = RadioGroup(
+            name="size",
+            options=[],
+            legend_text="Groesse",
+        ).to_html()
+        assert "Groesse" in html
+
+    def test_error_renders_field_error(self) -> None:
+        """Fehler werden gerendert."""
+        html = RadioGroup(
+            name="size",
+            options=[],
+            error="Pflichtfeld",
+        ).to_html()
+        assert "field-error" in html
+
+
+# ---------------------------------------------------------------------------
+# Tests: FormGroup
+# ---------------------------------------------------------------------------
+
+
+class TestFormGroup:
+    """Tests fuer die ``FormGroup``-Komponente."""
+
+    def test_renders_fields(self) -> None:
+        """Felder werden gerendert."""
+        group = FormGroup(
+            fields=[SelectField(name="role", options=[("A", "a")])],
+        )
+        assert "<select" in group.to_html()
+
+    def test_legend_text_rendered(self) -> None:
+        """Legend-Text wird gerendert."""
+        html = FormGroup(fields=[], legend_text="Kontakt").to_html()
+        assert "Kontakt" in html
+
+    def test_no_legend_omitted(self) -> None:
+        """Ohne Legend-Text wird form-group-legend nicht gerendert."""
+        html = FormGroup(fields=[]).to_html()
+        assert "form-group-legend" not in html
+
+
+# ---------------------------------------------------------------------------
+# Tests: Form
+# ---------------------------------------------------------------------------
+
+
+class TestForm:
+    """Tests fuer die ``Form``-Komponente."""
+
+    def test_renders_form_tag(self) -> None:
+        """Form-Tag wird gerendert."""
+        html = Form(action="/submit", fields=[]).to_html()
+        assert "<form" in html
+        assert 'action="/submit"' in html
+
+    def test_submit_button_present(self) -> None:
+        """Submit-Button ist vorhanden."""
+        html = Form(action="/submit", fields=[]).to_html()
+        assert "Absenden" in html
+
+    def test_custom_submit_label(self) -> None:
+        """Benutzerdefiniertes Submit-Label wird verwendet."""
+        html = Form(
+            action="/submit", fields=[], submit_label="Speichern"
+        ).to_html()
+        assert "Speichern" in html
+
+    def test_errors_passed_to_matching_field(self) -> None:
+        """Fehler werden an passende Felder weitergegeben."""
+        form_component = Form(
+            action="/submit",
+            fields=[SelectField(name="role", options=[])],
+            errors={"role": "Pflichtfeld"},
+        )
+        assert "Pflichtfeld" in form_component.to_html()
+
+    def test_hx_post_renders_hx_post_attr(self) -> None:
+        """hx-post wird gerendert wenn gesetzt."""
+        form_component = Form(
+            action="/submit",
+            fields=[],
+            hx_post="/submit",
+        )
+        assert 'hx-post="/submit"' in form_component.to_html()
+
+    def test_method_default_is_post(self) -> None:
+        """Standard-Method ist post."""
+        html = Form(action="/submit", fields=[]).to_html()
+        assert 'method="post"' in html

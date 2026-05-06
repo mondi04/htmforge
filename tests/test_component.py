@@ -88,6 +88,10 @@ class TestComponentRendering:
         expected = '<div class="card"><p>Hallo</p><p>Welt</p></div>'
         assert card.to_html() == expected
 
+    def test_to_fragment_equals_to_html(self) -> None:
+        card = GreetingCard(title="Test")
+        assert card.to_fragment() == card.to_html()
+
     def test_repr_shows_class_name_and_non_default_props(self) -> None:
         card = GreetingCard(title="Hi")
         r = repr(card)
@@ -264,3 +268,65 @@ class TestPublicExports:
         """Das Root-Package exportiert ``Component`` und ``Element``."""
         assert PublicComponent is Component
         assert PublicElement is Element
+
+    def test_render_function_works_with_component(self) -> None:
+        from htmforge import render
+
+        card = GreetingCard(title="Hi")
+        assert render(card) == card.to_html()
+
+    def test_render_function_works_with_element(self) -> None:
+        from htmforge import render
+        from htmforge.elements import div
+
+        assert render(div("x")) == "<div>x</div>"
+
+
+class TestComponentClone:
+    """Tests fuer ``Component.clone``."""
+
+    def test_clone_changes_specified_field(self) -> None:
+        card = GreetingCard(title="Hi", body="World")
+        card2 = card.clone(title="Hello")
+        assert card2.title == "Hello"
+        assert card2.body == "World"
+
+    def test_clone_returns_new_instance(self) -> None:
+        card = GreetingCard(title="Hi")
+        card2 = card.clone(title="Hi")
+        assert card is not card2
+
+    def test_clone_original_unchanged(self) -> None:
+        card = GreetingCard(title="Original")
+        card.clone(title="Changed")
+        assert card.title == "Original"
+
+    def test_clone_invalid_override_raises(self) -> None:
+        card = GreetingCard(title="Hi")
+        with pytest.raises(ValidationError):
+            card.clone(title=123)  # type: ignore[arg-type]
+
+
+class TestWhenHelper:
+    """Tests fuer die ``when``-Hilfsfunktion."""
+
+    def test_when_true_returns_element(self) -> None:
+        from htmforge import when
+        from htmforge.elements import span
+
+        el = span("x")
+        assert when(True, el) is el
+
+    def test_when_false_returns_none(self) -> None:
+        from htmforge import when
+        from htmforge.elements import span
+
+        assert when(False, span("x")) is None
+
+    def test_when_used_in_render(self) -> None:
+        from htmforge import when
+        from htmforge.elements import div, span
+
+        result = div(when(True, span("yes")), when(False, span("no")))
+        assert "yes" in result.to_html()
+        assert "no" not in result.to_html()

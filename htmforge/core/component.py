@@ -125,6 +125,43 @@ class Component(BaseModel, ABC):
         """
         return self.render().to_html()
 
+    def clone(self, **overrides: Any) -> Component:  # noqa: ANN401
+        """Gibt eine neue Instanz mit geaenderten Props zurueck.
+
+        Args:
+            **overrides: Felder die ueberschrieben werden sollen.
+
+        Returns:
+            Eine neue Instanz desselben Typs mit den geaenderten Werten.
+
+        Example:
+            >>> card = GreetingCard(title="Hi", body="World")
+            >>> card2 = card.clone(title="Hello")
+            >>> card2.title
+            'Hello'
+            >>> card2.body
+            'World'
+        """
+        data = self.model_dump()
+        data.update(overrides)
+        return type(self)(**data)
+
+    def to_fragment(self) -> str:
+        """Rendert die Komponente als HTMX-Fragment (identisch mit to_html()).
+
+        Explizite Methode fuer Fragmente um die Absicht zu dokumentieren:
+        dieser Endpunkt liefert kein vollstaendiges Dokument, sondern nur
+        einen HTML-Ausschnitt fuer HTMX-Swaps.
+
+        Returns:
+            Den HTML-String der Komponente ohne DOCTYPE.
+
+        Example:
+            >>> Alert(message="OK").to_fragment()
+            '<div class="alert alert-info">OK</div>'
+        """
+        return self.to_html()
+
     def htmx_attrs(self) -> dict[str, object]:
         """Gibt alle gesetzten HTMX-Props als Attribut-Dict zurueck.
 

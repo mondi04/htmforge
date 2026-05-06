@@ -1,30 +1,112 @@
-# Quickstart — 5 minute walkthrough
+﻿# Quickstart — 5 minute walkthrough
 
-1. Create a Component with typed props
+## 1. Create a Component
 
-```python
+`python
 from htmforge import Component
 from htmforge.elements import div, p
 
 class Greeting(Component):
     name: str
+    
     def render(self):
-        return div(p(f"Hello {self.name}"))
+        return div(p(f'Hello {self.name}!'), cls='greeting')
 
-print(Greeting(name="Ada").to_html())
-```
+print(Greeting(name='Ada').to_html())
+# Output: <div class="greeting"><p>Hello Ada!</p></div>
+`
 
-2. Use element factories inside `render()` (see above)
+## 2. Use Element factories
 
-3. Add HTMX attributes via typed enums or strings
-
-```python
-from htmforge.elements import button
+`python
+from htmforge.elements import button, input
 from htmforge.htmx import HxSwap
 
-btn = button("Load", hx_get="/frag", hx_swap=HxSwap.INNER_HTML)
-```
+btn = button(
+    'Load',
+    hx_get='/content',
+    hx_swap=HxSwap.INNER_HTML,
+)
 
-4. Render to HTML string: `component.to_html()`
+search = input(
+    type='search',
+    name='q',
+    hx_get='/search',
+    hx_trigger='keyup delay:300ms',
+    placeholder='Search users...',
+)
+`
 
-5. Wire into Flask (example in docs/examples/flask.md)
+## 3. Use pre-built Components (v0.3.0)
+
+`python
+from htmforge.components import (
+    Alert, AlertVariant,
+    DataTable, ColumnDef,
+    Form, SelectField,
+    Toast, ToastVariant,
+    Spinner, SpinnerSize,
+)
+
+# Alert
+alert = Alert(
+    variant=AlertVariant.SUCCESS,
+    content='Data saved!',
+    dismissible=True,
+)
+
+# DataTable with sortable headers
+table = DataTable(
+    columns=[
+        ColumnDef(key='name', label='Name', sortable=True),
+        ColumnDef(key='email', label='Email', sortable=False),
+    ],
+    dict_rows=[
+        {'name': 'Ada Lovelace', 'email': 'ada@example.com'},
+        {'name': 'Grace Hopper', 'email': 'grace@example.com'},
+    ],
+    sort_url='/users?sort={col}&dir={dir}',
+)
+
+# Form with auto-error injection
+form = Form(
+    action='/contact',
+    method='post',
+    fields=[
+        SelectField(
+            name='subject',
+            options=[('bug', 'Bug Report'), ('feature', 'Feature Request')],
+        ),
+    ],
+    errors={'subject': 'Please select a subject'},  # Auto-binds to field
+)
+
+# Toast notification
+toast = Toast(
+    variant=ToastVariant.INFO,
+    content='Page refreshed',
+    duration_ms=3000,
+)
+
+# Loading spinner
+spinner = Spinner(size=SpinnerSize.MD)
+`
+
+## 4. Render to HTML
+
+`python
+# Direct string
+html = greeting.to_html()
+
+# Framework adapters
+flask_response = greeting.to_flask()
+fastapi_response = greeting.to_fastapi()
+django_response = greeting.to_django()
+`
+
+## 5. Next Steps
+
+- See [Installation](installation.md) for setup
+- Read [Concepts](concepts.md) for architecture details
+- View [Components](../api/components.md) for full API reference
+- Check [Framework examples](../examples/) for FastAPI, Flask, Django

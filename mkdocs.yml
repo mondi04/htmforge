@@ -1,6 +1,6 @@
-site_name: htmforge
+﻿site_name: htmforge
 site_description: >-
-  Type-safe, composable UI components for Python —
+  Type-safe, composable UI components for Python â€”
   server-side rendered, HTMX-first, framework-agnostic.
 site_url: https://mondi04.github.io/htmforge/
 repo_url: https://github.com/mondi04/htmforge
@@ -62,6 +62,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Release Notes (v0.3.0): release-v0.3.0.md
   - Getting Started:
     - Installation: getting-started/installation.md
     - Quickstart: getting-started/quickstart.md
@@ -95,3 +96,4 @@ nav:
     - Django: examples/django.md
   - Changelog: changelog.md
   - Contributing: contributing.md
+

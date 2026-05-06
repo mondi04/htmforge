@@ -209,6 +209,26 @@ class TestElementFactories:
         assert "<form>" in form_html
 
 
+class TestElementEquality:
+    """Tests fuer ``Element``-Vergleich und Hashing."""
+
+    def test_equal_elements(self) -> None:
+        assert div("a") == div("a")
+
+    def test_unequal_elements(self) -> None:
+        assert div("a") != div("b")
+
+    def test_equal_with_attrs(self) -> None:
+        assert div("x", cls="foo") == div("x", cls="foo")
+
+    def test_not_equal_to_non_element(self) -> None:
+        assert div("a") != "<div>a</div>"
+
+    def test_element_usable_as_dict_key(self) -> None:
+        d = {div("x"): 1}
+        assert d[div("x")] == 1
+
+
 class TestNewElementFactories:
     """Tests fuer die neuen Element-Factories aus Block D / v0.2.0."""
 

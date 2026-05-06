@@ -4,6 +4,69 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-05-06
+
+### Block F — DataTable Enhancements
+- `ColumnDef` class: Structured column definition (key, label, sortable, width)
+- `dict_rows` support: Render from list[dict[str, str]] (backward-compatible with list[list[str]])
+- Sortable headers: ColumnDef.sortable renders hx-get links with sort/direction parameters
+- Sort tracking: sort_url, current_sort, sort_dir fields for sort direction flip logic
+- Full API stability: No breaking changes to existing DataTable usage
+
+### Block G — New Components (5)
+- `Spinner`: Accessible loading indicator with SpinnerSize enum (SM/MD/LG), role/aria-label
+- `Tabs`: Tab navigation with HTMX lazy-load per inactive tab, active state tracking
+- `Toast`: Timed notifications with ToastVariant enum, hx-swap-oob, auto-dismiss duration
+- `Accordion`: Collapsible sections using `<details>`/`<summary>`, open_index control
+- `Dropdown`: Trigger button with dropdown menu items, optional HTMX toggle URL
+- **25 component tests** covering render logic, HTMX attributes, edge cases
+
+### Block H — Forms System (5 Components)
+- `SelectField`: Dropdown select with typed options list, optional label
+- `CheckboxField`: Single checkbox with inline label and error display
+- `RadioGroup`: Fieldset with multiple radio inputs, legend, error support
+- `FormGroup`: Layout container for multiple fields with optional legend
+- `Form`: Main form wrapper with auto-error injection pattern and HTMX submit
+  - Auto-error injection: Matches field names to errors dict, clones field with error boundary
+  - HTMX integration: Optional hx_post, hx_target, hx_swap for progressive enhancement
+- **22 form tests** covering form structure, error injection, HTMX attributes
+
+### Block I — API Extensions
+- `Element.__eq__` and `__hash__`: Compare rendered HTML for equality, enable deduplication
+- `Component.clone(**overrides)`: Create new instance with changed properties
+- `Component.to_fragment()`: Explicit HTMX fragment rendering method
+- `htmforge.render()`: Top-level convenience function for Element/Component rendering
+- `htmforge.when()`: Conditional rendering helper (returns Element or None)
+
+### Block J — Testing Infrastructure
+- **tests/test_framework_adapters.py** (14 tests):
+  - FastAPI adapter: 3 tests for to_fastapi() HTMLResponse integration
+  - Flask adapter: 6 tests for to_flask() Response with content-type
+  - Django adapter: 5 tests (auto-skipped if not installed)
+  - Error handling: ImportError tests for missing framework imports
+- **tests/test_snapshots.py** (21 tests):
+  - Regression detection via HTML snapshots
+  - Auto-create snapshots in tests/snapshots/ on first run
+  - Compare rendered HTML against stored snapshots on subsequent runs
+  - Full component coverage: all 20+ components
+- **tests/test_performance.py** (5 benchmarks):
+  - Element rendering: 1000 iterations <1 second
+  - Nested elements (ul/li): 1000 iterations <1 second
+  - DataTable (10 rows): 1000 renders <2 seconds
+  - Alert rendering: 1000 renders <1 second
+  - render() helper: 1000 calls <1 second
+- **tests/snapshots/ directory**: Machine-generated HTML snapshots (added to .gitignore)
+
+### Quality & Testing
+- **238 tests passing** + 5 skipped (Django optional dependency)
+- **mypy --strict**: All 22 source files clean, 0 errors
+- **ruff**: Lint and format checks passing
+- **Full backwards compatibility**: All v0.2.x APIs continue working
+- Type checking: mypy strict mode, 22 source files
+- Linting: ruff checks pass, 22 files formatted
+- Documentation: Full API reference for new components
+- Component organization: Clear categorization in README (Layout, Data Display, Navigation, Forms)
+
 ## [0.2.1] - 2026-04-29
 
 ### Fixed
