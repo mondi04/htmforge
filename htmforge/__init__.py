@@ -71,4 +71,4 @@ __all__ = ["Component", "Element", "render", "when"]
 try:
     __version__ = _version("htmforge")
 except PackageNotFoundError:
-    __version__ = "0.3.0"
+    __version__ = "0.3.1"

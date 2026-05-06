@@ -1,4 +1,5 @@
-<!-- badges -->
+# htmforge
+
 [![PyPI version](https://img.shields.io/pypi/v/htmforge.svg)](https://pypi.org/project/htmforge/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT + Commons Clause](https://img.shields.io/badge/License-MIT%20%2B%20Commons%20Clause-blue.svg)](https://github.com/mondi04/htmforge/blob/main/LICENSE)
@@ -6,20 +7,32 @@
 [![CI](https://github.com/mondi04/htmforge/actions/workflows/ci.yml/badge.svg)](https://github.com/mondi04/htmforge/actions/workflows/ci.yml)
 [![Docs](https://img.shields.io/badge/docs-mondi04.github.io%2Fhtmforge-orange.svg)](https://mondi04.github.io/htmforge/)
 
-# htmforge
+**Type-safe, composable HTML components for Python — server-side rendered, HTMX-first, framework-agnostic.**
 
-Type-safe, composable UI components for Python. Server-side rendered,
-HTMX-first, framework-agnostic.
+Build HTML entirely in Python. No templates, no string formatting, no XSS surprises.
+Validated props via Pydantic, typed HTMX attributes, and direct adapters for FastAPI, Flask, and Django.
+
+---
 
 ## Why htmforge?
 
-- **Type-safe props** via Pydantic v2: props are validated on construction and on assignment.
-- **Small Element primitives** with safe rendering: `Element.to_html()` escapes text and maps Python attrs to HTML (e.g. `cls`→`class`).
-- **First-class HTMX support**: typed enums and helpers for `hx-*` attrs.
-- **Framework adapters**: `to_fastapi()`, `to_flask()`, `to_django()` on components for easy integration.
-- **Auto-error injection**: Forms automatically bind validation errors to fields via the Form.errors dict.
-- **20+ pre-built components**: Alerts, DataTables, Modals, Forms, Spinners, Tabs, Toasts, and more.
-- **Backward compatible**: Extend without breaking existing v0.2.x code.
+```python
+# ❌ Before — string templates, no type safety, easy to get wrong
+html = f'<div class="alert {variant}"><p>{message}</p></div>'
+
+# ✅ After — validated props, typed attributes, XSS-safe by default
+Alert(variant=AlertVariant.SUCCESS, content=message).to_html()
+```
+
+- **Type-safe props** via Pydantic v2 — validated on construction *and* assignment
+- **XSS protection** built-in — `markupsafe` escapes all text content automatically
+- **HTMX-native** — typed enums for every `hx-*` attribute, no string guessing
+- **20+ pre-built components** — Alerts, DataTables, Forms, Modals, Spinners, Tabs, and more
+- **Framework adapters** — `to_fastapi()`, `to_flask()`, `to_django()` out of the box
+- **2 dependencies** — only `pydantic` and `markupsafe`; FastAPI/Flask/Django are optional
+- **py.typed** — full inline type stubs, works perfectly with mypy strict and pyright
+
+---
 
 ## Installation
 
@@ -27,189 +40,283 @@ HTMX-first, framework-agnostic.
 pip install htmforge
 ```
 
-## Quickstart (Flask)
+Requires Python 3.11+. No extra dependencies for core usage.
 
-Copy-pasteable minimal Flask example using a `Page` and a `DataTable`.
+---
 
-```python
-from flask import Flask
-
-from htmforge.components.page import Page
-from htmforge.components import DataTable
-from htmforge.core.element import Element
-from htmforge.elements import div, h1
-
-app = Flask(__name__)
-
-class UsersPage(Page):
-    users: list[list[str]]
-
-    def _body_content(self) -> list[Element | str | None]:
-        return [
-            div(
-                h1("Users"),
-                DataTable(headers=["Name", "Email"], rows=self.users),
-            )
-        ]
-
-@app.route("/users")
-def users():
-    rows = [["Ada Lovelace", "ada@example.com"]]
-    return UsersPage(title="Users", users=rows).to_flask()
-
-if __name__ == "__main__":
-    app.run(debug=True)
-```
-
-## Elements
-
-`htmforge.elements` exposes small factory functions for HTML tags. These
-map Pythonic attribute names to HTML and escape text safely. Example:
+## 60-second example
 
 ```python
-from htmforge.elements import div, span, input
+from htmforge import Component
+from htmforge.elements import div, h1, p
 
-el = div(
-    span("Name:"),
-    input(type="search", name="q", hx_get="/search", cls="search"),
-    cls="form-row",
-)
-print(el.to_html())
+class UserCard(Component):
+    name: str
+    email: str
+
+    def render(self):
+        return div(
+            h1(self.name),
+            p(self.email, cls="text-muted"),
+            cls="card",
+        )
+
+print(UserCard(name="Ada Lovelace", email="ada@example.com").to_html())
+# <div class="card"><h1>Ada Lovelace</h1><p class="text-muted">ada@example.com</p></div>
 ```
 
-The `hx_get` argument renders as `hx-get`, and text is escaped by
-default to prevent XSS.
+---
 
-## Components
+## Pre-built Components
+
+htmforge ships with 20+ production-ready components, all with typed props and HTMX support.
 
 ### Layout & Structure
-| Component   | Description                                      | Import |
-|-------------|--------------------------------------------------|--------|
-| Page        | Abstract full-page component (adds DOCTYPE)      | `from htmforge.components.page import Page` |
+
+| Component | Description | Import |
+|-----------|-------------|--------|
+| `Page` | Abstract full-page component — emits `<!DOCTYPE html>` | `from htmforge.components.page import Page` |
 
 ### Data Display
-| Component   | Description                                      | Import |
-|-------------|--------------------------------------------------|--------|
-| Alert       | Dismissible info/success/warning/error box       | `from htmforge.components import Alert` |
-| Badge       | Small inline label with variant classes          | `from htmforge.components import Badge` |
-| Breadcrumb  | Ordered nav with `aria-current` for current item | `from htmforge.components import Breadcrumb` |
-| DataTable   | Table with dict/list rows, optional HTMX reload, sortable headers | `from htmforge.components import DataTable, ColumnDef` |
-| Pagination  | Page links + prev/next, supports HTMX targets    | `from htmforge.components import Pagination` |
-| Toast       | Timed notifications with OOB swap support        | `from htmforge.components import Toast` |
+
+| Component | Description | Import |
+|-----------|-------------|--------|
+| `Alert` | Info / success / warning / error box, dismissible | `from htmforge.components import Alert` |
+| `Badge` | Small inline label with variant colors | `from htmforge.components import Badge` |
+| `Breadcrumb` | Ordered nav with `aria-current` for active item | `from htmforge.components import Breadcrumb` |
+| `DataTable` | List/dict rows, sortable headers, HTMX reload | `from htmforge.components import DataTable, ColumnDef` |
+| `Pagination` | Previous/Next + numbered page links, HTMX target | `from htmforge.components import Pagination` |
+| `Toast` | Timed notifications with OOB swap support | `from htmforge.components import Toast` |
 
 ### Navigation & Interaction
-| Component   | Description                                      | Import |
-|-------------|--------------------------------------------------|--------|
-| Accordion   | Collapsible sections using `<details>`/`<summary>` | `from htmforge.components import Accordion` |
-| Dropdown    | Trigger button with dropdown menu items         | `from htmforge.components import Dropdown` |
-| Modal       | Trigger button + `<dialog>` overlay (HTMX body)  | `from htmforge.components import Modal` |
-| SearchInput | Search input with `keyup` debounce via HTMX      | `from htmforge.components import SearchInput` |
-| Spinner     | Accessible loading indicator (SM/MD/LG sizes)   | `from htmforge.components import Spinner, SpinnerSize` |
-| Tabs        | Tab navigation with HTMX lazy-load              | `from htmforge.components import Tabs` |
+
+| Component | Description | Import |
+|-----------|-------------|--------|
+| `Accordion` | Collapsible sections using `<details>`/`<summary>` | `from htmforge.components import Accordion` |
+| `Dropdown` | Trigger button with HTMX-toggled menu | `from htmforge.components import Dropdown` |
+| `Modal` | Trigger button + `<dialog>` overlay, HTMX-loaded body | `from htmforge.components import Modal` |
+| `SearchInput` | Text input with `keyup` debounce via HTMX | `from htmforge.components import SearchInput` |
+| `Spinner` | Accessible loading indicator (SM / MD / LG) | `from htmforge.components import Spinner, SpinnerSize` |
+| `Tabs` | Tab strip with HTMX lazy-load per inactive tab | `from htmforge.components import Tabs` |
 
 ### Forms & Input
-| Component   | Description                                      | Import |
-|-------------|--------------------------------------------------|--------|
-| FormField   | Label + input + optional error block             | `from htmforge.components import FormField, InputType` |
-| CheckboxField | Single checkbox with label and error display    | `from htmforge.components import CheckboxField` |
-| SelectField | Dropdown select with typed options               | `from htmforge.components import SelectField` |
-| RadioGroup  | Radio button group with legend and error         | `from htmforge.components import RadioGroup` |
-| FormGroup   | Container for multiple form fields               | `from htmforge.components import FormGroup` |
-| Form        | Full form with auto-error injection and HTMX     | `from htmforge.components import Form` |
 
-## HTMX integration
+| Component | Description | Import |
+|-----------|-------------|--------|
+| `Form` | Full form with **auto-error injection** and HTMX submit | `from htmforge.components import Form` |
+| `FormField` | Label + input + optional error block, 8 input types | `from htmforge.components import FormField, InputType` |
+| `CheckboxField` | Single checkbox with label and error display | `from htmforge.components import CheckboxField` |
+| `SelectField` | Dropdown `<select>` with typed options | `from htmforge.components import SelectField` |
+| `RadioGroup` | Radio button group with `<fieldset>` and legend | `from htmforge.components import RadioGroup` |
+| `FormGroup` | Layout container for multiple form fields | `from htmforge.components import FormGroup` |
 
-Typed enums live in `htmforge.htmx`: `HxSwap`, `HxTrigger`, `HxTarget`,
-and `HxPushUrl`. They render the correct attribute values. Example:
+---
+
+## HTMX Integration
+
+Every `hx-*` attribute is a typed enum — no misspelled strings, full IDE autocompletion.
 
 ```python
-from htmforge.elements import button
-from htmforge.htmx import HxSwap, HxTarget
+from htmforge.elements import button, input
+from htmforge.htmx import HxSwap, HxTarget, hx_keyup_delay
 
+# Delete button with confirmation
 btn = button(
     "Delete",
     hx_delete="/items/1",
     hx_swap=HxSwap.OUTER_HTML,
     hx_target=HxTarget.CLOSEST_TR,
+    hx_confirm="Really delete this item?",
+)
+# → <button hx-delete="/items/1" hx-swap="outerHTML"
+#           hx-target="closest tr" hx-confirm="Really delete this item?">Delete</button>
+
+# Debounced search input
+search = input(
+    type="search",
+    name="q",
+    hx_get="/search",
+    hx_trigger=hx_keyup_delay(300),   # → "keyup delay:300ms"
+    hx_target="#results",
+    placeholder="Search...",
 )
 ```
 
-Use `hx_keyup_delay(ms)` to produce `keyup delay:{ms}ms` trigger strings
-for debounced search inputs.
+Available enums: `HxSwap`, `HxTrigger`, `HxTarget`, `HxPushUrl`
 
-## Framework support
+---
 
-FastAPI example:
+## Framework Adapters
+
+### FastAPI
 
 ```python
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from htmforge.components.page import Page
+from htmforge.elements import div, h1
 
 app = FastAPI()
 
+class HomePage(Page):
+    def _body_content(self):
+        return [div(h1("Hello from htmforge"))]
+
 @app.get("/", response_class=HTMLResponse)
 def index():
-    return UsersPage(title="Home").to_html()
+    return HomePage(title="Home").to_html()
 ```
 
-Flask example (adapter shown above uses `to_flask()`):
+### Flask
 
 ```python
 from flask import Flask
+from htmforge.components.page import Page
+from htmforge.elements import div, h1
 
 app = Flask(__name__)
 
+class HomePage(Page):
+    def _body_content(self):
+        return [div(h1("Hello from htmforge"))]
+
 @app.route("/")
 def index():
-    return UsersPage(title="Home").to_flask()
+    return HomePage(title="Home").to_flask()  # Returns Flask Response directly
 ```
 
-Django example:
+### Django
 
 ```python
+from htmforge.components.page import Page
+from htmforge.elements import div, h1
+
+class HomePage(Page):
+    def _body_content(self):
+        return [div(h1("Hello from htmforge"))]
+
 def index(request):
-    return UsersPage(title="Home").to_django()
+    return HomePage(title="Home").to_django()  # Returns HttpResponse directly
 ```
 
-## Testing
+---
 
-htmforge is fully tested with comprehensive coverage:
+## Form with Validation Errors
 
-- **Unit tests**: 238 tests passing (+ 5 skipped for optional Django dependency)
-  - Component tests: Render logic, HTMX attributes, edge cases
-  - Element tests: Attribute mapping, escaping, void elements
-  - Framework adapters: FastAPI, Flask, Django with auto-skip for missing dependencies
-- **Snapshot tests** (21): Regression detection via HTML snapshots
-  - Auto-created in tests/snapshots/ on first run
-  - Compare rendered HTML on subsequent runs
-  - Full coverage of all 20+ components
-- **Performance benchmarks** (5): Ensure rendering stays fast
-  - Element rendering: 1000 iterations <1s
-  - Nested elements: 1000 iterations <1s
-  - DataTable (10 rows): 1000 renders <2s
-  - Alert component: 1000 renders <1s
-  - render() helper: 1000 calls <1s
+The `Form` component automatically routes validation errors to the matching field by name:
 
-Run tests:
+```python
+from htmforge.components import Form, FormField, InputType
+
+form = Form(
+    action="/register",
+    fields=[
+        FormField(name="username", label_text="Username", input_type=InputType.TEXT),
+        FormField(name="email",    label_text="Email",    input_type=InputType.EMAIL),
+    ],
+    errors={
+        "email": "This email is already registered.",
+    },
+    submit_label="Create Account",
+)
+# The email field automatically renders its error block — no manual wiring needed.
+```
+
+---
+
+## Elements
+
+`htmforge.elements` provides factory functions for all 80+ HTML5 elements. Python attribute names are mapped automatically:
+
+| Python | HTML output |
+|--------|-------------|
+| `cls="btn"` | `class="btn"` |
+| `hx_get="/url"` | `hx-get="/url"` |
+| `data_id="1"` | `data-id="1"` |
+| `required=True` | `required` (boolean flag) |
+| `disabled=False` | *(omitted)* |
+
+```python
+from htmforge.elements import form, input, button, label
+
+el = form(
+    label("Search", for_="q"),
+    input(id="q", type="search", name="q", hx_get="/search", hx_target="#results"),
+    button("Go", type="submit"),
+    cls="search-form",
+    hx_boost="true",
+)
+```
+
+All text content is escaped by `markupsafe` — safe by default, opt-out with `safe_html()` or `raw()` for trusted content.
+
+---
+
+## API Helpers
+
+```python
+from htmforge import render, when
+from htmforge.elements import div, p
+
+# render() — top-level convenience, works on Element or Component
+html: str = render(div(p("Hello")))
+
+# when() — conditional rendering, returns element or None
+content = when(user.is_admin, admin_panel)
+```
+
+`Component.clone(**overrides)` creates a new instance with changed props without mutating the original:
+
+```python
+base = Alert(variant=AlertVariant.INFO, content="Default message")
+success = base.clone(variant=AlertVariant.SUCCESS, content="Saved!")
+```
+
+---
+
+## Quality & Testing
+
+htmforge is built for production:
+
+```
+238 tests passing  ·  mypy --strict clean  ·  ruff lint + format clean  ·  CI on Python 3.11 / 3.12 / 3.13
+```
+
+- **Unit tests** — render logic, HTMX attributes, edge cases for all components
+- **Snapshot tests** (21) — HTML regression detection, auto-generated on first run
+- **Performance benchmarks** — 1 000 renders of elements <1s, DataTable <2s
+- **Framework adapter tests** — FastAPI, Flask, Django with graceful skip if not installed
 
 ```bash
-pytest                         # All tests
-pytest -v                      # Verbose output
-mypy htmforge/ --strict        # Type check (strict mode, 22 files)
-ruff check htmforge/           # Lint
-ruff format --check htmforge/  # Format check
+pytest                          # all tests
+pytest -v                       # verbose
+mypy htmforge/ --strict         # type check
+ruff check htmforge/            # lint
+ruff format --check htmforge/   # format check
 ```
+
+---
+
+## What htmforge is not
+
+- **Not a new framework** — sits on top of FastAPI, Flask, or Django
+- **Not a JavaScript replacement** — uses HTMX, not a SPA approach
+- **Not a template language** — pure Python classes and functions
+- **Not a backend layer** — no auth, no ORM, no routing
+
+---
 
 ## License
 
-This project is licensed under the MIT License with the Commons Clause
-condition. It is free for personal projects, open source projects, and
-small businesses (see `LICENSE`). Organizations with annual revenue or
-funding over USD 1,000,000 or more than 100 employees require a
-separate commercial license from the author.
+MIT License with the [Commons Clause](https://commonsclause.com/) condition.
+
+Free for personal projects, open-source projects, and small businesses.
+Organizations with **annual revenue or funding over USD 1 000 000** or **more than 100 employees** require a separate commercial license — contact the author.
+
+See [`LICENSE`](LICENSE) for the full text.
+
+---
 
 ## Contributing
 
-See `CONTRIBUTING.md` and the docs site at
-https://mondi04.github.io/htmforge/contributing/ for contribution guidelines.
-
+Contributions are welcome! Read [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup instructions, coding standards, and the commit convention. The full docs are at [mondi04.github.io/htmforge](https://mondi04.github.io/htmforge/).
