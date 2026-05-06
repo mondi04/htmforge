@@ -581,6 +581,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Concepts
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -597,6 +615,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#layer-1-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 1: Element
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-2-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 2: Component
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-3-ready-made-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 3: Ready-made components
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1572,6 +1642,47 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#layer-1-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 1: Element
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-2-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 2: Component
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-3-ready-made-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 3: Ready-made components
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1592,29 +1703,53 @@
 
 <h1 id="core-concepts">Core Concepts</h1>
 <p>htmforge is built in three layers:</p>
-<ul>
-<li>Layer 1: Element</li>
-<li><code>Element</code> represents a single HTML tag and implements <code>to_html()</code>.</li>
-<li>Attribute mapping rules: <code>cls</code> → <code>class</code>, <code>for_</code> → <code>for</code>, <code>hx_get</code> → <code>hx-get</code>.</li>
-<li>
-<p>Boolean <code>True</code> renders as a flag, <code>None</code>/<code>False</code> are omitted.</p>
-</li>
-<li>
-<p>Layer 2: Component</p>
-</li>
-<li><code>Component</code> is a <code>pydantic.BaseModel</code> with an abstract <code>render()</code>.</li>
-<li><code>to_html()</code> delegates to <code>render()</code> and returns the full HTML string.</li>
-<li>
-<p><code>htmx_attrs()</code> collects only set <code>hx_*</code> properties and serializes dicts.</p>
-</li>
-<li>
-<p>Layer 3: Ready-made components</p>
-</li>
-<li>Reusable high-level components (Badge, Breadcrumb, Modal, etc.)</li>
-</ul>
+<h2 id="layer-1-element">Layer 1: Element</h2>
+<p><code>Element</code> represents one HTML tag and handles safe HTML rendering.</p>
+<p>Attribute mapping rules:</p>
+<table>
+<thead>
+<tr>
+<th>Python argument</th>
+<th>HTML attribute</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cls="foo"</code></td>
+<td><code>class="foo"</code></td>
+<td><code>cls</code> → <code>class</code></td>
+</tr>
+<tr>
+<td><code>for_="id"</code></td>
+<td><code>for="id"</code></td>
+<td>trailing <code>_</code> stripped</td>
+</tr>
+<tr>
+<td><code>hx_get="/url"</code></td>
+<td><code>hx-get="/url"</code></td>
+<td><code>_</code> → <code>-</code> inside name</td>
+</tr>
+<tr>
+<td><code>disabled=True</code></td>
+<td><code>disabled</code></td>
+<td><code>True</code> → flag only</td>
+</tr>
+<tr>
+<td><code>hidden=False</code></td>
+<td><code>(omitted)</code></td>
+<td><code>False</code>/<code>None</code> → omitted</td>
+</tr>
+</tbody>
+</table>
+<p>Boolean <code>True</code> renders as a flag, while <code>False</code> and <code>None</code> are omitted.</p>
+<h2 id="layer-2-component">Layer 2: Component</h2>
+<p><code>Component</code> is a <code>pydantic.BaseModel</code> with an abstract <code>render()</code> method. <code>to_html()</code> delegates to <code>render()</code>, and <code>htmx_attrs()</code> collects only the set <code>hx_*</code> fields while serializing dict values compactly.</p>
+<h2 id="layer-3-ready-made-components">Layer 3: Ready-made components</h2>
+<p>Reusable high-level components include Alert, Badge, Breadcrumb, DataTable, FormField, Modal, Page, Pagination, and SearchInput.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart TD
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  Element --&gt; Component
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  Component --&gt; Components[Ready-made Components]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  E[&quot;Element\n.to_html()\n.to_str()&quot;] --&gt; C[&quot;Component\n(Pydantic BaseModel)\n.render() → Element\n.to_html()\n.htmx_attrs()&quot;]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  C --&gt; RC[&quot;Ready-made Components\nAlert · Badge · Breadcrumb\nDataTable · FormField · Modal\nPage · Pagination · SearchInput&quot;]
 </code></pre></div>
 
 

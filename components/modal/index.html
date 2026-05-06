@@ -1011,6 +1011,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modal
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1027,6 +1045,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#props" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Props
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendered-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendered HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1572,6 +1631,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#props" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Props
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendered-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendered HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1592,19 +1681,61 @@
 
 <h1 id="modal">Modal</h1>
 <p>Trigger button + dialog overlay. Content is loaded via HTMX into the dialog body.</p>
-<p>Props</p>
-<ul>
-<li><code>modal_id</code> | <code>str</code> | required</li>
-<li><code>trigger_label</code> | <code>str</code> | required</li>
-<li><code>hx_url</code> | <code>str</code> | required — URL to load content from</li>
-<li><code>hx_target</code> | <code>str</code> | optional; overrides default body target</li>
-<li><code>close_label</code> | <code>str</code> | default <code>Schließen</code></li>
-</ul>
-<p>Usage</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Modal</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">Modal</span><span class="p">(</span><span class="n">modal_id</span><span class="o">=</span><span class="s2">&quot;confirm&quot;</span><span class="p">,</span> <span class="n">trigger_label</span><span class="o">=</span><span class="s2">&quot;Open&quot;</span><span class="p">,</span> <span class="n">hx_url</span><span class="o">=</span><span class="s2">&quot;/modal/content&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Modal</span><span class="p">(</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">modal_id</span><span class="o">=</span><span class="s2">&quot;confirm&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">trigger_label</span><span class="o">=</span><span class="s2">&quot;Open&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">hx_url</span><span class="o">=</span><span class="s2">&quot;/modal/content&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">close_label</span><span class="o">=</span><span class="s2">&quot;Close&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
 </code></pre></div>
-<p>Rendered HTML: button with <code>data-modal-target</code> and a <code>&lt;dialog id=...&gt;</code> plus inline script to call <code>showModal()</code> on click.</p>
+<h2 id="props">Props</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>modal_id</code></td>
+<td><code>str</code></td>
+<td>required</td>
+<td>id for the <code>&lt;dialog&gt;</code> and body container</td>
+</tr>
+<tr>
+<td><code>trigger_label</code></td>
+<td><code>str</code></td>
+<td>required</td>
+<td>label on the trigger button</td>
+</tr>
+<tr>
+<td><code>hx_url</code></td>
+<td><code>str</code></td>
+<td>required</td>
+<td>URL loaded into the modal body</td>
+</tr>
+<tr>
+<td><code>hx_target</code></td>
+<td><code>str</code></td>
+<td><code>""</code></td>
+<td>overrides the default body target when set</td>
+</tr>
+<tr>
+<td><code>close_label</code></td>
+<td><code>str</code></td>
+<td><code>Schließen</code></td>
+<td>label for the close button</td>
+</tr>
+</tbody>
+</table>
+<h2 id="rendered-html">Rendered HTML</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal-wrapper&quot;</span><span class="p">&gt;&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">data-modal-target</span><span class="o">=</span><span class="s">&quot;confirm&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal-trigger&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/modal/content&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#confirm-body&quot;</span> <span class="na">hx-swap</span><span class="o">=</span><span class="s">&quot;innerHTML&quot;</span><span class="p">&gt;</span>Open<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;&lt;</span><span class="nt">dialog</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;confirm&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal&quot;</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;confirm-body&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal-body&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;dialog&quot;</span><span class="p">&gt;&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;modal-close&quot;</span><span class="p">&gt;</span>Close<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;&lt;/</span><span class="nt">form</span><span class="p">&gt;&lt;/</span><span class="nt">dialog</span><span class="p">&gt;&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;[data-modal-target]&#39;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">btn</span><span class="p">){</span><span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span><span class="kd">var</span><span class="w"> </span><span class="nx">id</span><span class="o">=</span><span class="nx">btn</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;data-modal-target&#39;</span><span class="p">);</span><span class="kd">var</span><span class="w"> </span><span class="nx">dlg</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span><span class="k">if</span><span class="p">(</span><span class="nx">dlg</span><span class="p">)</span><span class="nx">dlg</span><span class="p">.</span><span class="nx">showModal</span><span class="p">();});});&lt;/</span><span class="nt">script</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
 
 
 

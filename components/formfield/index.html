@@ -983,6 +983,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FormField
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -999,6 +1017,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#props" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Props
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendered-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendered HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1572,6 +1631,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#props" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Props
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendered-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendered HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1592,15 +1681,73 @@
 
 <h1 id="formfield">FormField</h1>
 <p>Label + input + optional error block.</p>
-<p>Props (from <code>htmforge.components.form_field</code>):
-- <code>name</code> | <code>str</code> | required
-- <code>label_text</code> | <code>str</code> | optional
-- <code>input_type</code> | enum <code>InputType</code> | default <code>TEXT</code>
-- <code>required</code> | <code>bool</code> | default <code>False</code>
-- <code>error</code> | <code>str</code> | optional</p>
-<p>Minimal example:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">FormField</span><span class="p">,</span> <span class="n">InputType</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">FormField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="n">label_text</span><span class="o">=</span><span class="s2">&quot;Email&quot;</span><span class="p">,</span> <span class="n">input_type</span><span class="o">=</span><span class="n">InputType</span><span class="o">.</span><span class="n">EMAIL</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">FormField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="n">label_text</span><span class="o">=</span><span class="s2">&quot;Email&quot;</span><span class="p">,</span> <span class="n">input_type</span><span class="o">=</span><span class="n">InputType</span><span class="o">.</span><span class="n">EMAIL</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="props">Props</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>required</td>
+<td>input name attribute</td>
+</tr>
+<tr>
+<td><code>label_text</code></td>
+<td><code>str</code></td>
+<td>required</td>
+<td>text rendered in the label</td>
+</tr>
+<tr>
+<td><code>input_type</code></td>
+<td><code>InputType</code></td>
+<td><code>InputType.TEXT</code></td>
+<td>controls the <code>&lt;input&gt;</code> type</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td><code>str</code></td>
+<td><code>""</code></td>
+<td>current input value</td>
+</tr>
+<tr>
+<td><code>placeholder</code></td>
+<td><code>str</code></td>
+<td><code>""</code></td>
+<td>placeholder text</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>adds <code>required</code> and <code>aria-required</code></td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td><code>str</code></td>
+<td><code>""</code></td>
+<td>renders an error block when set</td>
+</tr>
+<tr>
+<td><code>field_id</code></td>
+<td><code>str</code></td>
+<td><code>""</code></td>
+<td>overrides the generated id</td>
+</tr>
+</tbody>
+</table>
+<h2 id="rendered-html">Rendered HTML</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;email&quot;</span><span class="p">&gt;</span>Email<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;email&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
 
 

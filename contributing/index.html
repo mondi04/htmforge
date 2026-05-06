@@ -1526,24 +1526,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Contributing
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1560,36 +1542,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#running-the-docs-locally" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Running the docs locally
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -1615,25 +1567,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#running-the-docs-locally" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Running the docs locally
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1653,12 +1586,95 @@
 
 
 <h1 id="contributing">Contributing</h1>
-<p>Thanks for considering contributions to htmforge.</p>
-<p>See <code>CONTRIBUTING.md</code> in the repository for contribution guidelines.</p>
+<h1 id="contributing-to-htmforge">Contributing to htmforge</h1>
+<p>Thank you for your interest in contributing!</p>
+<h2 id="setup">Setup</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mondi04/htmforge.git
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>htmforge
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+</code></pre></div>
+<p>Run tests and type checks:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pytest<span class="w">               </span><span class="c1"># run all tests</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>mypy<span class="w"> </span>htmforge/<span class="w">        </span><span class="c1"># strict type check</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>ruff<span class="w"> </span>check<span class="w"> </span>htmforge/<span class="w">  </span><span class="c1"># lint</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>ruff<span class="w"> </span>format<span class="w"> </span>htmforge/<span class="w"> </span><span class="c1"># format</span>
+</code></pre></div>
+<h2 id="workflow">Workflow</h2>
+<ol>
+<li>Fork the repository and create a branch: <code>git checkout -b feat/my-feature</code></li>
+<li>Write your code and add tests — all new public functions need a docstring</li>
+<li>Make sure <code>pytest</code>, <code>mypy htmforge/</code>, and <code>ruff check htmforge/</code> all pass</li>
+<li>Open a pull request against <code>main</code> with a clear description</li>
+</ol>
+<h2 id="coding-standards">Coding Standards</h2>
+<ul>
+<li><strong>Formatting:</strong> <code>ruff format</code> with the project config (88 chars, double quotes)</li>
+<li><strong>Linting:</strong> <code>ruff check</code> must pass with zero warnings</li>
+<li><strong>Types:</strong> <code>mypy --strict</code> must pass; annotate every function signature</li>
+<li><strong>Docstrings:</strong> All public classes and functions require a Google-style docstring</li>
+<li><strong>Tests:</strong> Every new feature needs at least one positive and one edge-case test</li>
+</ul>
+<h2 id="commit-convention">Commit Convention</h2>
+<p>This project uses <a href="https://www.conventionalcommits.org/">Conventional Commits</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>When to use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>feat:</code></td>
+<td>New feature or component</td>
+</tr>
+<tr>
+<td><code>fix:</code></td>
+<td>Bug fix</td>
+</tr>
+<tr>
+<td><code>docs:</code></td>
+<td>Documentation only</td>
+</tr>
+<tr>
+<td><code>test:</code></td>
+<td>Adding or fixing tests</td>
+</tr>
+<tr>
+<td><code>chore:</code></td>
+<td>Build, CI, dependency updates</td>
+</tr>
+<tr>
+<td><code>refactor:</code></td>
+<td>Code change without behavior change</td>
+</tr>
+</tbody>
+</table>
+<p>Examples:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>feat: add Breadcrumb component
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>fix: escape attribute values in _render_attrs
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>docs: add FormField usage example to README
+</code></pre></div></p>
+<h2 id="good-first-issues">Good First Issues</h2>
+<p>If you're new to the project, these are great places to start:</p>
+<h3 id="1-framework-integration-tests">1. Framework integration tests</h3>
+<p>Create <code>tests/test_framework_adapters.py</code> and add tests that check
+<code>to_flask()</code> and <code>to_django()</code> return the correct response types. Use
+<code>pytest.importorskip</code> so the tests skip when Flask or Django are not
+installed.</p>
+<h3 id="2-datatable-typed-rows">2. DataTable typed rows</h3>
+<p>Add an optional <code>dict_rows: list[dict[str, str]]</code> field to
+<code>htmforge/components/table.py</code>. When it is provided, render rows in header
+order using the header keys.</p>
+<h3 id="3-spinner-component">3. Spinner component</h3>
+<p>Create <code>htmforge/components/spinner.py</code> as a loading indicator component with
+size variants (<code>sm</code>/<code>md</code>/<code>lg</code>) rendered as a <code>div</code> with CSS class
+<code>spinner spinner-{size}</code>. Export it from <code>components/__init__.py</code> and add
+tests in <code>tests/test_components.py</code>.</p>
 <h2 id="running-the-docs-locally">Running the docs locally</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[docs]&quot;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>mkdocs<span class="w"> </span>serve
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># open http://127.0.0.1:8000</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[docs]&quot;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>mkdocs<span class="w"> </span>serve
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># open http://127.0.0.1:8000</span>
 </code></pre></div>
 
 

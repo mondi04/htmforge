@@ -871,6 +871,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alert
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -887,6 +905,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#props" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Props
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendered-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendered HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1572,6 +1631,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#props" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Props
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendered-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendered HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1591,26 +1680,51 @@
 
 
 <h1 id="alert">Alert</h1>
-<p>Renders an alert box with optional dismiss button.</p>
+<p>Renders an alert box with an optional dismiss button.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Alert</span><span class="p">,</span> <span class="n">AlertVariant</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Alert</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Saved&quot;</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="n">AlertVariant</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Alert</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Saved&quot;</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="n">AlertVariant</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="n">dismissible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">close_label</span><span class="o">=</span><span class="s2">&quot;Close&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
 </code></pre></div>
-<p>Props</p>
-<ul>
-<li><code>message</code> | <code>str</code> | required — the alert text</li>
-<li><code>variant</code> | <code>AlertVariant</code> | default <code>AlertVariant.INFO</code></li>
-<li><code>dismissible</code> | <code>bool</code> | default <code>False</code></li>
-<li><code>close_label</code> | <code>str</code> | default <code>Schließen</code></li>
-</ul>
-<p>Usage</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Alert</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Saved&quot;</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="n">AlertVariant</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="n">dismissible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+<h2 id="props">Props</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>message</code></td>
+<td><code>str</code></td>
+<td>required</td>
+<td>the alert text</td>
+</tr>
+<tr>
+<td><code>variant</code></td>
+<td><code>AlertVariant</code></td>
+<td><code>AlertVariant.INFO</code></td>
+<td>CSS variant</td>
+</tr>
+<tr>
+<td><code>dismissible</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>adds the close button</td>
+</tr>
+<tr>
+<td><code>close_label</code></td>
+<td><code>str</code></td>
+<td><code>Schließen</code></td>
+<td><code>aria-label</code> for the close button</td>
+</tr>
+</tbody>
+</table>
+<h2 id="rendered-html">Rendered HTML</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-success&quot;</span><span class="p">&gt;</span>Saved<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert-close&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Close&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;this.closest(&amp;#39;.alert&amp;#39;).remove()&quot;</span><span class="p">&gt;</span>×<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
-<p>Rendered HTML (example):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-success&quot;</span><span class="p">&gt;</span>Saved<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert-close&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Schließen&quot;</span><span class="p">&gt;</span>×<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div>
-<p>HTMX: none specific.</p>
-<p>Edge cases: when <code>dismissible=False</code> no close button is rendered.</p>
 
 
 

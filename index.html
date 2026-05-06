@@ -523,10 +523,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#component-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Features
+        Component overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you get
       
     </span>
   </a>
@@ -1688,10 +1699,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#component-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Features
+        Component overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you get
       
     </span>
   </a>
@@ -1719,40 +1741,107 @@
 
 
 <h1 id="htmforge">htmforge</h1>
-<p>Type-safe, composable UI components for Python — server-side rendered, HTMX-first.</p>
+<p>Type-safe, composable UI components for Python that render server-side and play well with HTMX.</p>
 <h2 id="why-htmforge">Why htmforge?</h2>
 <ul>
-<li>Type-safe props and validation via Pydantic v2.</li>
-<li>Small, composable Element primitives with automatic XSS protection.</li>
-<li>HTMX-first integration with typed enums and helpers.</li>
-<li>Framework adapters for FastAPI, Flask, and Django.</li>
+<li><code>cls="container"</code> → <code>class="container"</code> automatically, so you can keep Pythonic names without losing HTML output.</li>
+<li><code>for_="email"</code> → <code>for="email"</code>, while <code>disabled=True</code> renders as a flag and <code>hidden=False</code> disappears entirely.</li>
+<li><code>hx_get="/search"</code> and <code>hx_trigger=HxTrigger.KEYUP</code> stay typed, so HTMX attributes are assembled without string juggling.</li>
+<li><code>Component(...).to_html()</code> gives you safe HTML, and the same component can be adapted with <code>to_fastapi()</code>, <code>to_flask()</code>, or <code>to_django()</code>.</li>
 </ul>
 <h2 id="quick-install">Quick install</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>htmforge
 </code></pre></div>
-<p>Verify:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">htmforge</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">htmforge</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-</code></pre></div>
 <h2 id="minimal-example">Minimal example</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.elements</span><span class="w"> </span><span class="kn">import</span> <span class="n">div</span><span class="p">,</span> <span class="n">p</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Hello</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">Hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;World&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
+</code></pre></div>
+<h2 id="component-overview">Component overview</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Description</th>
+<th>Import</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alert</td>
+<td>Dismissible info/success/warning/error box</td>
+<td><code>from htmforge.components import Alert</code></td>
+</tr>
+<tr>
+<td>Badge</td>
+<td>Small inline label with variant classes</td>
+<td><code>from htmforge.components import Badge</code></td>
+</tr>
+<tr>
+<td>Breadcrumb</td>
+<td>Ordered nav with <code>aria-current</code> for current item</td>
+<td><code>from htmforge.components import Breadcrumb</code></td>
+</tr>
+<tr>
+<td>DataTable</td>
+<td>Table with optional HTMX reloading</td>
+<td><code>from htmforge.components import DataTable</code></td>
+</tr>
+<tr>
+<td>FormField</td>
+<td>Label + input + optional error block</td>
+<td><code>from htmforge.components import FormField</code></td>
+</tr>
+<tr>
+<td>Modal</td>
+<td>Trigger button + <code>&lt;dialog&gt;</code> overlay (HTMX body)</td>
+<td><code>from htmforge.components import Modal</code></td>
+</tr>
+<tr>
+<td>Page</td>
+<td>Abstract full-page component (adds DOCTYPE)</td>
+<td><code>from htmforge.components.page import Page</code></td>
+</tr>
+<tr>
+<td>Pagination</td>
+<td>Page links + prev/next, supports HTMX targets</td>
+<td><code>from htmforge.components import Pagination</code></td>
+</tr>
+<tr>
+<td>SearchInput</td>
+<td>Search input with <code>keyup</code> debounce via HTMX</td>
+<td><code>from htmforge.components import SearchInput</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-you-get">What you get</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.elements</span><span class="w"> </span><span class="kn">import</span> <span class="n">div</span><span class="p">,</span> <span class="n">p</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Hello</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">Hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;World&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Card</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">body</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="k">return</span> <span class="n">div</span><span class="p">(</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            <span class="n">p</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">),</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>            <span class="n">p</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">),</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>            <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;card&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="p">)</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">Card</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Ada&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;Build once, render anywhere&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </code></pre></div>
-<h2 id="features">Features</h2>
-<ul>
-<li>Elements</li>
-<li>Components</li>
-<li>HTMX integrations</li>
-<li>Framework adapters</li>
-</ul>
-<p>Continue: Getting Started → Quickstart</p>
+<!-- output -->
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card&quot;</span><span class="p">&gt;&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Ada<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Build once, render anywhere<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Continue: <a href="getting-started/quickstart/">Getting Started → Quickstart</a></p>
 
 
 

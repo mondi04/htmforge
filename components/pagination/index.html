@@ -1067,6 +1067,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagination
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1083,6 +1101,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#props" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Props
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendered-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendered HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1572,6 +1631,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#props" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Props
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendered-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendered HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1592,12 +1681,50 @@
 
 <h1 id="pagination">Pagination</h1>
 <p>Pagination shows previous/next and page numbers. Supports HTMX via <code>hx_url</code> and <code>hx_target</code> props.</p>
-<p>Props (from source):
-- <code>current_page</code> | int
-- <code>total_pages</code> | int
-- <code>hx_url</code> | str | optional
-- <code>hx_target</code> | str | optional</p>
-<p>Edge cases: when <code>total_pages &lt;= 1</code> minimal markup is produced.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pagination</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Pagination</span><span class="p">(</span><span class="n">current_page</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">total_pages</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hx_url</span><span class="o">=</span><span class="s2">&quot;/p/</span><span class="si">{page}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">hx_target</span><span class="o">=</span><span class="s2">&quot;#list&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="props">Props</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>current_page</code></td>
+<td><code>int</code></td>
+<td>required</td>
+<td>current page number</td>
+</tr>
+<tr>
+<td><code>total_pages</code></td>
+<td><code>int</code></td>
+<td>required</td>
+<td>total number of pages</td>
+</tr>
+<tr>
+<td><code>hx_url</code></td>
+<td><code>str</code></td>
+<td>required</td>
+<td>URL template with <code>{page}</code> placeholder</td>
+</tr>
+<tr>
+<td><code>hx_target</code></td>
+<td><code>str</code></td>
+<td><code>""</code></td>
+<td>optional HTMX target selector</td>
+</tr>
+</tbody>
+</table>
+<h2 id="rendered-html">Rendered HTML</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pagination&quot;</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/1&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>Previous<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/1&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/3&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;/p/3&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#list&quot;</span><span class="p">&gt;</span>Next<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</code></pre></div>
 
 
 
