@@ -4,10 +4,16 @@ Type-safe, composable UI components for Python that render server-side and play 
 
 ## Why htmforge?
 
-- `cls="container"` → `class="container"` automatically, so you can keep Pythonic names without losing HTML output.
-- `for_="email"` → `for="email"`, while `disabled=True` renders as a flag and `hidden=False` disappears entirely.
-- `hx_get="/search"` and `hx_trigger=HxTrigger.KEYUP` stay typed, so HTMX attributes are assembled without string juggling.
-- `Component(...).to_html()` gives you safe HTML, and the same component can be adapted with `to_fastapi()`, `to_flask()`, or `to_django()`.
+- **Type-safe props**: Pydantic v2 validation on construction and assignment
+- **Safe rendering**: Automatic XSS protection via markupsafe
+- **HTMX-first**: Typed enums and helpers for `hx-*` attributes
+- **Framework-agnostic**: Adapters for FastAPI, Flask, Django
+- **20+ pre-built components**: Alerts, DataTables, Forms, Modals, Tabs, Spinners, Toasts, and more
+- **Auto-error injection**: Forms automatically bind validation errors to fields
+- **Snapshot testing**: Built-in regression detection via auto-created HTML snapshots
+- **Performance optimized**: 1000 renders in <1 second, benchmarks included
+- **Backward compatible**: Extend without breaking existing code
+- **Composable**: Mix and match components with custom Elements
 
 ## Quick install
 
@@ -15,58 +21,79 @@ Type-safe, composable UI components for Python that render server-side and play 
 pip install htmforge
 ```
 
-## Minimal example
+## Component example
 
 ```python
 from htmforge import Component
-from htmforge.elements import div, p
-
-class Hello(Component):
-    name: str
-    def render(self):
-        return div(p(f"Hello {self.name}"))
-
-print(Hello(name='World').to_html())
-```
-
-## Component overview
-
-| Component   | Description                                      | Import |
-|-------------|--------------------------------------------------|--------|
-| Alert       | Dismissible info/success/warning/error box       | `from htmforge.components import Alert` |
-| Badge       | Small inline label with variant classes          | `from htmforge.components import Badge` |
-| Breadcrumb  | Ordered nav with `aria-current` for current item | `from htmforge.components import Breadcrumb` |
-| DataTable   | Table with optional HTMX reloading               | `from htmforge.components import DataTable` |
-| FormField   | Label + input + optional error block             | `from htmforge.components import FormField` |
-| Modal       | Trigger button + `<dialog>` overlay (HTMX body)  | `from htmforge.components import Modal` |
-| Page        | Abstract full-page component (adds DOCTYPE)      | `from htmforge.components.page import Page` |
-| Pagination  | Page links + prev/next, supports HTMX targets    | `from htmforge.components import Pagination` |
-| SearchInput | Search input with `keyup` debounce via HTMX      | `from htmforge.components import SearchInput` |
-
-## What you get
-
-```python
-from htmforge import Component
-from htmforge.elements import div, p
+from htmforge.elements import div, p, button
+from htmforge.htmx import HxSwap
 
 class Card(Component):
     title: str
-    body: str
-
+    content: str
+    
     def render(self):
         return div(
-            p(self.title),
-            p(self.body),
-            cls="card",
+            p(self.title, cls="title"),
+            p(self.content),
+            button("Delete", hx_delete="/card/1", hx_swap=HxSwap.OUTER_HTML),
+            cls="card"
         )
 
-print(Card(title="Ada", body="Build once, render anywhere").to_html())
+print(Card(title="Hello", content="World").to_html())
 ```
 
-<!-- output -->
+## Framework example (Flask)
 
-```html
-<div class="card"><p>Ada</p><p>Build once, render anywhere</p></div>
+```python
+from flask import Flask
+from htmforge.components import DataTable
+from htmforge.components.page import Page
+from htmforge.core.element import Element
+from htmforge.elements import div, h1
+
+app = Flask(__name__)
+
+class UsersPage(Page):
+    users: list[list[str]]
+    
+    def _body_content(self) -> list[Element | str | None]:
+        return [
+            div(
+                h1("Users"),
+                DataTable(headers=["Name", "Email"], rows=self.users),
+            )
+        ]
+
+@app.route("/users")
+def users():
+    rows = [["Ada Lovelace", "ada@example.com"]]
+    return UsersPage(title="Users", users=rows).to_flask()
+
+if __name__ == "__main__":
+    app.run()
 ```
 
-Continue: [Getting Started → Quickstart](getting-started/quickstart.md)
+## Features
+
+### Components (20+)
+
+**Data Display**: Alert, Badge, Breadcrumb, DataTable (with sortable headers), Modal, Pagination, SearchInput, Toast
+
+**Navigation & Interaction**: Accordion, Dropdown, Spinner (SM/MD/LG), Tabs
+
+**Forms**: SelectField, CheckboxField, RadioGroup, FormGroup, Form (with auto-error injection)
+
+**Layout**: Page (full HTML document)
+
+### Platform
+
+- **HTML5 Element Factories**: 80+ element functions with type-safe attributes
+- **HTMX Integration**: Typed enums (HxSwap, HxTrigger, HxTarget) and helpers (hx_keyup_delay)
+- **Framework Adapters**: `to_fastapi()`, `to_flask()`, `to_django()`
+- **API Extensions**: Element.__eq__, Component.clone(), render(), when() helper
+- **Comprehensive Testing**: 238+ unit tests, 21 snapshot tests, 5 performance benchmarks
+
+## Continue
+
+Start with [Concepts](getting-started/concepts.md) → [Installation](getting-started/installation.md) → [Quickstart](getting-started/quickstart.md)

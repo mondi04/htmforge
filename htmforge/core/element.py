@@ -101,6 +101,23 @@ class Element:
         """Gibt eine kurze Debug-Darstellung zurück."""
         return f"Element(tag={self._tag!r}, attrs={self._attrs!r})"
 
+    def __eq__(self, other: object) -> bool:
+        """Vergleicht zwei Elemente anhand ihres gerenderten HTML.
+
+        Example:
+            >>> div("a") == div("a")
+            True
+            >>> div("a") == div("b")
+            False
+        """
+        if not isinstance(other, Element):
+            return NotImplemented
+        return self.to_html() == other.to_html()
+
+    def __hash__(self) -> int:
+        """Hash basierend auf dem gerenderten HTML."""
+        return hash(self.to_html())
+
     # ------------------------------------------------------------------
     # Private helpers
     # ------------------------------------------------------------------
