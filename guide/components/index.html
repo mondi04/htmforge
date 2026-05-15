@@ -806,6 +806,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#minimal-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimal Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#framework-adapters" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -828,22 +839,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pre-built-components-v030" class="md-nav__link">
+  <a href="#pre-built-components" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pre-built Components (v0.3.0)
+        Pre-built Components
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Pre-built Components (v0.3.0)">
+    <nav class="md-nav" aria-label="Pre-built Components">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#block-f-datatable" class="md-nav__link">
+  <a href="#data-and-feedback" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Block F: DataTable
+        Data and Feedback
       
     </span>
   </a>
@@ -851,10 +862,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#block-g-interactive-components" class="md-nav__link">
+  <a href="#interaction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Block G: Interactive Components
+        Interaction
       
     </span>
   </a>
@@ -862,10 +873,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#block-h-forms-system" class="md-nav__link">
+  <a href="#forms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Block H: Forms System
+        Forms
       
     </span>
   </a>
@@ -874,17 +885,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#legacy-v02x" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Legacy (v0.2.x)
-      
-    </span>
-  </a>
   
 </li>
       
@@ -2047,6 +2047,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#minimal-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimal Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#framework-adapters" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2069,22 +2080,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pre-built-components-v030" class="md-nav__link">
+  <a href="#pre-built-components" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pre-built Components (v0.3.0)
+        Pre-built Components
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Pre-built Components (v0.3.0)">
+    <nav class="md-nav" aria-label="Pre-built Components">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#block-f-datatable" class="md-nav__link">
+  <a href="#data-and-feedback" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Block F: DataTable
+        Data and Feedback
       
     </span>
   </a>
@@ -2092,10 +2103,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#block-g-interactive-components" class="md-nav__link">
+  <a href="#interaction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Block G: Interactive Components
+        Interaction
       
     </span>
   </a>
@@ -2103,10 +2114,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#block-h-forms-system" class="md-nav__link">
+  <a href="#forms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Block H: Forms System
+        Forms
       
     </span>
   </a>
@@ -2115,17 +2126,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#legacy-v02x" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Legacy (v0.2.x)
-      
-    </span>
-  </a>
   
 </li>
       
@@ -2150,76 +2150,97 @@
 
 
 <h1 id="components-guide">Components Guide</h1>
-<p>Subclass htmforge.Component and declare typed props as Pydantic fields.</p>
+<p>Components in htmforge are regular Python classes based on <code>Component</code>.
+You declare typed fields, then return one root <code>Element</code> from <code>render()</code>.</p>
 <h2 id="core-component-api">Core Component API</h2>
 <ul>
-<li>Implement 
-ender() -&gt; Element and return the root Element.</li>
-<li>alidate_assignment=True ensures runtime prop assignment is validated.</li>
-<li>Use   o_html() to get the rendered HTML string.</li>
-<li>clone(**overrides) creates a new instance with changed properties.</li>
-<li>o_fragment() renders as HTMX fragment (no wrapper div).</li>
+<li>Implement <code>render() -&gt; Element</code> and return the root element.</li>
+<li><code>validate_assignment=True</code> ensures runtime prop changes are validated.</li>
+<li>Use <code>to_html()</code> to render a full HTML string.</li>
+<li>Use <code>to_fragment()</code> when you want an HTMX-friendly fragment.</li>
+<li>Use <code>clone(**overrides)</code> to create a modified copy.</li>
 </ul>
-<p>htmx_attrs() returns only set HTMX props; dicts are compact JSON-serialized.</p>
-<p><strong>init_subclass</strong> guard raises TypeError if 
-ender is missing at instantiation.</p>
+<p><code>htmx_attrs()</code> returns only HTMX fields that are set. Dict values are serialized as compact JSON.</p>
+<p>If a subclass does not implement <code>render()</code>, instantiation fails with <code>TypeError</code>.</p>
+<h2 id="minimal-example">Minimal Example</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.core.element</span><span class="w"> </span><span class="kn">import</span> <span class="n">Element</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.elements</span><span class="w"> </span><span class="kn">import</span> <span class="n">div</span><span class="p">,</span> <span class="n">h2</span><span class="p">,</span> <span class="n">p</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">UserCard</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="k">return</span> <span class="n">div</span><span class="p">(</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>            <span class="n">h2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>            <span class="n">p</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">),</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;card&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="p">)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="n">html</span> <span class="o">=</span> <span class="n">UserCard</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Ada&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;ada@example.com&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+</code></pre></div>
 <h2 id="framework-adapters">Framework Adapters</h2>
 <ul>
-<li>o_fastapi() → FastAPI HTMLResponse</li>
-<li>o_flask() → Flask Response</li>
-<li>o_django() → Django HttpResponse</li>
+<li><code>to_fastapi()</code> returns a FastAPI <code>HTMLResponse</code></li>
+<li><code>to_flask()</code> returns a Flask <code>Response</code></li>
+<li><code>to_django()</code> returns a Django <code>HttpResponse</code></li>
 </ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">page</span> <span class="o">=</span> <span class="n">UserCard</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Ada&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;ada@example.com&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">fastapi_response</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">to_fastapi</span><span class="p">()</span>
+</code></pre></div>
 <h2 id="htmx-integration">HTMX Integration</h2>
-<p>Example button using htmx props:</p>
-<p>`python
-from htmforge.elements import button
-from htmforge.htmx import HxSwap</p>
-<p>btn = button("Delete", hx_delete="/users/1", hx_swap=HxSwap.OUTER_HTML)
-`</p>
-<h2 id="pre-built-components-v030">Pre-built Components (v0.3.0)</h2>
-<h3 id="block-f-datatable">Block F: DataTable</h3>
-<p>Use ColumnDef for structured columns with optional sort support:</p>
-<p>`python
-from htmforge.components import DataTable, ColumnDef</p>
-<p>table = DataTable(
-    columns=[
-        ColumnDef(key="name", label="User Name", sortable=True),
-        ColumnDef(key="email", label="Email", sortable=False),
-    ],
-    dict_rows=[
-        {"name": "Ada Lovelace", "email": "ada@example.com"},
-        {"name": "Grace Hopper", "email": "grace@example.com"},
-    ],
-    sort_url="/users?sort={col}&amp;dir={dir}",
-    current_sort="name",
-    sort_dir="asc",
-)
-`</p>
-<h3 id="block-g-interactive-components">Block G: Interactive Components</h3>
+<p>You can set typed HTMX values either on elements or components.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.elements</span><span class="w"> </span><span class="kn">import</span> <span class="n">button</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.htmx</span><span class="w"> </span><span class="kn">import</span> <span class="n">HxSwap</span><span class="p">,</span> <span class="n">HxTarget</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">delete_btn</span> <span class="o">=</span> <span class="n">button</span><span class="p">(</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="s2">&quot;Delete&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">hx_delete</span><span class="o">=</span><span class="s2">&quot;/users/1&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">hx_swap</span><span class="o">=</span><span class="n">HxSwap</span><span class="o">.</span><span class="n">OUTER_HTML</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">hx_target</span><span class="o">=</span><span class="n">HxTarget</span><span class="o">.</span><span class="n">CLOSEST_TR</span><span class="p">,</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">hx_confirm</span><span class="o">=</span><span class="s2">&quot;Delete this user?&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="p">)</span>
+</code></pre></div>
+<h2 id="pre-built-components">Pre-built Components</h2>
+<h3 id="data-and-feedback">Data and Feedback</h3>
 <ul>
-<li>Spinner(size=SpinnerSize.MD) — accessible loading indicator</li>
-<li>Tabs(tabs=[("Tab 1", "/content/1"), ("Tab 2", "/content/2")], active=0)</li>
-<li>Toast(variant=ToastVariant.SUCCESS, content="Saved!", duration_ms=3000)</li>
-<li>Accordion(items=["Section 1", "Section 2"], open_index=0)</li>
-<li>Dropdown(label="Menu", items=[("Link", "/link")])</li>
+<li><code>DataTable</code> for tabular data with legacy and dict-row modes</li>
+<li><code>Alert</code> for status messages</li>
+<li><code>Badge</code> and <code>Breadcrumb</code> for small metadata and navigation hints</li>
+<li><code>Pagination</code> for page controls</li>
+<li><code>Toast</code> for timed notifications</li>
 </ul>
-<h3 id="block-h-forms-system">Block H: Forms System</h3>
-<p>Build complete forms with auto-error injection:</p>
-<p>`python
-from htmforge.components import Form, SelectField, CheckboxField, RadioGroup</p>
-<p>form = Form(
-    action="/submit",
-    method="post",
-    fields=[
-        SelectField(name="country", options=[("us", "USA"), ("de", "Germany")]),
-        CheckboxField(name="agree", label_text="I agree to terms"),
-        RadioGroup(name="role", options=[("admin", "Admin"), ("user", "User")]),
-    ],
-    errors={"country": "Please select a country"}  # Auto-binds to SelectField
-)
-`</p>
-<h2 id="legacy-v02x">Legacy (v0.2.x)</h2>
-<p>FormField provides label + input + error for simple forms. Use Block H Form for advanced forms with auto-error injection.</p>
+<h3 id="interaction">Interaction</h3>
+<ul>
+<li><code>Modal</code> for dialog flows</li>
+<li><code>SearchInput</code> for debounced search</li>
+<li><code>Tabs</code> for HTMX tab panels</li>
+<li><code>Accordion</code> for expandable sections</li>
+<li><code>Dropdown</code> for action menus</li>
+<li><code>Spinner</code> for loading states</li>
+</ul>
+<h3 id="forms">Forms</h3>
+<ul>
+<li><code>FormField</code> for single field rendering</li>
+<li><code>SelectField</code>, <code>CheckboxField</code>, <code>RadioGroup</code> for typed controls</li>
+<li><code>FormGroup</code> for grouped layouts</li>
+<li><code>Form</code> for full forms with automatic error injection</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">FormField</span><span class="p">,</span> <span class="n">InputType</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">form</span> <span class="o">=</span> <span class="n">Form</span><span class="p">(</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">action</span><span class="o">=</span><span class="s2">&quot;/register&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">fields</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="n">FormField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="n">label_text</span><span class="o">=</span><span class="s2">&quot;Username&quot;</span><span class="p">,</span> <span class="n">input_type</span><span class="o">=</span><span class="n">InputType</span><span class="o">.</span><span class="n">TEXT</span><span class="p">),</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">FormField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="n">label_text</span><span class="o">=</span><span class="s2">&quot;Email&quot;</span><span class="p">,</span> <span class="n">input_type</span><span class="o">=</span><span class="n">InputType</span><span class="o">.</span><span class="n">EMAIL</span><span class="p">),</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="p">],</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">errors</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;This email is already registered.&quot;</span><span class="p">},</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">submit_label</span><span class="o">=</span><span class="s2">&quot;Create account&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">)</span>
+</code></pre></div>
 
 
 

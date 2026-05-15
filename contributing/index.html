@@ -1983,20 +1983,18 @@
 </code></pre></div></p>
 <h2 id="good-first-issues">Good First Issues</h2>
 <p>If you're new to the project, these are great places to start:</p>
-<h3 id="1-framework-integration-tests">1. Framework integration tests</h3>
-<p>Create <code>tests/test_framework_adapters.py</code> and add tests that check
-<code>to_flask()</code> and <code>to_django()</code> return the correct response types. Use
-<code>pytest.importorskip</code> so the tests skip when Flask or Django are not
-installed.</p>
-<h3 id="2-datatable-typed-rows">2. DataTable typed rows</h3>
-<p>Add an optional <code>dict_rows: list[dict[str, str]]</code> field to
-<code>htmforge/components/table.py</code>. When it is provided, render rows in header
-order using the header keys.</p>
-<h3 id="3-spinner-component">3. Spinner component</h3>
-<p>Create <code>htmforge/components/spinner.py</code> as a loading indicator component with
-size variants (<code>sm</code>/<code>md</code>/<code>lg</code>) rendered as a <code>div</code> with CSS class
-<code>spinner spinner-{size}</code>. Export it from <code>components/__init__.py</code> and add
-tests in <code>tests/test_components.py</code>.</p>
+<h3 id="1-admin-panel-example-screenshot">1. Admin Panel Example: Screenshot</h3>
+<p>Add at least one screenshot to <code>examples/admin-panel/README.md</code>. Run the admin
+panel locally, take a screenshot of the users page, save it as
+<code>examples/admin-panel/static/screenshot.png</code>, and reference it in the README.</p>
+<h3 id="2-datatable-render-component-cells-in-legacy-rows-mode">2. DataTable: render Component cells in legacy rows mode</h3>
+<p>Currently <code>rows: list[list[str]]</code> only supports strings. Add support for
+<code>list[list[str | Element]]</code> so Element values in legacy rows are rendered
+correctly, not just stringified.</p>
+<h3 id="3-page-add-lang-attribute-support">3. Page: add lang attribute support</h3>
+<p>Add an optional <code>lang: str = "en"</code> field to <code>Page</code> that sets
+<code>&lt;html lang="en"&gt;</code>. Update the <code>render()</code> method to pass it to the <code>html()</code>
+element. Add a test in <code>tests/test_components.py</code>.</p>
 <h2 id="running-the-docs-locally">Running the docs locally</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[docs]&quot;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>mkdocs<span class="w"> </span>serve
