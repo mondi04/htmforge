@@ -18,7 +18,7 @@ Validated props via Pydantic, typed HTMX attributes, and direct adapters for Fas
 
 A full user admin panel — live search, modals, forms with validation, pagination, toasts — **in pure Python, no templates**:
 
-> 📁 **[See the full working demo →](examples/admin-panel/)** — clone it, run it in 30 seconds.
+> 📁 **[examples/admin-panel/](https://github.com/mondi04/htmforge/tree/main/examples/admin-panel)** — see the full working demo, clone it, run it in 30 seconds.
 
 ```python
 # A complete, interactive page in ~20 lines of Python
@@ -318,7 +318,7 @@ success = base.clone(variant=AlertVariant.SUCCESS, content="Saved!")
 htmforge is built for production:
 
 ```
-238 tests passing  ·  mypy --strict clean  ·  ruff lint + format clean  ·  CI on Python 3.11 / 3.12 / 3.13
+240 tests passing  ·  mypy --strict clean  ·  ruff lint + format clean  ·  CI on Python 3.11 / 3.12 / 3.13
 ```
 
 - **Unit tests** — render logic, HTMX attributes, edge cases for all components
@@ -352,10 +352,10 @@ MIT License with the [Commons Clause](https://commonsclause.com/) condition.
 Free for personal projects, open-source projects, and small businesses.
 Organizations with **annual revenue or funding over USD 1 000 000** or **more than 100 employees** require a separate commercial license — contact the author.
 
-See [`LICENSE`](LICENSE) for the full text.
+See [LICENSE](https://github.com/mondi04/htmforge/blob/main/LICENSE) for the full text.
 
 ---
 
 ## Contributing
 
-Contributions are welcome! Read [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup instructions, coding standards, and the commit convention. The full docs are at [mondi04.github.io/htmforge](https://mondi04.github.io/htmforge/).
+Contributions are welcome! Read [CONTRIBUTING.md](https://github.com/mondi04/htmforge/blob/main/CONTRIBUTING.md) for setup instructions, coding standards, and the commit convention. The full docs are at [mondi04.github.io/htmforge](https://mondi04.github.io/htmforge/).

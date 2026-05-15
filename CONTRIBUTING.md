@@ -58,22 +58,20 @@ docs: add FormField usage example to README
 
 If you're new to the project, these are great places to start:
 
-### 1. Framework integration tests
+### 1. Admin Panel Example: Screenshot
 
-Create `tests/test_framework_adapters.py` and add tests that check
-`to_flask()` and `to_django()` return the correct response types. Use
-`pytest.importorskip` so the tests skip when Flask or Django are not
-installed.
+Add at least one screenshot to `examples/admin-panel/README.md`. Run the admin
+panel locally, take a screenshot of the users page, save it as
+`examples/admin-panel/static/screenshot.png`, and reference it in the README.
 
-### 2. DataTable typed rows
+### 2. DataTable: render Component cells in legacy rows mode
 
-Add an optional `dict_rows: list[dict[str, str]]` field to
-`htmforge/components/table.py`. When it is provided, render rows in header
-order using the header keys.
+Currently `rows: list[list[str]]` only supports strings. Add support for
+`list[list[str | Element]]` so Element values in legacy rows are rendered
+correctly, not just stringified.
 
-### 3. Spinner component
+### 3. Page: add lang attribute support
 
-Create `htmforge/components/spinner.py` as a loading indicator component with
-size variants (`sm`/`md`/`lg`) rendered as a `div` with CSS class
-`spinner spinner-{size}`. Export it from `components/__init__.py` and add
-tests in `tests/test_components.py`.
+Add an optional `lang: str = "en"` field to `Page` that sets
+`<html lang="en">`. Update the `render()` method to pass it to the `html()`
+element. Add a test in `tests/test_components.py`.

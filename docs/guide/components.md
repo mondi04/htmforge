@@ -1,84 +1,107 @@
 ﻿# Components Guide
 
-Subclass htmforge.Component and declare typed props as Pydantic fields.
+Components in htmforge are regular Python classes based on `Component`.
+You declare typed fields, then return one root `Element` from `render()`.
 
 ## Core Component API
 
-- Implement ender() -> Element and return the root Element.
-- alidate_assignment=True ensures runtime prop assignment is validated.
-- Use 	o_html() to get the rendered HTML string.
-- clone(**overrides) creates a new instance with changed properties.
-- 	o_fragment() renders as HTMX fragment (no wrapper div).
+- Implement `render() -> Element` and return the root element.
+- `validate_assignment=True` ensures runtime prop changes are validated.
+- Use `to_html()` to render a full HTML string.
+- Use `to_fragment()` when you want an HTMX-friendly fragment.
+- Use `clone(**overrides)` to create a modified copy.
 
-htmx_attrs() returns only set HTMX props; dicts are compact JSON-serialized.
+`htmx_attrs()` returns only HTMX fields that are set. Dict values are serialized as compact JSON.
 
-__init_subclass__ guard raises TypeError if ender is missing at instantiation.
+If a subclass does not implement `render()`, instantiation fails with `TypeError`.
+
+## Minimal Example
+
+```python
+from htmforge import Component
+from htmforge.core.element import Element
+from htmforge.elements import div, h2, p
+
+
+class UserCard(Component):
+    name: str
+    email: str
+
+    def render(self) -> Element:
+        return div(
+            h2(self.name),
+            p(self.email),
+            cls="card",
+        )
+
+
+html = UserCard(name="Ada", email="ada@example.com").to_html()
+```
 
 ## Framework Adapters
 
-- 	o_fastapi() → FastAPI HTMLResponse
-- 	o_flask() → Flask Response
-- 	o_django() → Django HttpResponse
+- `to_fastapi()` returns a FastAPI `HTMLResponse`
+- `to_flask()` returns a Flask `Response`
+- `to_django()` returns a Django `HttpResponse`
+
+```python
+page = UserCard(name="Ada", email="ada@example.com")
+fastapi_response = page.to_fastapi()
+```
 
 ## HTMX Integration
 
-Example button using htmx props:
+You can set typed HTMX values either on elements or components.
 
-`python
+```python
 from htmforge.elements import button
-from htmforge.htmx import HxSwap
+from htmforge.htmx import HxSwap, HxTarget
 
-btn = button("Delete", hx_delete="/users/1", hx_swap=HxSwap.OUTER_HTML)
-`
-
-## Pre-built Components (v0.3.0)
-
-### Block F: DataTable
-Use ColumnDef for structured columns with optional sort support:
-
-`python
-from htmforge.components import DataTable, ColumnDef
-
-table = DataTable(
-    columns=[
-        ColumnDef(key="name", label="User Name", sortable=True),
-        ColumnDef(key="email", label="Email", sortable=False),
-    ],
-    dict_rows=[
-        {"name": "Ada Lovelace", "email": "ada@example.com"},
-        {"name": "Grace Hopper", "email": "grace@example.com"},
-    ],
-    sort_url="/users?sort={col}&dir={dir}",
-    current_sort="name",
-    sort_dir="asc",
+delete_btn = button(
+    "Delete",
+    hx_delete="/users/1",
+    hx_swap=HxSwap.OUTER_HTML,
+    hx_target=HxTarget.CLOSEST_TR,
+    hx_confirm="Delete this user?",
 )
-`
+```
 
-### Block G: Interactive Components
-- Spinner(size=SpinnerSize.MD) — accessible loading indicator
-- Tabs(tabs=[("Tab 1", "/content/1"), ("Tab 2", "/content/2")], active=0)
-- Toast(variant=ToastVariant.SUCCESS, content="Saved!", duration_ms=3000)
-- Accordion(items=["Section 1", "Section 2"], open_index=0)
-- Dropdown(label="Menu", items=[("Link", "/link")])
+## Pre-built Components
 
-### Block H: Forms System
-Build complete forms with auto-error injection:
+### Data and Feedback
 
-`python
-from htmforge.components import Form, SelectField, CheckboxField, RadioGroup
+- `DataTable` for tabular data with legacy and dict-row modes
+- `Alert` for status messages
+- `Badge` and `Breadcrumb` for small metadata and navigation hints
+- `Pagination` for page controls
+- `Toast` for timed notifications
+
+### Interaction
+
+- `Modal` for dialog flows
+- `SearchInput` for debounced search
+- `Tabs` for HTMX tab panels
+- `Accordion` for expandable sections
+- `Dropdown` for action menus
+- `Spinner` for loading states
+
+### Forms
+
+- `FormField` for single field rendering
+- `SelectField`, `CheckboxField`, `RadioGroup` for typed controls
+- `FormGroup` for grouped layouts
+- `Form` for full forms with automatic error injection
+
+```python
+from htmforge.components import Form, FormField, InputType
 
 form = Form(
-    action="/submit",
-    method="post",
+    action="/register",
     fields=[
-        SelectField(name="country", options=[("us", "USA"), ("de", "Germany")]),
-        CheckboxField(name="agree", label_text="I agree to terms"),
-        RadioGroup(name="role", options=[("admin", "Admin"), ("user", "User")]),
+        FormField(name="username", label_text="Username", input_type=InputType.TEXT),
+        FormField(name="email", label_text="Email", input_type=InputType.EMAIL),
     ],
-    errors={"country": "Please select a country"}  # Auto-binds to SelectField
+    errors={"email": "This email is already registered."},
+    submit_label="Create account",
 )
-`
-
-## Legacy (v0.2.x)
-
-FormField provides label + input + error for simple forms. Use Block H Form for advanced forms with auto-error injection.
+```
