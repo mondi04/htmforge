@@ -9,7 +9,7 @@ Example:
 
 from __future__ import annotations
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from htmforge import Component
 from htmforge.core.element import Element
@@ -40,8 +40,8 @@ class ColumnDef(BaseModel):
 
 class DataTable(Component):
     """Rendert eine einfache Datentabelle mit optionalem HTMX-Reload."""
-    model_config = {"arbitrary_types_allowed": True}
 
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     headers: list[str] = []
     rows: list[list[str]] = []
@@ -131,7 +131,9 @@ class DataTable(Component):
                 # Handle both str and Element/Component values
                 rendered_cells = []
                 for cell_value in cells:
-                    if isinstance(cell_value, (Element, Component)):
+                    if isinstance(cell_value, Component):
+                        rendered_cells.append(td(cell_value.render()))
+                    elif isinstance(cell_value, Element):
                         rendered_cells.append(td(cell_value))
                     else:
                         rendered_cells.append(td(cell_value))

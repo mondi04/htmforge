@@ -16,9 +16,9 @@ class SettingsPage(BaseAdminPage):
     # Ensure the nav highlights the correct item
     active_nav: str = "Settings"
 
-    def _content(self) -> list[Element]:
+    def _body_content(self) -> list[Element | str | None]:
         """Render settings content."""
-        return [
+        content: list[Element | str | None] = [
             Breadcrumb(items=[("Home", "/"), ("Settings", None)]),
             h1("Settings"),
             div(
@@ -59,3 +59,4 @@ class SettingsPage(BaseAdminPage):
                 cls="danger-zone",
             ),
         ]
+        return self._render_admin_shell(content)

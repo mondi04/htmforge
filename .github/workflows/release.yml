@@ -9,9 +9,27 @@ permissions:
   contents: write
 
 jobs:
+  validate:
+    name: Validate tag is on main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ensure tag points to main
+        run: |
+          TAG_COMMIT=$(git rev-list -n 1 ${{ github.ref_name }})
+          MAIN_COMMIT=$(git rev-parse origin/main)
+          if [ "$TAG_COMMIT" != "$MAIN_COMMIT" ]; then
+            echo "ERROR: Tag is not on main!"
+            exit 1
+          fi
+
   release:
     name: Build and publish GitHub Release
     runs-on: ubuntu-latest
+    needs: validate          
 
     steps:
       - uses: actions/checkout@v4

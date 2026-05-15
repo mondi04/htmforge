@@ -32,7 +32,7 @@ from htmforge.components import (
 from htmforge.components.form_field import InputType
 from htmforge.components.page import Page
 from htmforge.core.element import Element
-from htmforge.elements import li, ul
+from htmforge.elements import div, li, ul
 
 
 class TestDataTable:
@@ -100,6 +100,28 @@ class TestDataTable:
         )
         html = table.to_html()
         assert "<td></td>" in html
+
+    def test_dict_rows_with_badge_component(self) -> None:
+        """Component-Zellen werden ueber ``render()`` als Inhalt gerendert."""
+        table = DataTable(
+            headers=["name", "status"],
+            dict_rows=[{"name": "Ada", "status": Badge(text="Neu")}],
+        )
+
+        html = table.to_html()
+
+        assert '<td><span class="badge badge-default">Neu</span></td>' in html
+
+    def test_dict_rows_with_element_value(self) -> None:
+        """Element-Zellen werden direkt in ``td`` eingebettet."""
+        table = DataTable(
+            headers=["name", "meta"],
+            dict_rows=[{"name": "Ada", "meta": div("Info", cls="meta") }],
+        )
+
+        html = table.to_html()
+
+        assert '<td><div class="meta">Info</div></td>' in html
 
     def test_column_def_label_used_as_header(self) -> None:
         """ColumnDef label wird als Header-Text gerendert."""

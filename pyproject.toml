@@ -15,7 +15,8 @@ authors = [
 keywords = [
     "html", "components", "htmx", "pydantic",
     "server-side-rendering", "type-safe",
-    "jinja2-alternative", "web", "fastapi", "flask", "django"
+    "jinja2-alternative", "dominate", "htpy", "html-builder", "template-free",
+    "web", "fastapi", "flask", "django"
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",

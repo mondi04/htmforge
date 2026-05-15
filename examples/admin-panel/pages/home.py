@@ -57,14 +57,14 @@ class HomePage(BaseAdminPage):
     recent_users: list[User]
     total_users: int
 
-    def _content(self) -> list[Element]:
+    def _body_content(self) -> list[Element | str | None]:
         """Render dashboard content."""
         # Count users by role
         admin_count = sum(1 for u in self.recent_users if u["role"] == "admin")
         editor_count = sum(1 for u in self.recent_users if u["role"] == "editor")
         viewer_count = sum(1 for u in self.recent_users if u["role"] == "viewer")
 
-        return [
+        content: list[Element | str | None] = [
             Breadcrumb(items=[("Home", None)]),
             div(
                 h1("Dashboard"),
@@ -109,3 +109,4 @@ class HomePage(BaseAdminPage):
                 close_label="Close",
             ),
         ]
+        return self._render_admin_shell(content)

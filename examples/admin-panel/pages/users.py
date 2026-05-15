@@ -153,7 +153,7 @@ class UsersPage(BaseAdminPage):
     flash_message: str = ""
     flash_variant: AlertVariant = AlertVariant.SUCCESS
 
-    def _content(self) -> list[Element | str | None]:
+    def _body_content(self) -> list[Element | str | None]:
         items: list[Element | str | None] = [
             Breadcrumb(items=[("Home", "/"), ("Users", None)]),
             section(
@@ -182,4 +182,4 @@ class UsersPage(BaseAdminPage):
                 div(id="toast", cls="toast-slot"),
             ]
         )
-        return items
+        return self._render_admin_shell(items)
