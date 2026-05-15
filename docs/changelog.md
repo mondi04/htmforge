@@ -4,6 +4,16 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.3.2] - 2026-05-15
+
+### Fixed
+- DataTable: Component and Element cell values in dict_rows now render correctly — Component cells call `.render()`, Element cells are passed directly to `td()`
+- Admin panel example: BaseAdminPage no longer calls undeclared `_content()` hook; all subclasses implement `_body_content()` directly
+
+### Changed
+- Release workflow: added `validate` job that ensures tag points to main before building
+- pyproject.toml: extended keywords with `dominate`, `htpy`, `html-builder`, `template-free`
+
 ## [0.3.1] - 2026-05-06
 
 ### Documentation

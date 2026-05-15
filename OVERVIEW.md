@@ -243,6 +243,7 @@ A block is only complete when:
 
 | Date       | Change |
 |------------|--------|
+| 2026-05-15 | v0.3.2: Fix DataTable Component/Element cell rendering (dead branch in _render_body_rows), admin page method contract (_content → _body_content), release workflow validate-job added, pyproject keywords extended |
 | 2026-05-06 | v0.3.1: Completed documentation site (all component references added, navigation + links fixed, Quickstart code blocks corrected, features section expanded) and refreshed README for improved onboarding |
 | 2026-05-06 | v0.3.0: **Block F** (DataTable dict_rows, ColumnDef, sortable headers, backwards-compatible). **Block G** (Spinner SM/MD/LG, Tabs HTMX lazy-load, Toast OOB swap, Accordion details/summary, Dropdown HTMX toggle). **Block H** (SelectField, CheckboxField, RadioGroup, FormGroup, Form with auto-error injection). **Block I** (Element.__eq__/__hash__, Component.clone(), to_fragment(), render(), when() helpers). **Block J** (Framework adapters FastAPI/Flask/Django, 21 snapshot regression tests, 5 performance benchmarks). **Result**: 238 tests passing, 5 skipped (Django), mypy strict clean, ruff clean, full documentation updated. |
 | 2026-04-29 | v0.2.2: Fix OVERVIEW merge conflict in Roadmap table resolved, CONTRIBUTING.md Good First Issues updated to reflect actual open tasks |
