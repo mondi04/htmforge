@@ -73,6 +73,7 @@ nav:
     - HTMX Integration: guide/htmx.md
     - Framework Adapters: guide/frameworks.md
     - XSS & Safety: guide/safety.md
+    - Trusted Publishing: guide/trusted-publishing.md
   - Components Reference:
     - Alert: components/alert.md
     - Badge: components/badge.md

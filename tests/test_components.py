@@ -530,7 +530,32 @@ class TestPage:
         """``render()`` gibt ein ``<html>``-Element ohne DOCTYPE zurueck."""
         page = SimplePage(title="X")
         el = page.render()
-        assert el.to_html().startswith("<html>")
+        assert el.to_html().startswith("<html")
+
+    def test_lang_attribute_default(self) -> None:
+        """Default lang attribute is "en" on the html element."""
+        html_out = SimplePage(title="X").to_html()
+        start = html_out.find("<html")
+        end = html_out.find(">", start)
+        tag = html_out[start : end + 1]
+        assert 'lang="en"' in tag
+
+    def test_lang_attribute_custom(self) -> None:
+        """Custom lang values are respected and rendered on the html tag."""
+        html_out = SimplePage(title="X", lang="de").to_html()
+        start = html_out.find("<html")
+        end = html_out.find(">", start)
+        tag = html_out[start : end + 1]
+        assert 'lang="de"' in tag
+
+    def test_lang_attribute_in_html_tag(self) -> None:
+        """Ensure the lang attribute is placed on the <html> tag, not on head/body."""
+        html_out = SimplePage(title="X", lang="fr").to_html()
+        start = html_out.find("<html")
+        end = html_out.find(">", start)
+        tag = html_out[start : end + 1]
+        assert 'lang="fr"' in tag
+        assert 'lang="fr"' not in html_out[end + 1 :]
 
 
 # ---------------------------------------------------------------------------

@@ -162,6 +162,23 @@ class Component(BaseModel, ABC):
         """
         return self.to_html()
 
+    def to_json(self) -> dict[str, str]:
+        """Return a JSON-serializable dict with HTML and component metadata.
+
+        This is useful for API endpoints that need to return a rendered HTML
+        fragment alongside minimal metadata about the component instance.
+
+        Returns:
+            A mapping containing the rendered HTML under ``"html"`` and the
+            component class name under ``"component"``.
+
+        Example:
+                >>> card = GreetingCard(title="Hi")
+                >>> card.to_json()
+                {"html": "<div class='card'>...", "component": "GreetingCard"}
+        """
+        return {"html": self.to_html(), "component": type(self).__name__}
+
     def htmx_attrs(self) -> dict[str, object]:
         """Gibt alle gesetzten HTMX-Props als Attribut-Dict zurueck.
 

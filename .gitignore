@@ -49,3 +49,4 @@ push.py
 
 site/
 dist/
+htmforge/_version.py

@@ -17,8 +17,10 @@ Quickstart::
     print(Card(title="Hello", body="World").to_html())
 """
 
-from importlib.metadata import PackageNotFoundError
-from importlib.metadata import version as _version
+try:
+    from ._version import __version__ as __version__  # type: ignore[import-not-found]
+except Exception:  # pragma: no cover - fallback for editable/local checkouts
+    __version__ = "0.0.0+unknown"
 
 from .core.component import Component
 from .core.element import Element
@@ -68,7 +70,4 @@ def when(
 
 __all__ = ["Component", "Element", "render", "when"]
 
-try:
-    __version__ = _version("htmforge")
-except PackageNotFoundError:
-    __version__ = "0.3.3"
+# __version__ is provided by hatch-vcs in production builds or falls back above

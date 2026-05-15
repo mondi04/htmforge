@@ -25,12 +25,13 @@ print(DemoPage(title="Demo").to_html())
 | `js_urls` | `list[str]` | `[]` | script URLs added before `</body>` |
 | `inline_css` | `str` | `""` | inline CSS wrapped in `<style>` |
 | `charset` | `str` | `utf-8` | charset meta value |
+| `lang` | `str` | `"en"` | Sets the `lang` attribute on the `<html>` element |
 
 ## Rendered HTML
 
 ```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Demo</title>

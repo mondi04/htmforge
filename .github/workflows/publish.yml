@@ -1,0 +1,36 @@
+name: Publish to PyPI (Trusted Publishing)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type 'publish' to confirm"
+        required: true
+
+permissions:
+  id-token: write
+
+jobs:
+  publish:
+    name: Upload to PyPI via Trusted Publishing
+    runs-on: ubuntu-latest
+    environment: release
+    if: github.event.inputs.confirm == 'publish'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependencies
+        run: pip install build hatch-vcs
+
+      - name: Build distribution
+        run: python -m build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

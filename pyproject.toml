@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
 name = "htmforge"
-version = "0.3.3"
+dynamic = ["version"]
 description = "Type-safe, composable UI components for Python — server-side rendered, HTMX-first, 20+ pre-built components."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -140,3 +140,9 @@ addopts = "-v --tb=short"
 # ---------------------------------------------------------------------------
 [tool.hatch.build.targets.wheel]
 packages = ["htmforge"]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "htmforge/_version.py"

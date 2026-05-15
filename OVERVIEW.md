@@ -64,6 +64,7 @@ Core install: **2 dependencies.**
 | v0.2.2 | Documentation rewrite — component pages with props tables and rendered HTML, quickstart with full runnable examples, concepts attribute mapping table, framework guide with embedded code, contributing guide embedded, OVERVIEW + CONTRIBUTING cleaned up | ✅ Released (PyPI: 2026-04-29) |
 | v0.3.0 | **Block F**: DataTable dict_rows + ColumnDef + sortable headers. **Block G**: Spinner, Tabs, Toast, Accordion, Dropdown. **Block H**: SelectField, CheckboxField, RadioGroup, FormGroup, Form (auto-error injection). **Block I**: Element.__eq__/__hash__, Component.clone(), to_fragment(), render(), when(). **Block J**: Framework adapters (FastAPI/Flask/Django), snapshot tests (21), performance benchmarks (5). **Result**: 238 tests passing, mypy strict, ruff clean. | ✅ Released (PyPI: 2026-05-06) |
 | v0.3.3 | README PyPI link fixes, DataTable docs update, components guide rewrite, CONTRIBUTING Good First Issues updated | 🔜 Planned |
+| v0.4.0 | Page.lang, Component.to_json(), hatch-vcs migration, Trusted Publishing workflow | 🔜 Planned |
 | v1.0.0 | Stable API guarantee, full mkdocs API reference, Django example, performance benchmarks, 100% docstring coverage | 🔜 Planned |
 
 ---
@@ -244,6 +245,7 @@ A block is only complete when:
 
 | Date       | Change |
 |------------|--------|
+| 2026-05-XX | v0.4.0: Page.lang, Component.to_json(), hatch-vcs migration, Trusted Publishing workflow |
 | 2026-05-15 | v0.3.3: README PyPI link fixes, DataTable docs updated (ColumnDef + dict_rows), components guide rewritten, CONTRIBUTING Good First Issues refreshed |
 | 2026-05-15 | v0.3.2: Fix DataTable Component/Element cell rendering (dead branch in _render_body_rows), admin page method contract (_content → _body_content), release workflow validate-job added, pyproject keywords extended |
 | 2026-05-06 | v0.3.1: Completed documentation site (all component references added, navigation + links fixed, Quickstart code blocks corrected, features section expanded) and refreshed README for improved onboarding |

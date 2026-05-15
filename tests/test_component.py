@@ -5,6 +5,8 @@ from __future__ import annotations
 import pytest
 from pydantic import ValidationError
 
+import json
+
 from htmforge import Component as PublicComponent
 from htmforge import Element as PublicElement
 from htmforge.core.component import Component
@@ -280,6 +282,28 @@ class TestPublicExports:
         from htmforge.elements import div
 
         assert render(div("x")) == "<div>x</div>"
+
+
+class TestToJson:
+    """Tests for Component.to_json() convenience method."""
+
+    def test_to_json_contains_html_key(self) -> None:
+        card = GreetingCard(title="Hello")
+        d = card.to_json()
+        assert "html" in d
+
+    def test_to_json_html_matches_to_html(self) -> None:
+        card = GreetingCard(title="Hello")
+        assert card.to_json()["html"] == card.to_html()
+
+    def test_to_json_component_key(self) -> None:
+        card = GreetingCard(title="Hello")
+        assert card.to_json()["component"] == "GreetingCard"
+
+    def test_to_json_is_serializable(self) -> None:
+        card = GreetingCard(title="Hello")
+        # should not raise
+        json.dumps(card.to_json())
 
 
 class TestComponentClone:

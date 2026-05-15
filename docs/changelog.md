@@ -6,6 +6,18 @@ Versioning: [Semantic Versioning](https://semver.org/).
 
 ## [0.3.3] - 2026-05-15
 
+## [0.4.0] - 2026-05-XX
+
+### Added
+- Page: lang field (default "en") sets lang attribute on <html> element for accessibility
+- Component: to_json() method returns {"html": ..., "component": ...} for API endpoints
+- CI: optional Trusted Publishing workflow (publish.yml) — manual trigger, replaces local token
+
+### Changed
+- Build: migrated to hatch-vcs for single-source-of-truth versioning via git tags
+- release.py and push.py: read version from git tag instead of pyproject.toml
+
+
 ### Fixed
 - README: all relative links replaced with absolute GitHub URLs for PyPI compatibility
 - DataTable component reference updated to document ColumnDef, dict_rows, sort_url, current_sort, sort_dir, empty_message

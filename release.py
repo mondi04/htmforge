@@ -20,19 +20,23 @@ def fail(message: str) -> None:
 
 
 def read_version() -> str:
-    """Read current project version from pyproject.toml."""
-    pyproject_path = Path("pyproject.toml")
-    if not pyproject_path.exists():
-        fail("pyproject.toml not found")
+    """Read current project version from the latest git tag.
 
-    data = tomllib.loads(pyproject_path.read_text(encoding="utf-8"))
+    Falls back to failing with a clear message if git is not available or
+    no tags are found. The leading ``v`` prefix will be stripped if present.
+    """
     try:
-        version = data["project"]["version"]
-    except KeyError as exc:
-        fail(f"Missing [project].version in pyproject.toml: {exc}")
-
-    if not isinstance(version, str) or not version:
-        fail("Invalid [project].version in pyproject.toml")
+        result = subprocess.run(
+            ["git", "describe", "--tags", "--abbrev=0"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+    except subprocess.CalledProcessError:
+        fail("Failed to read version from git tags. Ensure tags exist (e.g. v0.4.0).")
+    version = result.stdout.strip().lstrip("v")
+    if not version:
+        fail("Empty version read from git tags")
     return version
 
 

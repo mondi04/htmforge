@@ -62,6 +62,7 @@ class Page(Component):
     js_urls: list[str] = []
     inline_css: str = ""
     charset: str = "utf-8"
+    lang: str = "en"
 
     @abstractmethod
     def _body_content(self) -> list[Element | str | None]:
@@ -95,6 +96,7 @@ class Page(Component):
         return html(
             head(*head_children),
             body(*body_children),
+            lang=self.lang,
         )
 
     def to_html(self) -> str:
