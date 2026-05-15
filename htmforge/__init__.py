@@ -18,7 +18,7 @@ Quickstart::
 """
 
 try:
-    from ._version import __version__ as __version__  
+    from ._version import __version__ as __version__
 except Exception:  # pragma: no cover - fallback for editable/local checkouts
     __version__ = "0.0.0+unknown"
 
