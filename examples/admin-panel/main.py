@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from fastapi import FastAPI, Form as FastAPIForm
+from typing import cast, Literal
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 
@@ -104,7 +105,13 @@ def users_create(
         return _modal_body(
             Alert(message="Please fix the highlighted fields.", variant=AlertVariant.ERROR, dismissible=True),
             Breadcrumb(items=[("Users", "/users"), ("Add User", None)]),
-            UserForm(name=name, email=email, role=role if role in {"admin", "editor", "viewer"} else "viewer", errors=errors, submit_label="Create user").render(),
+            UserForm(
+                name=name,
+                email=email,
+                role=cast(Literal['admin', 'editor', 'viewer'], role if role in {"admin", "editor", "viewer"} else "viewer"),
+                errors=errors,
+                submit_label="Create user",
+            ).render(),
         )
 
     create_user(name=name, email=email, role=role)  # type: ignore[arg-type]
@@ -124,7 +131,7 @@ def users_edit(user_id: int) -> str:
             user_id=user_id,
             name=user["name"],
             email=user["email"],
-            role=user["role"],
+            role=cast(Literal['admin', 'editor', 'viewer'], user["role"]),
             use_put=True,
             submit_label="Save changes",
         ).render(),
@@ -148,7 +155,7 @@ def users_update(
                 user_id=user_id,
                 name=name,
                 email=email,
-                role=role if role in {"admin", "editor", "viewer"} else "viewer",
+                role=cast(Literal['admin', 'editor', 'viewer'], role if role in {"admin", "editor", "viewer"} else "viewer"),
                 errors=errors,
                 use_put=True,
                 submit_label="Save changes",
@@ -175,14 +182,14 @@ def settings_page() -> str:
 @app.post("/settings", response_class=HTMLResponse)
 def save_settings() -> str:
     """Save settings (in-memory only)."""
-    return Toast(message="Settings saved!", variant=ToastVariant.SUCCESS, hx_swap_oob="true").to_html()
+    return Toast(message="Settings saved!", variant=ToastVariant.SUCCESS).to_html()
 
 
 @app.post("/settings/reset", response_class=HTMLResponse)
 def reset_data() -> str:
     """Reset demo data."""
     reset_users()
-    return Toast(message="Demo data reset!", variant=ToastVariant.SUCCESS, hx_swap_oob="true").to_html()
+    return Toast(message="Demo data reset!", variant=ToastVariant.SUCCESS).to_html()
 
 
 if __name__ == "__main__":

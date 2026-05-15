@@ -6,6 +6,16 @@ Versioning: [Semantic Versioning](https://semver.org/).
 
 ## [0.3.3] - 2026-05-15
 
+### Fixed
+- README: all relative links replaced with absolute GitHub URLs for PyPI compatibility
+- DataTable component reference updated to document ColumnDef, dict_rows, sort_url,
+  current_sort, sort_dir, and empty_message parameters
+- docs/guide/components.md: fixed broken code block fences and garbled method names
+
+### Changed
+- CONTRIBUTING.md: Good First Issues updated to reflect actual open tasks
+- OVERVIEW.md: test count and roadmap updated
+
 ## [0.4.0] - 2026-05-XX
 
 ### Added
@@ -16,16 +26,6 @@ Versioning: [Semantic Versioning](https://semver.org/).
 ### Changed
 - Build: migrated to hatch-vcs for single-source-of-truth versioning via git tags
 - release.py and push.py: read version from git tag instead of pyproject.toml
-
-
-### Fixed
-- README: all relative links replaced with absolute GitHub URLs for PyPI compatibility
-- DataTable component reference updated to document ColumnDef, dict_rows, sort_url, current_sort, sort_dir, empty_message
-- docs/guide/components.md: fixed broken code block fences and garbled method names
-
-### Changed
-- CONTRIBUTING.md: Good First Issues updated to reflect actual open tasks
-- OVERVIEW.md: test count and roadmap updated
 
 ## [0.3.2] - 2026-05-15
 

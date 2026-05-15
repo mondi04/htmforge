@@ -62,7 +62,8 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Release Notes (v0.3.0): release-v0.3.0.md
+  - Release Notes v0.3.0: release-v0.3.0.md
+  - Release Notes v0.4.0: release-v0.4.0.md
   - Getting Started:
     - Installation: getting-started/installation.md
     - Quickstart: getting-started/quickstart.md

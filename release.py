@@ -62,7 +62,7 @@ def ensure_overview_changelog_entry(path: Path, version: str) -> None:
         text,
         re.MULTILINE,
     )
-    if not section_match:
+    if section_match is None:
         fail("OVERVIEW.md does not contain a Change-Log section")
 
     section = section_match.group(1)
