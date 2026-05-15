@@ -1,4 +1,5 @@
 # Virtual environments
+.venv_smoke_v010/
 .venv/
 venv/
 env/

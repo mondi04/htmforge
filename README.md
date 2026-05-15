@@ -14,6 +14,33 @@ Validated props via Pydantic, typed HTMX attributes, and direct adapters for Fas
 
 ---
 
+## What you can build with htmforge
+
+A full user admin panel — live search, modals, forms with validation, pagination, toasts — **in pure Python, no templates**:
+
+> 📁 **[See the full working demo →](examples/admin-panel/)** — clone it, run it in 30 seconds.
+
+```python
+# A complete, interactive page in ~20 lines of Python
+class UsersPage(BaseAdminPage):
+    users: list[dict]
+    total: int
+    page: int
+
+    def _body_content(self):
+        return [
+            SearchInput(name="q", hx_get="/users/search", hx_target="#user-table"),
+            DataTable(
+                id="user-table",
+                columns=[ColumnDef("name", "Name"), ColumnDef("email", "Email"), ColumnDef("role", "Role")],
+                rows=self.users,
+            ),
+            Pagination(current=self.page, total_pages=ceil(self.total / 5), hx_target="#user-table"),
+        ]
+```
+
+---
+
 ## Why htmforge?
 
 ```python
@@ -23,6 +50,18 @@ html = f'<div class="alert {variant}"><p>{message}</p></div>'
 # ✅ After — validated props, typed attributes, XSS-safe by default
 Alert(variant=AlertVariant.SUCCESS, content=message).to_html()
 ```
+
+**Compared to the alternatives:**
+
+| | htmforge | Jinja2 templates | `dominate` | `htpy` |
+|---|---|---|---|---|
+| Type-safe props | ✅ Pydantic v2 | ❌ | ❌ | ❌ |
+| Validated on assignment | ✅ | ❌ | ❌ | ❌ |
+| XSS protection | ✅ built-in | ⚠️ manual | ⚠️ partial | ✅ |
+| HTMX typed enums | ✅ | ❌ | ❌ | ❌ |
+| Pre-built components | ✅ 20+ | ❌ | ❌ | ❌ |
+| Framework adapters | ✅ | ✅ | ❌ | ❌ |
+| py.typed / mypy strict | ✅ | ❌ | ❌ | ⚠️ partial |
 
 - **Type-safe props** via Pydantic v2 — validated on construction *and* assignment
 - **XSS protection** built-in — `markupsafe` escapes all text content automatically

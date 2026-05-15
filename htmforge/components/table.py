@@ -40,10 +40,12 @@ class ColumnDef(BaseModel):
 
 class DataTable(Component):
     """Rendert eine einfache Datentabelle mit optionalem HTMX-Reload."""
+    model_config = {"arbitrary_types_allowed": True}
+
 
     headers: list[str] = []
     rows: list[list[str]] = []
-    dict_rows: list[dict[str, str]] | None = None
+    dict_rows: list[dict[str, str | Element | Component]] | None = None
     columns: list[ColumnDef] | None = None
     hx_url: str | None = None
     sort_url: str = ""
@@ -126,7 +128,14 @@ class DataTable(Component):
                 else:
                     # Use headers as keys
                     cells = [row_dict.get(h, "") for h in self.headers]
-                body_rows.append(tr(*(td(cell) for cell in cells)))
+                # Handle both str and Element/Component values
+                rendered_cells = []
+                for cell_value in cells:
+                    if isinstance(cell_value, (Element, Component)):
+                        rendered_cells.append(td(cell_value))
+                    else:
+                        rendered_cells.append(td(cell_value))
+                body_rows.append(tr(*rendered_cells))
             return body_rows
 
         # Use rows: list[list[str]]
