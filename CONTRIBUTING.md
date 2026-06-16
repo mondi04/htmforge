@@ -2,11 +2,18 @@
 
 Thank you for your interest in contributing!
 
+## Before you open a PR
+ 
+- Open an issue first for anything beyond a trivial fix.
+  New components or API changes need prior discussion.
+- Check that a similar issue or PR doesn't already exist.
+
 ## Setup
 
 ```bash
 git clone https://github.com/mondi04/htmforge.git
 cd htmforge
+python -m venv .venv && source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
 ```
 

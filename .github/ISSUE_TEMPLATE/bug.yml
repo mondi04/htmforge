@@ -1,0 +1,69 @@
+name: Bug Report
+description: Report a bug in htmforge
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! Please fill in the details below.
+
+  - type: textarea
+    id: describe_bug
+    attributes:
+      label: Describe the bug
+      description: What is the problem?
+      placeholder: "e.g., Button component doesn't accept disabled=True"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce this?
+      placeholder: |
+        1. Create a Button with disabled=True
+        2. Render to HTML
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected behavior
+      description: What should happen instead?
+      placeholder: "The button should have the disabled attribute"
+    validations:
+      required: true
+
+  - type: textarea
+    id: minimal_example
+    attributes:
+      label: Minimal code example
+      description: Paste a small reproducible example
+      render: python
+      placeholder: |
+        from htmforge import Button
+        btn = Button("Click me", disabled=True)
+        print(btn.render())
+    validations:
+      required: true
+
+  - type: dropdown
+    id: python_version
+    attributes:
+      label: Python version
+      options:
+        - "3.11"
+        - "3.12"
+        - "3.13"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Anything else relevant?
+      placeholder: "htmforge version, OS, etc."

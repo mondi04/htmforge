@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/mondi04/htmforge/discussions
+    about: Have a question? Ask in Discussions instead.
+  - name: Documentation
+    url: https://github.com/mondi04/htmforge
+    about: Check the README and examples first.
