@@ -95,6 +95,9 @@ if __name__ == "__main__":
 - **Auto-error injection** in Form — validation errors routed to fields automatically
 - **py.typed** — full mypy strict and pyright support
 
+- **`Component.to_json()`** — returns `{"html": ..., "component": ...}` for use in API endpoints
+- **`Page.lang`** — sets the `lang` attribute on the `<html>` element for accessibility
+
 ## Continue
 
 Start with [Concepts](getting-started/concepts.md) -> [Installation](getting-started/installation.md) -> [Quickstart](getting-started/quickstart.md)

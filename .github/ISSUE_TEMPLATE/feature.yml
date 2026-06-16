@@ -1,0 +1,61 @@
+name: Feature Request
+description: Suggest a new feature or component
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Great! Tell us about the feature you'd like to see.
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why would this be useful? What problem does it solve?
+      placeholder: "Currently, there's no way to... which makes it hard to..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How should this work? Show an example if possible
+      render: python
+      placeholder: |
+        from htmforge_ui import Stepper
+        
+        step = Stepper(
+          steps=["Login", "Profile", "Confirm"],
+          current=0
+        )
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
+      description: Are there other ways to solve this?
+      placeholder: "We could also..."
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      description: How big is this change?
+      options:
+        - "New component"
+        - "Enhancement to existing component"
+        - "New utility or helper"
+        - "Other"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I've checked if a similar feature already exists
+        - label: This aligns with htmforge's philosophy (minimal, composable)

@@ -26,6 +26,7 @@ theme:
     - navigation.tabs
     - navigation.sections
     - navigation.expand
+    - navigation.instant
     - navigation.top
     - search.highlight
     - search.suggest
@@ -44,7 +45,6 @@ plugins:
             show_root_heading: true
             show_submodules: false
             merge_init_into_class: true
-  # git-revision-date-localized removed for local build stability
 
 markdown_extensions:
   - admonition
@@ -62,18 +62,19 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Release Notes (v0.3.0): release-v0.3.0.md
+  
   - Getting Started:
     - Installation: getting-started/installation.md
     - Quickstart: getting-started/quickstart.md
     - Core Concepts: getting-started/concepts.md
-  - Guide:
+  
+  - Guides:
     - Elements: guide/elements.md
     - Components: guide/components.md
     - HTMX Integration: guide/htmx.md
     - Framework Adapters: guide/frameworks.md
     - XSS & Safety: guide/safety.md
-    - Trusted Publishing: guide/trusted-publishing.md
+  
   - Components Reference:
     - Alert: components/alert.md
     - Badge: components/badge.md
@@ -94,6 +95,7 @@ nav:
     - RadioGroup: components/radiogroup.md
     - FormGroup: components/formgroup.md
     - Form: components/form.md
+  
   - API Reference:
     - htmforge: api/htmforge.md
     - htmforge.core.element: api/element.md
@@ -101,10 +103,11 @@ nav:
     - htmforge.elements: api/elements.md
     - htmforge.htmx: api/htmx.md
     - htmforge.components: api/components.md
+  
   - Examples:
     - FastAPI: examples/fastapi.md
     - Flask: examples/flask.md
     - Django: examples/django.md
+  
   - Changelog: changelog.md
   - Contributing: contributing.md
-

@@ -4,9 +4,25 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
-## [0.3.3] - 2026-05-15
+## [0.4.1] - 2026-06-16
 
-## [0.4.0] - 2026-05-XX
+### Added
+- GitHub issue templates: bug.yml (bug reports), feature.yml (feature requests), config.yml (template config)
+- PR template with checklist for tests, type checking, linting, docstrings, conventional commits
+- Updated CONTRIBUTING.md with full setup guide, workflow, and coding standards
+
+### Changed
+- Release workflow: moved from local release.py/push.py scripts to GitHub Actions
+- release.yml now uses Trusted Publishing (OIDC) instead of PyPI API tokens
+
+### Removed
+- release.py: version detection and validation now in GitHub Actions workflow
+- push.py: PyPI uploads now handled by gh-action-pypi-publish
+
+### Fixed
+- (none for this patch)
+
+## [0.4.0] - 2026-05-15
 
 ### Added
 - Page: lang field (default "en") sets lang attribute on <html> element for accessibility
@@ -17,10 +33,12 @@ Versioning: [Semantic Versioning](https://semver.org/).
 - Build: migrated to hatch-vcs for single-source-of-truth versioning via git tags
 - release.py and push.py: read version from git tag instead of pyproject.toml
 
+## [0.3.3] - 2026-05-15
 
 ### Fixed
 - README: all relative links replaced with absolute GitHub URLs for PyPI compatibility
-- DataTable component reference updated to document ColumnDef, dict_rows, sort_url, current_sort, sort_dir, empty_message
+- DataTable component reference updated to document ColumnDef, dict_rows, sort_url,
+  current_sort, sort_dir, and empty_message parameters
 - docs/guide/components.md: fixed broken code block fences and garbled method names
 
 ### Changed

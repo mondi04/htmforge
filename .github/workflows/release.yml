@@ -1,77 +1,76 @@
-name: Release
+name: Release to PyPI & GitHub Pages
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (e.g., 0.5.0). Leave empty to skip release."
+        required: false
+        type: string
 
 permissions:
   contents: write
+  id-token: write  # For OIDC token generation
 
 jobs:
-  validate:
-    name: Validate tag is on main
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Ensure tag points to main
-        run: |
-          TAG_COMMIT=$(git rev-list -n 1 ${{ github.ref_name }})
-          MAIN_COMMIT=$(git rev-parse origin/main)
-          if [ "$TAG_COMMIT" != "$MAIN_COMMIT" ]; then
-            echo "ERROR: Tag is not on main!"
-            exit 1
-          fi
-
   release:
-    name: Build and publish GitHub Release
+    name: Build and publish
     runs-on: ubuntu-latest
-    needs: validate          
+    environment: release  # Optional but recommended for extra safety
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
 
-      - name: Install build dependencies
-        run: pip install build
+      - name: Install dependencies
+        run: pip install -e ".[dev]" build
+
+      - name: Run tests
+        run: pytest
+
+      - name: Type check
+        run: mypy htmforge/
+
+      - name: Lint
+        run: ruff check htmforge/
+
+      - name: Build documentation
+        run: python -m mkdocs build --strict
 
       - name: Build distribution
         run: python -m build
 
-      - name: Extract version from tag
-        id: version
-        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
-
-      - name: Extract changelog section
-        id: changelog
+      - name: Create git tag
+        if: github.event.inputs.version != ''
         run: |
-          python - <<'EOF'
-          import re, pathlib, os
-          version = os.environ["VERSION"]
-          text = pathlib.Path("docs/changelog.md").read_text()
-          pattern = rf"## \[{re.escape(version)}\].*?\n(.*?)(?=\n## \[|\Z)"
-          match = re.search(pattern, text, re.DOTALL)
-          body = match.group(1).strip() if match else "See CHANGELOG for details."
-          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-              f.write(f"BODY<<EOF\n{body}\nEOF\n")
-          EOF
-        env:
-          VERSION: ${{ steps.version.outputs.VERSION }}
+          TAG="v${{ github.event.inputs.version }}"
+          git tag "$TAG"
+          git push origin "$TAG"
 
       - name: Create GitHub Release
+        if: github.event.inputs.version != ''
         uses: softprops/action-gh-release@v2
         with:
-          name: htmforge ${{ steps.version.outputs.VERSION }}
-          body: ${{ steps.changelog.outputs.BODY }}
-          prerelease: ${{ contains(steps.version.outputs.VERSION, 'a') || contains(steps.version.outputs.VERSION, 'b') || contains(steps.version.outputs.VERSION, 'rc') }}
-          files: |
-            dist/*.whl
-            dist/*.tar.gz
+          tag_name: v${{ github.event.inputs.version }}
+          files: dist/*
+          body: "Release v${{ github.event.inputs.version }}\n\nSee [CHANGELOG](https://github.com/mondi04/htmforge/blob/main/OVERVIEW.md) for details."
+          draft: false
+          prerelease: false
+
+      - name: Publish to PyPI
+        if: github.event.inputs.version != ''
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Deploy docs to GitHub Pages
+        if: github.event.inputs.version != ''
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
