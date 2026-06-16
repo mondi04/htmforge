@@ -31,7 +31,7 @@ ruff format htmforge/ # format
 1. Fork the repository and create a branch: `git checkout -b feat/my-feature`
 2. Write your code and add tests — all new public functions need a docstring
 3. Make sure `pytest`, `mypy htmforge/`, and `ruff check htmforge/` all pass
-4. Open a pull request against `main` with a clear description
+4. Open a pull request against `develop` with a clear description
 
 ## Coding Standards
 
