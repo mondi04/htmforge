@@ -4,6 +4,35 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.4.1] - 2026-06-16
+
+### Added
+- GitHub issue templates: bug.yml (bug reports), feature.yml (feature requests), config.yml (template config)
+- PR template with checklist for tests, type checking, linting, docstrings, conventional commits
+- Updated CONTRIBUTING.md with full setup guide, workflow, and coding standards
+
+### Changed
+- Release workflow: moved from local release.py/push.py scripts to GitHub Actions
+- release.yml now uses Trusted Publishing (OIDC) instead of PyPI API tokens
+
+### Removed
+- release.py: version detection and validation now in GitHub Actions workflow
+- push.py: PyPI uploads now handled by gh-action-pypi-publish
+
+### Fixed
+- (none for this patch)
+
+## [0.4.0] - 2026-05-15
+
+### Added
+- Page: lang field (default "en") sets lang attribute on <html> element for accessibility
+- Component: to_json() method returns {"html": ..., "component": ...} for API endpoints
+- CI: optional Trusted Publishing workflow (publish.yml) — manual trigger, replaces local token
+
+### Changed
+- Build: migrated to hatch-vcs for single-source-of-truth versioning via git tags
+- release.py and push.py: read version from git tag instead of pyproject.toml
+
 ## [0.3.3] - 2026-05-15
 
 ### Fixed
@@ -15,17 +44,6 @@ Versioning: [Semantic Versioning](https://semver.org/).
 ### Changed
 - CONTRIBUTING.md: Good First Issues updated to reflect actual open tasks
 - OVERVIEW.md: test count and roadmap updated
-
-## [0.4.0] - 2026-05-XX
-
-### Added
-- Page: lang field (default "en") sets lang attribute on <html> element for accessibility
-- Component: to_json() method returns {"html": ..., "component": ...} for API endpoints
-- CI: optional Trusted Publishing workflow (publish.yml) — manual trigger, replaces local token
-
-### Changed
-- Build: migrated to hatch-vcs for single-source-of-truth versioning via git tags
-- release.py and push.py: read version from git tag instead of pyproject.toml
 
 ## [0.3.2] - 2026-05-15
 
