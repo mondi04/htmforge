@@ -11,7 +11,7 @@ Example:
 from __future__ import annotations
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import a, button, div
 from htmforge.htmx import HxSwap
 
@@ -61,4 +61,4 @@ class Dropdown(Component):
         menu_div = div(*menu_items, id=menu_id, cls="dropdown-menu")
 
         # Root-Div
-        return div(trigger_button, menu_div, cls="dropdown")
+        return div(trigger_button, menu_div, cls=merge_cls("dropdown", self.extra_cls))

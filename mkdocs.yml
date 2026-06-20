@@ -73,6 +73,7 @@ nav:
     - Components: guide/components.md
     - HTMX Integration: guide/htmx.md
     - Framework Adapters: guide/frameworks.md
+    - Styling: guide/styling.md
     - XSS & Safety: guide/safety.md
   
   - Components Reference:

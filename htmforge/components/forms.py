@@ -15,7 +15,7 @@ Example:
 from __future__ import annotations
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import (
     button,
     div,
@@ -74,7 +74,7 @@ class SelectField(Component):
         children.append(sel)
         if self.error:
             children.append(div(self.error, cls="field-error"))
-        return div(*children)
+        return div(*children, cls=merge_cls("field-wrapper", self.extra_cls))
 
 
 class CheckboxField(Component):
@@ -114,7 +114,7 @@ class CheckboxField(Component):
         ]
         if self.error:
             children.append(div(self.error, cls="field-error"))
-        return div(*children, cls="checkbox-field")
+        return div(*children, cls=merge_cls("checkbox-field", self.extra_cls))
 
 
 class RadioGroup(Component):
@@ -163,7 +163,7 @@ class RadioGroup(Component):
         if self.error:
             children.append(div(self.error, cls="field-error"))
 
-        return fieldset(*children)
+        return fieldset(*children, cls=merge_cls("radiogroup", self.extra_cls))
 
 
 class FormGroup(Component):
@@ -188,8 +188,10 @@ class FormGroup(Component):
         for field in self.fields:
             children.append(field.render())
 
-        group_cls = f"form-group {self.group_cls}".strip()
-        return div(*children, cls=group_cls)
+        return div(
+            *children,
+            cls=merge_cls("form-group", self.group_cls, self.extra_cls),
+        )
 
 
 class Form(Component):
@@ -235,6 +237,7 @@ class Form(Component):
         form_attrs: dict[str, object] = {
             "action": self.action,
             "method": self.method,
+            "cls": merge_cls("form", self.extra_cls),
         }
         if self.hx_post:
             form_attrs["hx_post"] = self.hx_post

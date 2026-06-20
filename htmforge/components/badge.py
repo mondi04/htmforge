@@ -11,7 +11,7 @@ from __future__ import annotations
 from enum import StrEnum
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import span
 
 
@@ -38,4 +38,7 @@ class Badge(Component):
 
     def render(self) -> Element:
         """Erstellt ein ``<span>`` mit Variantenklasse."""
-        return span(self.text, cls=f"badge badge-{self.variant.value}")
+        return span(
+            self.text,
+            cls=merge_cls(f"badge badge-{self.variant.value}", self.extra_cls),
+        )

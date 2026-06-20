@@ -11,7 +11,7 @@ from __future__ import annotations
 from enum import StrEnum
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import div
 
 
@@ -46,7 +46,7 @@ class Toast(Component):
         """Rendert die Toast-Benachrichtigung mit OOB-Swap-Support."""
         attrs: dict[str, object] = {
             "id": self.toast_id,
-            "cls": f"toast toast-{self.variant.value}",
+            "cls": merge_cls(f"toast toast-{self.variant.value}", self.extra_cls),
             "hx_swap_oob": "true",
         }
         if self.duration_ms > 0:

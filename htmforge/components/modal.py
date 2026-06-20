@@ -15,7 +15,7 @@ Example:
 from __future__ import annotations
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import button, dialog, div, form, raw
 from htmforge.htmx import HxSwap
 
@@ -86,5 +86,5 @@ class Modal(Component):
                 "});"
                 "</script>"
             ),
-            cls="modal-wrapper",
+            cls=merge_cls("modal-wrapper", self.extra_cls),
         )

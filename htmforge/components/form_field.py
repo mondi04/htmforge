@@ -12,7 +12,7 @@ from __future__ import annotations
 from enum import StrEnum
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import div, input, label
 
 
@@ -76,4 +76,4 @@ class FormField(Component):
         if self.error:
             children.append(div(self.error, cls="field-error"))
 
-        return div(*children)
+        return div(*children, cls=merge_cls(self.extra_cls))

@@ -197,6 +197,29 @@ def safe_html(text: str) -> Markup:
     return Markup(text)  # noqa: S704
 
 
+def merge_cls(*parts: str | None) -> str | None:
+    """Verbindet mehrere CSS-Klassen-Strings zu einem, leere Teile werden ignoriert.
+
+    Wird von Components genutzt, um die eigene Default-Klasse mit einer
+    optionalen ``extra_cls``-Prop zu kombinieren, ohne ein leeres
+    ``class=""``-Attribut zu erzeugen, wenn keine Klasse gesetzt ist.
+
+    Args:
+        *parts: Beliebig viele Klassen-Strings, ``None`` oder ``""`` erlaubt.
+
+    Returns:
+        Die verbundenen Klassen als String, oder ``None`` wenn alle Teile
+        leer/``None`` sind (damit das Attribut beim Rendern weggelassen wird).
+
+    Example:
+        >>> merge_cls("alert alert-success", "")
+        'alert alert-success'
+        >>> merge_cls("", None)
+    """
+    joined = " ".join(p for p in parts if p)
+    return joined or None
+
+
 def _normalize_attr_name(name: str) -> str:
     """Normalisiert einen Python-Attribut-Namen zu einem HTML-Attribut-Namen.
 

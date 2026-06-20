@@ -11,7 +11,7 @@ from __future__ import annotations
 from enum import StrEnum
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import div
 
 
@@ -37,7 +37,7 @@ class Spinner(Component):
     def render(self) -> Element:
         """Rendert den Spinner mit Größenklasse und Accessibility-Attributen."""
         return div(
-            cls=f"spinner spinner-{self.size.value}",
+            cls=merge_cls(f"spinner spinner-{self.size.value}", self.extra_cls),
             role="status",
             aria_label=self.label,
         )

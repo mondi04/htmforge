@@ -12,7 +12,7 @@ Example:
 from __future__ import annotations
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import button, div
 from htmforge.htmx import HxSwap
 
@@ -57,5 +57,5 @@ class Tabs(Component):
                     )
                 )
 
-        tab_cls = f"tabs {self.tab_cls}".strip()
+        tab_cls = merge_cls("tabs", self.tab_cls, self.extra_cls)
         return div(*tab_buttons, cls=tab_cls)

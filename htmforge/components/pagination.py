@@ -13,7 +13,7 @@ Example:
 from __future__ import annotations
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import a, li, ul
 
 
@@ -44,7 +44,7 @@ class Pagination(Component):
                 )
 
         items.append(self._next_link())
-        return ul(*items, cls="pagination")
+        return ul(*items, cls=merge_cls("pagination", self.extra_cls))
 
     def _previous_link(self) -> Element:
         """Rendert den Previous-Link mit deaktiviertem Zustand auf Seite 1."""

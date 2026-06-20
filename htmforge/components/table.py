@@ -12,7 +12,7 @@ from __future__ import annotations
 from pydantic import BaseModel, ConfigDict
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import a, div, table, tbody, td, th, thead, tr
 from htmforge.htmx import HxTrigger
 
@@ -73,7 +73,7 @@ class DataTable(Component):
                 cls="table",
                 **attrs,
             ),
-            cls="table-wrapper",
+            cls=merge_cls("table-wrapper", self.extra_cls),
         )
 
     def _render_header_row(self) -> Element:
