@@ -15,6 +15,13 @@ Versioning: [Semantic Versioning](https://semver.org/).
 ### Changed
 - `Form.action` is now optional (default `""`) instead of required
 
+### Fixed
+- Default theme (`docs/assets/css/htmforge-theme.css` + `examples/admin-panel/static/admin.css`): `CheckboxField`/`RadioGroup` inputs no longer inherit full-width text-input styling (`width: 100%`, large padding, `border-radius: 14px`), which previously rendered checkboxes/radios as oversized pill shapes
+- `.checkbox-field` / `.radio-item`: switched from `display: grid` to `display: flex` so the input sits inline with its label instead of stacking on its own row
+- `.checkbox-field label` now included in the bold-label rule (was previously unstyled, inconsistent with other field labels)
+- `<textarea>` (new via `InputType.TEXTAREA`) now has matching border, padding, and focus styling instead of falling back to unstyled browser defaults; added `min-height`, vertical `resize`, and `line-height` for usability
+- Generic input focus-state block extended to cover `number`, `tel`, `url`, and `textarea` (previously only `text`/`email`/`search`/`password`/`select` were covered)
+
 ## [0.4.3] - 2026-06-20
 
 ### Added
