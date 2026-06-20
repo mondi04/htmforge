@@ -10,7 +10,7 @@ Example:
 from __future__ import annotations
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import div, input
 from htmforge.htmx import hx_keyup_delay
 
@@ -53,5 +53,5 @@ class SearchInput(Component):
                 hx_target=self.search_target,
                 hx_indicator=self.indicator or None,
             ),
-            cls="search-input-wrapper",
+            cls=merge_cls("search-input-wrapper", self.extra_cls),
         )

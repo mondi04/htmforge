@@ -8,7 +8,7 @@ Example:
 from __future__ import annotations
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import details, div, summary
 
 
@@ -29,7 +29,7 @@ class Accordion(Component):
         """Rendert das Accordion mit aufklappbaren Items."""
         accordion_items: list[Element] = []
         for i, (title, content) in enumerate(self.items):
-            item_cls = f"accordion-item {self.item_cls}".strip()
+            item_cls = merge_cls("accordion-item", self.item_cls, self.extra_cls)
             is_open = i == self.open_index
             accordion_items.append(
                 details(
@@ -40,4 +40,4 @@ class Accordion(Component):
                 )
             )
 
-        return div(*accordion_items, cls="accordion")
+        return div(*accordion_items, cls=merge_cls("accordion", self.extra_cls))

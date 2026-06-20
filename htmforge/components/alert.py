@@ -11,7 +11,7 @@ from __future__ import annotations
 from enum import StrEnum
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import button, div
 
 
@@ -45,4 +45,4 @@ class Alert(Component):
                     onclick="this.closest('.alert').remove()",
                 )
             )
-        return div(*children, cls=f"alert alert-{self.variant.value}")
+        return div(*children, cls=merge_cls(f"alert alert-{self.variant.value}", self.extra_cls))

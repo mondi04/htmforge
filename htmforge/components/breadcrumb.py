@@ -12,7 +12,7 @@ Example:
 from __future__ import annotations
 
 from htmforge import Component
-from htmforge.core.element import Element
+from htmforge.core.element import Element, merge_cls
 from htmforge.elements import a, li, nav, ol, span
 
 
@@ -51,4 +51,4 @@ class Breadcrumb(Component):
                     )
                 )
 
-        return nav(ol(*list_items, cls="breadcrumb"), aria_label="breadcrumb")
+        return nav(ol(*list_items, cls="breadcrumb"), aria_label="breadcrumb", cls=merge_cls(self.extra_cls))
