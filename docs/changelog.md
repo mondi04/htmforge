@@ -4,6 +4,24 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.5.0] - 2026-06-20
+
+### Added
+- `Form.from_model(model, action="", **kwargs)`: generates a `Form` directly from a Pydantic v2 model
+- `htmforge.components.form_model.fields_from_model(model)`: introspection helper, maps model fields to `FormField`/`CheckboxField`/`SelectField`
+- `InputType.TEXTAREA`: new `FormField` input type, renders `<textarea>`
+- `FormField.min` / `FormField.max`: numeric bounds rendered on `<input type="number">`
+
+### Changed
+- `Form.action` is now optional (default `""`) instead of required
+
+### Fixed
+- Default theme (`docs/assets/css/htmforge-theme.css` + `examples/admin-panel/static/admin.css`): `CheckboxField`/`RadioGroup` inputs no longer inherit full-width text-input styling (`width: 100%`, large padding, `border-radius: 14px`), which previously rendered checkboxes/radios as oversized pill shapes
+- `.checkbox-field` / `.radio-item`: switched from `display: grid` to `display: flex` so the input sits inline with its label instead of stacking on its own row
+- `.checkbox-field label` now included in the bold-label rule (was previously unstyled, inconsistent with other field labels)
+- `<textarea>` (new via `InputType.TEXTAREA`) now has matching border, padding, and focus styling instead of falling back to unstyled browser defaults; added `min-height`, vertical `resize`, and `line-height` for usability
+- Generic input focus-state block extended to cover `number`, `tel`, `url`, and `textarea` (previously only `text`/`email`/`search`/`password`/`select` were covered)
+
 ## [0.4.3] - 2026-06-20
 
 ### Added
