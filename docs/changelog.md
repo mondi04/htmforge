@@ -4,6 +4,12 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.4.3] - 2026-06-20
+
+### Added
+- `.github/workflows/auto-tag.yml`: automatically tags `main` on merge when the merge commit title starts with `release: vX.Y.Z`, then fast-forwards `develop` onto `main`. Fails visibly (red ❌) if no valid release pattern is found, so a forgotten title change is never silent.
+- Documented the full release process in `CONTRIBUTING.md` (Maintainers section), including the manual merge-title step and a troubleshooting table.
+
 ## [0.4.2] - 2026-06-20
 
 ### Added
