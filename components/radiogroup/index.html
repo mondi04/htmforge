@@ -770,6 +770,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guide/styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Styling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guide/safety/" class="md-nav__link">
         
   
@@ -2018,12 +2046,18 @@
 <td><code>""</code></td>
 <td>Error message; renders as <code>div.field-error</code> if set</td>
 </tr>
+<tr>
+<td><code>extra_cls</code></td>
+<td><code>str</code></td>
+<td><code>""</code></td>
+<td>Extra CSS class appended to the <code>fieldset</code> (inherited from <code>Component</code>)</td>
+</tr>
 </tbody>
 </table>
 <h2 id="rendered-html">Rendered HTML</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">fieldset</span><span class="p">&gt;&lt;</span><span class="nt">legend</span><span class="p">&gt;</span>Select Plan<span class="p">&lt;/</span><span class="nt">legend</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;radio-item&quot;</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;plan&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;plan-basic&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;basic&quot;</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;plan-basic&quot;</span><span class="p">&gt;</span>Basic<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;radio-item&quot;</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;plan&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;plan-pro&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;pro&quot;</span> <span class="na">checked</span> <span class="na">required</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;plan-pro&quot;</span><span class="p">&gt;</span>Pro<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;radio-item&quot;</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;plan&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;plan-enterprise&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;enterprise&quot;</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;plan-enterprise&quot;</span><span class="p">&gt;</span>Enterprise<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">fieldset</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;radiogroup&quot;</span><span class="p">&gt;&lt;</span><span class="nt">legend</span><span class="p">&gt;</span>Select Plan<span class="p">&lt;/</span><span class="nt">legend</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;radio-item&quot;</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;plan&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;plan-basic&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;basic&quot;</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;plan-basic&quot;</span><span class="p">&gt;</span>Basic<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;radio-item&quot;</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;plan&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;plan-pro&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;pro&quot;</span> <span class="na">checked</span> <span class="na">required</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;plan-pro&quot;</span><span class="p">&gt;</span>Pro<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;radio-item&quot;</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;plan&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;plan-enterprise&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;enterprise&quot;</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;plan-enterprise&quot;</span><span class="p">&gt;</span>Enterprise<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
 </code></pre></div>
-<p><strong>Note:</strong> Rendered in a <code>&lt;fieldset&gt;</code> with radio items in individual <code>div.radio-item</code> containers. The <code>required</code> attribute is only set on the first radio button.</p>
+<p><strong>Note:</strong> Rendered in a <code>&lt;fieldset class="radiogroup"&gt;</code> with radio items in individual <code>div.radio-item</code> containers. The <code>required</code> attribute is only set on the first radio button. Use <code>extra_cls</code> to add custom styling classes.</p>
 
 
 

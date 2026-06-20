@@ -770,6 +770,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guide/styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Styling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guide/safety/" class="md-nav__link">
         
   
@@ -2290,7 +2318,7 @@
   <a href="#htmforge.components.breadcrumb.Breadcrumb--contains-home-and-aktuell" class="md-nav__link">
     <span class="md-ellipsis">
       
-        contains htmforge.components.table.DataTable(**data) Bases: Component Rendert eine einfache Datentabelle mit optionalem HTMX-Reload. Source code in htmforge/core/component.py 84 85 86 87 88 89 90 91def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Erstellt div.table-wrapper &gt; table.table mit thead/tbody. Source code in htmforge/components/table.py 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77def render(self) -&gt; Element: &quot;&quot;&quot;Erstellt ``div.table-wrapper &gt; table.table`` mit ``thead``/``tbody``.&quot;&quot;&quot; # Build header row header_row = self._render_header_row() # Build body rows body_rows = self._render_body_rows() attrs: dict[str, object] = {} if self.hx_url is not None: attrs[&quot;hx_get&quot;] = self.hx_url attrs[&quot;hx_trigger&quot;] = HxTrigger.LOAD return div( table( thead(header_row), tbody(*body_rows), cls=&quot;table&quot;, **attrs, ), cls=&quot;table-wrapper&quot;, ) Home htmforge.components.table.ColumnDef Bases: BaseModel Spaltenkonfiguration fuer DataTable. Fields key: Schlüssel für dict_rows oder Index-Position label: Angezeigter Spaltenname (default = key) sortable: Ob die Spalte klickbar/sortierbar ist width: Optionale CSS-Breite z.B. "120px" oder "10%" display_label property Gibt label zurück, falls gesetzt, sonst key. and htmforge.components.spinner.Spinner(**data) Bases: Component Barrierefreier Ladeindikator mit Groessenvarianten. Example Spinner().to_html() '' Source code in htmforge/core/component.py 84 85 86 87 88 89 90 91def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Rendert den Spinner mit Größenklasse und Accessibility-Attributen. Source code in htmforge/components/spinner.py 37 38 39 40 41 42 43def render(self) -&gt; Element: &quot;&quot;&quot;Rendert den Spinner mit Größenklasse und Accessibility-Attributen.&quot;&quot;&quot; return div( cls=f&quot;spinner spinner-{self.size.value}&quot;, role=&quot;status&quot;, aria_label=self.label, ) Aktuell htmforge.components.spinner.SpinnerSize Bases: StrEnum Verfügbare Spinner-Größen.
+        contains htmforge.components.table.DataTable(**data) Bases: Component Rendert eine einfache Datentabelle mit optionalem HTMX-Reload. Source code in htmforge/core/component.py 89 90 91 92 93 94 95 96def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Erstellt div.table-wrapper &gt; table.table mit thead/tbody. Source code in htmforge/components/table.py 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77def render(self) -&gt; Element: &quot;&quot;&quot;Erstellt ``div.table-wrapper &gt; table.table`` mit ``thead``/``tbody``.&quot;&quot;&quot; # Build header row header_row = self._render_header_row() # Build body rows body_rows = self._render_body_rows() attrs: dict[str, object] = {} if self.hx_url is not None: attrs[&quot;hx_get&quot;] = self.hx_url attrs[&quot;hx_trigger&quot;] = HxTrigger.LOAD return div( table( thead(header_row), tbody(*body_rows), cls=&quot;table&quot;, **attrs, ), cls=merge_cls(&quot;table-wrapper&quot;, self.extra_cls), ) Home htmforge.components.table.ColumnDef Bases: BaseModel Spaltenkonfiguration fuer DataTable. Fields key: Schlüssel für dict_rows oder Index-Position label: Angezeigter Spaltenname (default = key) sortable: Ob die Spalte klickbar/sortierbar ist width: Optionale CSS-Breite z.B. "120px" oder "10%" display_label property Gibt label zurück, falls gesetzt, sonst key. and htmforge.components.spinner.Spinner(**data) Bases: Component Barrierefreier Ladeindikator mit Groessenvarianten. Example Spinner().to_html() '' Source code in htmforge/core/component.py 89 90 91 92 93 94 95 96def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Rendert den Spinner mit Größenklasse und Accessibility-Attributen. Source code in htmforge/components/spinner.py 37 38 39 40 41 42 43def render(self) -&gt; Element: &quot;&quot;&quot;Rendert den Spinner mit Größenklasse und Accessibility-Attributen.&quot;&quot;&quot; return div( cls=merge_cls(f&quot;spinner spinner-{self.size.value}&quot;, self.extra_cls), role=&quot;status&quot;, aria_label=self.label, ) Aktuell htmforge.components.spinner.SpinnerSize Bases: StrEnum Verfügbare Spinner-Größen.
       
     </span>
   </a>
@@ -3335,7 +3363,7 @@
   <a href="#htmforge.components.breadcrumb.Breadcrumb--contains-home-and-aktuell" class="md-nav__link">
     <span class="md-ellipsis">
       
-        contains htmforge.components.table.DataTable(**data) Bases: Component Rendert eine einfache Datentabelle mit optionalem HTMX-Reload. Source code in htmforge/core/component.py 84 85 86 87 88 89 90 91def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Erstellt div.table-wrapper &gt; table.table mit thead/tbody. Source code in htmforge/components/table.py 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77def render(self) -&gt; Element: &quot;&quot;&quot;Erstellt ``div.table-wrapper &gt; table.table`` mit ``thead``/``tbody``.&quot;&quot;&quot; # Build header row header_row = self._render_header_row() # Build body rows body_rows = self._render_body_rows() attrs: dict[str, object] = {} if self.hx_url is not None: attrs[&quot;hx_get&quot;] = self.hx_url attrs[&quot;hx_trigger&quot;] = HxTrigger.LOAD return div( table( thead(header_row), tbody(*body_rows), cls=&quot;table&quot;, **attrs, ), cls=&quot;table-wrapper&quot;, ) Home htmforge.components.table.ColumnDef Bases: BaseModel Spaltenkonfiguration fuer DataTable. Fields key: Schlüssel für dict_rows oder Index-Position label: Angezeigter Spaltenname (default = key) sortable: Ob die Spalte klickbar/sortierbar ist width: Optionale CSS-Breite z.B. "120px" oder "10%" display_label property Gibt label zurück, falls gesetzt, sonst key. and htmforge.components.spinner.Spinner(**data) Bases: Component Barrierefreier Ladeindikator mit Groessenvarianten. Example Spinner().to_html() '' Source code in htmforge/core/component.py 84 85 86 87 88 89 90 91def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Rendert den Spinner mit Größenklasse und Accessibility-Attributen. Source code in htmforge/components/spinner.py 37 38 39 40 41 42 43def render(self) -&gt; Element: &quot;&quot;&quot;Rendert den Spinner mit Größenklasse und Accessibility-Attributen.&quot;&quot;&quot; return div( cls=f&quot;spinner spinner-{self.size.value}&quot;, role=&quot;status&quot;, aria_label=self.label, ) Aktuell htmforge.components.spinner.SpinnerSize Bases: StrEnum Verfügbare Spinner-Größen.
+        contains htmforge.components.table.DataTable(**data) Bases: Component Rendert eine einfache Datentabelle mit optionalem HTMX-Reload. Source code in htmforge/core/component.py 89 90 91 92 93 94 95 96def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Erstellt div.table-wrapper &gt; table.table mit thead/tbody. Source code in htmforge/components/table.py 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77def render(self) -&gt; Element: &quot;&quot;&quot;Erstellt ``div.table-wrapper &gt; table.table`` mit ``thead``/``tbody``.&quot;&quot;&quot; # Build header row header_row = self._render_header_row() # Build body rows body_rows = self._render_body_rows() attrs: dict[str, object] = {} if self.hx_url is not None: attrs[&quot;hx_get&quot;] = self.hx_url attrs[&quot;hx_trigger&quot;] = HxTrigger.LOAD return div( table( thead(header_row), tbody(*body_rows), cls=&quot;table&quot;, **attrs, ), cls=merge_cls(&quot;table-wrapper&quot;, self.extra_cls), ) Home htmforge.components.table.ColumnDef Bases: BaseModel Spaltenkonfiguration fuer DataTable. Fields key: Schlüssel für dict_rows oder Index-Position label: Angezeigter Spaltenname (default = key) sortable: Ob die Spalte klickbar/sortierbar ist width: Optionale CSS-Breite z.B. "120px" oder "10%" display_label property Gibt label zurück, falls gesetzt, sonst key. and htmforge.components.spinner.Spinner(**data) Bases: Component Barrierefreier Ladeindikator mit Groessenvarianten. Example Spinner().to_html() '' Source code in htmforge/core/component.py 89 90 91 92 93 94 95 96def __init__(self, **data: Any) -&gt; None: # noqa: ANN401 &quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot; if getattr(type(self), &quot;__htmforge_missing_render__&quot;, False): raise TypeError( f&quot;Can&#39;t instantiate abstract class {type(self).__name__} &quot; &quot;without a concrete render() implementation&quot; ) super().__init__(**data) render() Rendert den Spinner mit Größenklasse und Accessibility-Attributen. Source code in htmforge/components/spinner.py 37 38 39 40 41 42 43def render(self) -&gt; Element: &quot;&quot;&quot;Rendert den Spinner mit Größenklasse und Accessibility-Attributen.&quot;&quot;&quot; return div( cls=merge_cls(f&quot;spinner spinner-{self.size.value}&quot;, self.extra_cls), role=&quot;status&quot;, aria_label=self.label, ) Aktuell htmforge.components.spinner.SpinnerSize Bases: StrEnum Verfügbare Spinner-Größen.
       
     </span>
   </a>
@@ -3555,21 +3583,21 @@
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -3643,7 +3671,7 @@
 <a id="__codelineno-0-73" name="__codelineno-0-73"></a>            <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;table&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-74" name="__codelineno-0-74"></a>            <span class="o">**</span><span class="n">attrs</span><span class="p">,</span>
 <a id="__codelineno-0-75" name="__codelineno-0-75"></a>        <span class="p">),</span>
-<a id="__codelineno-0-76" name="__codelineno-0-76"></a>        <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;table-wrapper&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a>        <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;table-wrapper&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">),</span>
 <a id="__codelineno-0-77" name="__codelineno-0-77"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -3778,21 +3806,21 @@ width: Optionale CSS-Breite z.B. "120px" oder "10%"</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -3834,7 +3862,7 @@ width: Optionale CSS-Breite z.B. "120px" oder "10%"</p>
 <span class="normal"><a href="#__codelineno-0-43">43</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
 <a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Rendert den Spinner mit Größenklasse und Accessibility-Attributen.&quot;&quot;&quot;</span>
 <a id="__codelineno-0-39" name="__codelineno-0-39"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40"></a>        <span class="bp">cls</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;spinner spinner-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>        <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;spinner spinner-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">),</span>
 <a id="__codelineno-0-41" name="__codelineno-0-41"></a>        <span class="n">role</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-42" name="__codelineno-0-42"></a>        <span class="n">aria_label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
 <a id="__codelineno-0-43" name="__codelineno-0-43"></a>    <span class="p">)</span>
@@ -3936,21 +3964,21 @@ tab_cls: extra CSS class on the tab bar wrapper div</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -4034,7 +4062,7 @@ tab_cls: extra CSS class on the tab bar wrapper div</p>
 <a id="__codelineno-0-57" name="__codelineno-0-57"></a>                <span class="p">)</span>
 <a id="__codelineno-0-58" name="__codelineno-0-58"></a>            <span class="p">)</span>
 <a id="__codelineno-0-59" name="__codelineno-0-59"></a>
-<a id="__codelineno-0-60" name="__codelineno-0-60"></a>    <span class="n">tab_cls</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;tabs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tab_cls</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>    <span class="n">tab_cls</span> <span class="o">=</span> <span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;tabs&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tab_cls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">)</span>
 <a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">tab_buttons</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">tab_cls</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -4088,21 +4116,21 @@ duration_ms: int — auto-dismiss after ms via JS, 0 = no auto-dismiss</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -4149,7 +4177,7 @@ duration_ms: int — auto-dismiss after ms via JS, 0 = no auto-dismiss</p>
 <a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Rendert die Toast-Benachrichtigung mit OOB-Swap-Support.&quot;&quot;&quot;</span>
 <a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="n">attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
 <a id="__codelineno-0-48" name="__codelineno-0-48"></a>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">toast_id</span><span class="p">,</span>
-<a id="__codelineno-0-49" name="__codelineno-0-49"></a>        <span class="s2">&quot;cls&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;toast toast-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a>        <span class="s2">&quot;cls&quot;</span><span class="p">:</span> <span class="n">merge_cls</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;toast toast-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">),</span>
 <a id="__codelineno-0-50" name="__codelineno-0-50"></a>        <span class="s2">&quot;hx_swap_oob&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-51" name="__codelineno-0-51"></a>    <span class="p">}</span>
 <a id="__codelineno-0-52" name="__codelineno-0-52"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration_ms</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -4253,21 +4281,21 @@ item_cls: str — extra CSS class on each details element</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -4319,7 +4347,7 @@ item_cls: str — extra CSS class on each details element</p>
 <a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Rendert das Accordion mit aufklappbaren Items.&quot;&quot;&quot;</span>
 <a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="n">accordion_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 <a id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32"></a>        <span class="n">item_cls</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;accordion-item </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">item_cls</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a>        <span class="n">item_cls</span> <span class="o">=</span> <span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;accordion-item&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_cls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">)</span>
 <a id="__codelineno-0-33" name="__codelineno-0-33"></a>        <span class="n">is_open</span> <span class="o">=</span> <span class="n">i</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">open_index</span>
 <a id="__codelineno-0-34" name="__codelineno-0-34"></a>        <span class="n">accordion_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
 <a id="__codelineno-0-35" name="__codelineno-0-35"></a>            <span class="n">details</span><span class="p">(</span>
@@ -4330,7 +4358,7 @@ item_cls: str — extra CSS class on each details element</p>
 <a id="__codelineno-0-40" name="__codelineno-0-40"></a>            <span class="p">)</span>
 <a id="__codelineno-0-41" name="__codelineno-0-41"></a>        <span class="p">)</span>
 <a id="__codelineno-0-42" name="__codelineno-0-42"></a>
-<a id="__codelineno-0-43" name="__codelineno-0-43"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">accordion_items</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;accordion&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">accordion_items</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;accordion&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4391,21 +4419,21 @@ toggle_url: str — HTMX URL to reload/toggle menu, default ""</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -4482,7 +4510,7 @@ toggle_url: str — HTMX URL to reload/toggle menu, default ""</p>
 <a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="n">menu_div</span> <span class="o">=</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">menu_items</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">menu_id</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;dropdown-menu&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-62" name="__codelineno-0-62"></a>
 <a id="__codelineno-0-63" name="__codelineno-0-63"></a>    <span class="c1"># Root-Div</span>
-<a id="__codelineno-0-64" name="__codelineno-0-64"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="n">trigger_button</span><span class="p">,</span> <span class="n">menu_div</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;dropdown&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="n">trigger_button</span><span class="p">,</span> <span class="n">menu_div</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;dropdown&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4536,21 +4564,21 @@ field_id: str — HTML id, default = name</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -4629,7 +4657,7 @@ field_id: str — HTML id, default = name</p>
 <a id="__codelineno-0-74" name="__codelineno-0-74"></a>    <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
 <a id="__codelineno-0-75" name="__codelineno-0-75"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
 <a id="__codelineno-0-76" name="__codelineno-0-76"></a>        <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;field-error&quot;</span><span class="p">))</span>
-<a id="__codelineno-0-77" name="__codelineno-0-77"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">)</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;field-wrapper&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4682,21 +4710,21 @@ field_id: str — HTML id, default = name</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -4761,7 +4789,7 @@ field_id: str — HTML id, default = name</p>
 <a id="__codelineno-0-114" name="__codelineno-0-114"></a>    <span class="p">]</span>
 <a id="__codelineno-0-115" name="__codelineno-0-115"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
 <a id="__codelineno-0-116" name="__codelineno-0-116"></a>        <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;field-error&quot;</span><span class="p">))</span>
-<a id="__codelineno-0-117" name="__codelineno-0-117"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;checkbox-field&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-117" name="__codelineno-0-117"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;checkbox-field&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4813,21 +4841,21 @@ error: str — Fehlermeldung</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -4914,7 +4942,7 @@ error: str — Fehlermeldung</p>
 <a id="__codelineno-0-163" name="__codelineno-0-163"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
 <a id="__codelineno-0-164" name="__codelineno-0-164"></a>        <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;field-error&quot;</span><span class="p">))</span>
 <a id="__codelineno-0-165" name="__codelineno-0-165"></a>
-<a id="__codelineno-0-166" name="__codelineno-0-166"></a>    <span class="k">return</span> <span class="n">fieldset</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">)</span>
+<a id="__codelineno-0-166" name="__codelineno-0-166"></a>    <span class="k">return</span> <span class="n">fieldset</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;radiogroup&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4963,21 +4991,21 @@ group_cls: str — extra CSS-Klasse auf dem wrapper div</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -5020,7 +5048,9 @@ group_cls: str — extra CSS-Klasse auf dem wrapper div</p>
 <span class="normal"><a href="#__codelineno-0-189">189</a></span>
 <span class="normal"><a href="#__codelineno-0-190">190</a></span>
 <span class="normal"><a href="#__codelineno-0-191">191</a></span>
-<span class="normal"><a href="#__codelineno-0-192">192</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-182" name="__codelineno-0-182"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<span class="normal"><a href="#__codelineno-0-192">192</a></span>
+<span class="normal"><a href="#__codelineno-0-193">193</a></span>
+<span class="normal"><a href="#__codelineno-0-194">194</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-182" name="__codelineno-0-182"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
 <a id="__codelineno-0-183" name="__codelineno-0-183"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Rendert eine Feldgruppe mit optionaler Legend.&quot;&quot;&quot;</span>
 <a id="__codelineno-0-184" name="__codelineno-0-184"></a>    <span class="n">children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 <a id="__codelineno-0-185" name="__codelineno-0-185"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">legend_text</span><span class="p">:</span>
@@ -5029,8 +5059,10 @@ group_cls: str — extra CSS-Klasse auf dem wrapper div</p>
 <a id="__codelineno-0-188" name="__codelineno-0-188"></a>    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">:</span>
 <a id="__codelineno-0-189" name="__codelineno-0-189"></a>        <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
 <a id="__codelineno-0-190" name="__codelineno-0-190"></a>
-<a id="__codelineno-0-191" name="__codelineno-0-191"></a>    <span class="n">group_cls</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;form-group </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">group_cls</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<a id="__codelineno-0-192" name="__codelineno-0-192"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">group_cls</span><span class="p">)</span>
+<a id="__codelineno-0-191" name="__codelineno-0-191"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span>
+<a id="__codelineno-0-192" name="__codelineno-0-192"></a>        <span class="o">*</span><span class="n">children</span><span class="p">,</span>
+<a id="__codelineno-0-193" name="__codelineno-0-193"></a>        <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;form-group&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_cls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">),</span>
+<a id="__codelineno-0-194" name="__codelineno-0-194"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5086,21 +5118,21 @@ hx_swap: HxSwap | None — HTMX swap strategy</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -5133,9 +5165,7 @@ hx_swap: HxSwap | None — HTMX swap strategy</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>htmforge/components/forms.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-220">220</a></span>
-<span class="normal"><a href="#__codelineno-0-221">221</a></span>
-<span class="normal"><a href="#__codelineno-0-222">222</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-222">222</a></span>
 <span class="normal"><a href="#__codelineno-0-223">223</a></span>
 <span class="normal"><a href="#__codelineno-0-224">224</a></span>
 <span class="normal"><a href="#__codelineno-0-225">225</a></span>
@@ -5164,38 +5194,42 @@ hx_swap: HxSwap | None — HTMX swap strategy</p>
 <span class="normal"><a href="#__codelineno-0-248">248</a></span>
 <span class="normal"><a href="#__codelineno-0-249">249</a></span>
 <span class="normal"><a href="#__codelineno-0-250">250</a></span>
-<span class="normal"><a href="#__codelineno-0-251">251</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-220" name="__codelineno-0-220"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
-<a id="__codelineno-0-221" name="__codelineno-0-221"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Rendert das Formular mit auto-error-Injection.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-222" name="__codelineno-0-222"></a>    <span class="c1"># Apply errors to matching fields</span>
-<a id="__codelineno-0-223" name="__codelineno-0-223"></a>    <span class="n">rendered_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-0-224" name="__codelineno-0-224"></a>    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">:</span>
-<a id="__codelineno-0-225" name="__codelineno-0-225"></a>        <span class="n">field_to_render</span> <span class="o">=</span> <span class="n">field</span>
-<a id="__codelineno-0-226" name="__codelineno-0-226"></a>        <span class="c1"># Check if field has a &#39;name&#39; attribute and matching error</span>
-<a id="__codelineno-0-227" name="__codelineno-0-227"></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">):</span>
-<a id="__codelineno-0-228" name="__codelineno-0-228"></a>            <span class="n">field_name</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">name</span>
-<a id="__codelineno-0-229" name="__codelineno-0-229"></a>            <span class="k">if</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">:</span>
-<a id="__codelineno-0-230" name="__codelineno-0-230"></a>                <span class="c1"># Clone field with error</span>
-<a id="__codelineno-0-231" name="__codelineno-0-231"></a>                <span class="n">field_to_render</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">[</span><span class="n">field_name</span><span class="p">])</span>
-<a id="__codelineno-0-232" name="__codelineno-0-232"></a>        <span class="n">rendered_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field_to_render</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
-<a id="__codelineno-0-233" name="__codelineno-0-233"></a>
-<a id="__codelineno-0-234" name="__codelineno-0-234"></a>    <span class="c1"># Build form attributes</span>
-<a id="__codelineno-0-235" name="__codelineno-0-235"></a>    <span class="n">form_attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-0-236" name="__codelineno-0-236"></a>        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">,</span>
-<a id="__codelineno-0-237" name="__codelineno-0-237"></a>        <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
-<a id="__codelineno-0-238" name="__codelineno-0-238"></a>    <span class="p">}</span>
-<a id="__codelineno-0-239" name="__codelineno-0-239"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_post</span><span class="p">:</span>
-<a id="__codelineno-0-240" name="__codelineno-0-240"></a>        <span class="n">form_attrs</span><span class="p">[</span><span class="s2">&quot;hx_post&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_post</span>
-<a id="__codelineno-0-241" name="__codelineno-0-241"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_target</span><span class="p">:</span>
-<a id="__codelineno-0-242" name="__codelineno-0-242"></a>        <span class="n">form_attrs</span><span class="p">[</span><span class="s2">&quot;hx_target&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_target</span>
-<a id="__codelineno-0-243" name="__codelineno-0-243"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_swap</span><span class="p">:</span>
-<a id="__codelineno-0-244" name="__codelineno-0-244"></a>        <span class="n">form_attrs</span><span class="p">[</span><span class="s2">&quot;hx_swap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_swap</span>
-<a id="__codelineno-0-245" name="__codelineno-0-245"></a>
-<a id="__codelineno-0-246" name="__codelineno-0-246"></a>    <span class="c1"># Build form content</span>
-<a id="__codelineno-0-247" name="__codelineno-0-247"></a>    <span class="n">form_children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span><span class="p">]</span> <span class="o">=</span> <span class="n">rendered_fields</span> <span class="o">+</span> <span class="p">[</span>
-<a id="__codelineno-0-248" name="__codelineno-0-248"></a>        <span class="n">button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">submit_label</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-249" name="__codelineno-0-249"></a>    <span class="p">]</span>
-<a id="__codelineno-0-250" name="__codelineno-0-250"></a>
-<a id="__codelineno-0-251" name="__codelineno-0-251"></a>    <span class="k">return</span> <span class="n">form</span><span class="p">(</span><span class="o">*</span><span class="n">form_children</span><span class="p">,</span> <span class="o">**</span><span class="n">form_attrs</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-251">251</a></span>
+<span class="normal"><a href="#__codelineno-0-252">252</a></span>
+<span class="normal"><a href="#__codelineno-0-253">253</a></span>
+<span class="normal"><a href="#__codelineno-0-254">254</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-222" name="__codelineno-0-222"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<a id="__codelineno-0-223" name="__codelineno-0-223"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Rendert das Formular mit auto-error-Injection.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-224" name="__codelineno-0-224"></a>    <span class="c1"># Apply errors to matching fields</span>
+<a id="__codelineno-0-225" name="__codelineno-0-225"></a>    <span class="n">rendered_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-226" name="__codelineno-0-226"></a>    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">:</span>
+<a id="__codelineno-0-227" name="__codelineno-0-227"></a>        <span class="n">field_to_render</span> <span class="o">=</span> <span class="n">field</span>
+<a id="__codelineno-0-228" name="__codelineno-0-228"></a>        <span class="c1"># Check if field has a &#39;name&#39; attribute and matching error</span>
+<a id="__codelineno-0-229" name="__codelineno-0-229"></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">):</span>
+<a id="__codelineno-0-230" name="__codelineno-0-230"></a>            <span class="n">field_name</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">name</span>
+<a id="__codelineno-0-231" name="__codelineno-0-231"></a>            <span class="k">if</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">:</span>
+<a id="__codelineno-0-232" name="__codelineno-0-232"></a>                <span class="c1"># Clone field with error</span>
+<a id="__codelineno-0-233" name="__codelineno-0-233"></a>                <span class="n">field_to_render</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">[</span><span class="n">field_name</span><span class="p">])</span>
+<a id="__codelineno-0-234" name="__codelineno-0-234"></a>        <span class="n">rendered_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field_to_render</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
+<a id="__codelineno-0-235" name="__codelineno-0-235"></a>
+<a id="__codelineno-0-236" name="__codelineno-0-236"></a>    <span class="c1"># Build form attributes</span>
+<a id="__codelineno-0-237" name="__codelineno-0-237"></a>    <span class="n">form_attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-0-238" name="__codelineno-0-238"></a>        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">,</span>
+<a id="__codelineno-0-239" name="__codelineno-0-239"></a>        <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
+<a id="__codelineno-0-240" name="__codelineno-0-240"></a>        <span class="s2">&quot;cls&quot;</span><span class="p">:</span> <span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;form&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">),</span>
+<a id="__codelineno-0-241" name="__codelineno-0-241"></a>    <span class="p">}</span>
+<a id="__codelineno-0-242" name="__codelineno-0-242"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_post</span><span class="p">:</span>
+<a id="__codelineno-0-243" name="__codelineno-0-243"></a>        <span class="n">form_attrs</span><span class="p">[</span><span class="s2">&quot;hx_post&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_post</span>
+<a id="__codelineno-0-244" name="__codelineno-0-244"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_target</span><span class="p">:</span>
+<a id="__codelineno-0-245" name="__codelineno-0-245"></a>        <span class="n">form_attrs</span><span class="p">[</span><span class="s2">&quot;hx_target&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_target</span>
+<a id="__codelineno-0-246" name="__codelineno-0-246"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_swap</span><span class="p">:</span>
+<a id="__codelineno-0-247" name="__codelineno-0-247"></a>        <span class="n">form_attrs</span><span class="p">[</span><span class="s2">&quot;hx_swap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hx_swap</span>
+<a id="__codelineno-0-248" name="__codelineno-0-248"></a>
+<a id="__codelineno-0-249" name="__codelineno-0-249"></a>    <span class="c1"># Build form content</span>
+<a id="__codelineno-0-250" name="__codelineno-0-250"></a>    <span class="n">form_children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span><span class="p">]</span> <span class="o">=</span> <span class="n">rendered_fields</span> <span class="o">+</span> <span class="p">[</span>
+<a id="__codelineno-0-251" name="__codelineno-0-251"></a>        <span class="n">button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">submit_label</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-252" name="__codelineno-0-252"></a>    <span class="p">]</span>
+<a id="__codelineno-0-253" name="__codelineno-0-253"></a>
+<a id="__codelineno-0-254" name="__codelineno-0-254"></a>    <span class="k">return</span> <span class="n">form</span><span class="p">(</span><span class="o">*</span><span class="n">form_children</span><span class="p">,</span> <span class="o">**</span><span class="n">form_attrs</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5264,21 +5298,21 @@ True</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -5429,21 +5463,21 @@ True</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -5489,7 +5523,10 @@ True</p>
 <span class="normal"><a href="#__codelineno-0-45">45</a></span>
 <span class="normal"><a href="#__codelineno-0-46">46</a></span>
 <span class="normal"><a href="#__codelineno-0-47">47</a></span>
-<span class="normal"><a href="#__codelineno-0-48">48</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
 <a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Erstellt ein ``&lt;div&gt;`` mit Variantenklasse und optionalem Schliessen.&quot;&quot;&quot;</span>
 <a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="n">children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span> <span class="o">|</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">]</span>
 <a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dismissible</span><span class="p">:</span>
@@ -5502,7 +5539,10 @@ True</p>
 <a id="__codelineno-0-45" name="__codelineno-0-45"></a>                <span class="n">onclick</span><span class="o">=</span><span class="s2">&quot;this.closest(&#39;.alert&#39;).remove()&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-46" name="__codelineno-0-46"></a>            <span class="p">)</span>
 <a id="__codelineno-0-47" name="__codelineno-0-47"></a>        <span class="p">)</span>
-<a id="__codelineno-0-48" name="__codelineno-0-48"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;alert alert-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a>        <span class="o">*</span><span class="n">children</span><span class="p">,</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>        <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;alert alert-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">),</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5604,21 +5644,21 @@ True</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -5653,9 +5693,15 @@ True</p>
               <summary>Source code in <code>htmforge/components/badge.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-39">39</a></span>
 <span class="normal"><a href="#__codelineno-0-40">40</a></span>
-<span class="normal"><a href="#__codelineno-0-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
 <a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Erstellt ein ``&lt;span&gt;`` mit Variantenklasse.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="k">return</span> <span class="n">span</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;badge badge-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="k">return</span> <span class="n">span</span><span class="p">(</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>        <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;badge badge-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">),</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5759,21 +5805,21 @@ True</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -5828,7 +5874,10 @@ True</p>
 <span class="normal"><a href="#__codelineno-0-51">51</a></span>
 <span class="normal"><a href="#__codelineno-0-52">52</a></span>
 <span class="normal"><a href="#__codelineno-0-53">53</a></span>
-<span class="normal"><a href="#__codelineno-0-54">54</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Element</span><span class="p">:</span>
 <a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Erstellt ``&lt;nav&gt;`` mit ``&lt;ol&gt;`` und ``&lt;li&gt;``-Eintraegen.&quot;&quot;&quot;</span>
 <a id="__codelineno-0-34" name="__codelineno-0-34"></a>    <span class="n">list_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Element</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 <a id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="n">last_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
@@ -5850,7 +5899,10 @@ True</p>
 <a id="__codelineno-0-51" name="__codelineno-0-51"></a>                <span class="p">)</span>
 <a id="__codelineno-0-52" name="__codelineno-0-52"></a>            <span class="p">)</span>
 <a id="__codelineno-0-53" name="__codelineno-0-53"></a>
-<a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="k">return</span> <span class="n">nav</span><span class="p">(</span><span class="n">ol</span><span class="p">(</span><span class="o">*</span><span class="n">list_items</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;breadcrumb&quot;</span><span class="p">),</span> <span class="n">aria_label</span><span class="o">=</span><span class="s2">&quot;breadcrumb&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="k">return</span> <span class="n">nav</span><span class="p">(</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="n">ol</span><span class="p">(</span><span class="o">*</span><span class="n">list_items</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;breadcrumb&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">)),</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>        <span class="n">aria_label</span><span class="o">=</span><span class="s2">&quot;breadcrumb&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5892,21 +5944,21 @@ True</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -5977,7 +6029,7 @@ True</p>
 <a id="__codelineno-0-44" name="__codelineno-0-44"></a>            <span class="p">)</span>
 <a id="__codelineno-0-45" name="__codelineno-0-45"></a>
 <a id="__codelineno-0-46" name="__codelineno-0-46"></a>    <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_next_link</span><span class="p">())</span>
-<a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="k">return</span> <span class="n">ul</span><span class="p">(</span><span class="o">*</span><span class="n">items</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;pagination&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="k">return</span> <span class="n">ul</span><span class="p">(</span><span class="o">*</span><span class="n">items</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;pagination&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -6045,21 +6097,21 @@ close_label: str = "Schließen"</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -6163,7 +6215,7 @@ close_label: str = "Schließen"</p>
 <a id="__codelineno-0-86" name="__codelineno-0-86"></a>            <span class="s2">&quot;});&quot;</span>
 <a id="__codelineno-0-87" name="__codelineno-0-87"></a>            <span class="s2">&quot;&lt;/script&gt;&quot;</span>
 <a id="__codelineno-0-88" name="__codelineno-0-88"></a>        <span class="p">),</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>        <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;modal-wrapper&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>        <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;modal-wrapper&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">),</span>
 <a id="__codelineno-0-90" name="__codelineno-0-90"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -6226,21 +6278,21 @@ indicator: str = "" — optional hx-indicator selector</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -6298,7 +6350,7 @@ indicator: str = "" — optional hx-indicator selector</p>
 <a id="__codelineno-0-53" name="__codelineno-0-53"></a>            <span class="n">hx_target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search_target</span><span class="p">,</span>
 <a id="__codelineno-0-54" name="__codelineno-0-54"></a>            <span class="n">hx_indicator</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">indicator</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="p">),</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56"></a>        <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;search-input-wrapper&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>        <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="s2">&quot;search-input-wrapper&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">),</span>
 <a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -6360,21 +6412,21 @@ True</p>
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>htmforge/core/component.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-84">84</a></span>
-<span class="normal"><a href="#__codelineno-0-85">85</a></span>
-<span class="normal"><a href="#__codelineno-0-86">86</a></span>
-<span class="normal"><a href="#__codelineno-0-87">87</a></span>
-<span class="normal"><a href="#__codelineno-0-88">88</a></span>
-<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-89">89</a></span>
 <span class="normal"><a href="#__codelineno-0-90">90</a></span>
-<span class="normal"><a href="#__codelineno-0-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span>
+<span class="normal"><a href="#__codelineno-0-95">95</a></span>
+<span class="normal"><a href="#__codelineno-0-96">96</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: ANN401</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialisiert die Komponente und blockiert Klassen ohne ``render``.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">&quot;__htmforge_missing_render__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="sa">f</span><span class="s2">&quot;Can&#39;t instantiate abstract class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="s2">&quot;without a concrete render() implementation&quot;</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="p">)</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -6455,7 +6507,7 @@ True</p>
 <a id="__codelineno-0-76" name="__codelineno-0-76"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
 <a id="__codelineno-0-77" name="__codelineno-0-77"></a>        <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;field-error&quot;</span><span class="p">))</span>
 <a id="__codelineno-0-78" name="__codelineno-0-78"></a>
-<a id="__codelineno-0-79" name="__codelineno-0-79"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">)</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">merge_cls</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_cls</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>

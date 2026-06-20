@@ -770,6 +770,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guide/styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Styling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guide/safety/" class="md-nav__link">
         
   
@@ -2037,12 +2065,19 @@
 <td><code>None</code></td>
 <td>HTMX swap strategy</td>
 </tr>
+<tr>
+<td><code>extra_cls</code></td>
+<td><code>str</code></td>
+<td><code>""</code></td>
+<td>Extra CSS class appended to the <code>&lt;form&gt;</code> (inherited from <code>Component</code>)</td>
+</tr>
 </tbody>
 </table>
 <h2 id="rendered-html">Rendered HTML</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/users/create&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">hx-post</span><span class="o">=</span><span class="s">&quot;/users/create&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#form-result&quot;</span> <span class="na">hx-swap</span><span class="o">=</span><span class="s">&quot;outerHTML&quot;</span><span class="p">&gt;&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;role&quot;</span><span class="p">&gt;</span>Role<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;role&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;role&quot;</span><span class="p">&gt;&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;admin&quot;</span><span class="p">&gt;</span>Admin<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;user&quot;</span><span class="p">&gt;</span>User<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;&lt;/</span><span class="nt">select</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;field-error&quot;</span><span class="p">&gt;</span>Role is required<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;checkbox-field&quot;</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;active&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;active&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;</span>Active<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>Create User<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/users/create&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">hx-post</span><span class="o">=</span><span class="s">&quot;/users/create&quot;</span> <span class="na">hx-target</span><span class="o">=</span><span class="s">&quot;#form-result&quot;</span> <span class="na">hx-swap</span><span class="o">=</span><span class="s">&quot;outerHTML&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form&quot;</span><span class="p">&gt;&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;role&quot;</span><span class="p">&gt;</span>Role<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;role&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;role&quot;</span><span class="p">&gt;&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;admin&quot;</span><span class="p">&gt;</span>Admin<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;user&quot;</span><span class="p">&gt;</span>User<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;&lt;/</span><span class="nt">select</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;field-error&quot;</span><span class="p">&gt;</span>Role is required<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;checkbox-field&quot;</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;active&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;active&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;</span>Active<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>Create User<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
 </code></pre></div>
 <p><strong>Auto-Error Injection:</strong> The <code>Form</code> component matches field names in the <code>errors</code> dict against each field's <code>name</code> property. When a match is found, the field is cloned with the error message set, and the error is rendered as <code>div.field-error</code>.</p>
+<p><strong>Note:</strong> The root <code>&lt;form&gt;</code> always renders <code>class="form"</code>; use <code>extra_cls</code> to append additional classes.</p>
 
 
 
