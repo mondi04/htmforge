@@ -65,7 +65,10 @@ def field_to_component(name: str, field_info: FieldInfo) -> Component:
 
     # Enum -> SelectField
     if isinstance(annotation, type) and issubclass(annotation, Enum):
-        options = [(member.name.replace("_", " ").title(), str(member.value)) for member in annotation]
+        options = [
+            (member.name.replace("_", " ").title(), str(member.value))
+            for member in annotation
+        ]
         default_val = (
             str(field_info.default.value)
             if isinstance(field_info.default, Enum)
