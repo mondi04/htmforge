@@ -1,0 +1,97 @@
+name: Auto Tag
+
+# Läuft bei jedem Push nach main (also bei jedem Merge eines PRs).
+#
+# Konvention: Der Merge-Commit-Titel muss STRIKT mit
+#   release: vX.Y.Z
+# beginnen (z.B. "release: v0.4.3"), sonst wird kein Tag erstellt.
+#
+# GitHub füllt den Merge-Commit-Titel beim Klick auf "Merge pull request"
+# standardmäßig mit "Merge pull request #X from mondi04/develop" vor —
+# dieser muss beim Mergen AKTIV auf "release: vX.Y.Z" überschrieben werden.
+#
+# Verhalten:
+#   - Titel matcht "release: vX.Y.Z"  -> Tag wird erstellt + gepusht,
+#                                         danach develop per Fast-Forward
+#                                         auf main synchronisiert.
+#   - Titel matcht NICHT               -> Workflow schlägt fehl (❌ in der
+#                                         GitHub-UI sichtbar), kein Tag.
+#     Das ist gewolltes Verhalten für jeden normalen (Nicht-Release)-Merge
+#     nach main, der nicht direkt einen Tag auslösen soll — siehe
+#     "Release Process" in CONTRIBUTING.md.
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-tag-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    name: Tag aus Merge-Commit-Titel extrahieren
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Version aus Commit-Titel extrahieren (strikt release-vX.Y.Z-Praefix am Anfang)
+        id: version
+        run: |
+          MSG="$(git log -1 --pretty=%B)"
+          echo "Letzter Commit-Titel: $(git log -1 --pretty=%s)"
+          # Strikt: muss am Anfang der Message stehen, kein freier Suchmodus.
+          if [[ "$MSG" =~ ^release:[[:space:]]+v([0-9]+\.[0-9]+\.[0-9]+) ]]; then
+            VERSION="${BASH_REMATCH[1]}"
+            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "✅ Gefundene Version: v$VERSION"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "::error::Kein 'release: vX.Y.Z'-Präfix im Merge-Commit-Titel gefunden. Kein Tag wurde erstellt. Falls dieser Merge ein Release sein sollte: Merge rückgängig machen (oder neuen Commit pushen) und beim erneuten Merge den Commit-Titel manuell auf 'release: vX.Y.Z' setzen."
+          fi
+
+      - name: Fehlschlagen, wenn kein Versionsmuster gefunden wurde
+        if: steps.version.outputs.found != 'true'
+        run: |
+          echo "::error::Auto-Tag übersprungen — kein Release-Pattern erkannt. Das ist nur ein Fehler, wenn dieser Merge eigentlich ein Release sein sollte."
+          exit 1
+
+      - name: Prüfen, ob Tag bereits existiert
+        id: check_tag
+        if: steps.version.outputs.found == 'true'
+        run: |
+          TAG="v${{ steps.version.outputs.version }}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "::error::Tag $TAG existiert bereits. Versionsnummer im Merge-Commit-Titel prüfen (vermutlich vergessen zu erhöhen)."
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Tag erstellen und pushen
+        if: steps.version.outputs.found == 'true'
+        run: |
+          TAG="${{ steps.check_tag.outputs.tag }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" -m "Release $TAG"
+          git push origin "$TAG"
+          echo "✅ Tag $TAG erstellt und gepusht — Release-Workflow wird dadurch getriggert."
+
+      - name: develop per Fast-Forward auf main synchronisieren
+        if: steps.version.outputs.found == 'true'
+        run: |
+          git fetch origin develop
+          git checkout develop
+          if git merge-base --is-ancestor origin/develop main; then
+            git merge --ff-only main
+            git push origin develop
+            echo "✅ develop per Fast-Forward auf main synchronisiert."
+          else
+            echo "::warning::develop kann nicht per Fast-Forward auf main synchronisiert werden (develop hat eigene Commits, die main fehlen). Manuell mergen/rebasen."
+          fi
