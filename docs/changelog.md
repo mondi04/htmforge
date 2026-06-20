@@ -4,6 +4,24 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.4.2] - 2026-06-20
+
+### Added
+- `Component.extra_cls`: optional CSS class field on the base `Component`, merged additively with each component's default class via `merge_cls()` (does not replace it)
+- `htmforge.core.element.merge_cls()`: joins multiple class strings, skipping empty/`None` parts, returns `None` if all parts are empty (avoids emitting `class=""`)
+- `extra_cls` wired up in Alert, Badge, Breadcrumb, Dropdown, FormField, Modal, Pagination, SearchInput, Spinner, Table, Tabs, Toast, Accordion, SelectField, CheckboxField, RadioGroup, FormGroup, Form
+- Styling guide (docs/guide/styling.md): CSS class reference for all components
+- Optional default theme stylesheet (docs/assets/css/htmforge-theme.css)
+- Tabs, Accordion, Dropdown CSS added to example admin theme
+
+### Changed
+- `RadioGroup`: root `<fieldset>` now always renders `class="radiogroup"` (previously unstyled)
+- `Form`: root `<form>` now always renders `class="form"` (previously unstyled)
+- `FormGroup.group_cls` kept for backwards compatibility; merges additively with the new `extra_cls`
+
+### Fixed
+- Components silently accepted and discarded an unsupported `cls` kwarg due to Pydantic's default `extra="ignore"` behavior; there was previously no supported way to add a custom CSS class to a pre-built component
+
 ## [0.4.1] - 2026-06-16
 
 ### Added

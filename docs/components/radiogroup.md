@@ -24,11 +24,12 @@ RadioGroup(
 | `legend_text` | `str` | `""` | Group legend text; omitted if empty |
 | `required` | `bool` | `False` | Sets `required` on first radio only |
 | `error` | `str` | `""` | Error message; renders as `div.field-error` if set |
+| `extra_cls` | `str` | `""` | Extra CSS class appended to the `fieldset` (inherited from `Component`) |
 
 ## Rendered HTML
 
 ```html
-<fieldset><legend>Select Plan</legend><div class="radio-item"><input type="radio" name="plan" id="plan-basic" value="basic"><label for="plan-basic">Basic</label></div><div class="radio-item"><input type="radio" name="plan" id="plan-pro" value="pro" checked required><label for="plan-pro">Pro</label></div><div class="radio-item"><input type="radio" name="plan" id="plan-enterprise" value="enterprise"><label for="plan-enterprise">Enterprise</label></div></fieldset>
+<fieldset class="radiogroup"><legend>Select Plan</legend><div class="radio-item"><input type="radio" name="plan" id="plan-basic" value="basic"><label for="plan-basic">Basic</label></div><div class="radio-item"><input type="radio" name="plan" id="plan-pro" value="pro" checked required><label for="plan-pro">Pro</label></div><div class="radio-item"><input type="radio" name="plan" id="plan-enterprise" value="enterprise"><label for="plan-enterprise">Enterprise</label></div></fieldset>
 ```
 
-**Note:** Rendered in a `<fieldset>` with radio items in individual `div.radio-item` containers. The `required` attribute is only set on the first radio button.
+**Note:** Rendered in a `<fieldset class="radiogroup">` with radio items in individual `div.radio-item` containers. The `required` attribute is only set on the first radio button. Use `extra_cls` to add custom styling classes.
