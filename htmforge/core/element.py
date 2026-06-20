@@ -196,6 +196,7 @@ def safe_html(text: str) -> Markup:
     """
     return Markup(text)  # noqa: S704
 
+
 def merge_cls(*parts: str | None) -> str | None:
     """Verbindet mehrere CSS-Klassen-Strings zu einem, leere Teile werden ignoriert.
 

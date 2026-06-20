@@ -45,4 +45,7 @@ class Alert(Component):
                     onclick="this.closest('.alert').remove()",
                 )
             )
-        return div(*children, cls=merge_cls(f"alert alert-{self.variant.value}", self.extra_cls))
+        return div(
+            *children,
+            cls=merge_cls(f"alert alert-{self.variant.value}", self.extra_cls),
+        )

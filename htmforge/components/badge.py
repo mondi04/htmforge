@@ -38,4 +38,7 @@ class Badge(Component):
 
     def render(self) -> Element:
         """Erstellt ein ``<span>`` mit Variantenklasse."""
-        return span(self.text, cls=merge_cls(f"badge badge-{self.variant.value}", self.extra_cls))
+        return span(
+            self.text,
+            cls=merge_cls(f"badge badge-{self.variant.value}", self.extra_cls),
+        )

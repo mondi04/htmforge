@@ -51,4 +51,7 @@ class Breadcrumb(Component):
                     )
                 )
 
-        return nav(ol(*list_items, cls="breadcrumb"), aria_label="breadcrumb", cls=merge_cls(self.extra_cls))
+        return nav(
+            ol(*list_items, cls=merge_cls("breadcrumb", self.extra_cls)),
+            aria_label="breadcrumb",
+        )
