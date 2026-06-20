@@ -383,33 +383,66 @@ a {
 .user-form,
 .form,
 .form-group,
-.radiogroup,
-.checkbox-field,
-.radio-item {
+.radiogroup {
   display: grid;
   gap: 0.7rem;
 }
 
-.user-form input,
+.checkbox-field,
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.user-form input:not([type="checkbox"]):not([type="radio"]),
 .user-form select,
-.form input,
+.user-form textarea,
+.form input:not([type="checkbox"]):not([type="radio"]),
 .form select,
-.form-group input,
+.form textarea,
+.form-group input:not([type="checkbox"]):not([type="radio"]),
 .form-group select,
-.checkbox-field input {
-  width: 100%;
-  padding: 0.82rem 0.95rem;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  font: inherit;
+.form-group textarea {
+   width: 100%;
+   padding: 0.82rem 0.95rem;
+   border: 1px solid var(--border);
+   border-radius: 14px;
+   font: inherit;
+  background: #fff;
+  color: var(--text);
+ }
+
+.form textarea,
+.user-form textarea,
+.form-group textarea {
+  min-height: 6rem;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.checkbox-field input[type="checkbox"],
+.radio-item input[type="radio"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  flex: 0 0 auto;
+  accent-color: var(--brand);
+  cursor: pointer;
 }
 
 .user-form label,
 .form label,
 .form-group label,
 .radiogroup legend,
-.radio-item label {
+.radio-item label,
+.checkbox-field label {
   font-weight: 600;
+}
+
+.radio-item label,
+.checkbox-field label {
+  cursor: pointer;
 }
 
 .modal {
@@ -814,18 +847,27 @@ input[type="text"],
 input[type="email"],
 input[type="search"],
 input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+textarea,
 select {
   padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border);
   border-radius: 6px;
   font-size: 0.9rem;
+  font-family: inherit;
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+textarea:focus,
 select:focus {
   outline: none;
-  border-color: #1d4ed8;
+  border-color: var(--brand);
   box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
 }
 
