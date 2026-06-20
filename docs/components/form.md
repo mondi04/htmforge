@@ -44,3 +44,26 @@ Form(
 **Auto-Error Injection:** The `Form` component matches field names in the `errors` dict against each field's `name` property. When a match is found, the field is cloned with the error message set, and the error is rendered as `div.field-error`.
 
 **Note:** The root `<form>` always renders `class="form"`; use `extra_cls` to append additional classes.
+
+## Auto-generating Forms from a Pydantic Model
+
+`Form.from_model()` turns a Pydantic model straight into a `Form` — no manual field wiring:
+
+```python
+from pydantic import BaseModel, EmailStr, Field
+from htmforge.components import Form
+
+class UserData(BaseModel):
+    name: str
+    email: EmailStr
+    age: int = Field(ge=18, le=120)
+    bio: str | None = None
+    subscribe: bool = False
+
+form = Form.from_model(UserData, action="/users")
+```
+
+Field types map automatically: `str` → text, `EmailStr` → email, `int`/`float`
+(with `ge`/`le`) → number with `min`/`max`, `Optional[str]` → textarea,
+`bool` → checkbox, `Enum` → select. Pass any other `Form` prop (`method`,
+`submit_label`, `errors`, `hx_post`, ...) as additional keyword arguments.

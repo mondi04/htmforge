@@ -38,6 +38,7 @@ Complete component reference for htmforge v0.3.0+.
 ::: htmforge.components.forms.RadioGroup
 ::: htmforge.components.forms.FormGroup
 ::: htmforge.components.forms.Form
+::: htmforge.components.form_model.fields_from_model
 
 ## v0.2.x Components
 

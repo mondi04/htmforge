@@ -263,6 +263,31 @@ form = Form(
 
 ---
 
+## Auto-generating Forms from a Pydantic Model
+
+`Form.from_model()` turns a Pydantic model straight into a `Form` — no manual field wiring:
+
+```python
+from pydantic import BaseModel, EmailStr, Field
+from htmforge.components import Form
+
+class UserData(BaseModel):
+    name: str
+    email: EmailStr
+    age: int = Field(ge=18, le=120)
+    bio: str | None = None
+    subscribe: bool = False
+
+form = Form.from_model(UserData, action="/users")
+```
+
+Field types map automatically: `str` → text, `EmailStr` → email, `int`/`float`
+(with `ge`/`le`) → number with `min`/`max`, `Optional[str]` → textarea,
+`bool` → checkbox, `Enum` → select. Pass any other `Form` prop (`method`,
+`submit_label`, `errors`, `hx_post`, ...) as additional keyword arguments.
+
+---
+
 ## Elements
 
 `htmforge.elements` provides factory functions for all 80+ HTML5 elements. Python attribute names are mapped automatically:

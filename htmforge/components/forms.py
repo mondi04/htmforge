@@ -14,6 +14,10 @@ Example:
 
 from __future__ import annotations
 
+from typing import Any
+
+from pydantic import BaseModel
+
 from htmforge import Component
 from htmforge.core.element import Element, merge_cls
 from htmforge.elements import (
@@ -198,7 +202,9 @@ class Form(Component):
     """Formular-Container mit HTMX-Submit-Unterstuetzung.
 
     Fields:
-        action: str — form action URL
+        action: str — form action URL, default "" (z.B. wenn nur hx_post
+          genutzt wird, oder bei automatisch erzeugten Formularen via
+          Form.from_model())
         method: str — "get" or "post", default "post"
         fields: list[Component] — Formularfelder
         submit_label: str — Beschriftung des Submit-Buttons, default "Absenden"
@@ -210,7 +216,7 @@ class Form(Component):
         hx_swap: HxSwap | None — HTMX swap strategy
     """
 
-    action: str
+    action: str = ""
     method: str = "post"
     fields: list[Component] = []
     submit_label: str = "Absenden"
@@ -218,6 +224,48 @@ class Form(Component):
     hx_post: str = ""
     hx_target: str = ""
     hx_swap: HxSwap | None = None
+
+    @classmethod
+    def from_model(
+        cls,
+        model: type[BaseModel],
+        action: str = "",
+        **kwargs: Any,  # noqa: ANN401
+    ) -> Form:
+        """Erzeugt ein ``Form`` automatisch aus einem Pydantic-Model.
+
+        Jedes Modellfeld wird ueber
+        :func:`htmforge.components.form_model.fields_from_model` in eine
+        passende Formularkomponente uebersetzt (``FormField``,
+        ``CheckboxField`` oder ``SelectField``) — inklusive Pflichtfeld- und
+        Min/Max-Constraints, soweit aus dem Pydantic-Feld ableitbar.
+
+        Args:
+            model: Eine Pydantic ``BaseModel``-Subklasse.
+            action: Form-Action-URL, default "".
+            **kwargs: Weitere ``Form``-Props (``method``, ``submit_label``,
+                ``errors``, ``hx_post``, ``hx_target``, ``hx_swap``, ...).
+                ``fields`` darf hier nicht gesetzt werden, da es automatisch
+                generiert wird.
+
+        Returns:
+            Eine neue ``Form``-Instanz mit automatisch generierten Feldern.
+
+        Example:
+            >>> from pydantic import BaseModel, EmailStr, Field
+            >>> class UserData(BaseModel):
+            ...     name: str
+            ...     email: EmailStr
+            ...     age: int = Field(ge=18, le=120)
+            ...
+            >>> form = Form.from_model(UserData, action="/users")
+        """
+        # Lazy import: form_model.py importiert CheckboxField/SelectField aus
+        # diesem Modul — ein Import auf Modulebene wuerde einen Zirkelimport
+        # erzeugen.
+        from htmforge.components.form_model import fields_from_model
+
+        return cls(action=action, fields=fields_from_model(model), **kwargs)
 
     def render(self) -> Element:
         """Rendert das Formular mit auto-error-Injection."""

@@ -13,7 +13,7 @@ from enum import StrEnum
 
 from htmforge import Component
 from htmforge.core.element import Element, merge_cls
-from htmforge.elements import div, input, label
+from htmforge.elements import div, input, label, textarea
 
 
 class InputType(StrEnum):
@@ -27,10 +27,15 @@ class InputType(StrEnum):
     URL = "url"
     HIDDEN = "hidden"
     CHECKBOX = "checkbox"
+    TEXTAREA = "textarea"
 
 
 class FormField(Component):
     """Rendert ein beschriftetes Eingabefeld mit optionaler Fehleranzeige.
+
+    ``InputType.TEXTAREA`` ist ein Sonderfall: hierfuer wird statt eines
+    ``<input>`` ein ``<textarea>``-Element gerendert, dessen Inhalt ``value``
+    ist (kein Attribut).
 
     Example:
         >>> from htmforge.components.form_field import FormField, InputType
@@ -51,9 +56,11 @@ class FormField(Component):
     required: bool = False
     error: str = ""
     field_id: str = ""
+    min: int | float | None = None
+    max: int | float | None = None
 
     def render(self) -> Element:
-        """Erstellt ``div > label + input [+ div.field-error]``."""
+        """Erstellt ``div > label + input/textarea [+ div.field-error]``."""
         fid = self.field_id or self.name.replace(" ", "-")
 
         children: list[Element] = [
@@ -62,18 +69,34 @@ class FormField(Component):
                 for_=fid,
                 aria_required="true" if self.required else None,
             ),
-            input(
-                type=self.input_type.value,
-                name=self.name,
-                id=fid,
-                value=self.value or None,
-                placeholder=self.placeholder or None,
-                required=True if self.required else None,
-                aria_required="true" if self.required else None,
-            ),
+            self._render_control(fid),
         ]
 
         if self.error:
             children.append(div(self.error, cls="field-error"))
 
         return div(*children, cls=merge_cls(self.extra_cls))
+
+    def _render_control(self, fid: str) -> Element:
+        """Erstellt das eigentliche Eingabe-Element (``input`` oder ``textarea``)."""
+        if self.input_type is InputType.TEXTAREA:
+            return textarea(
+                self.value or None,
+                name=self.name,
+                id=fid,
+                placeholder=self.placeholder or None,
+                required=True if self.required else None,
+                aria_required="true" if self.required else None,
+            )
+
+        return input(
+            type=self.input_type.value,
+            name=self.name,
+            id=fid,
+            value=self.value or None,
+            placeholder=self.placeholder or None,
+            required=True if self.required else None,
+            aria_required="true" if self.required else None,
+            min=self.min,
+            max=self.max,
+        )

@@ -6,6 +6,7 @@ from .badge import Badge, BadgeVariant
 from .breadcrumb import Breadcrumb
 from .dropdown import Dropdown
 from .form_field import FormField, InputType
+from .form_model import fields_from_model
 from .forms import (
     CheckboxField,
     Form,
@@ -46,4 +47,5 @@ __all__ = [
     "Tabs",
     "Toast",
     "ToastVariant",
+    "fields_from_model",
 ]

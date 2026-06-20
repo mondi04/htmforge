@@ -4,6 +4,17 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.5.0] - 2026-06-20
+
+### Added
+- `Form.from_model(model, action="", **kwargs)`: generates a `Form` directly from a Pydantic v2 model
+- `htmforge.components.form_model.fields_from_model(model)`: introspection helper, maps model fields to `FormField`/`CheckboxField`/`SelectField`
+- `InputType.TEXTAREA`: new `FormField` input type, renders `<textarea>`
+- `FormField.min` / `FormField.max`: numeric bounds rendered on `<input type="number">`
+
+### Changed
+- `Form.action` is now optional (default `""`) instead of required
+
 ## [0.4.3] - 2026-06-20
 
 ### Added
