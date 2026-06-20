@@ -1081,6 +1081,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Rendered HTML">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#number-field-with-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number field with bounds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textarea-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Textarea field
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1965,6 +1993,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Rendered HTML">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#number-field-with-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number field with bounds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textarea-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Textarea field
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -2020,13 +2076,13 @@
 <td><code>input_type</code></td>
 <td><code>InputType</code></td>
 <td><code>InputType.TEXT</code></td>
-<td>controls the <code>&lt;input&gt;</code> type</td>
+<td>controls the <code>&lt;input&gt;</code> type — use <code>InputType.TEXTAREA</code> to render a <code>&lt;textarea&gt;</code> instead</td>
 </tr>
 <tr>
 <td><code>value</code></td>
 <td><code>str</code></td>
 <td><code>""</code></td>
-<td>current input value</td>
+<td>current input value (used as the textarea content when <code>input_type</code> is <code>TEXTAREA</code>)</td>
 </tr>
 <tr>
 <td><code>placeholder</code></td>
@@ -2052,11 +2108,34 @@
 <td><code>""</code></td>
 <td>overrides the generated id</td>
 </tr>
+<tr>
+<td><code>min</code></td>
+<td><code>int \| float \| None</code></td>
+<td><code>None</code></td>
+<td>sets the <code>min</code> attribute; only rendered for <code>InputType.NUMBER</code></td>
+</tr>
+<tr>
+<td><code>max</code></td>
+<td><code>int \| float \| None</code></td>
+<td><code>None</code></td>
+<td>sets the <code>max</code> attribute; only rendered for <code>InputType.NUMBER</code></td>
+</tr>
 </tbody>
 </table>
 <h2 id="rendered-html">Rendered HTML</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;email&quot;</span><span class="p">&gt;</span>Email<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;email&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
+<h3 id="number-field-with-bounds">Number field with bounds</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">FormField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">label_text</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">input_type</span><span class="o">=</span><span class="n">InputType</span><span class="o">.</span><span class="n">NUMBER</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;age&quot;</span><span class="p">&gt;</span>Age<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;number&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;age&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;age&quot;</span> <span class="na">min</span><span class="o">=</span><span class="s">&quot;18&quot;</span> <span class="na">max</span><span class="o">=</span><span class="s">&quot;120&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<h3 id="textarea-field">Textarea field</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">FormField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;bio&quot;</span><span class="p">,</span> <span class="n">label_text</span><span class="o">=</span><span class="s2">&quot;Bio&quot;</span><span class="p">,</span> <span class="n">input_type</span><span class="o">=</span><span class="n">InputType</span><span class="o">.</span><span class="n">TEXTAREA</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;bio&quot;</span><span class="p">&gt;</span>Bio<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;</span><span class="nt">textarea</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;bio&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;bio&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">textarea</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p><strong>Note:</strong> <code>InputType.TEXTAREA</code> is the one input type that does not render an <code>&lt;input&gt;</code> element — the field's <code>value</code> becomes the <code>&lt;textarea&gt;</code>'s text content instead of a <code>value</code> attribute.</p>
 
 
 

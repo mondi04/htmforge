@@ -1475,6 +1475,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#auto-generating-forms-from-a-pydantic-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-generating Forms from a Pydantic Model
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1967,6 +1978,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#auto-generating-forms-from-a-pydantic-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-generating Forms from a Pydantic Model
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2078,6 +2100,24 @@
 </code></pre></div>
 <p><strong>Auto-Error Injection:</strong> The <code>Form</code> component matches field names in the <code>errors</code> dict against each field's <code>name</code> property. When a match is found, the field is cloned with the error message set, and the error is rendered as <code>div.field-error</code>.</p>
 <p><strong>Note:</strong> The root <code>&lt;form&gt;</code> always renders <code>class="form"</code>; use <code>extra_cls</code> to append additional classes.</p>
+<h2 id="auto-generating-forms-from-a-pydantic-model">Auto-generating Forms from a Pydantic Model</h2>
+<p><code>Form.from_model()</code> turns a Pydantic model straight into a <code>Form</code> — no manual field wiring:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">EmailStr</span><span class="p">,</span> <span class="n">Field</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">htmforge.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Form</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">UserData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">bio</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">subscribe</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">form</span> <span class="o">=</span> <span class="n">Form</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">UserData</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;/users&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Field types map automatically: <code>str</code> → text, <code>EmailStr</code> → email, <code>int</code>/<code>float</code>
+(with <code>ge</code>/<code>le</code>) → number with <code>min</code>/<code>max</code>, <code>Optional[str]</code> → textarea,
+<code>bool</code> → checkbox, <code>Enum</code> → select. Pass any other <code>Form</code> prop (<code>method</code>,
+<code>submit_label</code>, <code>errors</code>, <code>hx_post</code>, ...) as additional keyword arguments.</p>
 
 
 
