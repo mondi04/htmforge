@@ -1970,6 +1970,86 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>fix: escape attribute values in _render_attrs
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>docs: add FormField usage example to README
 </code></pre></div></p>
+<h2 id="release-process-maintainers">Release Process (Maintainers)</h2>
+<blockquote>
+<p>This section is only relevant for repository maintainers merging PRs into
+<code>main</code>. Contributors can ignore it.</p>
+</blockquote>
+<p>Releases are triggered automatically by a tag push, which is itself created
+automatically when a PR is merged into <code>main</code> — <strong>if</strong> the merge commit title
+follows a specific convention.</p>
+<h3 id="how-it-works">How it works</h3>
+<ol>
+<li>A PR targeting <code>develop</code> is reviewed and merged as usual — nothing special here.</li>
+<li>When <code>develop</code> is ready for a release, open a PR from <code>develop</code> into <code>main</code>.</li>
+<li>When merging that PR via the GitHub UI, GitHub pre-fills the merge commit
+   title with <code>Merge pull request #X from mondi04/develop</code>. <strong>Overwrite this
+   title</strong> with: <code>release: vX.Y.Z</code> (e.g. <code>release: v0.4.3</code>), matching the next version per
+   <a href="https://semver.org/">Semantic Versioning</a>. This must be typed manually —
+   there is no default that produces a release.</li>
+<li>On merge, the <strong>Auto Tag</strong> workflow (<code>.github/workflows/auto-tag.yml</code>) runs
+   on <code>main</code> and:</li>
+<li>Reads the merge commit title.</li>
+<li>If it matches <code>release: vX.Y.Z</code> <strong>at the start of the message</strong>, creates
+     and pushes tag <code>vX.Y.Z</code>, then fast-forwards <code>develop</code> onto <code>main</code>.</li>
+<li>If it does <strong>not</strong> match, the workflow <strong>fails</strong> (red ❌ in the Actions
+     tab) — no tag is created. This is intentional: it makes a forgotten
+     title change immediately visible instead of silently doing nothing.</li>
+<li>The tag push triggers the existing <strong>Release</strong> workflow
+   (<code>.github/workflows/release.yml</code>), which runs tests, builds the package,
+   publishes to PyPI, creates the GitHub Release (using the matching section
+   from <code>docs/changelog.md</code>), and deploys docs.</li>
+</ol>
+<h3 id="normal-merges-into-main-without-a-release">Normal merges into <code>main</code> without a release</h3>
+<p>Not every merge into <code>main</code> needs to ship a release. If you merge without
+changing the commit title to <code>release: vX.Y.Z</code>, the Auto Tag workflow will
+fail with a red ❌. <strong>This failure is expected and harmless</strong> for non-release
+merges — it does not block or revert the merge itself, it only means no tag
+was created. It exists purely as a visible reminder; it's safe to ignore for
+merges that were never meant to be a release.</p>
+<h3 id="before-merging-a-release-pr">Before merging a release PR</h3>
+<ul>
+<li>[ ] <code>docs/changelog.md</code> has a <code>## [X.Y.Z] - YYYY-MM-DD</code> section for the new
+      version (the Release workflow extracts its body for the GitHub Release
+      notes — falls back to a generic message if missing).</li>
+<li>[ ] You're merging <code>develop</code> → <code>main</code> (not some other branch).</li>
+</ul>
+<p>Note: the package version itself does <strong>not</strong> need to be set anywhere by
+hand — <code>pyproject.toml</code> uses <code>hatch-vcs</code> (<code>dynamic = ["version"]</code>,
+<code>tool.hatch.version.source = "vcs"</code>), so the version is derived directly from
+the git tag at build time.</p>
+<h3 id="things-that-can-go-wrong">Things that can go wrong</h3>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Auto Tag fails with "kein Tag-Pattern gefunden"</td>
+<td>Forgot to overwrite the merge commit title</td>
+<td>If this should've been a release: revert/re-merge with the correct title. Otherwise: ignore, expected for non-release merges.</td>
+</tr>
+<tr>
+<td>Auto Tag fails with "Tag existiert bereits"</td>
+<td>Version number wasn't bumped, or this version was already released</td>
+<td>Bump the version and re-merge with a new tag.</td>
+</tr>
+<tr>
+<td><code>develop</code> not synced after a release</td>
+<td><code>develop</code> had commits not yet in <code>main</code> (fast-forward not possible), or push to <code>develop</code> was rejected by branch protection</td>
+<td>Sync manually: <code>git checkout develop &amp;&amp; git merge --ff-only main &amp;&amp; git push</code>.</td>
+</tr>
+<tr>
+<td>Pre-release tags (<code>v1.2.3-beta</code>)</td>
+<td>Not currently supported — the version regex only matches plain <code>X.Y.Z</code>, the suffix would be silently dropped from the tag</td>
+<td>Avoid pre-release tags via this workflow for now; tag manually if ever needed.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="good-first-issues">Good First Issues</h2>
 <p>If you're new to the project, these are great places to start:</p>
 <h3 id="1-admin-panel-example-screenshot">1. Admin Panel Example: Screenshot</h3>
