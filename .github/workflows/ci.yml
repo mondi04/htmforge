@@ -74,19 +74,39 @@ jobs:
         run: ruff format --check htmforge/
 
   # ---------------------------------------------------------------------------
+  # Theme CSS Sync Check
+  # ---------------------------------------------------------------------------
+  theme_sync:
+    name: Theme CSS sync
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check htmforge-theme.css is in sync with admin.css
+        run: |
+          if ! diff -q examples/admin-panel/static/admin.css docs/assets/css/htmforge-theme.css > /dev/null; then
+            echo "::error::docs/assets/css/htmforge-theme.css ist nicht synchron mit examples/admin-panel/static/admin.css"
+            echo "Quelle (admin.css) wurde geändert, ohne die Kopie (htmforge-theme.css) nachzuziehen."
+            diff examples/admin-panel/static/admin.css docs/assets/css/htmforge-theme.css || true
+            exit 1
+          fi
+          echo "✅ htmforge-theme.css ist synchron mit admin.css"
+
+  # ---------------------------------------------------------------------------
   # Summary — einziger Required Check für Branch Protection
   # ---------------------------------------------------------------------------
   ci-success:
     name: CI
     runs-on: ubuntu-latest
-    needs: [test, lint]
+    needs: [test, lint, theme_sync]
     if: always()
 
     steps:
       - name: Check all jobs passed
         run: |
-          if [[ "${{ needs.test.result }}" != "success" || "${{ needs.lint.result }}" != "success" ]]; then
-            echo "❌  test=${{ needs.test.result }}  lint=${{ needs.lint.result }}"
+          if [[ "${{ needs.test.result }}" != "success" || "${{ needs.lint.result }}" != "success" || "${{ needs.theme_sync.result }}" != "success" ]]; then
+            echo "❌  test=${{ needs.test.result }}  lint=${{ needs.lint.result }}  theme_sync=${{ needs.theme_sync.result }}"
             exit 1
           fi
           echo "✅ All checks passed"
