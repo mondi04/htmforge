@@ -39,6 +39,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.DEVELOP_SYNC_TOKEN }}
 
       - name: Version aus Commit-Titel extrahieren (strikt release-vX.Y.Z-Praefix am Anfang)
         id: version
