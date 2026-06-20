@@ -50,6 +50,11 @@ class Component(BaseModel, ABC):
     )
     __htmforge_missing_render__: ClassVar[bool] = False
 
+    # Optionale Zusatz-CSS-Klasse, die jede Component an ihr Root-Element
+    # anhängt (additiv, ersetzt nicht die Default-Klasse). Siehe
+    # ``htmforge.core.element.merge_cls``.
+    extra_cls: str = ""
+
     # Typisierte HTMX-Props, die komponentenweit wiederverwendbar sind.
     hx_get: str | None = None
     hx_post: str | None = None
