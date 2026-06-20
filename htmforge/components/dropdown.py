@@ -62,4 +62,3 @@ class Dropdown(Component):
 
         # Root-Div
         return div(trigger_button, menu_div, cls=merge_cls("dropdown", self.extra_cls))
-    
