@@ -14,6 +14,7 @@ Type-safe, composable UI components for Python - server-side rendered, HTMX-firs
 - **Performance optimized**: 1000 renders in under 1 second for core element paths.
 - **Backward compatible**: Extend without breaking existing code.
 - **Composable**: Mix and match components with custom Elements.
+- **Bring your own CSS, or use the optional default theme**: see [Styling](guide/styling.md).
 
 ## Quick install
 

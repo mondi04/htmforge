@@ -116,3 +116,4 @@ django_response = greeting.to_django()
 - Read [Concepts](concepts.md) for architecture details
 - View [Components](../api/components.md) for full API reference
 - Check [Framework examples](../examples/fastapi.md) for FastAPI, Flask, Django
+- See [Styling](../guide/styling.md) for CSS classes and theming
