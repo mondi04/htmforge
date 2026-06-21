@@ -1,3 +1,7 @@
+> ⚠️ **This PR must target `develop`, not `main`.**
+> If GitHub shows `main` as the base branch above, change it now via the
+> dropdown before filling this out — `main` is reserved for releases.
+
 ## Description
 
 What does this PR do? Keep it brief and clear.

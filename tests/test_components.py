@@ -35,6 +35,62 @@ from htmforge.core.element import Element
 from htmforge.elements import div, li, ul
 
 
+class TestComponentClone:
+    """Tests fuer ``Component.clone()`` mit verschachtelten Komponenten."""
+
+    def test_clone_preserves_form_field_component_type(self) -> None:
+        """Form.fields behaelt konkrete Component-Subklassen."""
+        form_component = Form(
+            action="/submit",
+            fields=[
+                SelectField(
+                    name="role",
+                    options=[("Admin", "admin")],
+                    selected="admin",
+                )
+            ],
+        )
+
+        cloned_form = form_component.clone(submit_label="Save")
+
+        assert cloned_form.submit_label == "Save"
+        assert isinstance(cloned_form.fields[0], SelectField)
+        assert cloned_form.fields[0] is not form_component.fields[0]
+        assert 'value="admin" selected' in cloned_form.to_html()
+
+    def test_clone_preserves_form_group_field_component_type(self) -> None:
+        """FormGroup.fields behaelt konkrete Component-Subklassen."""
+        group = FormGroup(
+            fields=[SelectField(name="role", options=[("Admin", "admin")])],
+        )
+
+        cloned_group = group.clone(legend_text="Role")
+
+        assert cloned_group.legend_text == "Role"
+        assert isinstance(cloned_group.fields[0], SelectField)
+        assert cloned_group.fields[0] is not group.fields[0]
+        assert "<select" in cloned_group.to_html()
+
+    def test_clone_preserves_datatable_component_cell_type(self) -> None:
+        """DataTable.dict_rows behaelt Component-Zellen."""
+        table = DataTable(
+            headers=["name", "status"],
+            dict_rows=[{"name": "Ada", "status": Badge(text="Neu")}],
+        )
+
+        cloned_table = table.clone()
+
+        assert cloned_table.dict_rows is not None
+        assert table.dict_rows is not None
+        cloned_cell = cloned_table.dict_rows[0]["status"]
+        original_cell = table.dict_rows[0]["status"]
+        assert isinstance(cloned_cell, Badge)
+        assert cloned_cell is not original_cell
+        assert '<td><span class="badge badge-default">Neu</span></td>' in (
+            cloned_table.to_html()
+        )
+
+
 class TestDataTable:
     """Tests fuer die ``DataTable``-Komponente."""
 

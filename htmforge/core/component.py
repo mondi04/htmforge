@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 from abc import ABC, abstractmethod
+from copy import deepcopy
 from typing import Any, ClassVar
 
 from pydantic import BaseModel, ConfigDict
@@ -147,7 +148,10 @@ class Component(BaseModel, ABC):
             >>> card2.body
             'World'
         """
-        data = self.model_dump()
+        data = {
+            field_name: deepcopy(getattr(self, field_name))
+            for field_name in type(self).model_fields
+        }
         data.update(overrides)
         return type(self)(**data)
 
