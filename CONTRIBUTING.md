@@ -4,6 +4,10 @@ Thank you for your interest in contributing!
 
 ## Before you open a PR
  
+- **PRs target `develop`, not `main`.** `main` only receives merges from
+  `develop` via release PRs (see "Release Process" below) — opening a PR
+  directly against `main` will need to be redirected before it can be
+  reviewed.
 - Open an issue first for anything beyond a trivial fix.
   New components or API changes need prior discussion.
 - Check that a similar issue or PR doesn't already exist.
@@ -31,7 +35,7 @@ ruff format htmforge/ # format
 1. Fork the repository and create a branch: `git checkout -b feat/my-feature`
 2. Write your code and add tests — all new public functions need a docstring
 3. Make sure `pytest`, `mypy htmforge/`, and `ruff check htmforge/` all pass
-4. Open a pull request against `develop` with a clear description
+4. Open a pull request **against `develop`** with a clear description
 
 ## Coding Standards
 

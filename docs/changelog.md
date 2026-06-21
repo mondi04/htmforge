@@ -4,6 +4,20 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.5.1] - 2026-06-21
+
+### Fixed
+- `Component.clone()`: fixed a `TypeError` ("Can't instantiate abstract class
+  Component...") raised whenever a component held a field typed as
+  `Component` or `list[Component]` — e.g. `Form.fields`, `FormGroup.fields`,
+  or `Component` cell values inside `DataTable.dict_rows`. `clone()`
+  previously round-tripped through `model_dump()`, which serialized nested
+  components using their declared abstract `Component` type instead of
+  their actual runtime subclass, producing an empty dict and a failed
+  reconstruction. `clone()` now reads field values directly and deep-copies
+  them before applying overrides, preserving the concrete runtime type of
+  nested components. (#13, #21)
+
 ## [0.5.0] - 2026-06-20
 
 ### Added
