@@ -1898,6 +1898,10 @@
 <p>Thank you for your interest in contributing!</p>
 <h2 id="before-you-open-a-pr">Before you open a PR</h2>
 <ul>
+<li><strong>PRs target <code>develop</code>, not <code>main</code>.</strong> <code>main</code> only receives merges from
+  <code>develop</code> via release PRs (see "Release Process" below) — opening a PR
+  directly against <code>main</code> will need to be redirected before it can be
+  reviewed.</li>
 <li>Open an issue first for anything beyond a trivial fix.
   New components or API changes need prior discussion.</li>
 <li>Check that a similar issue or PR doesn't already exist.</li>
@@ -1919,7 +1923,7 @@
 <li>Fork the repository and create a branch: <code>git checkout -b feat/my-feature</code></li>
 <li>Write your code and add tests — all new public functions need a docstring</li>
 <li>Make sure <code>pytest</code>, <code>mypy htmforge/</code>, and <code>ruff check htmforge/</code> all pass</li>
-<li>Open a pull request against <code>develop</code> with a clear description</li>
+<li>Open a pull request <strong>against <code>develop</code></strong> with a clear description</li>
 </ol>
 <h2 id="coding-standards">Coding Standards</h2>
 <ul>
