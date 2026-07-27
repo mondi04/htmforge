@@ -60,8 +60,16 @@ class FormField(Component):
     max: int | float | None = None
 
     def render(self) -> Element:
-        """Erstellt ``div > label + input/textarea [+ div.field-error]``."""
+        """Erstellt ``div > label + input/textarea [+ div.field-error]``".
+
+        ``InputType.HIDDEN`` ist ein Sonderfall: hier wird nur das
+        ``<input type="hidden">`` ohne Label und Error-Div gerendert.
+        """
         fid = self.field_id or self.name.replace(" ", "-")
+
+        # Hidden inputs should not render a visible label or error container
+        if self.input_type is InputType.HIDDEN:
+            return self._render_control(fid)
 
         children: list[Element] = [
             label(
