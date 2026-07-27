@@ -692,6 +692,32 @@ class TestFormField:
         )
         assert 'type="email"' in field.to_html()
 
+    def test_hidden_input_renders_no_label_or_error(self) -> None:
+        """``InputType.HIDDEN`` rendert nur das Input, kein Label oder Error-Div."""
+        field = FormField(
+            name="csrf_token",
+            label_text="CSRF Token",
+            input_type=InputType.HIDDEN,
+            value="abc123",
+        )
+        html_out = field.to_html()
+        assert 'type="hidden"' in html_out
+        assert '<label' not in html_out
+        assert 'field-error' not in html_out
+
+    def test_hidden_input_with_error_still_no_label(self) -> None:
+        """Auch mit gesetztem ``error`` rendert HIDDEN kein Label/Error-Div."""
+        field = FormField(
+            name="token",
+            label_text="Token",
+            input_type=InputType.HIDDEN,
+            error="sollte nicht sichtbar sein",
+        )
+        html_out = field.to_html()
+        assert '<label' not in html_out
+        assert 'field-error' not in html_out
+        assert 'type="hidden"' in html_out
+
 
 # ---------------------------------------------------------------------------
 # Tests: Spinner
