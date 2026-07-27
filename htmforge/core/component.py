@@ -184,7 +184,7 @@ class Component(BaseModel, ABC):
         Example:
                 >>> card = GreetingCard(title="Hi")
                 >>> card.to_json()
-                {"html": "<div class='card'>...", "component": "GreetingCard"}
+                {'html': '<div class="card">Hi</div>', 'component': 'GreetingCard'}
         """
         return {"html": self.to_html(), "component": type(self).__name__}
 
