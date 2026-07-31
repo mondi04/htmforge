@@ -195,18 +195,18 @@ class Component(BaseModel, ABC):
             sichergestellt ist.
 
         Note:
-            Benchmarks zeigen: fuer kleine, flache Components (wenige
-            einfache Felder, z.B. ``Alert``) ist dieser Pfad tendenziell
-            *langsamer* als die normale, validierte Konstruktion — Pydantic
-            v2 validiert einfache Modelle bereits ueber den kompilierten
-            Rust-Core, waehrend ``model_construct()`` reiner Python-Code
-            ist. Der Vorteil zeigt sich erst bei Components mit
-            aufwendigerer Struktur (verschachtelte Submodelle, laengere
-            Listen — z.B. ``DataTable`` mit vielen ``dict_rows``), wo die
-            Validierungskosten mit der Struktur wachsen, der
-            Python-Overhead von ``model_construct()`` aber ungefaehr
-            konstant bleibt. Vor dem Einsatz in einem Hot-Loop lohnt sich
-            ein Benchmark der konkreten Component.
+            Ob dieser Pfad tatsaechlich schneller ist, ist NICHT pauschal
+            garantiert und schwankt spuerbar zwischen Umgebungen: Pydantic
+            v2 validiert bereits ueber den kompilierten Rust-Core, waehrend
+            ``model_construct()`` reiner Python-Code ist — je nach
+            Pydantic-/Python-Version, Plattform und Struktur der Component
+            kann der eine oder der andere Pfad gewinnen (in eigenen Tests
+            waehrend der Entwicklung war das Bild zwischen Windows- und
+            Linux-Umgebungen fuer dieselbe Component uneinheitlich). Diese
+            Methode ist daher explizit ein *Opt-in-Werkzeug*, keine
+            garantierte Optimierung — vor dem Einsatz in einem Hot-Loop
+            immer die konkrete Component in der Zielumgebung benchmarken,
+            statt dieser Note pauschal zu vertrauen.
 
         Args:
             **data: Feldwerte, unvalidiert uebernommen. Fehlende Felder
