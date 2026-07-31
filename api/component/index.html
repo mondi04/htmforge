@@ -2609,18 +2609,18 @@ sichergestellt ist.</p>
 
 <details class="note" open>
   <summary>Note</summary>
-  <p>Benchmarks zeigen: fuer kleine, flache Components (wenige
-einfache Felder, z.B. <code>Alert</code>) ist dieser Pfad tendenziell
-<em>langsamer</em> als die normale, validierte Konstruktion — Pydantic
-v2 validiert einfache Modelle bereits ueber den kompilierten
-Rust-Core, waehrend <code>model_construct()</code> reiner Python-Code
-ist. Der Vorteil zeigt sich erst bei Components mit
-aufwendigerer Struktur (verschachtelte Submodelle, laengere
-Listen — z.B. <code>DataTable</code> mit vielen <code>dict_rows</code>), wo die
-Validierungskosten mit der Struktur wachsen, der
-Python-Overhead von <code>model_construct()</code> aber ungefaehr
-konstant bleibt. Vor dem Einsatz in einem Hot-Loop lohnt sich
-ein Benchmark der konkreten Component.</p>
+  <p>Ob dieser Pfad tatsaechlich schneller ist, ist NICHT pauschal
+garantiert und schwankt spuerbar zwischen Umgebungen: Pydantic
+v2 validiert bereits ueber den kompilierten Rust-Core, waehrend
+<code>model_construct()</code> reiner Python-Code ist — je nach
+Pydantic-/Python-Version, Plattform und Struktur der Component
+kann der eine oder der andere Pfad gewinnen (in eigenen Tests
+waehrend der Entwicklung war das Bild zwischen Windows- und
+Linux-Umgebungen fuer dieselbe Component uneinheitlich). Diese
+Methode ist daher explizit ein <em>Opt-in-Werkzeug</em>, keine
+garantierte Optimierung — vor dem Einsatz in einem Hot-Loop
+immer die konkrete Component in der Zielumgebung benchmarken,
+statt dieser Note pauschal zu vertrauen.</p>
 </details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2770,18 +2770,18 @@ card.title
 <a id="__codelineno-0-195" name="__codelineno-0-195"></a><span class="sd">        sichergestellt ist.</span>
 <a id="__codelineno-0-196" name="__codelineno-0-196"></a>
 <a id="__codelineno-0-197" name="__codelineno-0-197"></a><span class="sd">    Note:</span>
-<a id="__codelineno-0-198" name="__codelineno-0-198"></a><span class="sd">        Benchmarks zeigen: fuer kleine, flache Components (wenige</span>
-<a id="__codelineno-0-199" name="__codelineno-0-199"></a><span class="sd">        einfache Felder, z.B. ``Alert``) ist dieser Pfad tendenziell</span>
-<a id="__codelineno-0-200" name="__codelineno-0-200"></a><span class="sd">        *langsamer* als die normale, validierte Konstruktion — Pydantic</span>
-<a id="__codelineno-0-201" name="__codelineno-0-201"></a><span class="sd">        v2 validiert einfache Modelle bereits ueber den kompilierten</span>
-<a id="__codelineno-0-202" name="__codelineno-0-202"></a><span class="sd">        Rust-Core, waehrend ``model_construct()`` reiner Python-Code</span>
-<a id="__codelineno-0-203" name="__codelineno-0-203"></a><span class="sd">        ist. Der Vorteil zeigt sich erst bei Components mit</span>
-<a id="__codelineno-0-204" name="__codelineno-0-204"></a><span class="sd">        aufwendigerer Struktur (verschachtelte Submodelle, laengere</span>
-<a id="__codelineno-0-205" name="__codelineno-0-205"></a><span class="sd">        Listen — z.B. ``DataTable`` mit vielen ``dict_rows``), wo die</span>
-<a id="__codelineno-0-206" name="__codelineno-0-206"></a><span class="sd">        Validierungskosten mit der Struktur wachsen, der</span>
-<a id="__codelineno-0-207" name="__codelineno-0-207"></a><span class="sd">        Python-Overhead von ``model_construct()`` aber ungefaehr</span>
-<a id="__codelineno-0-208" name="__codelineno-0-208"></a><span class="sd">        konstant bleibt. Vor dem Einsatz in einem Hot-Loop lohnt sich</span>
-<a id="__codelineno-0-209" name="__codelineno-0-209"></a><span class="sd">        ein Benchmark der konkreten Component.</span>
+<a id="__codelineno-0-198" name="__codelineno-0-198"></a><span class="sd">        Ob dieser Pfad tatsaechlich schneller ist, ist NICHT pauschal</span>
+<a id="__codelineno-0-199" name="__codelineno-0-199"></a><span class="sd">        garantiert und schwankt spuerbar zwischen Umgebungen: Pydantic</span>
+<a id="__codelineno-0-200" name="__codelineno-0-200"></a><span class="sd">        v2 validiert bereits ueber den kompilierten Rust-Core, waehrend</span>
+<a id="__codelineno-0-201" name="__codelineno-0-201"></a><span class="sd">        ``model_construct()`` reiner Python-Code ist — je nach</span>
+<a id="__codelineno-0-202" name="__codelineno-0-202"></a><span class="sd">        Pydantic-/Python-Version, Plattform und Struktur der Component</span>
+<a id="__codelineno-0-203" name="__codelineno-0-203"></a><span class="sd">        kann der eine oder der andere Pfad gewinnen (in eigenen Tests</span>
+<a id="__codelineno-0-204" name="__codelineno-0-204"></a><span class="sd">        waehrend der Entwicklung war das Bild zwischen Windows- und</span>
+<a id="__codelineno-0-205" name="__codelineno-0-205"></a><span class="sd">        Linux-Umgebungen fuer dieselbe Component uneinheitlich). Diese</span>
+<a id="__codelineno-0-206" name="__codelineno-0-206"></a><span class="sd">        Methode ist daher explizit ein *Opt-in-Werkzeug*, keine</span>
+<a id="__codelineno-0-207" name="__codelineno-0-207"></a><span class="sd">        garantierte Optimierung — vor dem Einsatz in einem Hot-Loop</span>
+<a id="__codelineno-0-208" name="__codelineno-0-208"></a><span class="sd">        immer die konkrete Component in der Zielumgebung benchmarken,</span>
+<a id="__codelineno-0-209" name="__codelineno-0-209"></a><span class="sd">        statt dieser Note pauschal zu vertrauen.</span>
 <a id="__codelineno-0-210" name="__codelineno-0-210"></a>
 <a id="__codelineno-0-211" name="__codelineno-0-211"></a><span class="sd">    Args:</span>
 <a id="__codelineno-0-212" name="__codelineno-0-212"></a><span class="sd">        **data: Feldwerte, unvalidiert uebernommen. Fehlende Felder</span>
