@@ -19,6 +19,7 @@ from abc import abstractmethod
 from typing import Any
 
 from htmforge import Component
+from htmforge.core.assets import collect_assets
 from htmforge.core.element import Element
 from htmforge.elements import (
     body,
@@ -74,7 +75,14 @@ class Page(Component):
         ...
 
     def render(self) -> Element:
-        """Rendert das vollstaendige ``<html>``-Dokument ohne DOCTYPE."""
+        """Rendert das vollstaendige ``<html>``-Dokument ohne DOCTYPE.
+
+        Sammelt zusaetzlich zu den explizit gesetzten ``css_urls``/``js_urls``
+        automatisch die ``css_files``/``js_files`` aller Components im
+        Seiteninhalt (#3, siehe :func:`~htmforge.core.assets.collect_assets`)
+        und injiziert sie dedupliziert — Components bleiben so unabhaengig
+        von der Seite, die sie einbindet, selbst-beschreibend.
+        """
         head_children: list[Any] = [meta(charset=self.charset)]
 
         if self.description:
@@ -82,16 +90,27 @@ class Page(Component):
 
         head_children.append(title(self.title))
 
+        body_children: list[Any] = [c for c in self._body_content() if c is not None]
+        auto_css, auto_js = collect_assets(*body_children)
+
+        seen_css = set(self.css_urls)
         for css_url in self.css_urls:
             head_children.append(link(rel="stylesheet", href=css_url))
+        for css_url in auto_css:
+            if css_url not in seen_css:
+                seen_css.add(css_url)
+                head_children.append(link(rel="stylesheet", href=css_url))
 
         if self.inline_css:
             head_children.append(style(raw(self.inline_css)))
 
-        body_children: list[Any] = [c for c in self._body_content() if c is not None]
-
+        seen_js = set(self.js_urls)
         for js_url in self.js_urls:
             body_children.append(script(src=js_url))
+        for js_url in auto_js:
+            if js_url not in seen_js:
+                seen_js.add(js_url)
+                body_children.append(script(src=js_url))
 
         return html(
             head(*head_children),

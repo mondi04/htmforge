@@ -28,7 +28,7 @@ Form(
 | `action` | `str` | required | Form action URL (form attribute) |
 | `method` | `str` | `"post"` | HTTP method: "get" or "post" |
 | `fields` | `list[Component]` | `[]` | List of form field components |
-| `submit_label` | `str` | `"Absenden"` | Submit button text |
+| `submit_label` | `str` | `"Submit"` | Submit button text |
 | `errors` | `dict[str, str]` | `{}` | Validation errors: `{field_name: message}` |
 | `hx_post` | `str` | `""` | HTMX POST URL (overrides action for HTMX) |
 | `hx_target` | `str` | `""` | HTMX target selector |

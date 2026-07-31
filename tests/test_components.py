@@ -33,6 +33,7 @@ from htmforge.components.form_field import InputType
 from htmforge.components.page import Page
 from htmforge.core.element import Element
 from htmforge.elements import div, li, ul
+from htmforge.htmx import HxSwap
 
 
 class TestComponentClone:
@@ -90,6 +91,22 @@ class TestComponentClone:
             cloned_table.to_html()
         )
 
+    def test_clone_preserves_hx_swap_enum_field(self) -> None:
+        """clone() behaelt den konkreten HxSwap-Enum-Typ und -Wert (#23).
+
+        Follow-up regression test for #21: model_dump()-basierte Ansaetze
+        koennen Enum-Felder zu einem blossen String degradieren. Der
+        getattr()-basierte clone() aus #21 muss auch fuer HTMX-Enum-Felder
+        (z.B. hx_swap) den echten Enum-Typ erhalten.
+        """
+        badge = Badge(text="Neu", hx_swap=HxSwap.OUTER_HTML)
+
+        cloned_badge = badge.clone()
+
+        assert isinstance(cloned_badge.hx_swap, HxSwap)
+        assert cloned_badge.hx_swap is HxSwap.OUTER_HTML
+        assert cloned_badge.hx_swap == badge.hx_swap
+
 
 class TestDataTable:
     """Tests fuer die ``DataTable``-Komponente."""
@@ -115,7 +132,7 @@ class TestDataTable:
 
         html = table_component.to_html()
 
-        assert '<td colspan="2" class="table__empty">Keine Einträge</td>' in html
+        assert '<td colspan="2" class="table__empty">No entries</td>' in html
 
     def test_datatable_empty_rows(self) -> None:
         """Leere Tabellen zeigen den Empty-State mit ``table__empty``."""
@@ -123,7 +140,7 @@ class TestDataTable:
         html = table_component.to_html()
         assert 'class="table-wrapper"' in html
         assert 'class="table"' in html
-        assert '<td colspan="1" class="table__empty">Keine Einträge</td>' in html
+        assert '<td colspan="1" class="table__empty">No entries</td>' in html
 
     def test_render_sets_htmx_attributes_when_hx_url_is_configured(self) -> None:
         """Optionales Reloading per HTMX wird auf ``table`` gesetzt."""
@@ -224,7 +241,7 @@ class TestDataTable:
             headers=["name"],
             dict_rows=[],
         )
-        assert "Keine Einträge" in table.to_html()
+        assert "No entries" in table.to_html()
 
 
 class TestAlert:
@@ -482,7 +499,7 @@ class TestModal:
             hx_url="/modal/content",
         ).to_html()
         assert 'method="dialog"' in html
-        assert '<button class="modal-close">Schließen</button>' in html
+        assert '<button class="modal-close">Close</button>' in html
 
     def test_custom_close_label(self) -> None:
         """Der Close-Button nutzt ein benutzerdefiniertes Label."""
@@ -668,6 +685,44 @@ class TestFormField:
         """Ohne Fehler wird kein Error-Div gerendert."""
         field = FormField(name="x", label_text="X")
         assert "field-error" not in field.to_html()
+
+    def test_error_div_linked_via_aria_describedby(self) -> None:
+        """Error-Div bekommt eine id, die vom Input via aria-describedby referenziert wird (#17)."""
+        field = FormField(name="x", label_text="X", error="Pflichtfeld")
+        html_out = field.to_html()
+        assert 'id="x-error"' in html_out
+        assert 'aria-describedby="x-error"' in html_out
+
+    def test_no_error_omits_aria_describedby(self) -> None:
+        """Ohne Fehler wird kein aria-describedby gerendert."""
+        field = FormField(name="x", label_text="X")
+        assert "aria-describedby" not in field.to_html()
+
+    def test_hidden_input_renders_no_label_or_error(self) -> None:
+        """``InputType.HIDDEN`` rendert weder Label noch Error-Div (#14)."""
+        field = FormField(
+            name="csrf_token",
+            label_text="CSRF",
+            input_type=InputType.HIDDEN,
+            value="abc123",
+        )
+        html_out = field.to_html()
+        assert html_out == '<input type="hidden" name="csrf_token" id="csrf_token" value="abc123">'
+        assert "<label" not in html_out
+        assert "field-error" not in html_out
+
+    def test_hidden_input_with_error_still_no_label(self) -> None:
+        """Auch mit ``error`` gesetzt bleibt ``InputType.HIDDEN`` label-/error-frei."""
+        field = FormField(
+            name="csrf_token",
+            label_text="CSRF",
+            input_type=InputType.HIDDEN,
+            error="bad",
+        )
+        html_out = field.to_html()
+        assert "<label" not in html_out
+        assert "field-error" not in html_out
+        assert "bad" not in html_out
 
     def test_field_id_generated_from_name_when_empty(self) -> None:
         """Wenn ``field_id`` leer ist, wird die ID aus ``name`` abgeleitet."""
@@ -905,6 +960,12 @@ class TestSelectField:
         html = SelectField(name="role", options=[]).to_html()
         assert "field-error" not in html
 
+    def test_error_div_linked_via_aria_describedby(self) -> None:
+        """Error-Div bekommt eine id, die vom Select via aria-describedby referenziert wird (#17)."""
+        html = SelectField(name="role", options=[], error="Pflichtfeld").to_html()
+        assert 'id="role-error"' in html
+        assert 'aria-describedby="role-error"' in html
+
 
 # ---------------------------------------------------------------------------
 # Tests: CheckboxField
@@ -938,6 +999,14 @@ class TestCheckboxField:
             name="agree", label_text="OK", error="Erforderlich"
         ).to_html()
         assert "field-error" in html
+
+    def test_error_div_linked_via_aria_describedby(self) -> None:
+        """Error-Div bekommt eine id, die von der Checkbox via aria-describedby referenziert wird (#17)."""
+        html = CheckboxField(
+            name="agree", label_text="OK", error="Erforderlich"
+        ).to_html()
+        assert 'id="agree-error"' in html
+        assert 'aria-describedby="agree-error"' in html
 
 
 # ---------------------------------------------------------------------------
@@ -983,6 +1052,16 @@ class TestRadioGroup:
         ).to_html()
         assert "field-error" in html
 
+    def test_error_div_linked_via_aria_describedby(self) -> None:
+        """Error-Div bekommt eine id, die von jedem Radio via aria-describedby referenziert wird (#17)."""
+        html = RadioGroup(
+            name="size",
+            options=[("Small", "sm"), ("Large", "lg")],
+            error="Pflichtfeld",
+        ).to_html()
+        assert 'id="size-error"' in html
+        assert html.count('aria-describedby="size-error"') == 2
+
 
 # ---------------------------------------------------------------------------
 # Tests: FormGroup
@@ -1027,7 +1106,7 @@ class TestForm:
     def test_submit_button_present(self) -> None:
         """Submit-Button ist vorhanden."""
         html = Form(action="/submit", fields=[]).to_html()
-        assert "Absenden" in html
+        assert "Submit" in html
 
     def test_custom_submit_label(self) -> None:
         """Benutzerdefiniertes Submit-Label wird verwendet."""

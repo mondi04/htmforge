@@ -51,6 +51,14 @@ class Component(BaseModel, ABC):
     )
     __htmforge_missing_render__: ClassVar[bool] = False
 
+    # Component-Level Asset-Injection (#3): Subklassen deklarieren ihre
+    # eigenen CSS-/JS-Abhaengigkeiten hier statt sie manuell auf Seitenebene
+    # zu verdrahten. ``htmforge.core.assets.collect_assets`` sammelt diese
+    # rekursiv und dedupliziert ueber einen ganzen Component-Baum; ``Page``
+    # injiziert sie automatisch (siehe ``Page.render``).
+    css_files: ClassVar[list[str]] = []
+    js_files: ClassVar[list[str]] = []
+
     # Optionale Zusatz-CSS-Klasse, die jede Component an ihr Root-Element
     # anhängt (additiv, ersetzt nicht die Default-Klasse). Siehe
     # ``htmforge.core.element.merge_cls``.
@@ -129,7 +137,21 @@ class Component(BaseModel, ABC):
         Returns:
             Den vollständigen HTML-String der Komponente.
         """
-        return self.render().to_html()
+        buf: list[str] = []
+        self._write(buf)
+        return "".join(buf)
+
+    def _write(self, buf: list[str]) -> None:
+        """Schreibt das gerenderte HTML dieser Komponente in ``buf``.
+
+        Teil des Writer-Patterns aus :class:`~htmforge.core.element.Element`
+        (#18) — Components delegieren direkt in den geteilten Puffer, statt
+        einen Zwischenstring ueber :meth:`render` ``.to_html()`` zu bauen.
+
+        Args:
+            buf: Der gemeinsame Ziel-Puffer, an den angehaengt wird.
+        """
+        self.render()._write(buf)  # noqa: SLF001
 
     def clone(self, **overrides: Any) -> Component:  # noqa: ANN401
         """Gibt eine neue Instanz mit geaenderten Props zurueck.
@@ -154,6 +176,57 @@ class Component(BaseModel, ABC):
         }
         data.update(overrides)
         return type(self)(**data)
+
+    @classmethod
+    def fast_construct(cls, **data: Any) -> Component:  # noqa: ANN401
+        """Erstellt eine Instanz ohne Pydantic-Validierung (Opt-in Fast-Path, #1).
+
+        Nutzt intern ``BaseModel.model_construct()``, um den vollen
+        Validierungszyklus zu ueberspringen — sinnvoll, wenn dieselbe
+        Component-Struktur sehr oft mit bereits bekanntermassen gueltigen
+        Daten instanziiert wird (z.B. in engen Rendering-Loops ueber
+        Datenbank-Zeilen, die schon einmal validiert wurden).
+
+        Warning:
+            Die Daten werden NICHT validiert oder typ-konvertiert. Falsche
+            Typen oder fehlende Pflichtfelder fuehren nicht hier, sondern
+            erst (oder ueberhaupt nicht) beim Rendern zu einem Fehler. Nur
+            verwenden, wenn die Gueltigkeit der Daten bereits anderweitig
+            sichergestellt ist.
+
+        Note:
+            Benchmarks zeigen: fuer kleine, flache Components (wenige
+            einfache Felder, z.B. ``Alert``) ist dieser Pfad tendenziell
+            *langsamer* als die normale, validierte Konstruktion — Pydantic
+            v2 validiert einfache Modelle bereits ueber den kompilierten
+            Rust-Core, waehrend ``model_construct()`` reiner Python-Code
+            ist. Der Vorteil zeigt sich erst bei Components mit
+            aufwendigerer Struktur (verschachtelte Submodelle, laengere
+            Listen — z.B. ``DataTable`` mit vielen ``dict_rows``), wo die
+            Validierungskosten mit der Struktur wachsen, der
+            Python-Overhead von ``model_construct()`` aber ungefaehr
+            konstant bleibt. Vor dem Einsatz in einem Hot-Loop lohnt sich
+            ein Benchmark der konkreten Component.
+
+        Args:
+            **data: Feldwerte, unvalidiert uebernommen. Fehlende Felder
+                erhalten ihren deklarierten Default, soweit vorhanden.
+
+        Returns:
+            Eine neue Instanz, ohne dass Pydantic-Validierung durchlaufen
+            wurde.
+
+        Example:
+            >>> card = GreetingCard.fast_construct(title="Hi")
+            >>> card.title
+            'Hi'
+        """
+        if getattr(cls, "__htmforge_missing_render__", False):
+            raise TypeError(
+                f"Can't instantiate abstract class {cls.__name__} "
+                "without a concrete render() implementation"
+            )
+        return cls.model_construct(**data)
 
     def to_fragment(self) -> str:
         """Rendert die Komponente als HTMX-Fragment (identisch mit to_html()).
@@ -182,9 +255,9 @@ class Component(BaseModel, ABC):
             component class name under ``"component"``.
 
         Example:
-                >>> card = GreetingCard(title="Hi")
-                >>> card.to_json()
-                {"html": "<div class='card'>...", "component": "GreetingCard"}
+            >>> card = GreetingCard(title="Hi")
+            >>> card.to_json()
+            {'html': '<div class="card">Hi</div>', 'component': 'GreetingCard'}
         """
         return {"html": self.to_html(), "component": type(self).__name__}
 

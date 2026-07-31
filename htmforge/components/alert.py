@@ -30,7 +30,7 @@ class Alert(Component):
     message: str
     variant: AlertVariant = AlertVariant.INFO
     dismissible: bool = False
-    close_label: str = "Schließen"
+    close_label: str = "Close"
 
     def render(self) -> Element:
         """Erstellt ein ``<div>`` mit Variantenklasse und optionalem Schliessen."""

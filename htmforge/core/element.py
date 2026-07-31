@@ -81,17 +81,38 @@ class Element:
         Alle Text-Inhalte werden durch ``markupsafe.escape`` gesichert, damit
         kein unbeabsichtigtes HTML injiziert werden kann.
 
+        Intern schreibt :meth:`_write` direkt in einen gemeinsamen Puffer
+        (siehe #18) — dadurch entsteht nur ein einziges ``"".join()`` an der
+        Wurzel, statt eines Zwischenstrings pro Verschachtelungsebene.
+
         Returns:
             Ein vollständiger, wohlgeformter HTML-String.
+        """
+        buf: list[str] = []
+        self._write(buf)
+        return "".join(buf)
+
+    def _write(self, buf: list[str]) -> None:
+        """Schreibt das gerenderte HTML dieses Elements in ``buf``.
+
+        Writer-Pattern: jede Ebene haengt ihre Fragmente direkt an den vom
+        Aufrufer uebergebenen Puffer an, statt einen eigenen String zu bauen
+        und zurueckzugeben. Vermeidet das wiederholte Kopieren bereits
+        gerenderter Kind-Strings bei tief verschachtelten Baeumen.
+
+        Args:
+            buf: Der gemeinsame Ziel-Puffer, an den angehaengt wird.
         """
         attrs_str = self._render_attrs()
         tag = self._tag
 
         if tag in _VOID_ELEMENTS:
-            return f"<{tag}{attrs_str}>"
+            buf.append(f"<{tag}{attrs_str}>")
+            return
 
-        inner = self._render_children()
-        return f"<{tag}{attrs_str}>{inner}</{tag}>"
+        buf.append(f"<{tag}{attrs_str}>")
+        self._write_children(buf)
+        buf.append(f"</{tag}>")
 
     def __str__(self) -> str:
         """Delegiert zu :meth:`to_html`."""
@@ -155,24 +176,22 @@ class Element:
             return ""
         return " " + " ".join(parts)
 
-    def _render_children(self) -> str:
-        """Rendert alle Kind-Elemente zu einem zusammengesetzten HTML-String.
+    def _write_children(self, buf: list[str]) -> None:
+        """Schreibt alle Kind-Elemente direkt in den gemeinsamen Puffer ``buf``.
 
-        Returns:
-            Der verkettete HTML-String aller Kinder.
+        Args:
+            buf: Der gemeinsame Ziel-Puffer, an den angehaengt wird.
         """
-        chunks: list[str] = []
+        from htmforge.core.component import Component
+
         for child in self._children:
             if child is None:
                 continue
-            from htmforge.core.component import Component
-
             if isinstance(child, (Element, Component)):
-                chunks.append(child.to_html())
+                child._write(buf)  # noqa: SLF001
             else:
                 # Roher String → escapen, damit kein XSS möglich ist
-                chunks.append(str(escape(child)))
-        return "".join(chunks)
+                buf.append(str(escape(child)))
 
 
 def safe_html(text: str) -> Markup:

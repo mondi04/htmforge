@@ -60,25 +60,43 @@ class FormField(Component):
     max: int | float | None = None
 
     def render(self) -> Element:
-        """Erstellt ``div > label + input/textarea [+ div.field-error]``."""
+        """Erstellt ``div > label + input/textarea [+ div.field-error]``.
+
+        ``InputType.HIDDEN`` ist ein Sonderfall: hierfuer wird weder ein
+        ``<label>`` noch ein Fehler-``<div>`` gerendert (siehe #14) — nur das
+        blanke ``<input type="hidden">``, da versteckte Felder (z.B. ein
+        CSRF-Token) keine sichtbare Beschriftung oder Inline-Fehler brauchen.
+        """
         fid = self.field_id or self.name.replace(" ", "-")
 
+        if self.input_type is InputType.HIDDEN:
+            return self._render_control(fid)
+
+        error_id = f"{fid}-error" if self.error else None
         children: list[Element] = [
             label(
                 self.label_text,
                 for_=fid,
                 aria_required="true" if self.required else None,
             ),
-            self._render_control(fid),
+            self._render_control(fid, error_id),
         ]
 
         if self.error:
-            children.append(div(self.error, cls="field-error"))
+            children.append(div(self.error, cls="field-error", id=error_id))
 
         return div(*children, cls=merge_cls(self.extra_cls))
 
-    def _render_control(self, fid: str) -> Element:
+    def _render_control(self, fid: str, error_id: str | None = None) -> Element:
         """Erstellt das eigentliche Eingabe-Element (``input`` oder ``textarea``)."""
+        if self.input_type is InputType.HIDDEN:
+            return input(
+                type=self.input_type.value,
+                name=self.name,
+                id=fid,
+                value=self.value or None,
+            )
+
         if self.input_type is InputType.TEXTAREA:
             return textarea(
                 self.value or None,
@@ -87,6 +105,7 @@ class FormField(Component):
                 placeholder=self.placeholder or None,
                 required=True if self.required else None,
                 aria_required="true" if self.required else None,
+                aria_describedby=error_id,
             )
 
         return input(
@@ -97,6 +116,7 @@ class FormField(Component):
             placeholder=self.placeholder or None,
             required=True if self.required else None,
             aria_required="true" if self.required else None,
+            aria_describedby=error_id,
             min=self.min,
             max=self.max,
         )

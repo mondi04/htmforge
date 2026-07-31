@@ -23,7 +23,7 @@ DataTable(
 | `sort_url` | `str` | `""` | URL template for sortable headers |
 | `current_sort` | `str` | `""` | Currently sorted column key |
 | `sort_dir` | `str` | `"asc"` | Sort direction: "asc" or "desc" |
-| `empty_message` | `str` | `"Keine Einträge"` | Shown when rows are empty |
+| `empty_message` | `str` | `"No entries"` | Shown when rows are empty |
 
 ## ColumnDef Props
 

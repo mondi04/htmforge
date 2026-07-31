@@ -58,6 +58,7 @@ class SelectField(Component):
     def render(self) -> Element:
         """Rendert ein beschriftetes select-Element."""
         fid = self.field_id or self.name
+        error_id = f"{fid}-error" if self.error else None
         children: list[Element] = []
         if self.label_text:
             children.append(label(self.label_text, for_=fid))
@@ -74,10 +75,11 @@ class SelectField(Component):
             name=self.name,
             id=fid,
             required=True if self.required else None,
+            aria_describedby=error_id,
         )
         children.append(sel)
         if self.error:
-            children.append(div(self.error, cls="field-error"))
+            children.append(div(self.error, cls="field-error", id=error_id))
         return div(*children, cls=merge_cls("field-wrapper", self.extra_cls))
 
 
@@ -105,6 +107,7 @@ class CheckboxField(Component):
     def render(self) -> Element:
         """Rendert eine Checkbox mit Label."""
         fid = self.field_id or self.name
+        error_id = f"{fid}-error" if self.error else None
         children: list[Element] = [
             input(
                 type="checkbox",
@@ -113,11 +116,12 @@ class CheckboxField(Component):
                 value=self.value,
                 checked=True if self.checked else None,
                 required=True if self.required else None,
+                aria_describedby=error_id,
             ),
             label(self.label_text, for_=fid),
         ]
         if self.error:
-            children.append(div(self.error, cls="field-error"))
+            children.append(div(self.error, cls="field-error", id=error_id))
         return div(*children, cls=merge_cls("checkbox-field", self.extra_cls))
 
 
@@ -142,6 +146,7 @@ class RadioGroup(Component):
 
     def render(self) -> Element:
         """Rendert eine Gruppe von Radio-Buttons im Fieldset."""
+        error_id = f"{self.name}-error" if self.error else None
         children: list[Element] = []
         if self.legend_text:
             children.append(legend(self.legend_text))
@@ -158,6 +163,7 @@ class RadioGroup(Component):
                         value=val,
                         checked=True if val == self.selected else None,
                         required=True if self.required and is_first else None,
+                        aria_describedby=error_id,
                     ),
                     label(lbl, for_=radio_id),
                     cls="radio-item",
@@ -165,7 +171,7 @@ class RadioGroup(Component):
             )
 
         if self.error:
-            children.append(div(self.error, cls="field-error"))
+            children.append(div(self.error, cls="field-error", id=error_id))
 
         return fieldset(*children, cls=merge_cls("radiogroup", self.extra_cls))
 
@@ -207,19 +213,41 @@ class Form(Component):
           Form.from_model())
         method: str — "get" or "post", default "post"
         fields: list[Component] — Formularfelder
-        submit_label: str — Beschriftung des Submit-Buttons, default "Absenden"
+        submit_label: str — Beschriftung des Submit-Buttons, default "Submit"
         errors: dict[str, str] — Validierungsfehler {field_name: message}
           Wenn gesetzt, werden Fehler automatisch an passende Felder
           weitergegeben.
         hx_post: str — HTMX POST URL (optional, overrides action for HTMX)
         hx_target: str — HTMX target selector
         hx_swap: HxSwap | None — HTMX swap strategy
+
+    CSRF:
+        htmforge has no framework-specific CSRF token generation (FastAPI,
+        Flask and Django each generate/validate tokens differently), so
+        there is no dedicated ``CsrfField`` component. Instead, inject the
+        framework's token as a hidden field — ``InputType.HIDDEN`` renders
+        a bare ``<input>`` with no visible label (see #14)::
+
+            Form(
+                action="/users",
+                fields=[
+                    FormField(
+                        name="csrf_token",
+                        label_text="",
+                        input_type=InputType.HIDDEN,
+                        value=csrf_token,
+                    ),
+                    FormField(
+                        name="email", label_text="Email", input_type=InputType.EMAIL
+                    ),
+                ],
+            )
     """
 
     action: str = ""
     method: str = "post"
     fields: list[Component] = []
-    submit_label: str = "Absenden"
+    submit_label: str = "Submit"
     errors: dict[str, str] = {}
     hx_post: str = ""
     hx_target: str = ""
