@@ -4,6 +4,29 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.6.0] - 2026-07-31
+
+### Added
+- `DashboardLayout` + `Widget`: grid-based widget dashboards (#24)
+- `AutocompleteInput`, `InfiniteScrollList`, `InlineEditor`: behavioral affordance components covering debounced search, infinite scroll, and click-to-edit patterns (#26)
+- `htmforge.auth`: `LoginForm`, `LogoutButton` components and `requires_auth`/`role_required` render guards (#25)
+- `Component.css_files` / `Component.js_files` + `htmforge.core.assets.collect_assets()`: component-level asset declaration, auto-injected (deduplicated) by `Page` (#3)
+- `Component.fast_construct()`: opt-in validation-skip constructor for hot loops over components with expensive nested validation (#1)
+- `htmforge.devtools`: polling-based dev-mode auto-reload (`DevReloadWatcher`, `dev_reload_script()`) (#5)
+- `htmforge.contrib.tailwind`: optional Tailwind-styled starter components — `Button`, `Card`, `Alert`, `Badge` (#6)
+- `aria-describedby` linking error messages to their inputs across `FormField`, `SelectField`, `CheckboxField`, `RadioGroup` (#17)
+- CSRF hidden-field pattern documented on `Form` (#17)
+
+### Changed
+- `Element.to_html()` now writes into a shared buffer (`_write()`) instead of recursively joining per-level strings, avoiding repeated string copies on deeply nested trees (#18)
+- Default strings switched from German to English: `Alert.close_label` / `Modal.close_label` ("Close"), `Form.submit_label` ("Submit"), `DataTable.empty_message` ("No entries") (#17)
+- `Modal`'s inline script is now a single, idempotent, document-level delegated click listener instead of one per instance, preventing duplicate listeners and `InvalidStateError` with multiple modals on one page (#16)
+
+### Fixed
+- `FormField` no longer renders a `<label>`/error `<div>` for `InputType.HIDDEN` (#14)
+- `DataTable` sort links use `&` instead of a second `?` when `sort_url` already has a query string (#15)
+- `Component.to_json()` docstring example now matches actual output (#19)
+
 ## [0.5.1] - 2026-06-21
 
 ### Fixed
