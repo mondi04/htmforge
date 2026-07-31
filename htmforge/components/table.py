@@ -51,7 +51,7 @@ class DataTable(Component):
     sort_url: str = ""
     current_sort: str = ""
     sort_dir: str = "asc"
-    empty_message: str = "Keine Einträge"
+    empty_message: str = "No entries"
 
     def render(self) -> Element:
         """Erstellt ``div.table-wrapper > table.table`` mit ``thead``/``tbody``."""
@@ -89,10 +89,11 @@ class DataTable(Component):
                         if self.current_sort == col.key and self.sort_dir == "asc"
                         else "asc"
                     )
+                    separator = "&" if "?" in self.sort_url else "?"
                     link = a(
                         col.display_label,
                         href="#",
-                        hx_get=f"{self.sort_url}?sort={col.key}&dir={next_dir}",
+                        hx_get=f"{self.sort_url}{separator}sort={col.key}&dir={next_dir}",
                         hx_target="this",
                         cls="sort-link",
                     )

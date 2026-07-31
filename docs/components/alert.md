@@ -15,7 +15,7 @@ Alert(message="Saved", variant=AlertVariant.SUCCESS, dismissible=True, close_lab
 | `message` | `str` | required | the alert text |
 | `variant` | `AlertVariant` | `AlertVariant.INFO` | CSS variant |
 | `dismissible` | `bool` | `False` | adds the close button |
-| `close_label` | `str` | `Schließen` | `aria-label` for the close button |
+| `close_label` | `str` | `Close` | `aria-label` for the close button |
 
 ## Rendered HTML
 

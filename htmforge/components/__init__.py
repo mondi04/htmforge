@@ -3,7 +3,9 @@
 from .accordion import Accordion
 from .alert import Alert, AlertVariant
 from .badge import Badge, BadgeVariant
+from .behavioral import AutocompleteInput, InfiniteScrollList, InlineEditor
 from .breadcrumb import Breadcrumb
+from .dashboard import DashboardLayout, Widget
 from .dropdown import Dropdown
 from .form_field import FormField, InputType
 from .form_model import fields_from_model
@@ -26,16 +28,20 @@ __all__ = [
     "Accordion",
     "Alert",
     "AlertVariant",
+    "AutocompleteInput",
     "Badge",
     "BadgeVariant",
     "Breadcrumb",
     "CheckboxField",
     "ColumnDef",
+    "DashboardLayout",
     "DataTable",
     "Dropdown",
     "Form",
     "FormField",
     "FormGroup",
+    "InfiniteScrollList",
+    "InlineEditor",
     "InputType",
     "Modal",
     "Pagination",
@@ -47,5 +53,6 @@ __all__ = [
     "Tabs",
     "Toast",
     "ToastVariant",
+    "Widget",
     "fields_from_model",
 ]
