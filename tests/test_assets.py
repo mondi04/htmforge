@@ -86,7 +86,7 @@ class TestCollectAssets:
 class ChartPage(Page):
     """Test-Page die eine Component mit Assets einbindet."""
 
-    def _body_content(self) -> list[Element | str | None]:
+    def _body_content(self) -> list[Element | Component | str | None]:
         return [ChartWidget()]
 
 

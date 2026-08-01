@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 from abc import ABC, abstractmethod
 from copy import deepcopy
-from typing import Any, ClassVar
+from typing import Any, ClassVar, Self
 
 from pydantic import BaseModel, ConfigDict
 
@@ -153,7 +153,7 @@ class Component(BaseModel, ABC):
         """
         self.render()._write(buf)  # noqa: SLF001
 
-    def clone(self, **overrides: Any) -> Component:  # noqa: ANN401
+    def clone(self, **overrides: Any) -> Self:  # noqa: ANN401
         """Gibt eine neue Instanz mit geaenderten Props zurueck.
 
         Args:
@@ -178,7 +178,7 @@ class Component(BaseModel, ABC):
         return type(self)(**data)
 
     @classmethod
-    def fast_construct(cls, **data: Any) -> Component:  # noqa: ANN401
+    def fast_construct(cls, **data: Any) -> Self:  # noqa: ANN401
         """Erstellt eine Instanz ohne Pydantic-Validierung (Opt-in Fast-Path, #1).
 
         Nutzt intern ``BaseModel.model_construct()``, um den vollen

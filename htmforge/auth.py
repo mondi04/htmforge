@@ -23,14 +23,12 @@ from __future__ import annotations
 
 import functools
 from collections.abc import Callable
-from typing import Any, TypeVar
+from typing import Any
 
 from htmforge import Component
 from htmforge.core.element import Element, merge_cls
 from htmforge.elements import a, button, div, form, input, label
 from htmforge.htmx import HxSwap
-
-_R = TypeVar("_R", bound="Element | Component | None")
 
 
 def _is_authenticated(user: Any) -> bool:  # noqa: ANN401
@@ -70,7 +68,10 @@ def _has_role(user: Any, role: str) -> bool:  # noqa: ANN401
 
 def requires_auth(
     fallback: Element | Component | None = None,
-) -> Callable[[Callable[..., _R]], Callable[..., Element | Component | None]]:
+) -> Callable[
+    [Callable[..., Element | Component | None]],
+    Callable[..., Element | Component | None],
+]:
     """Decorator: rendert eine Funktion nur wenn ``user`` authentifiziert ist.
 
     Die dekorierte Funktion muss ``user`` als erstes Argument annehmen und
@@ -93,7 +94,7 @@ def requires_auth(
     """
 
     def decorator(
-        fn: Callable[..., _R],
+        fn: Callable[..., Element | Component | None],
     ) -> Callable[..., Element | Component | None]:
         @functools.wraps(fn)
         def wrapper(
@@ -113,7 +114,10 @@ def requires_auth(
 def role_required(
     role: str,
     fallback: Element | Component | None = None,
-) -> Callable[[Callable[..., _R]], Callable[..., Element | Component | None]]:
+) -> Callable[
+    [Callable[..., Element | Component | None]],
+    Callable[..., Element | Component | None],
+]:
     """Decorator: rendert eine Funktion nur wenn ``user`` die Rolle besitzt.
 
     Impliziert :func:`requires_auth` — ein nicht authentifizierter Nutzer
@@ -136,7 +140,7 @@ def role_required(
     """
 
     def decorator(
-        fn: Callable[..., _R],
+        fn: Callable[..., Element | Component | None],
     ) -> Callable[..., Element | Component | None]:
         @functools.wraps(fn)
         def wrapper(

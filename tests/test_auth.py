@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from htmforge.auth import LoginForm, LogoutButton, requires_auth, role_required
+from htmforge.core.element import Element
 from htmforge.elements import div
 
 
@@ -24,7 +25,7 @@ class TestRequiresAuth:
         """Authentifizierter User: die dekorierte Funktion wird gerendert."""
 
         @requires_auth(fallback=div("Please log in"))
-        def render_profile(user: FakeUser) -> div:
+        def render_profile(user: FakeUser) -> Element:
             return div(f"Hi {user.name}")
 
         result = render_profile(FakeUser(name="Ada"))
@@ -35,7 +36,7 @@ class TestRequiresAuth:
         """Kein User: fallback wird gerendert."""
 
         @requires_auth(fallback=div("Please log in"))
-        def render_profile(user: FakeUser | None) -> div:
+        def render_profile(user: FakeUser | None) -> Element:
             return div("secret")
 
         result = render_profile(None)
@@ -46,7 +47,7 @@ class TestRequiresAuth:
         """user.is_authenticated=False: fallback wird gerendert."""
 
         @requires_auth(fallback=div("Please log in"))
-        def render_profile(user: FakeUser) -> div:
+        def render_profile(user: FakeUser) -> Element:
             return div("secret")
 
         anon = FakeUser(name="Anon", is_authenticated=False)
@@ -58,7 +59,7 @@ class TestRequiresAuth:
         """Ohne fallback wird None zurueckgegeben."""
 
         @requires_auth()
-        def render_profile(user: FakeUser) -> div:
+        def render_profile(user: FakeUser) -> Element:
             return div("secret")
 
         assert render_profile(None) is None
@@ -71,7 +72,7 @@ class TestRoleRequired:
         """User mit passender Rolle: Funktion wird gerendert."""
 
         @role_required("admin", fallback=div("Forbidden"))
-        def render_admin_panel(user: FakeUser) -> div:
+        def render_admin_panel(user: FakeUser) -> Element:
             return div("controls")
 
         admin = FakeUser(name="Ada", roles=["admin"])
@@ -83,7 +84,7 @@ class TestRoleRequired:
         """User ohne passende Rolle: fallback wird gerendert."""
 
         @role_required("admin", fallback=div("Forbidden"))
-        def render_admin_panel(user: FakeUser) -> div:
+        def render_admin_panel(user: FakeUser) -> Element:
             return div("controls")
 
         member = FakeUser(name="Grace", roles=["member"])
@@ -95,7 +96,7 @@ class TestRoleRequired:
         """Nicht authentifizierter User faellt ebenfalls auf fallback zurueck."""
 
         @role_required("admin", fallback=div("Forbidden"))
-        def render_admin_panel(user: FakeUser) -> div:
+        def render_admin_panel(user: FakeUser) -> Element:
             return div("controls")
 
         assert render_admin_panel(None) is not None

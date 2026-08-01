@@ -5,7 +5,7 @@ Example:
     >>> from htmforge.core.element import Element
     >>>
     >>> class IndexPage(Page):
-    ...     def _body_content(self) -> list[Element | str | None]:
+    ...     def _body_content(self) -> Sequence[Element | Component | str | None]:
     ...         return []
     ...
     >>> html = IndexPage(title="Start").to_html()
@@ -16,6 +16,7 @@ Example:
 from __future__ import annotations
 
 from abc import abstractmethod
+from collections.abc import Sequence
 from typing import Any
 
 from htmforge import Component
@@ -48,7 +49,7 @@ class Page(Component):
         >>> class MyPage(Page):
         ...     users: list[str] = []
         ...
-        ...     def _body_content(self) -> list[Element | str | None]:
+        ...     def _body_content(self) -> Sequence[Element | Component | str | None]:
         ...         from htmforge.elements import li, ul
         ...         return [ul(*[li(u) for u in self.users])]
         ...
@@ -66,11 +67,15 @@ class Page(Component):
     lang: str = "en"
 
     @abstractmethod
-    def _body_content(self) -> list[Element | str | None]:
+    def _body_content(self) -> Sequence[Element | Component | str | None]:
         """Liefert die Kinder des ``<body>``-Elements.
 
         Returns:
-            Eine Liste von Elementen, Strings oder None-Werten.
+            Eine Sequenz von Elementen, Components, Strings oder None-Werten.
+            ``Sequence`` statt ``list`` als Rückgabetyp, damit Subklassen
+            einen praeziseren Listentyp (z.B. ``list[MyWidget]``) zurueckgeben
+            koennen, ohne dass Typchecker das als LSP-Verletzung markieren
+            (``list`` ist invariant, ``Sequence`` covariant).
         """
         ...
 
