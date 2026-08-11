@@ -128,6 +128,16 @@ class TestAttributeRendering:
         el = div("text", cls=["btn", "btn-primary"])
         assert el.to_html() == '<div class="btn btn-primary">text</div>'
 
+    def test_list_attributes_filter_none_and_bool_items(self) -> None:
+        """``None`` und boolesche Werte in Listenattributen werden ausgelassen."""
+        el = div("text", cls=["container", None, False, True, "active"])
+        assert el.to_html() == '<div class="container active">text</div>'
+
+    def test_list_attribute_with_only_filtered_items_is_omitted(self) -> None:
+        """Listenattribute ohne gerenderte Werte werden nicht ausgegeben."""
+        el = div("text", cls=[None, False, True])
+        assert el.to_html() == "<div>text</div>"
+
     def test_enum_attribute_renders_enum_value(self) -> None:
         """Enum-Attribute werden als Enum-Value statt Enum-Name gerendert."""
         el = button("Load", hx_swap=HxSwap.OUTER_HTML)
