@@ -163,10 +163,14 @@ class Element:
                 parts.append(html_key)
             else:
                 if isinstance(value, (list, tuple)):
-                    value = " ".join(
+                    rendered_items = [
                         str(item.value) if isinstance(item, Enum) else str(item)
                         for item in value
-                    )
+                        if item is not None and not isinstance(item, bool)
+                    ]
+                    if not rendered_items:
+                        continue
+                    value = " ".join(rendered_items)
                 elif isinstance(value, Enum):
                     value = value.value
                 safe_value = escape(str(value))
