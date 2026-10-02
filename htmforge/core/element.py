@@ -7,6 +7,7 @@ HTML-String gerendert werden kann.
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from enum import Enum
 from typing import TYPE_CHECKING, Union
 
@@ -216,7 +217,7 @@ def safe_html(text: str) -> Markup:
     return Markup(text)  # noqa: S704
 
 
-def merge_cls(*parts: str | None) -> str | None:
+def merge_cls(*parts: str | None | Iterable[str | None]) -> str | None:
     """Verbindet mehrere CSS-Klassen-Strings zu einem, leere Teile werden ignoriert.
 
     Wird von Components genutzt, um die eigene Default-Klasse mit einer
@@ -224,7 +225,8 @@ def merge_cls(*parts: str | None) -> str | None:
     ``class=""``-Attribut zu erzeugen, wenn keine Klasse gesetzt ist.
 
     Args:
-        *parts: Beliebig viele Klassen-Strings, ``None`` oder ``""`` erlaubt.
+        *parts: Klassen-Strings oder Iterables von Klassen-Strings.
+            ``None`` und ``""`` werden ignoriert.
 
     Returns:
         Die verbundenen Klassen als String, oder ``None`` wenn alle Teile
@@ -235,7 +237,13 @@ def merge_cls(*parts: str | None) -> str | None:
         'alert alert-success'
         >>> merge_cls("", None)
     """
-    joined = " ".join(p for p in parts if p)
+    flat: list[str | None] = []
+    for part in parts:
+        if isinstance(part, str) or part is None:
+            flat.append(part)
+        else:
+            flat.extend(part)
+    joined = " ".join(p for p in flat if p)
     return joined or None
 
 

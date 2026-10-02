@@ -4,6 +4,11 @@ All notable changes to htmforge are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- `merge_cls()` accepts class-name iterables alongside strings and skips empty parts.
+
 ## [0.6.0] - 2026-07-31
 
 ### Added

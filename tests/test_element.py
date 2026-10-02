@@ -4,9 +4,31 @@ from __future__ import annotations
 
 import pytest
 
-from htmforge.core.element import Element, _normalize_attr_name
+from htmforge.core.element import Element, _normalize_attr_name, merge_cls
 from htmforge.elements import br, button, div, form, input, span, table, td, tr
 from htmforge.htmx import HxSwap, HxTarget, HxTrigger
+
+
+class TestMergeClsIterables:
+    """Class-name iterables compose with the existing variadic API."""
+
+    def test_list_and_string(self) -> None:
+        """A list is flattened without splitting its strings."""
+        assert merge_cls(["badge", "badge-lg"], "extra") == "badge badge-lg extra"
+
+    def test_generator(self) -> None:
+        """A generator is consumed once, preserving order."""
+        assert (
+            merge_cls(value for value in ("badge", None, "", "large")) == "badge large"
+        )
+
+    def test_empty_iterables(self) -> None:
+        """Empty parts omit the class attribute as before."""
+        assert merge_cls([], iter(()), None, "") is None
+
+    def test_variadic_strings(self) -> None:
+        """Existing strings remain intact rather than becoming characters."""
+        assert merge_cls("badge large", None, "extra") == "badge large extra"
 
 
 class TestElementRendering:
